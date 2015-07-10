@@ -1,0 +1,257 @@
+{
+  "name": "StcSystem",
+  "parent": "DataModelXml",
+  "children": [
+    {
+      "name": "Project",
+      "parent": "StcSystem",
+      "children": [
+        {
+          "name": "EmulatedDevice",
+          "parent": "Project",
+          "children": [
+            {
+              "name": "Ipv4If",
+              "parent": "EmulatedDevice"
+            },
+            {
+              "name": "EthIIIf",
+              "parent": "EmulatedDevice"
+            },
+            {
+              "name": "Ipv6If",
+              "parent": "EmulatedDevice"
+            },
+            {
+              "name": "Ipv6If",
+              "parent": "EmulatedDevice"
+            },
+            {
+              "url": "#ttBfdRouterConfig",
+              "name": "BfdRouterConfig:ttBfdRouterConfig",
+              "parent": "EmulatedDevice",
+              "children": [
+                {
+                  "name": "BfdAuthenticationParams",
+                  "parent": "BfdRouterConfig"
+                }
+              ]
+            },
+            {
+              "url": "#ttBgpRouterConfig",
+              "name": "BgpRouterConfig:ttBgpRouterConfig",
+              "parent": "EmulatedDevice",
+              "children": [
+                {
+                  "name": "BgpAuthenticationParams",
+                  "parent": "BgpRouterConfig"
+                },
+                {
+                  "name": "BgpAsNumModifier",
+                  "parent": "BgpRouterConfig"
+                },
+                {
+                  "name": "BgpDutAsNumModifier",
+                  "parent": "BgpRouterConfig"
+                },
+                {
+                  "name": "Bgp4ByteAsNumModifier",
+                  "parent": "BgpRouterConfig"
+                },
+                {
+                  "name": "Bgp4ByteDutAsNumModifier",
+                  "parent": "BgpRouterConfig"
+                },
+                {
+                  "name": "BgpDutIpv4AddrModifier",
+                  "parent": "BgpRouterConfig"
+                },
+                {
+                  "name": "BgpDutIpv6AddrModifier",
+                  "parent": "BgpRouterConfig"
+                },
+                {
+                  "name": "BgpCapabilityConfig",
+                  "parent": "BgpRouterConfig"
+                }
+              ]
+            },
+            {
+              "name": "MplsIf",
+              "parent": "EmulatedDevice"
+            },
+            {
+              "url": "#ttIsisRouterConfig",
+              "name": "IsisRouterConfig:ttIsisRouterConfig",
+              "parent": "EmulatedDevice",
+              "children": [
+                {
+                  "name": "IsisLevel1TeParams",
+                  "parent": "IsisRouterConfig"
+                },
+                {
+                  "name": "IsisLevel2TeParams",
+                  "parent": "IsisRouterConfig"
+                },
+                {
+                  "name": "IsisAuthenticationParams",
+                  "parent": "IsisRouterConfig"
+                },
+                {
+                  "name": "IsisLevel1PlsbLinkMetric",
+                  "parent": "IsisRouterConfig"
+                },
+                {
+                  "name": "IsisLevel2PlsbLinkMetric",
+                  "parent": "IsisRouterConfig"
+                },
+                {
+                  "name": "IsisSpbLinkMetric",
+                  "parent": "IsisRouterConfig"
+                },
+                {
+                  "name": "IsisLspConfig",
+                  "parent": "IsisRouterConfig",
+                  "children": [
+                    {
+                      "name": "Ipv4IsisRoutesConfig",
+                      "parent": "IsisLspConfig",
+                      "children": [
+                        {
+                          "name": "Ipv4NetworkBlock",
+                          "parent": "Ipv4IsisRoutesConfig"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "MplsIf",
+              "parent": "EmulatedDevice"
+            },
+            {
+              "url": "#ttLdpRouterConfig",
+              "name": "LdpRouterConfig:ttLdpRouterConfig",
+              "parent": "EmulatedDevice",
+              "children": [
+                {
+                  "name": "LdpAuthenticationParams",
+                  "parent": "LdpRouterConfig"
+                }
+              ]
+            },
+            {
+              "name": "MplsIf",
+              "parent": "EmulatedDevice"
+            },
+            {
+              "name": "MplsIf",
+              "parent": "EmulatedDevice"
+            },
+            {
+              "name": "MplsIf",
+              "parent": "EmulatedDevice"
+            },
+            {
+              "url": "#ttOspfv2RouterConfig",
+              "name": "Ospfv2RouterConfig:ttOspfv2RouterConfig",
+              "parent": "EmulatedDevice",
+              "children": [
+                {
+                  "name": "TeParams",
+                  "parent": "Ospfv2RouterConfig"
+                },
+                {
+                  "name": "Ospfv2AuthenticationParams",
+                  "parent": "Ospfv2RouterConfig"
+                },
+                {
+                  "name": "RouterLsa",
+                  "parent": "Ospfv2RouterConfig",
+                  "children": [
+                    {
+                      "name": "RouterLsaLink",
+                      "parent": "RouterLsa",
+                      "children": [
+                        {
+                          "name": "Ipv4NetworkBlock",
+                          "parent": "RouterLsaLink"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "MplsIf",
+              "parent": "EmulatedDevice"
+            },
+            {
+              "url": "#ttOspfv3RouterConfig",
+              "name": "Ospfv3RouterConfig:ttOspfv3RouterConfig",
+              "parent": "EmulatedDevice",
+              "children": [
+                {
+                  "name": "Ospfv3RouterLsa",
+                  "parent": "Ospfv3RouterConfig",
+                  "children": [
+                    {
+                      "name": "Ospfv3RouterLsaIf",
+                      "parent": "Ospfv3RouterLsa"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "url": "#ttPimRouterConfig",
+              "name": "PimRouterConfig:ttPimRouterConfig",
+              "parent": "EmulatedDevice"
+            },
+            {
+              "url": "#ttRipRouterConfig",
+              "name": "RipRouterConfig:ttRipRouterConfig",
+              "parent": "EmulatedDevice",
+              "children": [
+                {
+                  "name": "RipAuthenticationParams",
+                  "parent": "RipRouterConfig"
+                },
+                {
+                  "name": "Ripv4RouterConfig",
+                  "parent": "RipRouterConfig"
+                },
+                {
+                  "name": "RipngRouterConfig",
+                  "parent": "RipRouterConfig"
+                },
+                {
+                  "name": "Ripv4RouteParams",
+                  "parent": "RipRouterConfig",
+                  "children": [
+                    {
+                      "name": "Ipv4NetworkBlock",
+                      "parent": "Ripv4RouteParams"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "url": "#ttRsvpRouterConfig",
+              "name": "RsvpRouterConfig:ttRsvpRouterConfig",
+              "parent": "EmulatedDevice"
+            },
+            {
+              "name": "MplsIf",
+              "parent": "EmulatedDevice"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

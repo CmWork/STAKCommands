@@ -1,0 +1,233 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>&lt;no title&gt; &mdash; Spirent Methodology Infrastructure 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Spirent Methodology Infrastructure 0.1 documentation" href="../../../index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="../../../index.html" class="icon icon-home"> Spirent Methodology Infrastructure
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="simple">
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">Spirent Methodology Infrastructure</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+    <li>&lt;no title&gt;</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/_static/Commands/stc_testmethodology/ExportDbChartCommand.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <p># ExportDbChartCommand</p>
+<p>Export Chart</p>
+<p>&lt;font size=&#8221;2&#8221;&gt;File Reference: stc_testmethodology.xml&lt;/font&gt;</p>
+<p>## Properties</p>
+<p>### CustomModifier: &#8220;Custom Modifier&#8221; (input:string)</p>
+<p>JSON string that will be appended to the JSON result file which is used to modify chart properties. Follows HighCharts API. Ex. {&#8220;yAxis&#8221;: {&#8220;title&#8221;: {&#8220;text&#8221;: &#8220;Modified Label&#8221;}}} SQL Queries can be inserted to the JSON string by delimiting the queries with {{ and }}</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### ChartTemplateJsonFileName: &#8220;Chart Template File&#8221; (input:inputFilePath)</p>
+<p>Chart Template JSON File Location</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### UseSummary: &#8220;Use the summery db only&#8221; (input:bool)</p>
+<p>Use the summary db instead of iteration dbs. Only valid if UseMultipleResultsDatabases is False.</p>
+<ul class="simple">
+<li>default - false</li>
+</ul>
+<p>### Title: &#8220;Chart Title&#8221; (input:string)</p>
+<p>Chart Title</p>
+<ul class="simple">
+<li>default - My Chart</li>
+</ul>
+<p>### Series: &#8220;Series&#8217; Data&#8221; (input:string)</p>
+<p>Set of data to be plotted on the chart (can be given as strings or SQL queries) Ex. String format for SeriesDataType(Single): 1, 2, 3, 4 SeriesDataType(Pair): [1, 1], [2, 2]</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### YAxisTitle: &#8220;Y Axis Title&#8221; (input:string)</p>
+<p>Y Axis Title</p>
+<ul class="simple">
+<li>default - My Y Axis</li>
+</ul>
+<p>### XAxisTitle: &#8220;X Axis Title&#8221; (input:string)</p>
+<p>X Axis Title</p>
+<ul class="simple">
+<li>default - My X Axis</li>
+</ul>
+<p>### UseMultipleResultsDatabases: &#8220;Has Multiple Results Databases&#8221; (input:bool)</p>
+<p>Used when there are multiple results databases (SaveResults LoopMode = Append). All active results databases will be queried. If set to True and only one results database exists (SaveResults LoopMode = Overwrite), an error will occur.</p>
+<ul class="simple">
+<li>default - false</li>
+</ul>
+<p>### SeriesDataType: &#8220;Series Data Type&#8221; (input:u8)</p>
+<p>Series data can be given as a single or pair type. SINGLE = only Y values, X values are calculated automaticatlly. PAIR = [x,y] value pairs</p>
+<ul class="simple">
+<li>default - SINGLE</li>
+</ul>
+<p>### XAxisCategories: &#8220;X Axis Categories&#8221; (input:string)</p>
+<p>X Axis Categories (can be a string or SQL query). Used to label the tick marks along the X axis</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### YAxisCategories: &#8220;Y Axis Categories&#8221; (input:string)</p>
+<p>Y Axis Categories (can be a string or SQL query). Used to label the tick marks along the Y axis</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>## UsedIn
+* ITU-T Y.1564 Microburst Test</p>
+<ul class="simple">
+<li>BGP Route Reflector Test</li>
+<li>Widgets Test</li>
+</ul>
+
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Spirent.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../jquery.js"></script>
+      <script type="text/javascript" src="../../underscore.js"></script>
+      <script type="text/javascript" src="../../doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

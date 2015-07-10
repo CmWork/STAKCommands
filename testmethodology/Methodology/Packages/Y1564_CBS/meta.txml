@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test>
+  <!--
+    A methodology is defined by a collection of files. One of the files
+    contains the metadata for the test. This is a sample of that metadata.
+    When a methodology is produced, it has one and only one meta.txml file,
+    where txml = testCenter XML. The test consumer never accesses or interacts
+    with the meta.txml for the methodology. When a test case is created from a
+    methodology, a copy of meta.txml is made. Localization is made in the
+    per-test-case copy of meta.txml.
+  -->
+  <!--
+    The testInfo section contains the overall information about the
+    methodology or test case.  testMethodologyName is the name of the
+    methodology. The description is the description of the methodology. The
+    testCaseName is the name of the test case that this instance of the file
+    represents. If this file represents a methodology, the testCaseName is set
+    to "original". The version is the version of this methodology. The
+    imageName is a diagram that contains an image that can be shown to
+    describe the topology of the test. Labels are used to categorize the test.
+  -->
+  <testInfo displayName="ITU-T Y.1564 CBS and EBS Burst Test" description="Measures SLA KPIs while operating under configured burst parameters such as the committed burst size (CBS) and excess burst size (EBS)" methodologyKey="Y1564_CBS" testCaseName="original" testCaseDescription="description specific to this test case" version="1.0" testCaseKey="">
+    <labels>
+      <label>data plane</label>
+      <label>x-connect</label>
+    </labels>
+    <features>
+      <!-- Replace with proper feature ID when available -->
+      <feature id="MAX_SCALABILITY"/>
+    </features>
+  </testInfo>
+  <!--
+    The testResources section provides information related to requirements on
+    the test ports and customer equipment for the test to run. This includes
+    references to the topology templates that are used for each port group.
+  -->
+  <testResources>
+    <resourceGroups>
+      <resourceGroup displayName="Port Group Limits" id="">
+        <!-- Per-port-group limits for validation -->
+        <attribute name="minNumPorts" value="2" />
+        <attribute name="maxNumPorts" value="10" />
+        <attribute name="portSpeedList" value="['10', '40', '100']" />
+      </resourceGroup>
+      <resourceGroup displayName="Chassis Info" id="chassisInfo">
+        <portGroups>
+          <portGroup name="Left Port Group" id="Tag.Name.2043">
+            <template name="Left Side Endpoint">
+              <description>Left Side Endpoint</description>
+              <image name="diagram.png" />
+              <source name="Traffic.xml" />
+            </template>
+            <!-- <ports> -->
+            <port name="Left Port">
+              <attribute name="location" value="10.14.16.27/2/7" />
+            </port>
+            <!-- </ports> -->
+          </portGroup>
+          <portGroup name="Right Port Group" id="Tag.Name.2044">
+            <template name="Right Side Endpoint">
+              <description>Right Side Endpoint</description>
+              <image name="diagram.png" />
+              <source name="Traffic.xml" />
+            </template>
+            <!-- <ports> -->
+            <port name="Right Port">
+              <attribute name="location" value="10.14.16.27/2/8" />
+            </port>
+            <!-- </ports> -->
+          </portGroup>
+        </portGroups>
+      </resourceGroup>
+    </resourceGroups>
+  </testResources>
+  <!--
+    The wizard section defines the input parameters that the test consumer
+    will be allowed to modify at run time. The format of this section is
+    designed to allow a rendering engine to create a simple wizard for
+    collecting information from the test consumer during localization.
+
+    Each page of the wizard has an optional imageName that can be used to
+    render an image file in the wizard as an aid to the user.
+  -->
+  <wizard displayName="ITU-T Y.1564 Service Configuration Test" description="Configure and run a Y.1564 Service Configuration test" image="y1564-main.png">
+
+    <page displayName="Left Side Endpoint Configuration" description="Configure the Left Side Endpoints" image="y1564-leftport.png">
+      <group displayName="Host Configuration">
+          <!-- <property id="spirent.methodology.LoadTemplateCommand.CopiesPerParent.4690" value="1" description="Number of endpoints created per port" displayName="Endpoint Count (Per Port)"  /> -->
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSourcemacStartValue" value="00:10:94:00:00:02" displayName="Mac Address Start" description="Mac Address Start" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSourcemacStepValue" value="00:00:00:01:00:00" displayName="Mac Address Step" description="Mac Address Step" />
+      </group>
+      <group displayName="IPv4 Configuration">
+          <property id="TopologyTemplateModifyXMLTemplateCommandPrefixlengthValueList" value="24" displayName="IPv4 Prefix Length" description="IPv4 Prefix Length" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAddressStartValue" value="10.1.1.1" displayName="IPv4 Address Start" description="IPv4 Address Start" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAddressStepValue" value="0.0.1.0" displayName="IPv4 Address Step" description="IPv4 Address Step" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAddressRepeatValue" value="0" displayName="IPv4 Address Repeat" description="IPv4 Address Repeat" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAddressRecycleValue" value="0" displayName="IPv4 Address Recycle" description="IPv4 Address Recycle" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandGatewayStartValue" value="10.1.1.2" displayName="IPv4 Gateway Start" description="IPv4 Gateway Start" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandGatewayStepValue" value="0.0.1.0" displayName="IPv4 Gateway Step" description="IPv4 Gateway Step" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandGatewayRepeatValue" value="0" displayName="IPv4 Gateway Repeat" description="IPv4 Gateway Repeat" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandGatewayRecycleValue" value="0" displayName="IPv4 Gateway Recycle" description="IPv4 Gateway Recycle" />
+      </group>
+    </page>
+
+    <page displayName="Left Side VLAN Configuration" description="Configure the Left Side Endpoints" image="y1564-leftport.png">
+      <group displayName="Service VLAN Configuration">
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSvlanidStartValue" value="100" displayName="Starting VLAN ID" description="Starting VLAN ID" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSvlanidStepValue" value="1" displayName="VLAN ID Step" description="VLAN ID Step" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSvlanidRepeatValue" value="0" displayName="VLAN ID Repeat" description="VLAN ID Repeat" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSvlanidRecycleValue" value="0" displayName="VLAN ID Recycle" description="VLAN ID Recycle" />
+      </group>
+      <group displayName="Customer VLAN Configuration">
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandCvlanidStartValue" value="500" displayName="Starting VLAN ID" description="Starting VLAN ID" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandCvlanidStepValue" value="1" displayName="VLAN ID Step" description="VLAN ID Step" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandCvlanidRepeatValue" value="0" displayName="VLAN ID Repeat" description="VLAN ID Repeat" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandCvlanidRecycleValue" value="0" displayName="VLAN ID Recycle" description="VLAN ID Recycle" />
+      </group>
+    </page>
+
+    <page displayName="Right Side Endpoint Configuration" description="Configure the Right Side Endpoints" image="y1564-rightport.png">
+      <group displayName="Host Configuration">
+          <!-- <property id="spirent.methodology.LoadTemplateCommand.CopiesPerParent.4692" value="1" description="Number of endpoints created per port" displayName="Endpoint Count (Per Port)"  /> -->
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSourcemacStartValue1" value="00:10:94:00:00:03" displayName="Mac Address Start" description="Mac Address Start" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSourcemacStepValue2" value="00:00:00:01:00:00" displayName="Mac Address Step" description="Mac Address Step" />
+      </group>
+      <group displayName="IPv4 Configuration">
+          <property id="TopologyTemplateModifyXMLTemplateCommandPrefixlengthValueList3" value="24" displayName="IPv4 Prefix Length" description="IPv4 Prefix Length" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAddressStartValue4" value="10.1.1.2" displayName="IPv4 Address Start" description="Address Start" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAddressStepValue5" value="0.0.1.0" displayName="IPv4 Address Step" description="Address Step per Port" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAddressRepeatValue1" value="0" displayName="IPv4 Address Repeat" description="Address Repeat" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAddressRecycleValue2" value="0" displayName="IPv4 Address Recycle" description="Address Recycle" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandGatewayStartValue6" value="10.1.1.1" displayName="IPv4 Gateway Start" description="Gateway Start" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandGatewayStepValue7" value="0.0.1.0" displayName="IPv4 Gateway Step" description="Gateway Step per Port" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandGatewayRepeatValue3" value="0" displayName="IPv4 Gateway Repeat" description="Gateway Repeat" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandGatewayRecycleValue4" value="0" displayName="IPv4 Gateway Recycle" description="Gateway Recycle" />
+      </group>
+    </page>
+
+    <page displayName="Right Side VLAN Configuration" description="Configure the Right Side Endpoints" image="y1564-rightport.png">
+      <group displayName="Service VLAN Configuration">
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSvlanidStartValue8" value="100" displayName="Starting VLAN ID" description="Starting VLAN ID" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSvlanidStepValue9" value="1" displayName="VLAN ID Step" description="VLAN ID Step" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSvlanidRepeatValue5" value="0" displayName="VLAN ID Repeat" description="VLAN ID Repeat" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSvlanidRecycleValue6" value="0" displayName="VLAN ID Recycle" description="VLAN ID Recycle" />
+      </group>
+      <group displayName="Customer VLAN Configuration">
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandCvlanidStartValue10" value="500" displayName="Starting VLAN ID" description="Starting VLAN ID" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandCvlanidStepValue11" value="1" displayName="VLAN ID Step" description="VLAN ID Step" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandCvlanidRepeatValue7" value="0" displayName="VLAN ID Repeat" description="VLAN ID Repeat" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandCvlanidRecycleValue8" value="0" displayName="VLAN ID Recycle" description="VLAN ID Recycle" />
+      </group>
+    </page>
+
+    <page displayName="Service Configuration" description="Configure the Service" image="y1564-service.png">
+      <group displayName="CBS Burst Test">
+          <property id="test.cbs.frameSizeList" value="['256','512']" displayName="CBS Frame Size List (bytes)" description="CBS Frame Size List (comma-separated)" ignoreOnBackEnd="true" />
+          <property id="PauseForPre-BurstDurationWaitTimeSecs" value="30" displayName="Pre-Burst Pause Duration (s)" description="Pre-Burst Pause Duration (s)" />
+          <!-- Y1564SvcConfigRampCommand's IterationDuration just sets all WaitCommands that are tagged with "Y1584Command".  We appropriate it here for a different purpose. -->
+          <property id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.IterationDuration.2147" value="120" displayName="Burst Duration (s)" description="Burst Duration (s)" />
+          <property id="spirent.methodology.traffic.AllocateTrafficMixLoadCommand.Load.4730" value="40" displayName="Burst Load (%)" description="Burst Load (%)" />
+          <property id="Post-BurstIterationSDurationWaitTimeSecs" value="30" displayName="Post-Burst Iteration(s) Duration (s)" description="Post-Burst Iteration(s) Duration (s)" />
+          <property id="test.cbs.bwList" value="['10','20']" displayName="CBS Bandwidth List (%)" description="CBS Bandwidth List (comma-separated)" ignoreOnBackEnd="true" />
+      </group>
+      <group displayName="CBS KPI Threshold Settings">
+          <property description="Value the Mean Frame Transfer Delay should not exceed" displayName="Mean Frame Transfer Delay (FTD) Threshold (ms)" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpAvgLatency.2147" value="0.7"/>
+          <property description="Value the Max Frame Transfer Delay should not exceed" displayName="Max Frame Transfer Delay (FTD) Threshold (ms)" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpMaxLatency.2147" value="1.0"/>
+          <property description="Value the RFC4689 Average Frame Delay Variation should not exceed" displayName="RFC4689 Mean Frame Delay Variation (FDV) Threshold (ms)" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpRfc4689AvgJitter.2147" value="0.05"/>
+          <property description="Value the Max Frame Delay Variation should not exceed" displayName="Max Frame Delay Variation (FDV) Threshold (ms)" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpMaxJitter.2147" value="0.2"/>
+          <property description="Value the Frame Loss Count should not exceed" displayName="Frame Loss (FL) Count Threshold" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpPktLossCount.2147" value="0"/>
+          <property description="Value the Out of Order Frame Count should not exceed" displayName="Out of Order Frame Count Threshold" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpMaxOopCount.2147" value="0"/>
+          <property description="Value the Late Frame Count should not exceed" displayName="Late Frame Count Threshold" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpMaxLatePktCount.2147" value="0"/>      </group>
+
+      <group displayName="EBS Burst Test">
+          <property id="test.ebs.frameSizeList" value="['256','512']" displayName="EBS Frame Size List (bytes)" description="EBS Frame Size List (comma-separated)" ignoreOnBackEnd="true" />
+          <property id="PauseForPre-BurstDurationWaitTimeSecs1" value="30" displayName="Pre-Burst Pause Duration (s)" description="Pre-Burst Pause Duration (s)" />
+          <!-- Y1564SvcConfigRampCommand's IterationDuration just sets all WaitCommands that are tagged with "Y1584Command".  We appropriate it here for a different purpose. -->
+          <property id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.IterationDuration.2164" value="120" displayName="Burst Duration (s)" description="Burst Duration (s)" />
+          <property id="spirent.methodology.traffic.AllocateTrafficMixLoadCommand.Load.4763" value="40" displayName="Burst Load (%)" description="Burst Load (%)" />
+          <property id="spirent.methodology.traffic.AllocateTrafficMixLoadCommand.Load.4766" value="20" displayName="CIR Load (%)" description="CIR Load (%)" />
+          <property id="PauseForCIRDurationWaitTimeSecs" value="30" displayName="CIR Duration (s)" description="CIR Duration (s)" />
+          <property id="spirent.methodology.traffic.AllocateTrafficMixLoadCommand.Load.4768" value="25" displayName="CIR+EIR Load (%)" description="CIR+EIR Load (%)" />
+          <property id="PauseForCIR+EIRDurationWaitTimeSecs" value="60" displayName="EIR Duration (s)" description="EIR Duration (s)" />
+      </group>
+      <group displayName="EBS KPI Threshold Settings">
+          <property description="Value the Mean Frame Transfer Delay should not exceed" displayName="Mean Frame Transfer Delay (FTD) Threshold (ms)" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpAvgLatency.2164" value="0.7"/>
+          <property description="Value the Max Frame Transfer Delay should not exceed" displayName="Max Frame Transfer Delay (FTD) Threshold (ms)" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpMaxLatency.2164" value="1.0"/>
+          <property description="Value the RFC4689 Average Frame Delay Variation should not exceed" displayName="RFC4689 Mean Frame Delay Variation (FDV) Threshold (ms)" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpRfc4689AvgJitter.2164" value="0.05"/>
+          <property description="Value the Max Frame Delay Variation should not exceed" displayName="Max Frame Delay Variation (FDV) Threshold (ms)" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpMaxJitter.2164" value="0.2"/>
+          <property description="Value the Frame Loss Count should not exceed" displayName="Frame Loss (FL) Count Threshold" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpPktLossCount.2164" value="0"/>
+          <property description="Value the Out of Order Frame Count should not exceed" displayName="Out of Order Frame Count Threshold" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpMaxOopCount.2164" value="0"/>
+          <property description="Value the Late Frame Count should not exceed" displayName="Late Frame Count Threshold" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpMaxLatePktCount.2164" value="0"/>
+      </group>
+
+    </page>
+  </wizard>
+
+
+  <processingFunctions>
+    <processingFunction id="cbs.frameSizeList.pf.copy_string_to_list" scriptFile="txml_processing_functions.py" entryFunction="copy_string_to_list">
+      <input srcId="test.cbs.frameSizeList" scriptVarName="InputKey" />
+      <output scriptVarName="OutputKey" epKey="spirent.methodology.ObjectIteratorCommand.ValueList.4717" />
+    </processingFunction>
+    <processingFunction id="cbs.bwList.pf.copy_string_to_list" scriptFile="txml_processing_functions.py" entryFunction="copy_string_to_list">
+      <input srcId="test.cbs.bwList" scriptVarName="InputKey" />
+      <output scriptVarName="OutputKey" epKey="spirent.methodology.ObjectIteratorCommand.ValueList.4728" />
+    </processingFunction>
+    <processingFunction id="ebs.frameSizeList.pf.copy_string_to_list" scriptFile="txml_processing_functions.py" entryFunction="copy_string_to_list">
+      <input srcId="test.ebs.frameSizeList" scriptVarName="InputKey" />
+      <output scriptVarName="OutputKey" epKey="spirent.methodology.ObjectIteratorCommand.ValueList.4754" />
+    </processingFunction>
+  </processingFunctions>
+
+
+</test>

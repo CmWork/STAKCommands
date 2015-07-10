@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" ?>
+<stc:meta xmlns:stc="urn:www.spirentcom.com:XMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" package="spirent.methodology.api" plugin="plcommands" version="0.0.0-0">
+
+    <!-- Test Case Consumption Commands -->
+    <stc:class name="GetAllMethodologiesCommand" displayName="Get All Test Methodologies Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="false" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Returns a list of all imported test methodologies as JSON" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//API" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="output" name="MethodologyList" displayName="Test Methodology List" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of all imported Test Methodology as JSON" />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="GetMethodologyInfoCommand"
+               displayName="Returns Test Methodology information given key value"
+               bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="false" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Returns Test Methodology information as JSON given the methodology key value."/>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//API" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="MethodologyKey"
+                      displayName="Methodology Key" type="string" default="Not Specified">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology Key" />
+            <stc:stringValidation minLength="1" maxLength="512"/>
+        </stc:property>
+        <stc:property category="output" name="MethodologyInfo"
+                      displayName="Test Methodology" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology information corresponding to given key as JSON" />
+        </stc:property>
+    </stc:class>
+    <!--
+    <stc:class name="RunMethodologyTestCommand"
+               displayName="Runs a Methodology Test"
+               bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Returns the"/>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//API" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="MethodologyKey"
+                      displayName="Methodology Key" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test methodology key that specifies which methodology to run a test." />
+        </stc:property>
+        <stc:property category="input" name="TestParams"
+                      displayName="Test Parameters" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="A JSON document that specifies the input parameters for the specified methodology." />
+        </stc:property>
+        <stc:property category="input" name="EnableTieValidation"
+                      displayName="Enable TIE Validation" type="bool" default="false">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="If true, Test Intelligence Engine validation is enabled for this test." />
+        </stc:property>
+        <stc:property category="output" name="TestCaseId"
+                      displayName="Test Case ID" type="handle" default="false">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="An identifier for the test being run." />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="GetTestReportCommand"
+               displayName="Retrieves the current Test Report for a methodology test"
+               bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Retrieves the current test report for the specified methodology test"/>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//API" />
+        <stc:property category="input" name="TestCaseId"
+                      displayName="Test Case ID" type="handle" default="false">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="An identifier that specifies the methodology test for which to retrieve the port." />
+        </stc:property>
+        <stc:property category="output" name="TestReport"
+                      displayName="The Test Report for the specified methodology test" type="string" default="false">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="The JSON test report retrieved for the specified methodology test" />
+        </stc:property>                      
+    </stc:class>
+    -->
+</stc:meta>
+

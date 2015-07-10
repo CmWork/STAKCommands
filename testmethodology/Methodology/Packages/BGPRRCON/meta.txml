@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test>
+  <!--
+    A methodology is defined by a collection of files. One of the files contains the metadata
+    for the test. This is a sample of that metadata. When a methodology is produced, it has one
+    and only one meta.txml file, where txml = testCenter XML. The test consumer never accesses
+    or interacts with the meta.txml for the methodology. When a test case is created from
+    a methodology, a copy of meta.txml is made. Localization is made in the per-test-case copy
+    of meta.txml.
+  -->
+  <!--
+    The testInfo section contains the overall information about the methodology or test case.
+    testMethodologyName is the name of the methodology. The description is the description of
+    the methodology. The testCaseName is the name of the test case that this instance of the
+    file represents. If this file represents a methodology, the testCaseName is set to
+    "original". The version is the version of this methodology. The imageName is a diagram
+    that contains an image that can be shown to describe the topology of the test. Labels are
+    used to categorize the test.
+  -->
+  <testInfo displayName="BGP Route Reflector Test" description="This is a simple BGP route reflector test that will determine convergence time for routes being advertised from one side." methodologyKey="BGPRRCON" testCaseName="original" testCaseDescription="description specific to this test case" version="1.0" testCaseKey="">
+    <labels>
+      <label>bgp</label>
+      <label>control plane</label>
+      <label>route reflector</label>
+      <label>x-connect</label>
+    </labels>
+    <features>
+      <!-- Replace with proper feature ID when available -->
+      <feature id="MAX_SCALABILITY"/>
+    </features>
+  </testInfo>
+  <!--
+    The testResources section provides information related to requirements on the test ports
+    and customer equipment for the test to run. This includes references to the topology
+    templates that are used for each port group.
+  -->
+  <testResources>
+    <resourceGroups>
+      <resourceGroup displayName="Port Group Limits" id="">
+        <!-- Per-port-group limits for validation -->
+        <attribute name="minNumPorts" value="2" />
+        <attribute name="maxNumPorts" value="10" />
+        <attribute name="portSpeedList" value="['10', '40', '100']" />
+      </resourceGroup>
+      <resourceGroup displayName="Chassis Info" id="chassisInfo">
+        <portGroups>
+          <portGroup name="east" id="Tag.Name.2039">
+            <template name="BGP Provider Edge">
+              <description>Source BGP IPv4 Provider Edge Template</description>
+              <image name="diagram.png" />
+              <source name="BGP_IPv4_Source_PE.xml" />
+            </template>
+            <port name="port1.location.2051">
+              <attribute name="location" value="10.14.16.27/2/7" />
+            </port>
+          </portGroup>
+          <portGroup name="west" id="Tag.Name.2040">
+            <template name="BGP Route Reflector">
+              <description>Receiver BGP IPv4 Provider Edge Template</description>
+              <image name="diagram.png" />
+              <source name="BGP_IPv4_Receiver_PE.xml" />
+            </template>
+            <port name="port3.location.2053">
+              <attribute name="location" value="10.14.16.27/2/8" />
+            </port>
+          </portGroup>
+        </portGroups>
+      </resourceGroup>
+    </resourceGroups>
+  </testResources>
+  <!--
+    The wizard section defines the input parameters that the test consumer
+    will be allowed to modify at run time. The format of this section is
+    designed to allow a rendering engine to create a simple wizard for
+    collecting information from the test consumer during localization.
+
+    Each page of the wizard has an optional imageName that can be used to
+    render an image file in the wizard as an aid to the user.
+  -->
+  <wizard displayName="BGP Route Reflector Test" description="Configure and run a simple BGP Route Reflector test" image="diagram.png">
+    <page displayName="Source PE Template" description="Configure the BGP Route Sources" image="diagram.png">
+      <group displayName="Source PE Copies">
+          <property id="spirent.methodology.LoadTemplateCommand.CopiesPerParent.40000" value="1" displayName="Routers Per Port" description="Number of routers to create per port" type="uint32" />
+      </group>
+      <group displayName="Source PE Device Interface Info">
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandRouteridStartValue" value="192.85.1.1" displayName="Router ID Start" description="Router ID Start" type="ipv4" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandRouteridStepValue" value="0.0.1.0" min="0.0.0.0" displayName="Router ID Step" description="Router ID Step" type="ipv4" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAddressStartValue" value="192.85.1.1" displayName="IPv4 Address Start" description="IPv4 Address Start" type="ipv4" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAddressStepValue" value="0.0.1.0" displayName="IPv4 Address Step" description="IPv4 Address Step" type="ipv4" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandGatewayStartValue" value="192.85.1.2" displayName="IPv4 Gateway Start" description="IPv4 Gateway Start" type="ipv4" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandGatewayStepValue" value="0.0.1.0" displayName="IPv4 Gateway Step" description="IPv4 Gateway Step" type="ipv4" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSourcemacStartValue" value="00:10:95:00:00:01" displayName="MAC Address Start" description="MAC Address Start" type="mac" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSourcemacStepValue" value="00:00:00:00:00:01" displayName="MAC Address Step" description="MAC Address Step" type="mac" />
+      </group>
+      <group displayName="BGP Parameters">
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAsnumStartValue" value="1" displayName="AS Number Start" description="AS Number Start" type="uint32">
+            <numericValidation minInclusive="0" maxInclusive="65535" />
+          </property>
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAsnumStepValue" value="0" displayName="AS Number Step" description="AS Number Step" type="uint32">
+            <numericValidation minInclusive="0" maxInclusive="65535" />
+          </property>
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandDutasnumStartValue" value="1" displayName="DUT AS Number Start" description="DUT AS Number Start" type="uint32">
+            <numericValidation minInclusive="0" maxInclusive="65535" />
+          </property>
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandDutasnumStepValue" value="0" displayName="DUT AS Number Step" description="DUT AS Number Step" type="uint32">
+            <numericValidation minInclusive="0" maxInclusive="65535" />
+          </property>
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandDutipv4addrStartValue" value="192.85.1.2" displayName="DUT IPv4 Address Start" description="DUT IPv4 Address Start" type="ipv4" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandDutipv4addrStepValue" value="0.0.1.0" displayName="DUT IPv4 Address Step" description="DUT IPv4 Address Step" type="ipv4" />
+      </group>
+      <group displayName="Route Parameters">
+          <!--<property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandStartiplistStartValue" value="100.0.0.1" displayName="IPv4 Route Start" description="IPv4 Route Start" type="ipv4" />-->
+          <!--<property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandStartiplistStepValue" value="0.0.0.1" displayName="IPv4 Route Step" description="IPv4 Route Step" />-->
+          <!--<property id="TopologyTemplateModifyXMLTemplateCommandAddrincrementValueList" value="1" displayName="IPv4 Route Step" description="IPv4 Route Step" type="ipv4" />-->
+          <!--<property id="TopologyTemplateModifyXMLTemplateCommandNetworkcountValueList" value="50" displayName="Advertised Routes Per Router" description="Number of Routes to Advertise Per Router" type="uint32" />-->
+          <!--<property id="TopologyTemplateModifyXMLTemplateCommandPrefixlengthValueList" value="32" displayName="Route IP Prefix Length" description="Route IP Prefix Length" type="uint32">
+            <numericValidation minInclusive="0" maxInclusive="32" />
+          </property>-->
+          <property id="TopologyTemplateModifyXMLTemplateCommandFilenameValueList" value="bgp_fullroute.txt" displayName="Route File" description="Files with Routes to import" type="inputFilePath" />
+          <property id="TopologyTemplateModifyXMLTemplateCommandRoutertypeValueList" value="CISCO_VERSION_ONE" displayName="Route File Type" description="Type of Route File" type="string" />
+          <property id="TopologyTemplateModifyXMLTemplateCommandDisabletrafficValueList" value="False" displayName="Fast Route Import" widgetType="checkbox" type="bool" />
+          <property id="TopologyTemplateModifyXMLTemplateCommandAddtesterasnValueList" value="False" displayName="Prepend Tester ASN to AS Path" widgetType="checkbox" type="bool" />
+          <property id="TopologyTemplateModifyXMLTemplateCommandUsetesteripasnexthopValueList" value="False" displayName="Use Tester IP as Next Hop (Import best routes)" widgetType="checkbox" type="bool" />
+      </group>
+    </page>
+    <page displayName="Receiver PE Template" description="Configure the BGP Route Receivers" image="diagram.png">
+      <group displayName="Receiver PE Copies">
+          <property id="spirent.methodology.LoadTemplateCommand.CopiesPerParent.40001" value="1" displayName="Routers Per Port" description="Number of routers to create per port" type="uint32" />
+      </group>
+      <group displayName="Receiver PE Device Interface Info">
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandRouteridStartValue1" value="192.85.1.2" displayName="Router ID Start" description="Router ID Start" type="ipv4" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandRouteridStepValue2" value="0.0.1.0" displayName="Router ID Step" description="Router ID Step" type="ipv4" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAddressStartValue3" value="192.85.1.2" displayName="IPv4 Address Start" description="IPv4 Address Start" type="ipv4" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAddressStepValue4" value="0.0.1.0" displayName="IPv4 Address Step" description="IPv4 Address Step" type="ipv4" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandGatewayStartValue5" value="192.85.1.1" displayName="IPv4 Gateway Start" description="IPv4 Gateway Start" type="ipv4" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandGatewayStepValue6" value="0.0.1.0" displayName="IPv4 Gateway Step" description="IPv4 Gateway Step" type="ipv4" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSourcemacStartValue7" value="00:10:94:00:00:01" displayName="MAC Address Start" description="MAC Address Start" type="mac" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSourcemacStepValue8" value="00:00:00:00:00:01" displayName="MAC Address Step" description="MAC Address Step" type="mac" />
+      </group>
+      <group displayName="BGP Parameters">
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAsnumStartValue11" value="1" displayName="AS Number Start" description="AS Number Start" type="uint32">
+            <numericValidation minInclusive="0" maxInclusive="65535" />
+          </property>
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAsnumStepValue12" value="0" displayName="AS Number Step" description="AS Number Step" type="uint32">
+            <numericValidation minInclusive="0" maxInclusive="65535" />
+          </property>
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandDutasnumStartValue13" value="1" displayName="DUT AS Number Start" description="DUT AS Number Start" type="uint32">
+            <numericValidation minInclusive="0" maxInclusive="65535" />
+          </property>
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandDutasnumStepValue14" value="0" displayName="DUT AS Number Step" description="DUT AS Number Step" type="uint32">
+            <numericValidation minInclusive="0" maxInclusive="65535" />
+          </property>
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandDutipv4addrStartValue9" value="192.85.1.1" displayName="DUT IPv4 Address Start" description="DUT IPv4 Address Start" type="ipv4" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandDutipv4addrStepValue10" value="0.0.1.0" displayName="DUT IPv4 Address Step" description="DUT IPv4 Address Step" type="ipv4" />
+      </group>
+    </page>
+    <page displayName="Polling Configuration" description="Configure the Polling-Related Commands" image="">
+      <group displayName="Wait For Router State Command">
+          <property id="RoutingWaitForRouterStateWaitTimeSecs" value="600" displayName="Wait Time (sec)" description="Wait Time (sec)" type="uint32" />
+      </group>
+      <group displayName="Setup Subscription Command">
+          <property id="SamplingSetUpRxSamplingSubscriptionCommandPollingIntervalS" value="1" displayName="Polling Interval (sec)" description="Polling interval in seconds" type="uint32" />
+          <property id="SamplingSetUpRxSamplingSubscriptionCommandTimeToMarkSubscriptionCompleteIfAllValuesStayConstant" value="5" displayName="Stability Check (sec)" description="Amount of time to continue to poll after target route count is reached to check for stability" type="uint32" />
+          <property id="SamplingSetUpRxSamplingSubscriptionCommandEnableTerminalValues" value="TRUE" displayName="Enable Condition" description="Enable Condition" type="checkbox" />
+          <property id="SamplingSetUpRxSamplingSubscriptionCommandTerminalValueList" value="50" displayName="Expected Receive Route Count" description="Number of routes expected to be received." type="uint32" />
+          <property id="SamplingSetUpTxSamplingSubscriptionCommand8TerminalValueList" value="50" displayName="Expected Transmit Route Count" description="Number of routes expected to be transmitted." type="uint32" />
+      </group>
+      <group displayName="Poll Subscription Command">
+          <property id="spirent.methodology.sampling.PollSubscriptionCommand.PollingPeriod.19620" value="120" displayName="Maximum Polling Period (sec)" description="Maximum polling period in seconds" type="uint32" />
+      </group>
+      <group displayName="Results to Verify">
+          <property id="spirent.methodology.VerifyDbQueryCommand.RowCount.19687" value="2" displayName="Number of expected established routers" description="Number of expected established routers" type="uint32" />
+          <property id="spirent.methodology.VerifyDbQueryCommand.RowCount.19688" value="1" displayName="Number of expected advertising routers" description="Number of expected advertising routers" type="uint32" />
+          <property id="spirent.methodology.VerifyDbQueryCommand.RowCount.19689" value="1" displayName="Number of expected router recipients" description="Number of expected router recipients" type="uint32" />
+      </group>
+    </page>
+  </wizard>
+</test>

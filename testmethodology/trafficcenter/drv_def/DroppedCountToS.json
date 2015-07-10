@@ -1,0 +1,16 @@
+{
+"SelectProperties" : ["StreamBlock.Name", "StreamBlock.StreamId", "StreamBlock.PortName",
+                    "StreamBlock.ActualRxPortName", "StreamBlock.TxFrameCount",
+                    "StreamBlock.RxFrameCount",
+                    "StreamBlock.FrameConfig.ipv4:IPv4.1.tosDiffserv.tos",
+                    "StreamBlock.FrameConfig.ipv4:IPv4.1.sourceAddr",
+                    "StreamBlock.FrameConfig.ipv4:IPv4.1.destAddr", 
+                    "StreamBlock.TxBitRate", "StreamBlock.RxBitRate",
+                    "StreamBlock.DroppedFrameCount"]
+.
+"WhereConditions" : ["StreamBlock.DroppedFrameCount > 0"]
+,
+"GroupByProperties" : ["StreamBlock.FrameConfig.ipv4:IPv4.1.tosDiffserv.tos"]
+,
+"SortBy" : ["StreamBlock.DroppedFrameCount DESC"]
+}

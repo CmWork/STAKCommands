@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test>
+  <testInfo displayName="Widgets Test" description="My Widgets" methodologyKey="WIDGET_SAMPLE" testCaseName="original" testCaseDescription="description specific to this test case" version="1.0" testCaseKey="">
+    <labels>
+      <label>bgp</label>
+      <label>control plane</label>
+      <label>route reflector</label>
+      <label>x-connect</label>
+    </labels>
+  </testInfo>
+  <testResources>
+    <resourceGroups>
+      <resourceGroup displayName="Port Group Limits" id="">
+        <!-- Per-port-group limits for validation -->
+        <attribute name="minNumPorts" value="2" />
+        <attribute name="maxNumPorts" value="10" />
+        <attribute name="portSpeedList" value="['10', '40', '100']" />
+      </resourceGroup>
+      <resourceGroup displayName="Chassis Info" id="chassisInfo">
+        <portGroups>
+          <portGroup name="east" id="Tag.Name.2039">
+            <template name="BGP Provider Edge">
+              <description>Source BGP IPv4 Provider Edge Template</description>
+              <image name="diagram.png" />
+              <source name="BGP_IPv4_Source_PE.xml" />
+            </template>
+            <port name="port1.location.2051">
+              <attribute name="location" value="192.85.1.2/1/1" />
+            </port>
+          </portGroup>
+          <portGroup name="west" id="Tag.Name.2040">
+            <template name="BGP Route Reflector">
+              <description>Receiver BGP IPv4 Provider Edge Template</description>
+              <image name="diagram.png" />
+              <source name="BGP_IPv4_Receiver_PE.xml" />
+            </template>
+            <port name="port3.location.2053">
+              <attribute name="location" value="192.85.1.3/1/1" />
+            </port>
+          </portGroup>
+        </portGroups>
+      </resourceGroup>
+    </resourceGroups>
+  </testResources>
+  <!--
+    The wizard section defines the input parameters that the test consumer
+    will be allowed to modify at run time. The format of this section is 
+    designed to allow a rendering engine to create a simple wizard for
+    collecting information from the test consumer during localization.
+
+    Each page of the wizard has an optional imageName that can be used to 
+    render an image file in the wizard as an aid to the user.
+  -->
+
+<!-- enumerations -->
+  <enumerations>
+    <enumeration id="EnumXState">
+      <enum name="IDLE" displayName="Idle"/>
+      <enum name="ESTABLISH" displayName="Establishing" />
+    </enumeration>
+    <enumeration id="EnumYState">
+      <enum name="RUNNING" displayName="Running" />
+      <enum name="DROPPING" displayName="Dropping" />
+    </enumeration>
+  </enumerations>
+
+  <wizard displayName="Widget Test" description="Examples of custom widgets" image="diagram.png">
+    <page displayName="Text Box Validation Page" description="Test page for text box field validation.">
+      <group displayName="Controls">
+          <property id="textbox.ipv4.1234" value="1.1.1.1" displayName="IPv4 Textbox" description="" type="ipv4" ignoreOnBackEnd="true" />
+          <property id="textbox.ipv6.1234" value="1::1" displayName="IPv6 Textbox" description="" type="ipv6" ignoreOnBackEnd="true" />
+          <property id="textbox.mac.1234" value="11:22:33:44:55:66" displayName="MAC Textbox" description="" type="mac" ignoreOnBackEnd="true" />
+          <property id="textbox.uint16.1234" value="1" displayName="UInt16 Textbox" description="" type="uint16" ignoreOnBackEnd="true" />
+          <property id="textbox.uint16r.1234" value="1" displayName="UInt16 Textbox With Reduced Range" description="" type="uint16" ignoreOnBackEnd="true">
+            <numericValidation minInclusive="1" maxInclusive="4095" />
+          </property>
+          <property id="textbox.uint32.1234" value="1" displayName="UInt32 Textbox" description="" type="uint32" ignoreOnBackEnd="true" />
+          <property id="textbox.uint32r.1234" value="1" displayName="UInt32 Textbox With Reduced Range" description="" type="uint32" ignoreOnBackEnd="true">
+            <numericValidation minInclusive="1" maxInclusive="4095" />
+	      </property>
+          <property id="textbox.uint64.1234" value="1" displayName="UInt64 Textbox" description="" type="uint64" ignoreOnBackEnd="true" />
+          <property id="textbox.uint64r.1234" value="1" displayName="UInt64 Textbox With Reduced Range" description="" type="uint64" ignoreOnBackEnd="true">
+            <numericValidation minInclusive="1" maxInclusive="4095" />
+          </property>
+          <property id="textbox.sint16.1234" value="1" displayName="SInt16 Textbox (no validation yet)" description="" type="sint16" ignoreOnBackEnd="true" />
+          <property id="textbox.sint32.1234" value="1" displayName="SInt32 Textbox" description="" type="sint32" ignoreOnBackEnd="true" />
+          <property id="textbox.sint32r.1234" value="1" displayName="SInt32 Textbox With Reduced Range" description="" type="sint32" ignoreOnBackEnd="true">
+            <numericValidation minInclusive="-4095" maxInclusive="4095" />
+          </property>
+          <property id="textbox.double.1234" value="1.234" displayName="Double Textbox" description="" type="double" ignoreOnBackEnd="true" />
+          <property id="textbox.doubler.1234" value="1.234" displayName="Double Textbox With Reduced Range" description="" type="double" ignoreOnBackEnd="true">
+            <numericValidation minInclusive="0.1234" maxInclusive="4095.2345" />
+          </property>
+          <property id="textbox.hex.1234" value="0123456789ABCDEF" displayName="Hex Textbox (no validation yet)" description="" type="hex" ignoreOnBackEnd="true" />
+          <property id="textbox.string.1234" value="Some string" displayName="String Textbox (no validation yet)" description="" type="string" ignoreOnBackEnd="true" />
+      </group>
+    </page>
+    <page layout="grid" columns="2" rows="2" displayName="Source PE Template 1" description="Configure the BGP Route Sources" image="diagram.png"> 
+      <group posId="0,0" displayName="GRID 0,0">
+        <table id="table1">
+          <property id=" spirent.methodology.LoadTemplateCommand.CopiesPerParent.40000" displayName="X Copies Per Parent " widgetType="textbox" type="int" value="11">
+            <numericValidation minInclusive="1" maxInclusive="1024" /> 
+            <data>1</data>
+            <data>2</data>
+            <data>3</data>
+          </property>
+          <property id="spirent.methodology.LoadTemplateCommand.TemplateXml.40000:SomeObject.EnableX" value="True" displayName="Enable X" widgetType="checkbox" type="bool">
+            <data>True</data>
+            <data>False</data>
+            <data>True</data>
+          </property>
+          <property id=" spirent.methodology.LoadTemplateCommand.CopiesPerParent.40000" displayName="Y Copies Per Parent " widgetType="textbox" type="int" value="22">
+            <numericValidation minInclusive="1" maxInclusive="1024" /> 
+            <data>4</data>
+            <data>5</data>
+            <data>6</data>
+          </property>
+          <property id="spirent.methodology.LoadTemplateCommand.TemplateXml.40000:SomeObject.EnableY" value="False" displayName="Enable Y" widgetType="checkbox" type="bool"> 
+            <data>False</data>
+            <data>True</data>
+            <data>True</data>
+          </property>
+          <property id="spirent.methodology.LoadTemplateCommand.40004.command.enumYProperty" value="RUNNING" displayName="Y State" widgetType="dropdown" type="enum">
+            <enumerationRef ref="EnumYState" />
+            <data>RUNNING</data>
+            <data>DROPPING</data>
+            <data>DROPPING</data>
+          </property>
+        </table>
+      </group>
+      <group displayName="GRID 0,1" posId="0,1">
+        <property id="spirent.methodology.LoadTemplateCommand.40001:SomeObject.EnableX" value="False" displayName="Enable X" widgetType="checkbox" type="bool" /> 
+        <property id="spirent.methodology.LoadTemplateCommand.40001.alphavalue" value="21" displayName="Alpha" widgetType="textbox" type="int" ignoreOnBackEnd="True" /> 
+        <property id="spirent.methodology.LoadTemplateCommand.40001.betavalue" value="12" displayName="Beta" widgetType="textbox" type="int" ignoreOnBackEnd="True" />
+        <property id="spirent.methodology.LoadTemplateCommand.40001:SomeObject.EnableY" value="True" displayName="Enable Y" widgetType="checkbox" type="bool" /> 
+        <property id="spirent.methodology.LoadTemplateCommand.40001:SomeObject.EnableZ" value="False" displayName="Enable Z" widgetType="checkbox" type="bool" /> 
+      </group>
+      <group displayName="GRID 1,0" posId="1,0">
+        <property id="spirent.methodology.LoadTemplateCommand.40002.alphavalue" value="21" displayName="Alpha" widgetType="textbox" type="int" ignoreOnBackEnd="True" /> 
+        <property id="spirent.methodology.LoadTemplateCommand.40002.betavalue" value="12" displayName="Beta" widgetType="textbox" type="int" ignoreOnBackEnd="True" />
+        <property id="command.enumYProperty" value="RUNNING" displayName="Y State" widgetType="dropdown" type="enum">
+            <enumerationRef ref="EnumYState" />
+        </property>
+      </group>
+      <group displayName="GRID 1,1" posId="1,1">
+        <property id="spirent.methodology.LoadTemplateCommand.40003.alphavalue" value="21" displayName="Alpha" widgetType="textbox" type="int" ignoreOnBackEnd="True" /> 
+        <property id="spirent.methodology.LoadTemplateCommand.40003.betavalue" value="12" displayName="Beta" widgetType="textbox" type="int" ignoreOnBackEnd="True" />
+      </group>
+    </page>
+    <page layout="grid" columns="1" rows="1" displayName="Source PE Template 2" description="Configure the BGP Route Sources" image="diagram.png"> 
+      <group displayName="GRID 0,0" posId="0,0">
+        <property id="spirent.methodology.LoadTemplateCommand.40004.alphavalue" value="21" displayName="Alpha-page2" widgetType="textbox" type="int" ignoreOnBackEnd="True" /> 
+        <property id="spirent.methodology.LoadTemplateCommand.40004.betavalue" value="12" displayName="Beta-page2" widgetType="textbox" type="int" ignoreOnBackEnd="True" />
+        <property id="spirent.methodology.LoadTemplateCommand.40004.command.enumYProperty" value="RUNNING" displayName="Y State" widgetType="dropdown" type="enum">
+            <enumerationRef ref="EnumYState" />
+        </property>
+     </group>
+    </page>
+  </wizard>
+</test>
+

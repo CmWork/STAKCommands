@@ -1,0 +1,842 @@
+{
+    "methodology_key": "RFC2544THROUGHPUT",
+    "display_template_key": "EASTWESTBASICTEMPLATE",
+    "sut_template_key": "BASICTHROUGHPUTSUT",
+    "display_name": "RFC 2544 Throughput Test",
+    "short_display_name": "RFC2544",
+    "description": "Determine the maximum rate at which none of the offered frames are dropped by the DUT.",
+    "version": "1-0-0",
+    "status": {
+        "valid": true,
+        "validation_explanation": "None."
+    },
+    "labels": [
+        "RFC 2544 Throughput",
+        "2544",
+        "Throughput"
+    ],
+    "feature_ids": [
+        "0014_RFC2544_TPK"
+    ],
+    "port_groups": [
+        {
+            "prop_id": "LeftPortGroup",
+            "name": "Left",
+            "ports": [
+                {
+                    "location": "10.10.10.1/1/1"
+                }
+            ]
+        },
+        {
+            "prop_id": "RightPortGroup",
+            "name": "Right",
+            "ports": [
+                {
+                    "location": "10.10.10.1/1/1"
+                }
+            ]
+        }
+    ],
+    "property_groups": [
+        {
+            "prop_id": "leftEndpointConfig",
+            "gui_id": "left_endpoint_config",
+            "group_type": "endpoint_profile",
+            "display_name": "Left Endpoint Addressing",
+            "image": "rfc2544_endpoints.png",
+            "default_for_new_test": false,
+            "test_properties": [
+                {
+                    "prop_id": "Left_IpVersion",
+                    "gui_id": "ip_version",
+                    "display_name": "Endpoint IP Version",
+                    "description": "Selects which version of IP to use.",
+                    "property_value": "IPV4",
+                    "property_value_type": "enum",
+                    "acceptable_values": [
+                        "IPV4",
+                        "IPV6"
+                    ],
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Left_Ipv4AddrStart",
+                    "gui_id": "ipv4_addr_start",
+                    "display_name": "IPv4 Address Start",
+                    "description": "Start IPv4 address for left endpoints.",
+                    "property_value": "192.85.1.2",
+                    "property_value_type": "ipv4",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Left_Ipv4AddrPortStep",
+                    "gui_id": "ipv4_addr_port_step",
+                    "display_name": "IPv4 Address Port Step",
+                    "description": "IPv4 address port step for left endpoints.",
+                    "property_value": "0.0.0.1",
+                    "property_value_type": "ipv4",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Left_Ipv4PrefixLength",
+                    "gui_id": "ipv4_prefix_length",
+                    "display_name": "IPv4 Prefix Length",
+                    "description": "IPv4 prefix length for left endpoints.",
+                    "property_value": "24",
+                    "property_value_type": "integer",
+                    "minimum": 0,
+                    "maximum": 32,
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Left_Ipv4GatewayStart",
+                    "gui_id": "ipv4_gateway_start",
+                    "display_name": "IPv4 Gateway Address Start",
+                    "description": "Start IPv4 Gateway address for left endpoints.",
+                    "property_value": "192.85.1.1",
+                    "property_value_type": "ipv4",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Left_Ipv4GatewayPortStep",
+                    "gui_id": "ipv4_gateway_port_step",
+                    "display_name": "IPv4 Gateway Address Port Step",
+                    "description": "IPv4 Gateway address port step for left endpoints.",
+                    "property_value": "0.0.0.0",
+                    "property_value_type": "ipv4",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Left_Ipv6LLAddrStart",
+                    "gui_id": "ipv6_link_local_addr_start",
+                    "display_name": "IPv6 Link Local Address Start",
+                    "description": "Start IPv6 link local address for left endpoints.",
+                    "property_value": "fe80::1",
+                    "property_value_type": "ipv6",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Left_Ipv6LLAddrPortStep",
+                    "gui_id": "ipv6_link_local_addr_port_step",
+                    "display_name": "IPv6 Link Local Address Port Step",
+                    "description": "IPv6 link local address port step for left endpoints.",
+                    "property_value": "::1",
+                    "property_value_type": "ipv6",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Left_Ipv6AddrStart",
+                    "gui_id": "ipv6_addr_start",
+                    "display_name": "IPv6 Address Start",
+                    "description": "Start IPv6 address for left endpoints.",
+                    "property_value": "2000::2",
+                    "property_value_type": "ipv6",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Left_Ipv6AddrPortStep",
+                    "gui_id": "ipv6_addr_port_step",
+                    "display_name": "IPv6 Address Port Step",
+                    "description": "IPv6 address port step for left endpoints.",
+                    "property_value": "::1:0",
+                    "property_value_type": "ipv6",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Left_Ipv6PrefixLength",
+                    "gui_id": "ipv6_prefix_length",
+                    "display_name": "IPv6 Prefix Length",
+                    "description": "IPv6 prefix length for left endpoints.",
+                    "property_value": "64",
+                    "property_value_type": "integer",
+                    "minimum": 0,
+                    "maximum": 128,
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Left_Ipv6GatewayStart",
+                    "gui_id": "ipv6_gateway_start",
+                    "display_name": "IPv6 Gateway Address Start",
+                    "description": "Start IPv6 Gateway address for left endpoints.",
+                    "property_value": "2000::1",
+                    "property_value_type": "ipv6",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Left_Ipv6GatewayPortStep",
+                    "gui_id": "ipv6_gateway_port_step",
+                    "display_name": "IPv6 Gateway Address Port Step",
+                    "description": "IPv6 Gateway address port step for left endpoints.",
+                    "property_value": "::1:0",
+                    "property_value_type": "ipv6",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Left_EnableVlan",
+                    "gui_id": "vlan_enable",
+                    "display_name": "Enable VLAN",
+                    "description": "Enable VLAN for left endpoints.",
+                    "property_value": "False",
+                    "property_value_type": "boolean",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Left_VlanIdStart",
+                    "gui_id": "vlan_id_start",
+                    "display_name": "VLAN ID Start",
+                    "description": "Start VLAN ID for left endpoints.",
+                    "property_value": "100",
+                    "property_value_type": "integer",
+                    "gui_only": true,
+                    "minimum": 0,
+                    "maximum": 4095
+                },
+                {
+                    "prop_id": "Left_VlanIdPortStep",
+                    "gui_id": "vlan_id_port_step",
+                    "display_name": "VLAN ID Port Step",
+                    "description": "VLAN ID port step for left endpoints.",
+                    "property_value": "1",
+                    "property_value_type": "integer",
+                    "gui_only": true,
+                    "minimum": 0,
+                    "maximum": 4095
+                },
+                {
+                    "prop_id": "Left_MacAddrStart",
+                    "gui_id": "mac_addr_start",
+                    "display_name": "MAC Address Start",
+                    "description": "Start MAC address for left endpoints.",
+                    "property_value": "00:10:94:00:00:02",
+                    "property_value_type": "mac",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Left_MacAddrPortStep",
+                    "gui_id": "mac_addr_port_step",
+                    "display_name": "MAC Address Port Step",
+                    "description": "Port step MAC address for left endpoints.",
+                    "property_value": "00:00:00:00:00:01",
+                    "property_value_type": "mac",
+                    "gui_only": true
+                }
+            ]
+        },
+        {
+            "prop_id": "rightEndpointConfig",
+            "gui_id": "right_endpoint_config",
+            "group_type": "endpoint_profile",
+            "display_name": "Right Endpoint Addressing",
+            "image": "rfc2544_endpoints.png",
+            "default_for_new_test": false,
+            "test_properties": [
+                {
+                    "prop_id": "Right_IpVersion",
+                    "gui_id": "ip_version",
+                    "display_name": "Endpoint IP Version",
+                    "description": "Selects which version of IP to use.",
+                    "property_value": "IPV4",
+                    "property_value_type": "enum",
+                    "acceptable_values": [
+                        "IPV4",
+                        "IPV6"
+                    ],
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Right_Ipv4AddrStart",
+                    "gui_id": "ipv4_addr_start",
+                    "display_name": "IPv4 Address Start",
+                    "description": "Start IPv4 address for right endpoints.",
+                    "property_value": "192.86.1.2",
+                    "property_value_type": "ipv4",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Right_Ipv4AddrPortStep",
+                    "gui_id": "ipv4_addr_port_step",
+                    "display_name": "IPv4 Address Port Step",
+                    "description": "IPv4 address port step for right endpoints.",
+                    "property_value": "0.0.0.1",
+                    "property_value_type": "ipv4",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Right_Ipv4PrefixLength",
+                    "gui_id": "ipv4_prefix_length",
+                    "display_name": "IPv4 Prefix Length",
+                    "description": "IPv4 prefix length for right endpoints.",
+                    "property_value": "24",
+                    "property_value_type": "integer",
+                    "minimum": 0,
+                    "maximum": 32,
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Right_Ipv4GatewayStart",
+                    "gui_id": "ipv4_gateway_start",
+                    "display_name": "IPv4 Gateway Address Start",
+                    "description": "Start IPv4 Gateway address for right endpoints.",
+                    "property_value": "192.86.1.1",
+                    "property_value_type": "ipv4",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Right_Ipv4GatewayPortStep",
+                    "gui_id": "ipv4_gateway_port_step",
+                    "display_name": "IPv4 Gateway Address Port Step",
+                    "description": "IPv4 Gateway address port step for right endpoints.",
+                    "property_value": "0.0.0.0",
+                    "property_value_type": "ipv4",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Right_Ipv6LLAddrStart",
+                    "gui_id": "ipv6_link_local_addr_start",
+                    "display_name": "IPv6 Link Local Address Start",
+                    "description": "Start IPv6 link local address for right endpoints.",
+                    "property_value": "fe80::1:1",
+                    "property_value_type": "ipv6",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Right_Ipv6LLAddrPortStep",
+                    "gui_id": "ipv6_link_local_addr_port_step",
+                    "display_name": "IPv6 Link Local Address Port Step",
+                    "description": "IPv6 link local address port step for right endpoints.",
+                    "property_value": "::1",
+                    "property_value_type": "ipv6",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Right_Ipv6AddrStart",
+                    "gui_id": "ipv6_addr_start",
+                    "display_name": "IPv6 Address Start",
+                    "description": "Start IPv6 address for right endpoints.",
+                    "property_value": "2001::2",
+                    "property_value_type": "ipv6",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Right_Ipv6AddrPortStep",
+                    "gui_id": "ipv6_addr_port_step",
+                    "display_name": "IPv6 Address Port Step",
+                    "description": "IPv6 address port step for right endpoints.",
+                    "property_value": "::1:0",
+                    "property_value_type": "ipv6",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Right_Ipv6PrefixLength",
+                    "gui_id": "ipv6_prefix_length",
+                    "display_name": "IPv6 Prefix Length",
+                    "description": "IPv6 prefix length for right endpoints.",
+                    "property_value": "64",
+                    "property_value_type": "integer",
+                    "minimum": 0,
+                    "maximum": 128,
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Right_Ipv6GatewayStart",
+                    "gui_id": "ipv6_gateway_start",
+                    "display_name": "IPv6 Gateway Address Start",
+                    "description": "Start IPv6 Gateway address for right endpoints.",
+                    "property_value": "2001::1",
+                    "property_value_type": "ipv6",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Right_Ipv6GatewayPortStep",
+                    "gui_id": "ipv6_gateway_port_step",
+                    "display_name": "IPv6 Gateway Address Port Step",
+                    "description": "IPv6 Gateway address port step for right endpoints.",
+                    "property_value": "::1:0",
+                    "property_value_type": "ipv6",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Right_EnableVlan",
+                    "gui_id": "vlan_enable",
+                    "display_name": "Enable VLAN",
+                    "description": "Enable VLAN for right endpoints.",
+                    "property_value": "False",
+                    "property_value_type": "boolean",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Right_VlanIdStart",
+                    "gui_id": "vlan_id_start",
+                    "display_name": "VLAN ID Start",
+                    "description": "Start VLAN ID for right endpoints.",
+                    "property_value": "100",
+                    "property_value_type": "integer",
+                    "gui_only": true,
+                    "minimum": 0,
+                    "maximum": 4095
+                },
+                {
+                    "prop_id": "Right_VlanIdPortStep",
+                    "gui_id": "vlan_id_port_step",
+                    "display_name": "VLAN ID Port Step",
+                    "description": "VLAN ID port step for right endpoints.",
+                    "property_value": "1",
+                    "property_value_type": "integer",
+                    "gui_only": true,
+                    "minimum": 0,
+                    "maximum": 4095
+                },
+                {
+                    "prop_id": "Right_MacAddrStart",
+                    "gui_id": "mac_addr_start",
+                    "display_name": "MAC Address Start",
+                    "description": "Start MAC address for right endpoints.",
+                    "property_value": "00:10:94:11:00:02",
+                    "property_value_type": "mac",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "Right_MacAddrPortStep",
+                    "gui_id": "mac_addr_port_step",
+                    "display_name": "MAC Address Port Step",
+                    "description": "Port step MAC address for right endpoints.",
+                    "property_value": "00:00:00:00:00:01",
+                    "property_value_type": "mac",
+                    "gui_only": true
+                }
+            ]
+        },
+        {
+            "prop_id": "learningConfig",
+            "display_name": "L2 and L3 Learning Configuration",
+            "test_properties": [
+                {
+                    "prop_id": "EnableLearning",
+                    "gui_id": "learning_enable",
+                    "display_name": "Enable Learning",
+                    "description": "Enables L2 or L3 Learning for the test.",
+                    "property_value": "True",
+                    "property_value_type": "boolean",
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "LearningMode",
+                    "gui_id": "learning_mode",
+                    "display_name": "Learning Mode",
+                    "description": "Selects the type of learning to perform if learning is enable.",
+                    "property_value": "L3",
+                    "property_value_type": "enum",
+                    "acceptable_values": [
+                        "L2",
+                        "L3"
+                    ],
+                    "gui_only": true
+                }
+            ]
+        },
+        {
+            "prop_id": "trafficPatternConfig",
+            "gui_id": "traffic_pattern_config",
+            "display_name": "Traffic Pattern",
+            "test_properties": [
+                {
+                    "prop_id": "EndpointTrafficPattern",
+                    "gui_id": "traffic_pattern",
+                    "description": "The traffic pattern between the defined endpoint sets in the test.",
+                    "property_value": "PAIR",
+                    "property_value_type": "enum",
+                    "acceptable_values": [
+                        "PAIR",
+                        "BACKBONE",
+                        "MESH"
+                    ],
+                    "gui_only": true
+                }
+            ]
+        },
+        {
+            "prop_id": "trafficConfig",
+            "gui_id": "2544_traffic_config",
+            "display_name": "Traffic Configuration",
+            "image": "rfc2544_topology.png",
+            "test_properties": [
+                {
+                    "prop_id": "NumberOfTrials",
+                    "gui_id": "num_trials",
+                    "display_name": "Number of Trials",
+                    "decription": "The number of times the test is run with its configuration.",
+                    "property_value": "1",
+                    "property-value_type": "integer",
+                    "minimum": 1,
+                    "maximum": 60,
+                    "gui_only": true
+                },
+                {
+                    "prop_id": "TrafficDuration",
+                    "gui_id": "traffic_duration",
+                    "display_name": "Traffic Duration (sec)",
+                    "description": "The length of time the traffic will run in seconds.",
+                    "property_value": "60",
+                    "property_value_type": "float",
+                    "minimum": 0.005,
+                    "maximum": 2147483647
+                },
+                {
+                    "prop_id": "WaitTimeAfterTraffic",
+                    "gui_id": "wait_time_after_traffic",
+                    "display_name": "Wait after Traffic Stopped (sec)",
+                    "description": "Time in seconds to wait after traffic is stopped before collecting measurements.",
+                    "property_value": "10",
+                    "property_value_type": "float",
+                    "minimum": 0.005,
+                    "maximum": 2147483647
+                },
+                {
+                    "prop_id": "spirent.methodology.ObjectIteratorCommand.ValueList.188536",
+                    "gui_id": "frame_size_list",
+                    "display_name": "Frame Size List (bytes)",
+                    "description": "The maximum frame rate shall be determined for each specified frame size in list.",
+                    "property_value": [
+                        "64",
+                        "128",
+                        "256",
+                        "512",
+                        "1024"
+                    ],
+                    "property_value_type": "integer",
+                    "minimum": 20,
+                    "maximum": 16383
+                }
+            ]
+        },
+        {
+            "prop_id": "binarySearchConfig",
+            "gui_id": "2544_traffic_binary_search",
+            "display_name": "Binary Search Parameters",
+            "test_properties": [
+                {
+                    "prop_id": "spirent.methodology.RateIteratorCommand.MinVal.126354",
+                    "gui_id": "binary_search_lower_limit",
+                    "display_name": "Traffic Rate Lower Limit (%)",
+                    "description": "Lowest search limit for binary search.",
+                    "property_value": "1",
+                    "property_value_type": "float",
+                    "minimum": 0.001,
+                    "maximum": 100
+                },
+                {
+                    "prop_id": "spirent.methodology.RateIteratorCommand.MaxVal.126354",
+                    "gui_id": "binary_search_upper_limit",
+                    "display_name": "Traffic Rate Upper Limit (%)",
+                    "description": "Highest search limit for binary search.",
+                    "property_value": "100",
+                    "property_value_type": "float",
+                    "minimum": 0.001,
+                    "maximum": 100
+                },
+                {
+                    "prop_id": "spirent.methodology.RateIteratorCommand.Resolution.126354",
+                    "gui_id": "binary_search_resolution",
+                    "display_name": "Resolution (%)",
+                    "description": "Specifies how precisely to determine measured throughput against true throughput. Binary search shall complete once last two search iterations are within the specified resolution.",
+                    "property_value": "1",
+                    "property_value_type": "float",
+                    "minimum": 0.001,
+                    "maximum": 100
+                }
+            ]
+        }
+    ],
+    "test_criteria": [
+        {
+            "prop_id": "ThroughputCriterion",
+            "gui_id": "throughput_criterion",
+            "template": "Maximum throughput is {operator} {threshold} {threshold_unit} for each frame size",
+            "operator": "<",
+            "threshold": {
+                "prop_id": "ThroughputThreshold",
+                "gui_id": "throughput_threshold",
+                "property_value": "100",
+                "property_value_type": "float",
+                "minimum": 0.001,
+                "maximum": 100,
+                "gui_only": true
+            },
+            "threshold_unit": "%"
+        }
+    ],
+    "processing_functions": [
+        {
+            "script_filename": "Rfc2544_Script.py",
+            "entry_function": "Rfc2544ThroughputConfigureLearning",
+            "input": [
+                {
+                    "src_prop_id": "EnableLearning",
+                    "script_input_key": "EnableLearning"
+                },
+                {
+                    "src_prop_id": "LearningMode",
+                    "script_input_key": "LearningMode"
+                }
+            ],
+            "output": [
+                {
+                    "script_output_key": "EnableL2Learning",
+                    "ep_key": "TestMethodologyL2L3LearningCommandEnableL2Learning"
+                },
+                {
+                    "script_output_key": "EnableL3Learning",
+                    "ep_key": "TestMethodologyL2L3LearningCommandEnableL3Learning"
+                }
+            ]
+        },
+        {
+            "script_filename": "Rfc2544_Script.py",
+            "entry_function": "Rfc2544ThroughputMixInfoProcFunction",
+            "output": [
+                {
+                    "script_output_key": "MixInfo",
+                    "ep_key": "TestMethodologyCreateTrafficMixCommandMixInfo"
+                }
+            ],
+            "input": [
+                {
+                    "script_input_key": "input",
+                    "dict": {
+                        "load": 1,
+                        "loadUnits": "PERCENT_LINE_RATE",
+                        "components": [
+                            {
+                                "weight": "100%",
+                                "baseTemplateFile": "IPv4_Stream.xml",
+                                "modifyList": [
+                                    {
+                                        "propertyValueList": [
+                                            {
+                                                "tagName": "ttStreamBlock",
+                                                "className": "StreamBlock",
+                                                "propertyValueList": {
+                                                    "TrafficPattern": "EndpointTrafficPattern"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "postExpandModify": [
+                                    {
+                                        "streamBlockExpand": {
+                                            "endpointMapping": {
+                                                "bidirectional": true,
+                                                "srcBindingTagList": [
+                                                    "Left_ttIpv4If"
+                                                ],
+                                                "dstBindingTagList": [
+                                                    "Right_ttIpv4If"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "entry_function": "config_protocol_table_data",
+            "output": [
+                {
+                    "ep_key": "TestMethodologyCreateProtocolMixCommand1MixInfo",
+                    "script_output_key": "TableData"
+                }
+            ],
+            "script_filename": "txml_processing_functions.py",
+            "func_id": "Left.CreateProtocolMix.TableData",
+            "input": [
+                {
+                    "script_input_key": "input",
+                    "dict": {
+                        "protocolDict": [],
+                        "customDict": {
+                            "EnableVlan": "Left_EnableVlan",
+                            "IpStack": "Left_IpVersion",
+                            "DeviceCount": "1",
+                            "DevPerBlock": [
+                                "1"
+                            ],
+                            "TagPrefix": "Left_",
+                            "Weight": [
+                                "1"
+                            ]
+                        },
+                        "interfaceDict": [
+                            {
+                                "ClassName": "VlanIf",
+                                "ParentTagName": "ttVlanIf",
+                                "StmPropertyModifierDict": {
+                                    "VlanId": {
+                                        "Start": "Left_VlanIdStart",
+                                        "Step": "Left_VlanIdPortStep"
+                                    }
+                                }
+                            },
+                            {
+                                "ClassName": "Ipv4If",
+                                "ParentTagName": "ttIpv4If",
+                                "StmPropertyModifierDict": {
+                                    "Gateway": {
+                                        "Start": "Left_Ipv4GatewayStart",
+                                        "Step": "Left_Ipv4GatewayPortStep"
+                                    },
+                                    "Address": {
+                                        "Start": "Left_Ipv4AddrStart",
+                                        "Step": "Left_Ipv4AddrPortStep"
+                                    }
+                                },
+                                "PropertyValueDict": {
+                                    "PrefixLength": "Left_Ipv4PrefixLength"
+                                }
+                            },
+                            {
+                                "ClassName": "Ipv6If",
+                                "ParentTagName": "ttIpv6If",
+                                "StmPropertyModifierDict": {
+                                    "Gateway": {
+                                        "Start": "Left_Ipv6GatewayStart",
+                                        "Step": "Left_Ipv6GatewayPortStep"
+                                    },
+                                    "Address": {
+                                        "Start": "Left_Ipv6AddrStart",
+                                        "Step": "Left_Ipv6AddrPortStep"
+                                    }
+                                },
+                                "PropertyValueDict": {
+                                    "PrefixLength": "Left_Ipv6PrefixLength"
+                                }
+                            },
+                            {
+                                "ClassName": "Ipv6If",
+                                "ParentTagName": "ttLinkLocalIf",
+                                "StmPropertyModifierDict": {
+                                    "Address": {
+                                        "Start": "Left_Ipv6LLAddrStart",
+                                        "Step": "Left_Ipv6LLAddrPortStep"
+                                    }
+                                }
+                            },
+                            {
+                                "ClassName": "EthIIIf",
+                                "ParentTagName": "ttEthIIIf",
+                                "StmPropertyModifierDict": {
+                                    "SourceMac": {
+                                        "Start": "Left_MacAddrStart",
+                                        "Step": "Left_MacAddrPortStep"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "entry_function": "config_protocol_table_data",
+            "output": [
+                {
+                    "ep_key": "TestMethodologyCreateProtocolMixCommand2MixInfo",
+                    "script_output_key": "TableData"
+                }
+            ],
+            "script_filename": "txml_processing_functions.py",
+            "func_id": "Right.CreateProtocolMix.TableData",
+            "input": [
+                {
+                    "script_input_key": "input",
+                    "dict": {
+                        "protocolDict": [],
+                        "customDict": {
+                            "EnableVlan": "Right_EnableVlan",
+                            "IpStack": "Right_IpVersion",
+                            "DeviceCount": "1",
+                            "DevPerBlock": [
+                                "1"
+                            ],
+                            "TagPrefix": "Right_",
+                            "Weight": [
+                                "1"
+                            ]
+                        },
+                        "interfaceDict": [
+                            {
+                                "ClassName": "VlanIf",
+                                "ParentTagName": "ttVlanIf",
+                                "StmPropertyModifierDict": {
+                                    "VlanId": {
+                                        "Start": "Right_VlanIdStart",
+                                        "Step": "Right_VlanIdPortStep"
+                                    }
+                                }
+                            },
+                            {
+                                "ClassName": "Ipv4If",
+                                "ParentTagName": "ttIpv4If",
+                                "StmPropertyModifierDict": {
+                                    "Gateway": {
+                                        "Start": "Right_Ipv4GatewayStart",
+                                        "Step": "Right_Ipv4GatewayPortStep"
+                                    },
+                                    "Address": {
+                                        "Start": "Right_Ipv4AddrStart",
+                                        "Step": "Right_Ipv4AddrPortStep"
+                                    }
+                                },
+                                "PropertyValueDict": {
+                                    "PrefixLength": "Right_Ipv4PrefixLength"
+                                }
+                            },
+                            {
+                                "ClassName": "Ipv6If",
+                                "ParentTagName": "ttIpv6If",
+                                "StmPropertyModifierDict": {
+                                    "Gateway": {
+                                        "Start": "Right_Ipv6GatewayStart",
+                                        "Step": "Right_Ipv6GatewayPortStep"
+                                    },
+                                    "Address": {
+                                        "Start": "Right_Ipv6AddrStart",
+                                        "Step": "Right_Ipv6AddrPortStep"
+                                    }
+                                },
+                                "PropertyValueDict": {
+                                    "PrefixLength": "Right_Ipv6PrefixLength"
+                                }
+                            },
+                            {
+                                "ClassName": "Ipv6If",
+                                "ParentTagName": "ttLinkLocalIf",
+                                "StmPropertyModifierDict": {
+                                    "Address": {
+                                        "Start": "Right_Ipv6LLAddrStart",
+                                        "Step": "Right_Ipv6LLAddrPortStep"
+                                    }
+                                }
+                            },
+                            {
+                                "ClassName": "EthIIIf",
+                                "ParentTagName": "ttEthIIIf",
+                                "StmPropertyModifierDict": {
+                                    "SourceMac": {
+                                        "Start": "Right_MacAddrStart",
+                                        "Step": "Right_MacAddrPortStep"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

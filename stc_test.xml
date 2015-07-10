@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+<stc:meta package="spirent.methodology" plugin="plcommands" version="0.0.0-0" xmlns:stc="urn:www.spirentcom.com:XMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<!-- Iterate over discrete objects -->
+<stc:class name="ObjectIteratorCommand" displayName="Object Iterator Command" baseClass="spirent.methodology.IteratorCommand" bllDirectInterface="true" isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Object Iterator Command" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Iterators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:enumeration name="EnumIterMode">
+      <stc:enum name="STEP"         value="1" displayName="Step" />
+      <stc:enum name="BINARY"       value="2" displayName="Binary" />
+    </stc:enumeration>
+
+    <stc:enumeration name="EnumValueType">
+      <stc:enum name="RANGE"        value="1" displayName="Range" />
+      <stc:enum name="LIST"         value="2" displayName="List" />
+    </stc:enumeration>
+
+    <stc:property category="input" name="IterMode" displayName="Iteration Mode" type="u8" default="STEP" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Iteration mode" />
+      <stc:enumerationRef ref="EnumIterMode"/>
+    </stc:property>
+    <stc:property category="input" name="StepVal" displayName="Step value" type="double" default="10">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Step value" />
+    </stc:property>
+    <stc:property category="input" name="ValueType" displayName="Value type" type="u8" default="RANGE" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Value type (list or range)" />
+      <stc:enumerationRef ref="EnumValueType"/>
+    </stc:property>
+    <stc:property category="input" name="ValueList" displayName="List of values" type="string" default="" minOccurs="0" maxOccurs="unbounded" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of values to test" />
+    </stc:property>
+
+    <stc:property category="state" name="CurrIndex" displayName="Current Index" type="u32" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Current list value's index" />
+    </stc:property>
+    <stc:property category="state" name="MinFail" displayName="Minimum fail value" type="double" default="" isInternal="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Minimum fail value" />
+    </stc:property>
+    <stc:property category="state" name="MaxPass" displayName="Maximum pass value" type="double" default="" isInternal="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Maximum pass value" />
+    </stc:property>
+
+    <stc:property category="output" name="IsConverged" displayName="Is Converged" type="bool" default="false">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Did the iterator converge?" />
+    </stc:property>
+    <stc:property category="output" name="ConvergedVal" displayName="Converged Value" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Value the iterator converged on" />
+    </stc:property>
+
+</stc:class>
+
+
+<!-- Iterate over continuous values like rates (ie RFC 2544 style throughput search) -->
+<stc:class name="RateIteratorCommand" displayName="Rate Iterator Command" baseClass="spirent.methodology.IteratorCommand" bllDirectInterface="true" isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Rate Iterator Command" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Iterators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:enumeration name="EnumResolutionMode">
+      <stc:enum name="PERCENT"       value="1" displayName="Percent" />
+      <stc:enum name="ABSOLUTE"      value="2" displayName="Absolute" />
+    </stc:enumeration>
+
+    <stc:property category="input" name="Resolution" displayName="Resolution" type="double" default="1">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="How close to get to the true value" />
+    </stc:property>
+    <stc:property category="input" name="ResolutionMode" displayName="Resolution Mode" type="u8" default="PERCENT">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Resolution units" />
+      <stc:enumerationRef ref="EnumResolutionMode"/>
+    </stc:property>
+    <stc:property category="input" name="RoundingResolution" displayName="Rounding Resolution" type="double" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="How to round the values used. 0 means no rounding." />
+    </stc:property>
+
+    <stc:property category="state" name="MinFail" displayName="Minimum fail value" type="double" default="" isInternal="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Minimum fail value" />
+    </stc:property>
+    <stc:property category="state" name="MaxPass" displayName="Maximum pass value" type="double" default="" isInternal="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Maximum pass value" />
+    </stc:property>
+
+    <stc:property category="output" name="IsConverged" displayName="Is Converged" type="bool" default="false">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Did the iterator converge?" />
+    </stc:property>
+    <stc:property category="output" name="ConvergedVal" displayName="Converged Value" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Value the iterator converged on" />
+    </stc:property>
+</stc:class>
+
+
+</stc:meta>

@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>&lt;no title&gt; &mdash; Spirent Methodology Infrastructure 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Spirent Methodology Infrastructure 0.1 documentation" href="../../index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="../../index.html" class="icon icon-home"> Spirent Methodology Infrastructure
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="simple">
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Spirent Methodology Infrastructure</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+    <li>&lt;no title&gt;</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/Commands/stc_testmethodology/CreateTemplateConfigCommand.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <p># CreateTemplateConfigCommand</p>
+<p>Create an StmTemplateConfig by load an XML template and modifying it.</p>
+<p>&lt;img src=&#8217;somesource&#8217; /&gt;</p>
+<p>&lt;font size=&#8221;2&#8221;&gt;File Reference: stc_testmethodology.xml&lt;/font&gt;</p>
+<p>## Properties</p>
+<p>### TargetTagList: &#8220;Target Tag List&#8221; (input:string)</p>
+<p>List of tags that indicate where in the STC configuration the template will be copied to.  If TargetTagList is empty, the target will be assumed to be Project.</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### InputJsonSchema: &#8220;Input JSON Schema&#8221; (state:string)</p>
+<p>JSON schema that will be used to validate the InputJson property&#8217;s value.</p>
+<ul>
+<li><p class="first">JSON Schema -</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;required&#8221;: [</dt>
+<dd><p class="first last">&#8220;baseTemplateFile&#8221;</p>
+</dd>
+</dl>
+<p>],
+&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;properties&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;modifyList&#8221;: {</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><p class="first">&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;properties&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;stmPropertyModifierList&#8221;: {</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><p class="first">&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;properties&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;className&#8221;: {</dt>
+<dd><p class="first last">&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Class name of the object type that properties will be modified on.&#8221;</p>
+</dd>
+</dl>
+<p>},
+&#8220;propertyName&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Name of the property that an StmPropertyModifier is being attached onto.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;parentTagName&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Name of the tag that tags the object that an StmPropertyModifier will be added or configured on.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;tagName&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Name of the tag that tags objects of type className.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;propertyValueList&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;description&#8221;: &#8220;List of property-value pairs that will be modified.  This list should contain property names that exist in the StmPropertyModifier&#8217;s ModifierInfo.&#8221;</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>},
+&#8220;required&#8221;: [</p>
+<blockquote>
+<div><p>&#8220;className&#8221;,
+&#8220;tagName&#8221;,
+&#8220;propertyValueList&#8221;</p>
+</div></blockquote>
+<p class="last">],
+&#8220;type&#8221;: &#8220;array&#8221;,
+&#8220;description&#8221;: &#8220;A list of config StmPropertyModifier operations to add or configure StmPropertyModifiers in the StmTemplateConfig.&#8221;</p>
+</dd>
+</dl>
+<p>},
+&#8220;propertyValueList&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><p class="first">&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;properties&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;className&#8221;: {</dt>
+<dd><p class="first last">&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Class name of the object type that properties will be modified on.&#8221;</p>
+</dd>
+</dl>
+<p>},
+&#8220;tagName&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Name of the tag that tags objects of type className.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;propertyValueList&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;description&#8221;: &#8220;List of property-value pairs that will be modified.&#8221;</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>},
+&#8220;required&#8221;: [</p>
+<blockquote>
+<div><p>&#8220;className&#8221;,
+&#8220;tagName&#8221;,
+&#8220;propertyValueList&#8221;</p>
+</div></blockquote>
+<p>],
+&#8220;type&#8221;: &#8220;array&#8221;,
+&#8220;description&#8221;: &#8220;A list of modify template operations to change the values of properties on tagged objects.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;relationList&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><p class="first">&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;properties&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;relationType&#8221;: {</dt>
+<dd><p class="first last">&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;The type of relation to add or remove, ie StackedOnEndpoint or UsesIf.&#8221;</p>
+</dd>
+</dl>
+<p>},
+&#8220;sourceTag&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Name of the tag that tags an object that is the source of the relation.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;removeRelation&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;boolean&#8221;,
+&#8220;description&#8221;: &#8220;A flag indicating if the relation should be removed if found.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;targetTag&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Name of the tag that tags an object that is the target of the relation.&#8221;</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>},
+&#8220;required&#8221;: [</p>
+<blockquote>
+<div><p>&#8220;relationType&#8221;,
+&#8220;targetTagList&#8221;</p>
+</div></blockquote>
+<p>],
+&#8220;type&#8221;: &#8220;array&#8221;,
+&#8220;description&#8221;: &#8220;A list of configure relation operations to add or remove relations between elements in the StmTemplateConfig.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;pduModifierList&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><p class="first">&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;properties&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;templateElementTagName&#8221;: {</dt>
+<dd><p class="first last">&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Name of the tag that tags StreamBlock objects.&#8221;</p>
+</dd>
+</dl>
+<p>},
+&#8220;value&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;String value for the PDU property.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;offsetReference&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;String in the form of . that refers to a particular field in a particular PDU that will be modified.&#8221;</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>},
+&#8220;required&#8221;: [</p>
+<blockquote>
+<div><p>&#8220;offsetReference&#8221;</p>
+</div></blockquote>
+<p>],
+&#8220;type&#8221;: &#8220;array&#8221;,
+&#8220;description&#8221;: &#8220;A list of PDU modification operations to change values in a StreamBlock&#8217;s FrameConfig.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;mergeList&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><p class="first">&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;properties&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;stmPropertyModifierList&#8221;: {</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><p class="first">&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;properties&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;className&#8221;: {</dt>
+<dd><p class="first last">&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Class name of the object type that properties will be modified on.&#8221;</p>
+</dd>
+</dl>
+<p>},
+&#8220;propertyName&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Name of the property that an StmPropertyModifier is being attached onto.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;parentTagName&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Name of the tag that tags the object that an StmPropertyModifier will be added or configured on.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;tagName&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Name of the tag that tags objects of type className.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;propertyValueList&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;description&#8221;: &#8220;List of property-value pairs that will be modified.  This list should contain property names that exist in the StmPropertyModifier&#8217;s ModifierInfo.&#8221;</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>},
+&#8220;required&#8221;: [</p>
+<blockquote>
+<div><p>&#8220;className&#8221;,
+&#8220;tagName&#8221;,
+&#8220;propertyValueList&#8221;</p>
+</div></blockquote>
+<p class="last">],
+&#8220;type&#8221;: &#8220;array&#8221;,
+&#8220;description&#8221;: &#8220;A list of config StmPropertyModifier operations to add or configure StmPropertyModifiers in the StmTemplateConfig.&#8221;</p>
+</dd>
+</dl>
+<p>},
+&#8220;propertyValueList&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><p class="first">&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;properties&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;className&#8221;: {</dt>
+<dd><p class="first last">&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Class name of the object type that properties will be modified on.&#8221;</p>
+</dd>
+</dl>
+<p>},
+&#8220;tagName&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Name of the tag that tags objects of type className.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;propertyValueList&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;description&#8221;: &#8220;List of property-value pairs that will be modified.&#8221;</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>},
+&#8220;required&#8221;: [</p>
+<blockquote>
+<div><p>&#8220;className&#8221;,
+&#8220;tagName&#8221;,
+&#8220;propertyValueList&#8221;</p>
+</div></blockquote>
+<p>],
+&#8220;type&#8221;: &#8220;array&#8221;,
+&#8220;description&#8221;: &#8220;A list of modify template operations to change the values of properties on tagged objects.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;mergeSourceTag&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;The name of the tag in the XML file from which tagged elements will be merged into the StmTemplateConfig.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;mergeSourceTemplateFile&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;The path to the source XML file.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;mergeTagPrefix&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;A string that will be prefixed to the tags that are merged from the source file to the StmTemplateConfig.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;mergeTargetTag&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;The name of the tag in the StmTemplateConfig where elements from the XML file will be merged into.&#8221;</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>},
+&#8220;required&#8221;: [</p>
+<blockquote>
+<div><p>&#8220;mergeSourceTag&#8221;,
+&#8220;mergeSourceTemplateFile&#8221;,
+&#8220;mergeTargetTag&#8221;</p>
+</div></blockquote>
+<p>],
+&#8220;type&#8221;: &#8220;array&#8221;,
+&#8220;description&#8221;: &#8220;A list of merge operations where a XML file will be used as a source of XML to merge into the XML contained in the StmTemplateConfig.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;addObjectList&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><p class="first">&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;properties&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;className&#8221;: {</dt>
+<dd><p class="first last">&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Class name of the object type that will be added.&#8221;</p>
+</dd>
+</dl>
+<p>},
+&#8220;parentTagName&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Name of the tag that tags parent objects for type className.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;tagName&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Name of the tag that tags newly created objects of type className.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;propertyValueList&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;description&#8221;: &#8220;List of property-value pairs that will be modified.&#8221;</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>},
+&#8220;required&#8221;: [</p>
+<blockquote>
+<div><p>&#8220;className&#8221;,
+&#8220;parentTagName&#8221;,
+&#8220;tagName&#8221;</p>
+</div></blockquote>
+<p>],
+&#8220;type&#8221;: &#8220;array&#8221;,
+&#8220;description&#8221;: &#8220;A list of objects to add to a template.&#8221;</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p class="last">},
+&#8220;type&#8221;: &#8220;array&#8221;,
+&#8220;description&#8221;: &#8220;A list of operations that will be carried out on the template.&#8221;</p>
+</dd>
+</dl>
+<p>},
+&#8220;tagPrefix&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;String that will be prefixed to all tags loaded and used in this template.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;baseTemplateFile&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Base template file that will be loaded into the StmTemplateConfig.  All modifications in the modifyList will be applied to the contents loaded out of this file.&#8221;</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">},
+&#8220;title&#8221;: &#8220;Schema for InputJson of the spirent.methodology.CreateTemplateConfigCommand.&#8221;</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+</li>
+</ul>
+<p>### AutoExpandTemplate: &#8220;Automatically Expand Template&#8221; (input:bool)</p>
+<p>Expand template into EmulatedDevices, Streamblocks, etc.</p>
+<ul class="simple">
+<li>default - true</li>
+</ul>
+<p>### StmTemplateMix: &#8220;Parent StmTemplateMix object&#8221; (input:handle)</p>
+<p>Handle of an StmTemplateMix object to use for the parent of the created StmTemplateConfig.</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### StmTemplateConfig: &#8220;XML container object (StmTemplateConfig)&#8221; (output:handle)</p>
+<p>StmTemplateConfig container object</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### InputJson: &#8220;JSON Input&#8221; (input:string)</p>
+<p>JSON string representation of parameters to load and modify template(s) into the StmTemplateConfig.</p>
+<ul class="simple">
+<li>default - {&#8220;baseTemplateFile&#8221;: &#8220;IPv4_NoVlan.xml&#8221;}</li>
+</ul>
+<p>### SrcTagList: &#8220;Source Tag List&#8221; (input:string)</p>
+<p>List of tags that indicate where in the XML template the config will be expanded from</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### CopiesPerParent: &#8220;Number of copies to make per Target Tag object&#8221; (input:u32)</p>
+<p>Number of copies of the template to make per Target Tag object</p>
+<ul class="simple">
+<li>default - 1</li>
+</ul>
+<p>## JSON Sample</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd>&#8220;here&#8221;: &#8220;there&#8221;</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>## UsedIn
+* RFC 2544 Throughput Test</p>
+
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Spirent.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

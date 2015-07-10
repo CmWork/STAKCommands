@@ -1,0 +1,4241 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>stc_testmethodology.xml - Spirent Methodology Infrastructure</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Commands\stc_testmethodology"
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Spirent Methodology Infrastructure</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../..">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Commands</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_api/">stc_methodology_api.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_datacenter/">stc_methodology_datacenter.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_routing/">stc_methodology_routing.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_sampling/">stc_methodology_sampling.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_traffic/">stc_methodology_traffic.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_trafficcenter/">stc_methodology_trafficcenter.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_traffictest/">stc_methodology_traffictest.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodologymanager/">stc_methodologymanager.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">stc_testmethodology.xml</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#addrowtodbtablecommand">AddRowToDbTableCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#addtemplateobjectcommand">AddTemplateObjectCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#benchmarkstabilityiteratorcommand">BenchmarkStabilityIteratorCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#completeiterationcommand">CompleteIterationCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#configrelationcommand">ConfigRelationCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#configtemplatepduscommand">ConfigTemplatePdusCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#configtemplaterelationcommand">ConfigTemplateRelationCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#configtemplatestmpropertymodifiercommand">ConfigTemplateStmPropertyModifierCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#createmethodologychartcommand">CreateMethodologyChartCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#createprotocolmixcommand">CreateProtocolMixCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#createtemplateconfigcommand">CreateTemplateConfigCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#deletetemplateobjectcommand">DeleteTemplateObjectCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#deletetemplatesandgeneratedobjectscommand">DeleteTemplatesAndGeneratedObjectsCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#endoftestcommand">EndOfTestCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#expandprotocolmixcommand">ExpandProtocolMixCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#expandtemplatecommand">ExpandTemplateCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#exportdbchartcommand">ExportDbChartCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#exportdynamicresultviewdatacommand">ExportDynamicResultViewDataCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#iterationgroupcommand">IterationGroupCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#iteratorconfigframesizecommand">IteratorConfigFrameSizeCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#iteratorconfigmixparamscommand">IteratorConfigMixParamsCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#iteratorconfigpropertyvaluecommand">IteratorConfigPropertyValueCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#iteratorconfigrotatetrafficmixweightscommand">IteratorConfigRotateTrafficMixWeightsCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#iteratorconfigtrafficloadcommand">IteratorConfigTrafficLoadCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#iteratorvalidatecommand">IteratorValidateCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#l2l3learningcommand">L2L3LearningCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#loadtemplatecommand">LoadTemplateCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#mergetemplatecommand">MergeTemplateCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#modifyhandlelistcommand">ModifyHandleListCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#modifytemplatepropertycommand">ModifyTemplatePropertyCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#objectiteratorcommand">ObjectIteratorCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#rateiteratorcommand">RateIteratorCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#resetrotatetrafficmixweightscommand">ResetRotateTrafficMixWeightsCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#runpyscriptcommand">RunPyScriptCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#stabilitybackoffiteratorcommand">StabilityBackoffIteratorCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#startoftestcommand">StartOfTestCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#taggedlinkcreatecommand">TaggedLinkCreateCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#taggedobjectsiteratorcommand">TaggedObjectsIteratorCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#tagobjectconfigcommand">TagObjectConfigCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#validaterouterupcommand">ValidateRouterUpCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#verifydbquerycommand">VerifyDbQueryCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#verifydynamicresultviewdatacommand">VerifyDynamicResultViewDataCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#verifymultipledbquerycommand">VerifyMultipleDbQueryCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#waitforpropertyvaluecommand">WaitForPropertyValueCommand</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Templates</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Templates/AllRouters/">AllRouters.xml</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Spirent Methodology Infrastructure</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Commands &raquo;</li>
+        
+      
+    
+    <li>stc_testmethodology.xml</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="addrowtodbtablecommand">AddRowToDbTableCommand</h1>
+<p>Add queried results to a new or existing table.</p>
+<h2>- Properties</h2>
+
+<h3>SrcDatabase (input:u8)<br><font size=2>"Source Database"</font></h3>
+
+<p>Select source database(s) to execute Sql query.</p>
+<ul>
+<li>default: ALL_ITERATION<pre><code>EnumSourceDatabase
+    LAST_ITERATION = 0
+    SUMMARY = 1
+    ALL_ITERATION = 2
+</code></pre>
+</li>
+</ul>
+<h3>DstDatabase (input:u8)<br><font size=2>"Destination Database"</font></h3>
+
+<p>Select destination database to create new table.</p>
+<ul>
+<li>default: SUMMARY<pre><code>EnumDestinationDatabase
+    LAST_ITERATION = 0
+    SUMMARY = 1
+</code></pre>
+</li>
+</ul>
+<h3>SqlCreateTable (input:string)<br><font size=2>"Create Table Sql Statement"</font></h3>
+
+<p>Specify a table name for an existing destination table or a Create Table Sql statement for a new destination table. If the table exists, a new one shall not be created.</p>
+<ul>
+<li>default: CREATE TABLE NewTableName ('Column1' INTEGER, 'Column2' TIMESTAMP)</li>
+</ul>
+<h3>SqlQuery (input:string)<br><font size=2>"Source Data Sql Query"</font></h3>
+
+<p>Sql query for source data. Queried results shall be populated in new or existing table specified in Create Table Sql Statement field. The number of columns in the query must match the number of columns in the table.</p>
+<ul>
+<li>default: SELECT Id, CreatedTime From DataSet</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>RFC 2544 Throughput Test</p>
+</li>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="addtemplateobjectcommand">AddTemplateObjectCommand</h1>
+<p>Add a new STC object to the template</p>
+<h2>- Properties</h2>
+
+<h3>StmTemplateConfig (input:handle)<br><font size=2>"StmTemplateConfig"</font></h3>
+
+<p>StmTemplateConfig</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>ParentTagName (input:string)<br><font size=2>"Parent Tag Name"</font></h3>
+
+<p>Name of the tag from which parent objects will be found to add new objects to under</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>TagName (input:string)<br><font size=2>"Tag Name"</font></h3>
+
+<p>Name of a new tag to create and attach to the added objects</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ClassName (input:string)<br><font size=2>"Class Name"</font></h3>
+
+<p>Class name of the object</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>PropertyList (input:string)<br><font size=2>"Property List"</font></h3>
+
+<p>List of property IDs on the newly created object to configure new values for.  Position in this list MUST map to position in the ValueList.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ValueList (input:string)<br><font size=2>"Value List"</font></h3>
+
+<p>List of values to configure on the newly created object.  Position in this list MUST map to position in the PropertyList.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="benchmarkstabilityiteratorcommand">BenchmarkStabilityIteratorCommand</h1>
+<h3>Extends spirent.methodology.IteratorCommand.</h3>
+
+<p>Discrete step size binary or step search followed by stability test with backoff</p>
+<h2>- Properties</h2>
+
+<h3>EnableStabilityBackoff (input:bool)<br><font size=2>"Enable Stability Backoff"</font></h3>
+
+<p>Enable stability backoff iteration once a converged value is found.  If false, iteration will end once a converged value is found.</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h3>IterMode (input:u8)<br><font size=2>"Iteration Mode"</font></h3>
+
+<p>Iteration mode</p>
+<ul>
+<li>default: STEP<pre><code>EnumIterMode
+    STEP = 1
+    BINARY = 2
+</code></pre>
+</li>
+</ul>
+<h3>StepVal (input:double)<br><font size=2>"Step value"</font></h3>
+
+<p>Step value</p>
+<ul>
+<li>default: 10</li>
+</ul>
+<h3>ValueType (input:u8)<br><font size=2>"Value type"</font></h3>
+
+<p>Value type (list or range)</p>
+<ul>
+<li>default: RANGE<pre><code>EnumValueType
+    RANGE = 1
+    LIST = 2
+</code></pre>
+</li>
+</ul>
+<h3>ValueList (input:string)<br><font size=2>"List of values"</font></h3>
+
+<p>List of values to test</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>RepeatCount (input:u32)<br><font size=2>"Repeat Count"</font></h3>
+
+<p>Number of times to repeat an iteration</p>
+<ul>
+<li>default: 5</li>
+</ul>
+<h3>SuccessPercent (input:double)<br><font size=2>"Success Percent"</font></h3>
+
+<p>Number of times a repeated value has to pass to be considered stable</p>
+<ul>
+<li>default: 100</li>
+</ul>
+<h3>CurrIndex (state:u32)<br><font size=2>"Current Index"</font></h3>
+
+<p>Current list value's index</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>IterState (state:u8)<br><font size=2>"Iterator state"</font></h3>
+
+<p>Specifies what part of the search the iterator is in (goal-seeking or stability backoff)</p>
+<ul>
+<li>default: SEARCH<pre><code>EnumIterState
+    SEARCH = 1
+    STABILITY = 2
+</code></pre>
+</li>
+</ul>
+<h3>SearchIteration (state:u32)<br><font size=2>"Goal-seeking Test Iteration Number"</font></h3>
+
+<p>Iteration number used during goal-seek testing</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>SearchMinFail (state:double)<br><font size=2>"Minimum fail value"</font></h3>
+
+<p>Minimum failing value encountered during search</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>SearchMaxPass (state:double)<br><font size=2>"Maximum pass value"</font></h3>
+
+<p>Maximum passing value encountered during search</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>StabilityIteration (state:u32)<br><font size=2>"Stability Test Iteration Number"</font></h3>
+
+<p>Iteration number used during stability testing</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>StabilityTrialNum (state:u32)<br><font size=2>"Stability Test Trial Number"</font></h3>
+
+<p>Trial number for a particular test value during stability testing</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>StabilitySuccessCount (state:u32)<br><font size=2>"Stability Success Count"</font></h3>
+
+<p>Number of successful trials in a iteration during stability testing</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>IsConverged (output:bool)<br><font size=2>"Is Converged"</font></h3>
+
+<p>Did the iterator converge?</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>ConvergedVal (output:string)<br><font size=2>"Converged Value"</font></h3>
+
+<p>Value the iterator converged on</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>StableValue (output:string)<br><font size=2>"Stable value"</font></h3>
+
+<p>Stable value</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>FoundStableValue (output:bool)<br><font size=2>"Found a stable value"</font></h3>
+
+<p>Flag indicating a stable value was found</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>BreakOnFail (input:bool)<br><font size=2>"Break on fail"</font></h3>
+
+<p>Break out of the test when an iteration fails</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>MinVal (input:double)<br><font size=2>"Minimum value"</font></h3>
+
+<p>Minimum value</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>MaxVal (input:double)<br><font size=2>"Maximum value"</font></h3>
+
+<p>Maximum value</p>
+<ul>
+<li>default: 100</li>
+</ul>
+<h3>PrevIterVerdict (input:bool)<br><font size=2>"Previous iteration result"</font></h3>
+
+<p>Result of the previous iteration</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h3>Iteration (state:u32)<br><font size=2>"Iteration"</font></h3>
+
+<p>Iteration number</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>CurrVal (state:string)<br><font size=2>"Current value"</font></h3>
+
+<p>Value to use in the current iteration</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ResetState (state:bool)<br><font size=2>"Reset State"</font></h3>
+
+<p>Reset state properties</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>Routing Multi-Protocol</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="completeiterationcommand">CompleteIterationCommand</h1>
+<p>Collect and summarize results for current iteration</p>
+<h2>- Properties</h2>
+
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Performance Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Configuration Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>ACL Performance Test</p>
+</li>
+<li>
+<p>RFC 2544 Throughput Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="configrelationcommand">ConfigRelationCommand</h1>
+<p>Add or remove a relation between tagged BLL objects</p>
+<h2>- Properties</h2>
+
+<h3>SrcTagName (input:string)<br><font size=2>"Source Tag Name"</font></h3>
+
+<p>Name of the tag from which the source object(s) will be found</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>TargetTagName (input:string)<br><font size=2>"Target Tag Name"</font></h3>
+
+<p>Name of the tag from which the target object(s) will be found</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>RelationName (input:string)<br><font size=2>"Relation Name"</font></h3>
+
+<p>Name of the relation to add or remove</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>RemoveRelation (input:bool)<br><font size=2>"Remove Relation"</font></h3>
+
+<p>Remove the relation of the given type</p>
+<ul>
+<li>default: false</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="configtemplatepduscommand">ConfigTemplatePdusCommand</h1>
+<p>This command will configure PDUs in the Streamblock template's FrameConfig that itself is found in the StmTemplateConfig, using the information from PduInfo property.</p>
+<h2>- Properties</h2>
+
+<h3>StmTemplateConfig (input:handle)<br><font size=2>"StmTemplateConfig"</font></h3>
+
+<p>StmTemplateConfig handle</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>TemplateElementTagNameList (input:string)<br><font size=2>"Template Element Tag Name List"</font></h3>
+
+<p>List of tag names that refer to the targeted stream block (XML elements) in the template.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>PduPropertyList (input:string)<br><font size=2>"PDU Information Property List"</font></h3>
+
+<p>List of properties to modify PDU information within streamblocks' FrameConfig properties.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>PduValueList (input:string)<br><font size=2>"PDU Information Value List"</font></h3>
+
+<p>List of values to modify PDU information within streamblocks' FrameConfig properties.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="configtemplaterelationcommand">ConfigTemplateRelationCommand</h1>
+<p>Add or remove a relation in the template</p>
+<h2>- Properties</h2>
+
+<h3>StmTemplateConfig (input:handle)<br><font size=2>"StmTemplateConfig"</font></h3>
+
+<p>StmTemplateConfig</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>SrcTagName (input:string)<br><font size=2>"Source Tag Name"</font></h3>
+
+<p>Name of the tag from which the source object will be found</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>TargetTagName (input:string)<br><font size=2>"Target Tag Name"</font></h3>
+
+<p>Name of the tag from which the target object will be found</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>RelationName (input:string)<br><font size=2>"Relation Name"</font></h3>
+
+<p>Name of the relation to add or remove</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>RemoveRelation (input:bool)<br><font size=2>"Remove Relation"</font></h3>
+
+<p>Remove the relation of the given type</p>
+<ul>
+<li>default: false</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="configtemplatestmpropertymodifiercommand">ConfigTemplateStmPropertyModifierCommand</h1>
+<p>Add or configure an StmPropertyModifier in the template</p>
+<h2>- Properties</h2>
+
+<h3>StmTemplateConfig (input:handle)<br><font size=2>"StmTemplateConfig"</font></h3>
+
+<p>StmTemplateConfig</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>TagName (input:string)<br><font size=2>"Tag Name"</font></h3>
+
+<p>Name of the Tag referencing an StmPropertyModifier object to modify in the template.  If an StmPropertyModifier is being created, this is the name that will be used for a tag that references the StmPropertyModifier.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>TargetObjectTagName (input:string)<br><font size=2>"Target Object's Tag Name"</font></h3>
+
+<p>Name of the Tag referencing the target object this modifier is being applied to.  If configuring an existing modifier, this can be left empty.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ObjectName (input:string)<br><font size=2>"Object Name"</font></h3>
+
+<p>Class name of the object being modified.  If configuring an existing modifier, this can be left empty. </p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>PropertyName (input:string)<br><font size=2>"Property Name"</font></h3>
+
+<p>Name of the property being modified.  If configuring an existing modifier, this can be left empty. </p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>StartList (input:string)<br><font size=2>"Start Value List"</font></h3>
+
+<p>List of modifier start values</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>StepList (input:string)<br><font size=2>"Step Value List"</font></h3>
+
+<p>List of modifier step values</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>RepeatList (input:u32)<br><font size=2>"Repeat Value List"</font></h3>
+
+<p>List of modifier repeat values</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>RecycleList (input:u32)<br><font size=2>"Recycle Value List"</font></h3>
+
+<p>List of modifier recycle values</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>ModifierType (input:u8)<br><font size=2>"Modifier Type"</font></h3>
+
+<p>The type of modifier to add or configure.  If a modifier already exists with the given tag but is of different type, it will be changed to use the new type.</p>
+<ul>
+<li>default: RANGE<pre><code>EnumModifierType
+    RANGE = 0
+</code></pre>
+</li>
+</ul>
+<h3>TargetObjectStepList (input:string)<br><font size=2>"Target Object Step List"</font></h3>
+
+<p>List of step value to apply to start value(s) when a new target object is encountered.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ResetOnNewTargetObject (input:bool)<br><font size=2>"Reset Start Value On New Target Object"</font></h3>
+
+<p>Reset the start value each time a new target (usually parent) object of the objects being modified is encountered.</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>L3 QoS DiffServ</p>
+</li>
+<li>
+<p>BGP Route Reflector Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Performance Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Configuration Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>ACL Performance Test</p>
+</li>
+<li>
+<p>ACL Basic Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="createmethodologychartcommand">CreateMethodologyChartCommand</h1>
+<h3>Extends spirent.methodology.ResultBaseCommand.</h3>
+
+<p>Export Chart</p>
+<h2>- Properties</h2>
+
+<h3>ChartTemplateJsonFileName (input:inputFilePath)<br><font size=2>"Chart Template File"</font></h3>
+
+<p>Chart template file in JSON format. May use one of the provided basic templates: Line_Template.json and Column_Template.json.</p>
+<ul>
+<li>default: Line_Template.json</li>
+</ul>
+<h3>Title (input:string)<br><font size=2>"Chart Title"</font></h3>
+
+<p>Title displayed at the top of the chart.</p>
+<ul>
+<li>default: Result Node Param Handles</li>
+</ul>
+<h3>XAxisTitle (input:string)<br><font size=2>"X Axis Title"</font></h3>
+
+<p>Title displayed along the X axis.</p>
+<ul>
+<li>default: Id</li>
+</ul>
+<h3>XAxisCategories (input:string)<br><font size=2>"X Axis Categories"</font></h3>
+
+<p>X axis categories specified as a list of strings or SQL queries. Used to label the tick marks along the X axis.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>YAxisTitle (input:string)<br><font size=2>"Y Axis Title"</font></h3>
+
+<p>Title displayed along the Y axis.</p>
+<ul>
+<li>default: Handle</li>
+</ul>
+<h3>YAxisCategories (input:string)<br><font size=2>"Y Axis Categories"</font></h3>
+
+<p>Y axis categories specified as a list of strings or SQL queries. Used to label the tick marks along the Y axis.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>Series (input:string)<br><font size=2>"Series' Data"</font></h3>
+
+<p>Set of data to be plotted on the chart specified as a list of strings or SQL queries. Each list element is a series. The string format to plot a single data type is: 1, 2, 3, 4. Plotting two data types is: [1, 1], [2, 2].</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>TemplateModifier (input:string)<br><font size=2>"Template Modifier"</font></h3>
+
+<p>Modify chart properties by specifying a string in JSON format that will be appended to the result file. Specified properties will be merged with and overwrite any existing properies in the chart template file. Follows the HighCharts API. Ex. {"yAxis": {"title": {"text": "Modified Label"}}} SQL Queries can be inserted to the JSON string by delimiting the queries with {{ and }}.</p>
+<ul>
+<li>default: {"series":[{"name": "Handles"}]}</li>
+</ul>
+<h3>SrcDatabase (input:u8)<br><font size=2>"Source Database"</font></h3>
+
+<p>Select source database(s) to execute the Sql queries.</p>
+<ul>
+<li>default: SUMMARY<pre><code>EnumSourceDatabase
+    LAST_ITERATION = 0
+    SUMMARY = 1
+    ALL_ITERATION = 2
+</code></pre>
+</li>
+</ul>
+<h3>ReportGroup (input:u8)<br><font size=2>"Report Group"</font></h3>
+
+<p>Determines where the results will be displayed on the results page. Group 0 is the highest priority and will be displayed before Group 3, Group 2, etc. SUMMARY will be displayed at the very top in the summary section.</p>
+<ul>
+<li>default: GROUP_2<pre><code>spirent.methodology.ResultBaseCommand.EnumReportGroup
+</code></pre>
+</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>Routing Multi-Protocol</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="createprotocolmixcommand">CreateProtocolMixCommand</h1>
+<h3>Extends spirent.methodology.CreateTemplateMixCommand.</h3>
+
+<p>Command for creating mixtures of protocols on an Emulated Device block.</p>
+<h2>- Properties</h2>
+
+<h3>MixInfo (input:string)<br><font size=2>"Mix Info"</font></h3>
+
+<p>JSON string representation of the mix (including table data)</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>MixTagName (input:string)<br><font size=2>"Mix Container Tag Name"</font></h3>
+
+<p>Name to use when tagging the output StmProtocolMix.  If left blank, StmProtocolMix will not be tagged.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>PortGroupTagList (input:string)<br><font size=2>"Port Group Tag"</font></h3>
+
+<p>Tag name representing the port group on which devices and protocols should be expanded on.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>GroupCommandTagInfo (state:string)<br><font size=2>"Group Command Tag Info"</font></h3>
+
+<p>JSON structure containing the names of the tags used to refer to commands in this group.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>MixInfoJsonSchema (state:string)<br><font size=2>"Table Data JSON Schema"</font></h3>
+
+<p>JSON schema that will be used to validate the TableData property's value.</p>
+<h3><a id="schema.for.CreateProtocolMixCommand.MixInfoJsonSchema.h3link" href="JavaScript:;" onclick="toggle_visibility('schema.for.CreateProtocolMixCommand.MixInfoJsonSchema');">JSON Schema [+]</a></h3>
+
+<div class="section" style="display:none;" id="schema.for.CreateProtocolMixCommand.MixInfoJsonSchema"><pre><code class="hljs json">     {
+          "required": [
+            "deviceCount", 
+            "components"
+          ], 
+          "type": "object", 
+          "properties": {
+            "deviceCount": {
+              "type": "number", 
+              "description": "Total Device Count for StmTemplateMix distribution."
+            }, 
+            "components": {
+              "items": {
+                "required": [
+                  "weight", 
+                  "devicesPerBlock", 
+                  "baseTemplateFile"
+                ], 
+                "type": "object", 
+                "properties": {
+                  "weight": {
+                    "type": "string", 
+                    "description": "If value is followed by %, this is the percent weight of the total deviceCount to assign to this component. Otherwise, this becomes a static deviceCount value."
+                  }, 
+                  "tagPrefix": {
+                    "type": "string", 
+                    "description": "String that will be prefixed to all tags loaded and used in this template."
+                  }, 
+                  "appliedValue": {
+                    "type": "number", 
+                    "description": "Load actually assigned to this component.  Autocalculated, do not set."
+                  }, 
+                  "modifyList": {
+                    "items": {
+                      "type": "object", 
+                      "properties": {
+                        "mergeList": {
+                          "items": {
+                            "type": "object"
+                          }, 
+                          "type": "array", 
+                          "description": "A list of merge operations where a XML file will be used as a source of XML to merge into the XML contained in the StmTemplateConfig."
+                        }
+                      }
+                    }, 
+                    "type": "array", 
+                    "description": "A list of operations that will be carried out on the template.  See the schema defined in the spirent.methodology.CreateTemplateConfigCommand."
+                  }, 
+                  "baseTemplateFile": {
+                    "type": "string", 
+                    "description": "Base template file that will be loaded into the StmTemplateConfig.  All modifications in the modifyList will be applied to the contents loaded out of this file."
+                  }, 
+                  "devicesPerBlock": {
+                    "type": "number", 
+                    "description": "Number that indicates how many device will be assigned per device block.  If 0, devicesPerBlock indicates all deviceCount is assigned to one block. If 1, devicesPerBlock = # of device blocks with a device count of 1. If devicesPerBlock > device count of component (after weight is applied), all devices go into one block.  Otherwise, blocks are greedily created until we run out of device count (ie. deviceCount = 17, devicesPerBlock = 5, blocks created with 5, 5, 5, 2 devices)."
+                  }
+                }
+              }, 
+              "type": "array", 
+              "description": "A list of components that make up the mixture."
+            }
+          }, 
+          "title": "Schema for the MixInfo of the spirent.methodology.CreateProtocolMixCommand."
+        }
+
+</code></pre></div>
+
+<h3>AutoExpandTemplateMix (input:bool)<br><font size=2>"Automatically expand templates in the mix"</font></h3>
+
+<p>Automatically expand templates.</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h3>StmTemplateMix (output:handle)<br><font size=2>"XML Container Aggregator object (StmTemplateMix)"</font></h3>
+
+<p>StmTemplate Mix container aggregator object</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<p><font color="red">MISSING JSON SAMPLE</font></p>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>RFC 2544 Throughput Test</p>
+</li>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="createtemplateconfigcommand">CreateTemplateConfigCommand</h1>
+<p>Create an StmTemplateConfig by load an XML template and modifying it.</p>
+<h2>- Properties</h2>
+
+<h3>AutoExpandTemplate (input:bool)<br><font size=2>"Automatically Expand Template"</font></h3>
+
+<p>Expand template into EmulatedDevices, Streamblocks, etc.</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h3>StmTemplateMix (input:handle)<br><font size=2>"Parent StmTemplateMix object"</font></h3>
+
+<p>Handle of an StmTemplateMix object to use for the parent of the created StmTemplateConfig.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>InputJson (input:string)<br><font size=2>"JSON Input"</font></h3>
+
+<p>JSON string representation of parameters to load and modify template(s) into the StmTemplateConfig.</p>
+<ul>
+<li>default: {"baseTemplateFile": "IPv4_NoVlan.xml"}</li>
+</ul>
+<h3>CopiesPerParent (input:u32)<br><font size=2>"Number of copies to make per Target Tag object"</font></h3>
+
+<p>Number of copies of the template to make per Target Tag object</p>
+<ul>
+<li>default: 1</li>
+</ul>
+<h3>SrcTagList (input:string)<br><font size=2>"Source Tag List"</font></h3>
+
+<p>List of tags that indicate where in the XML template the config will be expanded from</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>TargetTagList (input:string)<br><font size=2>"Target Tag List"</font></h3>
+
+<p>List of tags that indicate where in the STC configuration the template will be copied to.  If TargetTagList is empty, the target will be assumed to be Project.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>InputJsonSchema (state:string)<br><font size=2>"Input JSON Schema"</font></h3>
+
+<p>JSON schema that will be used to validate the InputJson property's value.</p>
+<h3><a id="schema.for.CreateTemplateConfigCommand.InputJsonSchema.h3link" href="JavaScript:;" onclick="toggle_visibility('schema.for.CreateTemplateConfigCommand.InputJsonSchema');">JSON Schema [+]</a></h3>
+
+<div class="section" style="display:none;" id="schema.for.CreateTemplateConfigCommand.InputJsonSchema"><pre><code class="hljs json">        {
+          "required": [
+            "baseTemplateFile"
+          ], 
+          "type": "object", 
+          "properties": {
+            "modifyList": {
+              "items": {
+                "type": "object", 
+                "properties": {
+                  "stmPropertyModifierList": {
+                    "items": {
+                      "type": "object", 
+                      "properties": {
+                        "items": {
+                          "className": {
+                            "type": "string", 
+                            "description": "Class name of the object type that properties will be modified on."
+                          }, 
+                          "propertyName": {
+                            "type": "string", 
+                            "description": "Name of the property that an StmPropertyModifier is being attached onto."
+                          }, 
+                          "parentTagName": {
+                            "type": "string", 
+                            "description": "Name of the tag that tags the object that an StmPropertyModifier will be added or configured on."
+                          }, 
+                          "tagName": {
+                            "type": "string", 
+                            "description": "Name of the tag that tags objects of type className."
+                          }, 
+                          "propertyValueList": {
+                            "type": "object", 
+                            "description": "List of property-value pairs that will be modified.  This list should contain property names that exist in the StmPropertyModifier's ModifierInfo."
+                          }
+                        }
+                      }
+                    }, 
+                    "required": [
+                      "className", 
+                      "tagName", 
+                      "propertyValueList"
+                    ], 
+                    "type": "array", 
+                    "description": "A list of config StmPropertyModifier operations to add or configure StmPropertyModifiers in the StmTemplateConfig."
+                  }, 
+                  "propertyValueList": {
+                    "items": {
+                      "type": "object", 
+                      "properties": {
+                        "className": {
+                          "type": "string", 
+                          "description": "Class name of the object type that properties will be modified on."
+                        }, 
+                        "tagName": {
+                          "type": "string", 
+                          "description": "Name of the tag that tags objects of type className."
+                        }, 
+                        "propertyValueList": {
+                          "type": "object", 
+                          "description": "List of property-value pairs that will be modified."
+                        }
+                      }
+                    }, 
+                    "required": [
+                      "className", 
+                      "tagName", 
+                      "propertyValueList"
+                    ], 
+                    "type": "array", 
+                    "description": "A list of modify template operations to change the values of properties on tagged objects."
+                  }, 
+                  "relationList": {
+                    "items": {
+                      "type": "object", 
+                      "properties": {
+                        "relationType": {
+                          "type": "string", 
+                          "description": "The type of relation to add or remove, ie StackedOnEndpoint or UsesIf."
+                        }, 
+                        "sourceTag": {
+                          "type": "string", 
+                          "description": "Name of the tag that tags an object that is the source of the relation."
+                        }, 
+                        "removeRelation": {
+                          "type": "boolean", 
+                          "description": "A flag indicating if the relation should be removed if found."
+                        }, 
+                        "targetTag": {
+                          "type": "string", 
+                          "description": "Name of the tag that tags an object that is the target of the relation."
+                        }
+                      }
+                    }, 
+                    "required": [
+                      "relationType", 
+                      "targetTagList"
+                    ], 
+                    "type": "array", 
+                    "description": "A list of configure relation operations to add or remove relations between elements in the StmTemplateConfig."
+                  }, 
+                  "pduModifierList": {
+                    "items": {
+                      "type": "object", 
+                      "properties": {
+                        "templateElementTagName": {
+                          "type": "string", 
+                          "description": "Name of the tag that tags StreamBlock objects."
+                        }, 
+                        "value": {
+                          "type": "string", 
+                          "description": "String value for the PDU property."
+                        }, 
+                        "offsetReference": {
+                          "type": "string", 
+                          "description": "String in the form of . that refers to a particular field in a particular PDU that will be modified."
+                        }
+                      }
+                    }, 
+                    "required": [
+                      "offsetReference"
+                    ], 
+                    "type": "array", 
+                    "description": "A list of PDU modification operations to change values in a StreamBlock's FrameConfig."
+                  }, 
+                  "mergeList": {
+                    "items": {
+                      "type": "object", 
+                      "properties": {
+                        "stmPropertyModifierList": {
+                          "items": {
+                            "type": "object", 
+                            "properties": {
+                              "items": {
+                                "className": {
+                                  "type": "string", 
+                                  "description": "Class name of the object type that properties will be modified on."
+                                }, 
+                                "propertyName": {
+                                  "type": "string", 
+                                  "description": "Name of the property that an StmPropertyModifier is being attached onto."
+                                }, 
+                                "parentTagName": {
+                                  "type": "string", 
+                                  "description": "Name of the tag that tags the object that an StmPropertyModifier will be added or configured on."
+                                }, 
+                                "tagName": {
+                                  "type": "string", 
+                                  "description": "Name of the tag that tags objects of type className."
+                                }, 
+                                "propertyValueList": {
+                                  "type": "object", 
+                                  "description": "List of property-value pairs that will be modified.  This list should contain property names that exist in the StmPropertyModifier's ModifierInfo."
+                                }
+                              }
+                            }
+                          }, 
+                          "required": [
+                            "className", 
+                            "tagName", 
+                            "propertyValueList"
+                          ], 
+                          "type": "array", 
+                          "description": "A list of config StmPropertyModifier operations to add or configure StmPropertyModifiers in the StmTemplateConfig."
+                        }, 
+                        "propertyValueList": {
+                          "items": {
+                            "type": "object", 
+                            "properties": {
+                              "className": {
+                                "type": "string", 
+                                "description": "Class name of the object type that properties will be modified on."
+                              }, 
+                              "tagName": {
+                                "type": "string", 
+                                "description": "Name of the tag that tags objects of type className."
+                              }, 
+                              "propertyValueList": {
+                                "type": "object", 
+                                "description": "List of property-value pairs that will be modified."
+                              }
+                            }
+                          }, 
+                          "required": [
+                            "className", 
+                            "tagName", 
+                            "propertyValueList"
+                          ], 
+                          "type": "array", 
+                          "description": "A list of modify template operations to change the values of properties on tagged objects."
+                        }, 
+                        "mergeSourceTag": {
+                          "type": "string", 
+                          "description": "The name of the tag in the XML file from which tagged elements will be merged into the StmTemplateConfig."
+                        }, 
+                        "mergeSourceTemplateFile": {
+                          "type": "string", 
+                          "description": "The path to the source XML file."
+                        }, 
+                        "mergeTagPrefix": {
+                          "type": "string", 
+                          "description": "A string that will be prefixed to the tags that are merged from the source file to the StmTemplateConfig."
+                        }, 
+                        "mergeTargetTag": {
+                          "type": "string", 
+                          "description": "The name of the tag in the StmTemplateConfig where elements from the XML file will be merged into."
+                        }
+                      }
+                    }, 
+                    "required": [
+                      "mergeSourceTag", 
+                      "mergeSourceTemplateFile", 
+                      "mergeTargetTag"
+                    ], 
+                    "type": "array", 
+                    "description": "A list of merge operations where a XML file will be used as a source of XML to merge into the XML contained in the StmTemplateConfig."
+                  }, 
+                  "addObjectList": {
+                    "items": {
+                      "type": "object", 
+                      "properties": {
+                        "className": {
+                          "type": "string", 
+                          "description": "Class name of the object type that will be added."
+                        }, 
+                        "parentTagName": {
+                          "type": "string", 
+                          "description": "Name of the tag that tags parent objects for type className."
+                        }, 
+                        "tagName": {
+                          "type": "string", 
+                          "description": "Name of the tag that tags newly created objects of type className."
+                        }, 
+                        "propertyValueList": {
+                          "type": "object", 
+                          "description": "List of property-value pairs that will be modified."
+                        }
+                      }
+                    }, 
+                    "required": [
+                      "className", 
+                      "parentTagName", 
+                      "tagName"
+                    ], 
+                    "type": "array", 
+                    "description": "A list of objects to add to a template."
+                  }
+                }
+              }, 
+              "type": "array", 
+              "description": "A list of operations that will be carried out on the template."
+            }, 
+            "tagPrefix": {
+              "type": "string", 
+              "description": "String that will be prefixed to all tags loaded and used in this template."
+            }, 
+            "baseTemplateFile": {
+              "type": "string", 
+              "description": "Base template file that will be loaded into the StmTemplateConfig.  All modifications in the modifyList will be applied to the contents loaded out of this file."
+            }
+          }, 
+          "title": "Schema for InputJson of the spirent.methodology.CreateTemplateConfigCommand."
+        }
+
+</code></pre></div>
+
+<h3>StmTemplateConfig (output:handle)<br><font size=2>"XML container object (StmTemplateConfig)"</font></h3>
+
+<p>StmTemplateConfig container object</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<p><font color="red">MISSING JSON SAMPLE</font></p>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>RFC 2544 Throughput Test</p>
+</li>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="deletetemplateobjectcommand">DeleteTemplateObjectCommand</h1>
+<p>Delete an object and all of its children from the template</p>
+<h2>- Properties</h2>
+
+<h3>StmTemplateConfig (input:handle)<br><font size=2>"StmTemplateConfig"</font></h3>
+
+<p>StmTemplateConfig</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>TagName (input:string)<br><font size=2>"Tag Name"</font></h3>
+
+<p>Name of the tag referring to the object to delete</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ClassName (input:string)<br><font size=2>"Class Name"</font></h3>
+
+<p>Class name of the object</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="deletetemplatesandgeneratedobjectscommand">DeleteTemplatesAndGeneratedObjectsCommand</h1>
+<p>Deletes StmTemplateConfigs and objects generated from expansion of the templates</p>
+<h2>- Properties</h2>
+
+<h3>DeleteStmTemplateConfigs (input:bool)<br><font size=2>"Delete StmTemplateConfig objects"</font></h3>
+
+<p>Deletes StmTemplateConfig objects when True, skip them when False</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>L3 QoS DiffServ</p>
+</li>
+<li>
+<p>BGP Route Reflector Test</p>
+</li>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Performance Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Configuration Test</p>
+</li>
+<li>
+<p>Widgets Test</p>
+</li>
+<li>
+<p>Basic Traffic Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>ACL Performance Test</p>
+</li>
+<li>
+<p>ACL Basic Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Microburst Test</p>
+</li>
+<li>
+<p>RFC 2544 Throughput Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="endoftestcommand">EndOfTestCommand</h1>
+<p>Aggregates and writes out test results</p>
+<h2>- Properties</h2>
+
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>L3 QoS DiffServ</p>
+</li>
+<li>
+<p>BGP Route Reflector Test</p>
+</li>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Performance Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Configuration Test</p>
+</li>
+<li>
+<p>Widgets Test</p>
+</li>
+<li>
+<p>Basic Traffic Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>ACL Performance Test</p>
+</li>
+<li>
+<p>ACL Basic Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Microburst Test</p>
+</li>
+<li>
+<p>RFC 2544 Throughput Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="expandprotocolmixcommand">ExpandProtocolMixCommand</h1>
+<h3>Extends spirent.methodology.ExpandTemplateMixCommand.</h3>
+
+<p>Expand a Protocol Mix</p>
+<h2>- Properties</h2>
+
+<h3>TagName (input:string)<br><font size=2>"Tag name for the Template Mix"</font></h3>
+
+<p>Tag name referencing an existing StmProtocolMix</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>DeviceCount (input:u32)<br><font size=2>"Device Count"</font></h3>
+
+<p>Device Count</p>
+<ul>
+<li>default: 10</li>
+</ul>
+<h3>PortGroupTagList (input:string)<br><font size=2>"Port Group Tag"</font></h3>
+
+<p>Tag name representing the port group on which devices and protocols should be expanded on.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>StmTemplateMix (input:handle)<br><font size=2>"XML Container object (StmTemplateMix)"</font></h3>
+
+<p>StmTemplate Mix container object</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>Routing Multi-Protocol</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="expandtemplatecommand">ExpandTemplateCommand</h1>
+<p>Expand an XML template across ports</p>
+<h2>- Properties</h2>
+
+<h3>StmTemplateConfigList (input:handle)<br><font size=2>"StmTemplateConfig List"</font></h3>
+
+<p>List of StmTemplateConfig objects</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>CopiesPerParent (input:u32)<br><font size=2>"Number of copies to make per Target Tag object"</font></h3>
+
+<p>Number of copies of the template to make per Target Tag object</p>
+<ul>
+<li>default: 1</li>
+</ul>
+<h3>SrcTagList (input:string)<br><font size=2>"Source Tag List"</font></h3>
+
+<p>List of tags that indicate where in the XML template the config will be copied from</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>TargetTagList (input:string)<br><font size=2>"Target Tag List"</font></h3>
+
+<p>List of tags that indicate where in the STC configuration the template will be copied to.  If TargetTagList is empty, the target will be assumed to be Project.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="exportdbchartcommand">ExportDbChartCommand</h1>
+<h3>Extends spirent.methodology.ResultBaseCommand.</h3>
+
+<p>Export Chart</p>
+<h2>- Properties</h2>
+
+<h3>ChartTemplateJsonFileName (input:inputFilePath)<br><font size=2>"Chart Template File"</font></h3>
+
+<p>Chart Template JSON File Location</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>Title (input:string)<br><font size=2>"Chart Title"</font></h3>
+
+<p>Chart Title</p>
+<ul>
+<li>default: My Chart</li>
+</ul>
+<h3>XAxisTitle (input:string)<br><font size=2>"X Axis Title"</font></h3>
+
+<p>X Axis Title</p>
+<ul>
+<li>default: My X Axis</li>
+</ul>
+<h3>XAxisCategories (input:string)<br><font size=2>"X Axis Categories"</font></h3>
+
+<p>X Axis Categories (can be a string or SQL query). Used to label the tick marks along the X axis</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>YAxisTitle (input:string)<br><font size=2>"Y Axis Title"</font></h3>
+
+<p>Y Axis Title</p>
+<ul>
+<li>default: My Y Axis</li>
+</ul>
+<h3>YAxisCategories (input:string)<br><font size=2>"Y Axis Categories"</font></h3>
+
+<p>Y Axis Categories (can be a string or SQL query). Used to label the tick marks along the Y axis</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>Series (input:string)<br><font size=2>"Series' Data"</font></h3>
+
+<p>Set of data to be plotted on the chart (can be given as strings or SQL queries) Ex. String format for SeriesDataType(Single): 1, 2, 3, 4 SeriesDataType(Pair): [1, 1], [2, 2]</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>SeriesDataType (input:u8)<br><font size=2>"Series Data Type"</font></h3>
+
+<p>Series data can be given as a single or pair type. SINGLE = only Y values, X values are calculated automaticatlly. PAIR = [x,y] value pairs</p>
+<ul>
+<li>default: SINGLE<pre><code>EnumSeriesDataType
+    SINGLE = 1
+    PAIR = 2
+</code></pre>
+</li>
+</ul>
+<h3>CustomModifier (input:string)<br><font size=2>"Custom Modifier"</font></h3>
+
+<p>JSON string that will be appended to the JSON result file which is used to modify chart properties. Follows HighCharts API. Ex. {"yAxis": {"title": {"text": "Modified Label"}}} SQL Queries can be inserted to the JSON string by delimiting the queries with {{ and }}</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>UseMultipleResultsDatabases (input:bool)<br><font size=2>"Has Multiple Results Databases"</font></h3>
+
+<p>Used when there are multiple results databases (SaveResults LoopMode = Append). All active results databases will be queried. If set to True and only one results database exists (SaveResults LoopMode = Overwrite), an error will occur.</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>UseSummary (input:bool)<br><font size=2>"Use the summery db only"</font></h3>
+
+<p>Use the summary db instead of iteration dbs. Only valid if UseMultipleResultsDatabases is False.</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>ReportGroup (input:u8)<br><font size=2>"Report Group"</font></h3>
+
+<p>Determines where the results will be displayed on the results page. Group 0 is the highest priority and will be displayed before Group 3, Group 2, etc. SUMMARY will be displayed at the very top in the summary section.</p>
+<ul>
+<li>default: GROUP_2<pre><code>spirent.methodology.ResultBaseCommand.EnumReportGroup
+</code></pre>
+</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>ITU-T Y.1564 Microburst Test</p>
+</li>
+<li>
+<p>BGP Route Reflector Test</p>
+</li>
+<li>
+<p>Widgets Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="exportdynamicresultviewdatacommand">ExportDynamicResultViewDataCommand</h1>
+<h3>Extends spirent.methodology.VerifyBaseCommand.</h3>
+
+<p>Export dynamic result view data to the test report.</p>
+<h2>- Properties</h2>
+
+<h3>DynamicResultViewNameList (input:string)<br><font size=2>"Dynamic Result View Name List"</font></h3>
+
+<p>Dynamic Result View Name List.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ExportDisabledAutoGroupData (input:bool)<br><font size=2>"Export Disabled Auto Group Data"</font></h3>
+
+<p>Export disabled auto group data for drilldown results.</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>DisplayNameList (input:string)<br><font size=2>"Display Name List"</font></h3>
+
+<p>Title to display for this result section in the report file. Maps 1-1 with dynamic result view list.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ApplyVerdictToSummary (input:bool)<br><font size=2>"Apply Verdict To Summary"</font></h3>
+
+<p>Apply Verdict To Test verdict.</p>
+<ul>
+<li>default: true</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="iterationgroupcommand">IterationGroupCommand</h1>
+<h3>Extends stak.StakGroupCommand.</h3>
+
+<p>Iteration Group</p>
+<h2>- Properties</h2>
+
+<h3>ObjectList (input:handle)<br><font size=2>"Object List"</font></h3>
+
+<p>List of objects to configure</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Performance Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Configuration Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>ACL Performance Test</p>
+</li>
+<li>
+<p>RFC 2544 Throughput Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="iteratorconfigframesizecommand">IteratorConfigFrameSizeCommand</h1>
+<h3>Extends spirent.methodology.IteratorConfigCommand.</h3>
+
+<p>Configure the frame size on a group of tagged streamblocks</p>
+<h2>- Properties</h2>
+
+<h3>ObjectList (input:handle)<br><font size=2>"Object List"</font></h3>
+
+<p>List of objects to configure</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>IgnoreEmptyTags (input:bool)<br><font size=2>"Ignore Empty Tags"</font></h3>
+
+<p>If set to false, tags must point to at least one object</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>TagList (input:string)<br><font size=2>"Tag List"</font></h3>
+
+<p>List of Tags from which to get objects to be configured</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>CurrVal (input:string)<br><font size=2>"Current value"</font></h3>
+
+<p>Value to use in the current iteration</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>Iteration (input:u32)<br><font size=2>"Iteration"</font></h3>
+
+<p>Iteration number</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>RFC 2544 Throughput Test</p>
+</li>
+<li>
+<p>ACL Performance Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Configuration Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Performance Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="iteratorconfigmixparamscommand">IteratorConfigMixParamsCommand</h1>
+<h3>Extends spirent.methodology.IteratorConfigCommand.</h3>
+
+<p>dummy</p>
+<h2>- Properties</h2>
+
+<h3>StmTemplateMix (input:handle)<br><font size=2>"StmTemplateMix"</font></h3>
+
+<p>StmTemplateMix handle</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>TagData (input:string)<br><font size=2>"tag Data"</font></h3>
+
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>MixJsonSchema (state:string)<br><font size=2>"Mix JSON Schema"</font></h3>
+
+<p>JSON schema that will be used to validate the StmTemplateMix JSON contents.</p>
+<h3><a id="schema.for.IteratorConfigMixParamsCommand.MixJsonSchema.h3link" href="JavaScript:;" onclick="toggle_visibility('schema.for.IteratorConfigMixParamsCommand.MixJsonSchema');">JSON Schema [+]</a></h3>
+
+<div class="section" style="display:none;" id="schema.for.IteratorConfigMixParamsCommand.MixJsonSchema"><pre><code class="hljs json">       {
+          "required": [
+            "components"
+          ], 
+          "type": "object", 
+          "properties": {
+            "components": {
+              "items": {
+                "required": [
+                  "weight", 
+                  "baseTemplateFile"
+                ], 
+                "type": "object", 
+                "properties": {
+                  "appliedValue": {
+                    "type": "number", 
+                    "description": "Load actually assigned to this component.  Autocalculated, do not set."
+                  }, 
+                  "tagPrefix": {
+                    "type": "string", 
+                    "description": "String that will be prefixed to all tags loaded and used in this template."
+                  }, 
+                  "weight": {
+                    "type": "string", 
+                    "description": "Percent weight of the total load to assign to this component."
+                  }, 
+                  "baseTemplateFile": {
+                    "type": "string", 
+                    "description": "Base template file that will be loaded into the StmTemplateConfig.  All modifications in the modifyList will be applied to the contents loaded out of this file."
+                  }
+                }
+              }, 
+              "type": "array", 
+              "description": "A list of components that make up the mixture."
+            }
+          }, 
+          "title": "Schema for the MixInfo of the spirent.methodology.IteratorConfigMixParamsCommand."
+        }
+
+</code></pre></div>
+
+<h3>ObjectList (input:handle)<br><font size=2>"Object List"</font></h3>
+
+<p>List of objects to configure</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>IgnoreEmptyTags (input:bool)<br><font size=2>"Ignore Empty Tags"</font></h3>
+
+<p>If set to false, tags must point to at least one object</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>TagList (input:string)<br><font size=2>"Tag List"</font></h3>
+
+<p>List of Tags from which to get objects to be configured</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>CurrVal (input:string)<br><font size=2>"Current value"</font></h3>
+
+<p>Value to use in the current iteration</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>Iteration (input:u32)<br><font size=2>"Iteration"</font></h3>
+
+<p>Iteration number</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<p><font color="red">MISSING JSON SAMPLE</font></p>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>RFC 2544 Throughput Test</p>
+</li>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="iteratorconfigpropertyvaluecommand">IteratorConfigPropertyValueCommand</h1>
+<h3>Extends spirent.methodology.IteratorConfigCommand.</h3>
+
+<p>Configure the property for objects of a given type</p>
+<h2>- Properties</h2>
+
+<h3>ClassName (input:string)<br><font size=2>"Class Name"</font></h3>
+
+<p>Name of the object's class</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>PropertyName (input:string)<br><font size=2>"Property Name"</font></h3>
+
+<p>Name of the property to configure</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ObjectList (input:handle)<br><font size=2>"Object List"</font></h3>
+
+<p>List of objects to configure</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>IgnoreEmptyTags (input:bool)<br><font size=2>"Ignore Empty Tags"</font></h3>
+
+<p>If set to false, tags must point to at least one object</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>TagList (input:string)<br><font size=2>"Tag List"</font></h3>
+
+<p>List of Tags from which to get objects to be configured</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>CurrVal (input:string)<br><font size=2>"Current value"</font></h3>
+
+<p>Value to use in the current iteration</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>Iteration (input:u32)<br><font size=2>"Iteration"</font></h3>
+
+<p>Iteration number</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>RFC 2544 Throughput Test</p>
+</li>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="iteratorconfigrotatetrafficmixweightscommand">IteratorConfigRotateTrafficMixWeightsCommand</h1>
+<h3>Extends spirent.methodology.IteratorConfigCommand.</h3>
+
+<p>Reconfigure the Traffic Mix's load weights by rotating the weights list to the right by RotationCount (or left by a negative count).</p>
+<h2>- Properties</h2>
+
+<h3>ObjectList (input:handle)<br><font size=2>"Object List"</font></h3>
+
+<p>List of objects to configure</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>IgnoreEmptyTags (input:bool)<br><font size=2>"Ignore Empty Tags"</font></h3>
+
+<p>If set to false, tags must point to at least one object</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>TagList (input:string)<br><font size=2>"Tag List"</font></h3>
+
+<p>List of Tags from which to get objects to be configured</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>CurrVal (input:string)<br><font size=2>"Current value"</font></h3>
+
+<p>Value to use in the current iteration</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>Iteration (input:u32)<br><font size=2>"Iteration"</font></h3>
+
+<p>Iteration number</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>ACL Performance Test</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="iteratorconfigtrafficloadcommand">IteratorConfigTrafficLoadCommand</h1>
+<h3>Extends spirent.methodology.IteratorConfigCommand.</h3>
+
+<p>Configure the traffic load on a group of tagged streamblocks</p>
+<h2>- Properties</h2>
+
+<h3>LoadUnit (input:u8)<br><font size=2>"Load Units"</font></h3>
+
+<p>Load Units</p>
+<ul>
+<li>default: PERCENT_LINE_RATE<pre><code>StreamBlock.EnumLoadUnit
+</code></pre>
+</li>
+</ul>
+<h3>ObjectList (input:handle)<br><font size=2>"Object List"</font></h3>
+
+<p>List of objects to configure</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>IgnoreEmptyTags (input:bool)<br><font size=2>"Ignore Empty Tags"</font></h3>
+
+<p>If set to false, tags must point to at least one object</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>TagList (input:string)<br><font size=2>"Tag List"</font></h3>
+
+<p>List of Tags from which to get objects to be configured</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>CurrVal (input:string)<br><font size=2>"Current value"</font></h3>
+
+<p>Value to use in the current iteration</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>Iteration (input:u32)<br><font size=2>"Iteration"</font></h3>
+
+<p>Iteration number</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>ACL Performance Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Configuration Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="iteratorvalidatecommand">IteratorValidateCommand</h1>
+<p>Base Iterator Validate Command</p>
+<h2>- Properties</h2>
+
+<h3>Iteration (input:u32)<br><font size=2>"Iteration"</font></h3>
+
+<p>Iteration number</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>Verdict (output:bool)<br><font size=2>"Verdict"</font></h3>
+
+<p>Validate command's verdict</p>
+<ul>
+<li>default: True</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+<li>
+<p>RFC 2544 Throughput Test</p>
+</li>
+<li>
+<p>ACL Performance Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="l2l3learningcommand">L2L3LearningCommand</h1>
+<p>L2L3 Learning Command</p>
+<h2>- Properties</h2>
+
+<h3>ObjectList (input:handle)<br><font size=2>"Object List"</font></h3>
+
+<p>List of port, stream block, host, router, or emulated device handles.</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>TagNameList (input:string)<br><font size=2>"Tag Name List"</font></h3>
+
+<p>List of tag names identifying port, stream block, host, router, or emulated device</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>EnableL2Learning (input:bool)<br><font size=2>"Enable L2 Learning"</font></h3>
+
+<p>Enable L2 Learning</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h3>EnableL3Learning (input:bool)<br><font size=2>"Enable L3 Learning"</font></h3>
+
+<p>Enable L3 Learning</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h3>L2LearningOption (input:u8)<br><font size=2>"L2 Learning Option"</font></h3>
+
+<p>L2LearningOption takes places on Tx, or Rx, or both Tx and Rx. Only used for L2 learning.</p>
+<ul>
+<li>default: TX_RX<pre><code>EnumL2LearningOption
+    TX_ONLY = 0
+    RX_ONLY = 1
+    TX_RX = 2
+</code></pre>
+</li>
+</ul>
+<h3>WaitForArpToFinish (input:bool)<br><font size=2>"Wait For Arp To Finish"</font></h3>
+
+<p>Wait for Arp to finish. Only used for L3 learning.</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h3>ForceArp (input:bool)<br><font size=2>"Always Arp"</font></h3>
+
+<p>If Arp should always occur even if it is not required. Only used for L3 learning.</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h3>VerifyArp (input:bool)<br><font size=2>"Verify Arp Status"</font></h3>
+
+<p>Verifiy if Arp resolved.</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>RFC 2544 Throughput Test</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="loadtemplatecommand">LoadTemplateCommand</h1>
+<h3>Extends stak.StakGroupCommand.</h3>
+
+<p>Load an XML template into an StmTemplateConfig object</p>
+<h2>- Properties</h2>
+
+<h3>CopiesPerParent (input:u32)<br><font size=2>"Number of copies to make per Target Tag object"</font></h3>
+
+<p>Number of copies of the template to make per Target Tag object</p>
+<ul>
+<li>default: 1</li>
+</ul>
+<h3>TargetTagList (input:string)<br><font size=2>"Target Tag List"</font></h3>
+
+<p>List of tags where the Source Tags will be appended.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>TemplateXml (input:string)<br><font size=2>"XML Template String"</font></h3>
+
+<p>Template to use as a string</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>TemplateXmlFileName (input:inputFilePath)<br><font size=2>"XML Template File"</font></h3>
+
+<p>Template XML File Location</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>TagPrefix (input:string)<br><font size=2>"Tag Prefix"</font></h3>
+
+<p>Prefix value prepended to all tags loaded by configuration</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>AutoExpandTemplate (input:bool)<br><font size=2>"Automatically Expand Template"</font></h3>
+
+<p>Expand template into EmulatedDevices, Streamblocks, etc.</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h3>StmTemplateMix (input:handle)<br><font size=2>"Parent StmTemplateMix object"</font></h3>
+
+<p>Handle of an StmTemplateMix object to use for the parent of the created StmTemplateConfig.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>EnableLoadFromFileName (input:bool)<br><font size=2>"Enable XML Template File"</font></h3>
+
+<p>Load the XML from a Template File rather than the Template XML string parameter.</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h3>StmTemplateConfig (output:handle)<br><font size=2>"XML container object (StmTemplateConfig)"</font></h3>
+
+<p>StmTemplateConfig container object</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>L3 QoS DiffServ</p>
+</li>
+<li>
+<p>BGP Route Reflector Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Performance Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Configuration Test</p>
+</li>
+<li>
+<p>Widgets Test</p>
+</li>
+<li>
+<p>Basic Traffic Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>ACL Performance Test</p>
+</li>
+<li>
+<p>ACL Basic Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="mergetemplatecommand">MergeTemplateCommand</h1>
+<p>Merges XML from a source string or file into the StmTemplateConfig container using source and target tags.</p>
+<h2>- Properties</h2>
+
+<h3>StmTemplateConfig (input:handle)<br><font size=2>"StmTemplateConfig (from LoadTemplateCommand)"</font></h3>
+
+<p>StmTemplateConfig container object passed in from the LoadTemplateCommand</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>SrcTagList (input:string)<br><font size=2>"Source Tag List"</font></h3>
+
+<p>List of tags from the XML Template String or File whose elements will be merged into the TemplateXml contained in the StmTemplateConfig</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>TargetTagList (input:string)<br><font size=2>"Target Tag List"</font></h3>
+
+<p>List of tags in the StmTemplateConfig's TemplateXml string where the Source Tag List's tagged elements will be inserted.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>TagPrefix (input:string)<br><font size=2>"Tag Prefix"</font></h3>
+
+<p>Prefix value prepended to all merged tags loaded in the source XML</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>TemplateXml (input:string)<br><font size=2>"XML Template String"</font></h3>
+
+<p>String XML that will serve as a source</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>TemplateXmlFileName (input:inputFilePath)<br><font size=2>"XML Template File"</font></h3>
+
+<p>Template XML File Location that will serve as a source</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>EnableLoadFromFileName (input:bool)<br><font size=2>"Enable XML Template File"</font></h3>
+
+<p>Load the XML from a Template File rather than the Template XML string parameter.</p>
+<ul>
+<li>default: true</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="modifyhandlelistcommand">ModifyHandleListCommand</h1>
+<p>Modify a property of a BLL command that contains a list of handles</p>
+<h2>- Properties</h2>
+
+<h3>BllCommandTagName (input:string)<br><font size=2>"Tag that identifies target BLL Command"</font></h3>
+
+<p>Name of the tag that the target BLL command will have a UserTag relation to.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>PropertyName (input:string)<br><font size=2>"Property To Modify"</font></h3>
+
+<p>The property in the target BLL command that will have its contents modified.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>TagList (input:string)<br><font size=2>"Tag List"</font></h3>
+
+<p>List of tags that will be expanded into BLL objects, then passed in to the command.  If the command already has handles, these handles will be appended to its list.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>OverwriteProperty (input:bool)<br><font size=2>"Overwrite Property"</font></h3>
+
+<p>If set to true, will overwrite the property to modify.  If false, command will append.</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>L3 QoS DiffServ</p>
+</li>
+<li>
+<p>BGP Route Reflector Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Performance Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Configuration Test</p>
+</li>
+<li>
+<p>Widgets Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Microburst Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="modifytemplatepropertycommand">ModifyTemplatePropertyCommand</h1>
+<p>Modify an XML template across ports</p>
+<h2>- Properties</h2>
+
+<h3>StmTemplateConfig (input:handle)<br><font size=2>"StmTemplateConfig"</font></h3>
+
+<p>StmTemplateConfig</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>TagNameList (input:string)<br><font size=2>"Tag Name List"</font></h3>
+
+<p>Name of the Tag(s) referencing objects to modify in the template</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>PropertyList (input:string)<br><font size=2>"Property List"</font></h3>
+
+<p>List of property IDs (ie classname.property) to configure new values for.  Position in this list MUST map to position in the ValueList.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ValueList (input:string)<br><font size=2>"Value List"</font></h3>
+
+<p>List of values to configure.  Position in this list MUST map to position in the PropertyList.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>L3 QoS DiffServ</p>
+</li>
+<li>
+<p>BGP Route Reflector Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Configuration Test</p>
+</li>
+<li>
+<p>Widgets Test</p>
+</li>
+<li>
+<p>Basic Traffic Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>ACL Basic Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="objectiteratorcommand">ObjectIteratorCommand</h1>
+<h3>Extends spirent.methodology.IteratorCommand.</h3>
+
+<p>Object Iterator Command</p>
+<h2>- Properties</h2>
+
+<h3>IterMode (input:u8)<br><font size=2>"Iteration Mode"</font></h3>
+
+<p>Iteration mode</p>
+<ul>
+<li>default: STEP<pre><code>EnumIterMode
+    STEP = 1
+    BINARY = 2
+</code></pre>
+</li>
+</ul>
+<h3>StepVal (input:double)<br><font size=2>"Step value"</font></h3>
+
+<p>Step value</p>
+<ul>
+<li>default: 10</li>
+</ul>
+<h3>ValueType (input:u8)<br><font size=2>"Value type"</font></h3>
+
+<p>Value type (list or range)</p>
+<ul>
+<li>default: RANGE<pre><code>EnumValueType
+    RANGE = 1
+    LIST = 2
+</code></pre>
+</li>
+</ul>
+<h3>ValueList (input:string)<br><font size=2>"List of values"</font></h3>
+
+<p>List of values to test</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>CurrIndex (state:u32)<br><font size=2>"Current Index"</font></h3>
+
+<p>Current list value's index</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>MinFail (state:double)<br><font size=2>"Minimum fail value"</font></h3>
+
+<p>Minimum fail value</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>MaxPass (state:double)<br><font size=2>"Maximum pass value"</font></h3>
+
+<p>Maximum pass value</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>IsConverged (output:bool)<br><font size=2>"Is Converged"</font></h3>
+
+<p>Did the iterator converge?</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>ConvergedVal (output:string)<br><font size=2>"Converged Value"</font></h3>
+
+<p>Value the iterator converged on</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>BreakOnFail (input:bool)<br><font size=2>"Break on fail"</font></h3>
+
+<p>Break out of the test when an iteration fails</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>MinVal (input:double)<br><font size=2>"Minimum value"</font></h3>
+
+<p>Minimum value</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>MaxVal (input:double)<br><font size=2>"Maximum value"</font></h3>
+
+<p>Maximum value</p>
+<ul>
+<li>default: 100</li>
+</ul>
+<h3>PrevIterVerdict (input:bool)<br><font size=2>"Previous iteration result"</font></h3>
+
+<p>Result of the previous iteration</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h3>Iteration (state:u32)<br><font size=2>"Iteration"</font></h3>
+
+<p>Iteration number</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>CurrVal (state:string)<br><font size=2>"Current value"</font></h3>
+
+<p>Value to use in the current iteration</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ResetState (state:bool)<br><font size=2>"Reset State"</font></h3>
+
+<p>Reset state properties</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Performance Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Configuration Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>ACL Performance Test</p>
+</li>
+<li>
+<p>RFC 2544 Throughput Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="rateiteratorcommand">RateIteratorCommand</h1>
+<h3>Extends spirent.methodology.IteratorCommand.</h3>
+
+<p>Rate Iterator Command</p>
+<h2>- Properties</h2>
+
+<h3>Resolution (input:double)<br><font size=2>"Resolution"</font></h3>
+
+<p>How close to get to the true value</p>
+<ul>
+<li>default: 1</li>
+</ul>
+<h3>ResolutionMode (input:u8)<br><font size=2>"Resolution Mode"</font></h3>
+
+<p>Resolution units</p>
+<ul>
+<li>default: PERCENT<pre><code>EnumResolutionMode
+    PERCENT = 1
+    ABSOLUTE = 2
+</code></pre>
+</li>
+</ul>
+<h3>RoundingResolution (input:double)<br><font size=2>"Rounding Resolution"</font></h3>
+
+<p>How to round the values used. 0 means no rounding.</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>MinFail (state:double)<br><font size=2>"Minimum fail value"</font></h3>
+
+<p>Minimum fail value</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>MaxPass (state:double)<br><font size=2>"Maximum pass value"</font></h3>
+
+<p>Maximum pass value</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>IsConverged (output:bool)<br><font size=2>"Is Converged"</font></h3>
+
+<p>Did the iterator converge?</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>ConvergedVal (output:string)<br><font size=2>"Converged Value"</font></h3>
+
+<p>Value the iterator converged on</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>BreakOnFail (input:bool)<br><font size=2>"Break on fail"</font></h3>
+
+<p>Break out of the test when an iteration fails</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>MinVal (input:double)<br><font size=2>"Minimum value"</font></h3>
+
+<p>Minimum value</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>MaxVal (input:double)<br><font size=2>"Maximum value"</font></h3>
+
+<p>Maximum value</p>
+<ul>
+<li>default: 100</li>
+</ul>
+<h3>PrevIterVerdict (input:bool)<br><font size=2>"Previous iteration result"</font></h3>
+
+<p>Result of the previous iteration</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h3>Iteration (state:u32)<br><font size=2>"Iteration"</font></h3>
+
+<p>Iteration number</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>CurrVal (state:string)<br><font size=2>"Current value"</font></h3>
+
+<p>Value to use in the current iteration</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ResetState (state:bool)<br><font size=2>"Reset State"</font></h3>
+
+<p>Reset state properties</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>RFC 2544 Throughput Test</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="resetrotatetrafficmixweightscommand">ResetRotateTrafficMixWeightsCommand</h1>
+<p>Configure the TrafficProfile's frame size</p>
+<h2>- Properties</h2>
+
+<h3>ObjectList (input:handle)<br><font size=2>"Object List"</font></h3>
+
+<p>List of objects to configure</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>TrafficMixTagList (input:string)<br><font size=2>"Traffic Mix Tag List"</font></h3>
+
+<p>List of Tag names to identify the Traffic Mix objects.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>ACL Performance Test</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="runpyscriptcommand">RunPyScriptCommand</h1>
+<p>Run a python script.</p>
+<h2>- Properties</h2>
+
+<h3>ScriptFilename (input:inputFilePath)<br><font size=2>"Python script file"</font></h3>
+
+<p>The python script file (without the py extension).</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>MethodName (input:string)<br><font size=2>"Method within the script"</font></h3>
+
+<p>The python script method to run.</p>
+<ul>
+<li>default: run</li>
+</ul>
+<h3>TagName (input:string)<br><font size=2>"Name of the tag associated with the target object(s)"</font></h3>
+
+<p>Name of the tag used to form a collection of objects for the script to act on.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>Params (input:string)<br><font size=2>"A string for the script"</font></h3>
+
+<p>A string parameter that is passed to the script to work with.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ErrorMsg (output:string)<br><font size=2>"Error Message"</font></h3>
+
+<p>Holds the last error message recorded by the command.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>L3 QoS DiffServ</p>
+</li>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Performance Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>ACL Performance Test</p>
+</li>
+<li>
+<p>ACL Basic Test</p>
+</li>
+<li>
+<p>RFC 2544 Throughput Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="stabilitybackoffiteratorcommand">StabilityBackoffIteratorCommand</h1>
+<h3>Extends spirent.methodology.IteratorCommand.</h3>
+
+<p>Stability Backoff Iterator (reverse iteration from a maximum value while repeating each test value some number of times for stability)</p>
+<h2>- Properties</h2>
+
+<h3>StepVal (input:double)<br><font size=2>"Step value"</font></h3>
+
+<p>Amount to step backwards by</p>
+<ul>
+<li>default: 10</li>
+</ul>
+<h3>RepeatCount (input:u32)<br><font size=2>"Step value"</font></h3>
+
+<p>Number of times to repeat an iteration</p>
+<ul>
+<li>default: 5</li>
+</ul>
+<h3>SuccessPercent (input:double)<br><font size=2>"Success Percent"</font></h3>
+
+<p>Number of times a repeated value has to pass to be considered stable</p>
+<ul>
+<li>default: 100</li>
+</ul>
+<h3>ValueType (input:u8)<br><font size=2>"Value type"</font></h3>
+
+<p>Value type (list or range)</p>
+<ul>
+<li>default: RANGE<pre><code>EnumValueType
+    RANGE = 1
+    LIST = 2
+</code></pre>
+</li>
+</ul>
+<h3>ValueList (input:string)<br><font size=2>"List of values"</font></h3>
+
+<p>List of values to test</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>CurrIndex (state:u32)<br><font size=2>"Current Index"</font></h3>
+
+<p>Current list value's index</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>MinFail (state:double)<br><font size=2>"Minimum fail value"</font></h3>
+
+<p>Minimum fail value</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>MaxPass (state:double)<br><font size=2>"Maximum pass value"</font></h3>
+
+<p>Maximum pass value</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>SuccessCount (state:u32)<br><font size=2>"Success Count"</font></h3>
+
+<p>Number of successful trials</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>TrialNum (state:u32)<br><font size=2>"Trial Number"</font></h3>
+
+<p>Trial number for a particular test value</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>StableValue (output:string)<br><font size=2>"Stable value"</font></h3>
+
+<p>Stable value</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>FoundStableValue (output:bool)<br><font size=2>"Found a stable value"</font></h3>
+
+<p>Flag indicating a stable value was found</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>BreakOnFail (input:bool)<br><font size=2>"Break on fail"</font></h3>
+
+<p>Break out of the test when an iteration fails</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>MinVal (input:double)<br><font size=2>"Minimum value"</font></h3>
+
+<p>Minimum value</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>MaxVal (input:double)<br><font size=2>"Maximum value"</font></h3>
+
+<p>Maximum value</p>
+<ul>
+<li>default: 100</li>
+</ul>
+<h3>PrevIterVerdict (input:bool)<br><font size=2>"Previous iteration result"</font></h3>
+
+<p>Result of the previous iteration</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h3>Iteration (state:u32)<br><font size=2>"Iteration"</font></h3>
+
+<p>Iteration number</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>CurrVal (state:string)<br><font size=2>"Current value"</font></h3>
+
+<p>Value to use in the current iteration</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ResetState (state:bool)<br><font size=2>"Reset State"</font></h3>
+
+<p>Reset state properties</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>ACL Performance Test</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="startoftestcommand">StartOfTestCommand</h1>
+<p>Initializes test results</p>
+<h2>- Properties</h2>
+
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>L3 QoS DiffServ</p>
+</li>
+<li>
+<p>BGP Route Reflector Test</p>
+</li>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Performance Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Configuration Test</p>
+</li>
+<li>
+<p>Widgets Test</p>
+</li>
+<li>
+<p>Basic Traffic Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>ACL Performance Test</p>
+</li>
+<li>
+<p>ACL Basic Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Microburst Test</p>
+</li>
+<li>
+<p>RFC 2544 Throughput Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="taggedlinkcreatecommand">TaggedLinkCreateCommand</h1>
+<p>Create Links With Tagged Objects</p>
+<h2>- Properties</h2>
+
+<h3>LinkType (input:string)<br><font size=2>"Link Type"</font></h3>
+
+<p>Name Link Created between objects</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>SrcObjTag (input:string)<br><font size=2>"Source Object Tag"</font></h3>
+
+<p>Tag used for Source (Back) Objects</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>SrcIfTag (input:string)<br><font size=2>"Source Interface Tag"</font></h3>
+
+<p>Tag used for Source (Back) Interface Objects</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>DstObjTag (input:string)<br><font size=2>"Destination Object Tag"</font></h3>
+
+<p>Tag used for Destination (Front) Objects</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>DstIfTag (input:string)<br><font size=2>"Destination Interface Tag"</font></h3>
+
+<p>Tag used for Destination (Front) Interface Objects</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>LinkPattern (input:u8)<br><font size=2>"Link Distribution Pattern"</font></h3>
+
+<p>Link Distribution Pattern</p>
+<ul>
+<li>default: PAIR<pre><code>EnumLinkPattern
+    PAIR = 0
+    BACKBONE = 1
+    INTERLEAVED = 2
+</code></pre>
+</li>
+</ul>
+<h3>LinkTag (input:string)<br><font size=2>"Tag for newly-created Link Objects"</font></h3>
+
+<p>If not blank, tag used with new link objects </p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>LinkList (output:handle)<br><font size=2>"List of created Link objects"</font></h3>
+
+<p>Contains list of handles for links created</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="taggedobjectsiteratorcommand">TaggedObjectsIteratorCommand</h1>
+<h3>Extends spirent.methodology.IteratorCommand.</h3>
+
+<p>Tagged Objects Iterator Command</p>
+<h2>- Properties</h2>
+
+<h3>ObjectOrder (input:u8)<br><font size=2>"Iteration Mode"</font></h3>
+
+<p>Order of tagged objects</p>
+<ul>
+<li>default: SCALAR<pre><code>EnumObjectOrder
+    SCALAR = 1
+    TUPLE = 2
+</code></pre>
+</li>
+</ul>
+<h3>TagNameList (input:string)<br><font size=2>"List of Tag Names"</font></h3>
+
+<p>Obtain objects from named tags</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>BreakOnFail (input:bool)<br><font size=2>"Break on fail"</font></h3>
+
+<p>Break out of the test when an iteration fails</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>MinVal (input:double)<br><font size=2>"Minimum value"</font></h3>
+
+<p>Minimum value</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>MaxVal (input:double)<br><font size=2>"Maximum value"</font></h3>
+
+<p>Maximum value</p>
+<ul>
+<li>default: 100</li>
+</ul>
+<h3>PrevIterVerdict (input:bool)<br><font size=2>"Previous iteration result"</font></h3>
+
+<p>Result of the previous iteration</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h3>Iteration (state:u32)<br><font size=2>"Iteration"</font></h3>
+
+<p>Iteration number</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>CurrVal (state:string)<br><font size=2>"Current value"</font></h3>
+
+<p>Value to use in the current iteration</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ResetState (state:bool)<br><font size=2>"Reset State"</font></h3>
+
+<p>Reset state properties</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Configuration Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Performance Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="tagobjectconfigcommand">TagObjectConfigCommand</h1>
+<h3>Extends spirent.methodology.IteratorConfigCommand.</h3>
+
+<p>Set Tag to only point to specified object handle(s)</p>
+<h2>- Properties</h2>
+
+<h3>TagNameList (input:string)<br><font size=2>"Tag Name List"</font></h3>
+
+<p>List of Tags used to tag objects specified</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ObjectList (input:handle)<br><font size=2>"Object List"</font></h3>
+
+<p>List of objects to configure</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>IgnoreEmptyTags (input:bool)<br><font size=2>"Ignore Empty Tags"</font></h3>
+
+<p>If set to false, tags must point to at least one object</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>TagList (input:string)<br><font size=2>"Tag List"</font></h3>
+
+<p>List of Tags from which to get objects to be configured</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>CurrVal (input:string)<br><font size=2>"Current value"</font></h3>
+
+<p>Value to use in the current iteration</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>Iteration (input:u32)<br><font size=2>"Iteration"</font></h3>
+
+<p>Iteration number</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Configuration Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Performance Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="validaterouterupcommand">ValidateRouterUpCommand</h1>
+<h3>Extends spirent.methodology.IteratorValidateCommand.</h3>
+
+<p>Validate Router Up</p>
+<h2>- Properties</h2>
+
+<h3>Iteration (input:u32)<br><font size=2>"Iteration"</font></h3>
+
+<p>Iteration number</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>Verdict (output:bool)<br><font size=2>"Verdict"</font></h3>
+
+<p>Validate command's verdict</p>
+<ul>
+<li>default: True</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="verifydbquerycommand">VerifyDbQueryCommand</h1>
+<h3>Extends spirent.methodology.VerifySingleBaseCommand.</h3>
+
+<p>Verify that an SqlQuery yields a row count that meets the specified limits.</p>
+<h2>- Properties</h2>
+
+<h3>SqlQuery (input:string)<br><font size=2>"Sql Query"</font></h3>
+
+<p>Sql Query</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>OperationType (input:u8)<br><font size=2>"Operation Type"</font></h3>
+
+<p>Comparision operator</p>
+<ul>
+<li>default: GREATER_THAN<pre><code>spirent.methodology.ResultBaseCommand.EnumComparisonOperator
+</code></pre>
+</li>
+</ul>
+<h3>RowCount (input:u64)<br><font size=2>"Row Count"</font></h3>
+
+<p>Row count to compare to SQL query yield based on OperationType. Valid for all OperationType values except Between.</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>MinRowCount (input:u64)<br><font size=2>"Min Row Count (Inclusive)"</font></h3>
+
+<p>Minimum acceptable row count when OperationType is Between.</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>MaxRowCount (input:u64)<br><font size=2>"Max Row Count (Inclusive)"</font></h3>
+
+<p>Maximum acceptable row count when OperationType is Between.</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>UseMultipleResultsDatabases (input:bool)<br><font size=2>"Has Multiple Results Databases"</font></h3>
+
+<p>Used when there are multiple results databases (SaveResults LoopMode = Append). All active results databases will be queried. If set to True and only one results database exists (SaveResults LoopMode = Overwrite), an error will occur.</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>UseSummary (input:bool)<br><font size=2>"Use the summery db only"</font></h3>
+
+<p>Use the summary db instead of iteration dbs. Only valid if UseMultipleResultsDatabases is False.</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>DisplayName (input:string)<br><font size=2>"Display Name"</font></h3>
+
+<p>Title to display for this result section in the report file.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>PassedVerdictExplanation (input:string)<br><font size=2>"Passed Verdict Explanation"</font></h3>
+
+<p>Verdict explanation if command passes.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>FailedVerdictExplanation (input:string)<br><font size=2>"Failed Verdict Explanation"</font></h3>
+
+<p>Verdict explanation if command fails.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>L3 QoS DiffServ</p>
+</li>
+<li>
+<p>BGP Route Reflector Test</p>
+</li>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Performance Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Configuration Test</p>
+</li>
+<li>
+<p>Widgets Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>ACL Performance Test</p>
+</li>
+<li>
+<p>ACL Basic Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Microburst Test</p>
+</li>
+<li>
+<p>RFC 2544 Throughput Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="verifydynamicresultviewdatacommand">VerifyDynamicResultViewDataCommand</h1>
+<h3>Extends spirent.methodology.VerifySingleBaseCommand.</h3>
+
+<p>Verify that DRV yields a result count that meets the specified limits.</p>
+<h2>- Properties</h2>
+
+<h3>DynamicResultViewName (input:string)<br><font size=2>"Dynamic Result View Name"</font></h3>
+
+<p>Dynamic Result View Name.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>OperationType (input:u8)<br><font size=2>"Operation Type"</font></h3>
+
+<p>Comparision operator</p>
+<ul>
+<li>default: GREATER_THAN<pre><code>spirent.methodology.ResultBaseCommand.EnumComparisonOperator
+</code></pre>
+</li>
+</ul>
+<h3>ResultCount (input:u64)<br><font size=2>"Result Count"</font></h3>
+
+<p>Result count to compare to DRV yield based on OperationType. Valid for all OperationType values except Between.</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>MinResultCount (input:u64)<br><font size=2>"Min Result Count (Inclusive)"</font></h3>
+
+<p>Minimum acceptable result count when OperationType is Between.</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>MaxResultCount (input:u64)<br><font size=2>"Max Result Count (Inclusive)"</font></h3>
+
+<p>Maximum acceptable result count when OperationType is Between.</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>DisplayName (input:string)<br><font size=2>"Display Name"</font></h3>
+
+<p>Title to display for this result section in the report file.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>PassedVerdictExplanation (input:string)<br><font size=2>"Passed Verdict Explanation"</font></h3>
+
+<p>Verdict explanation if command passes.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>FailedVerdictExplanation (input:string)<br><font size=2>"Failed Verdict Explanation"</font></h3>
+
+<p>Verdict explanation if command fails.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="verifymultipledbquerycommand">VerifyMultipleDbQueryCommand</h1>
+<h3>Extends spirent.methodology.VerifyMultiBaseCommand.</h3>
+
+<p>Verify that each query in a list of SqlQueries yields row count = 0.</p>
+<h2>- Properties</h2>
+
+<h3>SqlQueryList (input:string)<br><font size=2>"Sql Query List"</font></h3>
+
+<p>A list of 1 or more SQL queries.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>UseMultipleResultsDatabases (input:bool)<br><font size=2>"Has Multiple Results Databases"</font></h3>
+
+<p>Used when there are multiple results databases (SaveResults LoopMode = Append). All active results databases will be queried. If set to True and only one results database exists (SaveResults LoopMode = Overwrite), an error will occur.</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>UseSummary (input:bool)<br><font size=2>"Use Summary Database Only"</font></h3>
+
+<p>Use the summary database instead of the iteration databases. Only valid if UseMultipleResultsDatabases is False.</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>DisplayNameList (input:string)<br><font size=2>"Display Name List"</font></h3>
+
+<p>Title to display for this result section in the report file. Maps 1-1 with validation query/configuration.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>PassedVerdictExplanationList (input:string)<br><font size=2>"Passed Verdict Explanation List"</font></h3>
+
+<p>Verdict explanation if command passes. Maps 1-1 with validation query/configuration.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>FailedVerdictExplanationList (input:string)<br><font size=2>"Failed Verdict Explanation List"</font></h3>
+
+<p>Verdict explanation if command fails. Maps 1-1 with validation query/configuration.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>L3 QoS DiffServ</p>
+</li>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Performance Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Service Configuration Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 CBS and EBS Burst Test</p>
+</li>
+<li>
+<p>ACL Performance Test</p>
+</li>
+<li>
+<p>ITU-T Y.1564 Microburst Test</p>
+</li>
+<li>
+<p>RFC 2544 Throughput Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="waitforpropertyvaluecommand">WaitForPropertyValueCommand</h1>
+<p>Wait for an object's property to reach a certain value</p>
+<h2>- Properties</h2>
+
+<h3>ParentList (input:handle)<br><font size=2>"Parent List"</font></h3>
+
+<p>List of parent objects to wait for property value on</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>ObjectClassName (input:string)<br><font size=2>"Object Class Name"</font></h3>
+
+<p>Object Class Name</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>PropertyName (input:string)<br><font size=2>"Property Name"</font></h3>
+
+<p>Name of the Property to wait for</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>PropertyValue (input:string)<br><font size=2>"Property Value"</font></h3>
+
+<p>Name of the value to wait for</p>
+<ul>
+<li>default: 0</li>
+</ul>
+<h3>PropertyValueType (input:u8)<br><font size=2>"Property Value Type"</font></h3>
+
+<p>Property Value Type</p>
+<ul>
+<li>default: 0<pre><code>EnumPropertyValueType
+    NUMBER = 0
+    BOOL = 1
+    STRING = 2
+    ENUM = 3
+</code></pre>
+</li>
+</ul>
+<h3>OperationType (input:u8)<br><font size=2>"Operation Type"</font></h3>
+
+<p>Name of the value to wait for</p>
+<ul>
+<li>default: 0<pre><code>EnumOperationType
+    EQUALS = 0
+    NOT_EQUALS = 1
+    GREATER_THAN = 2
+    LESS_THAN = 3
+    GREATER_THAN_OR_EQUALS = 4
+    LESS_THAN_OR_EQUALS = 5
+</code></pre>
+</li>
+</ul>
+<h3>PollInterval (input:u32)<br><font size=2>"Poll Interval"</font></h3>
+
+<p>How often to poll state result in seconds</p>
+<ul>
+<li>default: 10</li>
+</ul>
+<h3>MaxWaitTime (input:u32)<br><font size=2>"Maximum Wait Time"</font></h3>
+
+<p>Maximum amount of time to wait for state change in seconds</p>
+<ul>
+<li>default: 10</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>Routing Multi-Protocol</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../Templates/AllRouters/" class="btn btn-neutral float-right" title="AllRouters.xml"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../stc_methodologymanager/" class="btn btn-neutral" title="stc_methodologymanager.xml"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../stc_methodologymanager/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../Templates/AllRouters/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

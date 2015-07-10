@@ -1,0 +1,135 @@
+<?xml version="1.0" ?>
+<test>
+  <testInfo displayName="ITU-T Y.1564 Service Performance Test" description="This test determines if the service KPIs (or SLA parameters) are met." methodologyKey="Y1564PERF" testCaseName="original" testCaseDescription="" version="1.0" testCaseKey="">
+    <labels>
+      <label>Y1564PERF</label>
+    </labels>
+  </testInfo>
+  <testResources>
+    <resourceGroups>
+      <resourceGroup displayName="Chassis Info" id="chassisInfo">
+        <portGroups>
+          <portGroup id="Tag.Name.1998" name="Left Port Group">
+            <template name="Templates\IPv4_QinQ_EtherSam">
+              <description>Left Side Endpoint</description>
+              <image name="y1564perf_ports.png" />
+              <source name="IPv4_QinQ_EtherSam.xml"/>
+            </template>
+            <port name="Left Port">
+              <attribute name="location" value="10.109.122.244/1/1" />
+            </port>
+          </portGroup>
+          <portGroup id="Tag.Name.1999" name="Right Port Group">
+            <template name="IPv4_QinQ_EtherSam.xml">
+              <description>Right Side Endpoint</description>
+              <image name="y1564perf_ports.png" />
+              <source name="IPv4_QinQ_EtherSam.xml"/>
+            </template>
+            <port name="Right Port">
+              <attribute name="location" value="10.109.127.134/1/1" />
+            </port>
+          </portGroup>
+        </portGroups>
+      </resourceGroup>
+    </resourceGroups>
+  </testResources>
+  
+  <!--
+    The wizard section defines the input parameters that the test consumer
+    will be allowed to modify at run time. The format of this section is 
+    designed to allow a rendering engine to create a simple wizard for
+    collecting information from the test consumer during localization.
+
+    Each page of the wizard has an optional imageName that can be used to 
+    render an image file in the wizard as an aid to the user.
+  -->
+  <wizard description="ITU-T Y.1564 Service Performance Test" displayName="ITU-T Y.1564 Service Performance Test" image="y1564_performance.png">
+  
+    <page displayName="Left Side Endpoint Configuration" description="Configure the Left Side Endpoints" image="y1564perf_leftport.png">
+      <group displayName="Ethernet Configuration">
+          <property description="MAC Address Start" displayName="MAC Address Start" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand3StartValue" value="00:10:94:00:00:01"/>
+          <property description="MAC Address Step" displayName="MAC Address Step" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand3StepValue" value="00:00:00:00:00:01"/>
+      </group>
+      <group displayName="IPv4 Configuration">
+          <property description="IPv4 Address Start" displayName="IPv4 Address Start" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand9StartValue" value="192.85.1.3"/>
+          <property description="IPv4 Address Step" displayName="IPv4 Address Step" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand9StepValue" value="0.0.0.1"/>
+    <!--  <property description="IPv4 Prefix Length" displayName="IPv4 Prefix Length" id="TO BE EXPOSED" value="24"/> -->
+          <property description="IPv4 Address Recycle Count" displayName="IPv4 Address Recycle Count" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand9RecycleValue" value="0"/>
+          <property description="IPv4 Address Repeat Count" displayName="IPv4 Address Repeat Count" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand9RepeatValue" value="0"/>
+          <property description="IPv4 Gateway Start" displayName="IPv4 Gateway Start" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand2StartValue" value="192.85.1.1"/>
+          <property description="IPv4 Gateway Step" displayName="IPv4 Gateway Step" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand2StepValue" value="0.0.0.0"/>
+          <property description="IPv4 Gateway Recycle Count" displayName="IPv4 Gateway Recycle Count " id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand2RecycleValue" value="0"/>
+          <property description="IPv4 Gateway Repeat Count" displayName="IPv4 Gateway Repeat Count" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand2RepeatValue" value="0"/>
+      </group>
+      <group displayName="Service VLAN Configuration">
+          <property description="Starting VLAN ID" displayName="Starting VLAN ID" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand1StartValue" value="100"/>
+          <property description="VLAN ID Step" displayName="VLAN ID Step" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand1StepValue" value="1"/>
+          <property description="VLAN ID Recycle Count" displayName="VLAN ID Recycle Count" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand1RecycleValue" value="0"/>
+          <property description="VLAN ID Repeat Count" displayName="VLAN ID Repeat Count" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand1RepeatValue" value="0"/>
+      </group>
+      <group displayName="Customer VLAN Configuration">         
+          <property description="Starting VLAN ID" displayName="Starting VLAN ID" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand4StartValue" value="100"/>
+          <property description="VLAN ID Step" displayName="VLAN ID Step" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand4StepValue" value="1"/>
+          <property description="VLAN ID Recycle Count" displayName="VLAN ID Recycle Count" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand4RecycleValue" value="0"/>
+          <property description="VLAN ID Repeat Count" displayName="VLAN ID Repeat Count" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand4RepeatValue" value="0"/>
+      </group>
+    </page>          
+
+    <page displayName="Right Side Endpoint Configuration" description="Configure the Right Side Endpoints" image="y1564perf_rightport.png">      
+      <group displayName="Ethernet Configuration">
+          <property description="MAC Address Start" displayName="MAC Address Start" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand6StartValue" value="00:10:95:00:00:01"/>
+          <property description="MAC Address Step" displayName="MAC Address Step" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand6StepValue" value="00:00:00:00:00:01"/>
+      </group>
+      <group displayName="IPv4 Configuration">
+          <property description="IPv4 Address Start" displayName="IPv4 Address Start" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand10StartValue" value="192.85.1.1"/>
+          <property description="IPv4 Address Step" displayName="IPv4 Address Step" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand10StepValue" value="0.0.0.1"/>
+    <!--  <property description="IPv4 Prefix Length" displayName="IPv4 Prefix Length" id="TO BE EXPOSED" value="24"/> -->
+          <property description="IPv4 Address Recycle Count" displayName="IPv4 Address Recycle Count" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand10RecycleValue" value="0"/>
+          <property description="IPv4 Address Repeat Count" displayName="IPv4 Address Repeat Count" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand10RepeatValue" value="0"/>
+          <property description="IPv4 Gateway Start" displayName="IPv4 Gateway Start" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand5StartValue" value="192.85.1.3"/>
+          <property description="IPv4 Gateway Step" displayName="IPv4 Gateway Step" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand5StepValue" value="0.0.0.0"/>
+          <property description="IPv4 Gateway Recycle Count" displayName="IPv4 Gateway Recycle Count" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand5RecycleValue" value="0"/>
+          <property description="IPv4 Gateway Repeat Count" displayName="IPv4 Gateway Repeat Count" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand5RepeatValue" value="0"/>
+      </group>
+      <group displayName="Service VLAN Configuration">
+          <property description="Starting VLAN ID" displayName="Starting VLAN ID" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand8StartValue" value="100"/>
+          <property description="VLAN ID Step" displayName="VLAN ID Step" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand8StepValue" value="1"/>
+          <property description="VLAN ID Recycle Count" displayName="VLAN ID Recycle Count" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand8RecycleValue" value="0"/>
+          <property description="VLAN ID Repeat Count" displayName="VLAN ID Repeat Count" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand8RepeatValue" value="0"/>
+      </group>
+      <group displayName="Customer VLAN Configuration">
+          <property description="Starting VLAN ID" displayName="Starting VLAN ID" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand7StartValue" value="100"/>
+          <property description="VLAN ID Step" displayName="VLAN ID Step" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand7StepValue" value="1"/>
+          <property description="VLAN ID Recycle Count" displayName="VLAN ID Recycle Count" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand7RecycleValue" value="0"/>
+          <property description="VLAN ID Repeat Count" displayName="VLAN ID Repeat Count" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand7RepeatValue" value="0"/>
+      </group>
+    </page>
+ 
+    <page displayName="Service Configuration" description="Configure the Service properties" image="y1564perf_serviceconfig.png">
+      <group displayName="General">
+          <property description="List of Frame Sizes to iterate over for each test stream" displayName="Frame Size List (bytes)" id="test.frameSizeList" value="['128', '256', '512']" ignoreOnBackEnd="true"/>
+      </group>
+      <group displayName="Bandwidth">
+          <property description="% Bandwidth of the port load allocated for Service1" displayName="Service1 CIR Bandwidth (%)" id="spirent.methodology.traffic.LoadTrafficTemplateCommand.Weight.138872" value="10"/>
+          <property description="% Bandwidth of the port load allocated for Service2" displayName="Service2 CIR Bandwidth (%)" id="spirent.methodology.traffic.LoadTrafficTemplateCommand.Weight.138873" value="10"/>
+          <property description="% Bandwidth of the port load allocated for Service3" displayName="Service3 CIR Bandwidth (%)" id="spirent.methodology.traffic.LoadTrafficTemplateCommand.Weight.138874" value="10"/>
+      </group>
+      <group displayName="Service KPI Threshold Settings">
+          <property description="Value the RFC4689 Average Frame Delay Variation should not exceed" displayName="RFC4689 Mean Frame Delay Variation (FDV) Threshold (ms)" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpRfc4689AvgJitter.51778" value="0.05"/>
+          <property description="Value the Max Frame Delay Variation should not exceed" displayName="Max Frame Delay Variation (FDV) Threshold (ms)" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpMaxJitter.51778" value="0.2"/>
+          <property description="Value the Mean Frame Transfer Delay should not exceed" displayName="Mean Frame Transfer Delay (FTD) Threshold (ms)" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpAvgLatency.51778" value="0.7"/>
+          <property description="Value the Max Frame Transfer Delay should not exceed" displayName="Max Frame Transfer Delay (FTD) Threshold (ms)" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpMaxLatency.51778" value="1.0"/>
+          <property description="Value the Frame Loss Count should not exceed" displayName="Frame Loss (FL) Count Threshold" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpPktLossCount.51778" value="0"/>
+          <property description="Value the Out of Order Frame Count should not exceed" displayName="Out of Order Frame Count Threshold" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpMaxOopCount.51778" value="0"/>
+          <property description="Value the Late Frame Count should not exceed" displayName="Late Frame Count Threshold" id="spirent.methodology.traffictest.Y1564SvcConfigRampCommand.ExpMaxLatePktCount.51778" value="0"/>
+      </group>
+    </page>
+  </wizard>
+
+  <processingFunctions>
+    <processingFunction id="frameSizeList.pf.copy_string_to_list" scriptFile="txml_processing_functions.py" entryFunction="copy_string_to_list">
+      <input srcId="test.frameSizeList" scriptVarName="InputKey" />
+      <output scriptVarName="OutputKey" epKey="spirent.methodology.ObjectIteratorCommand.ValueList.131990" />
+    </processingFunction>
+  </processingFunctions>
+</test>

@@ -1,0 +1,1886 @@
+
+{
+    "status" :
+    {
+        "valid" : true,
+        "validation_explanation" : "None."
+    },
+    "sut_template_key" : "",
+    "labels" : ["bgp", "control plane", "route reflector", "x-connect"],
+    "display_name" : "Routing Multi-Protocol",
+    "description" : "Routing Multi-Protocol Methodology",
+    "processing_functions" : [
+        {
+            "entry_function" : "config_device_iterator_value",
+            "input" : [
+                {
+                    "src_prop_id" : "MethTestType",
+                    "script_input_key" : "TestType"
+                },
+                {
+                    "src_prop_id" : "ScalabilityDeviceCount",
+                    "script_input_key" : "ScaleDeviceCount"
+                },
+                {
+                    "src_prop_id" : "DeviceCountMin",
+                    "script_input_key" : "MinDeviceCount"
+                },
+                {
+                    "src_prop_id" : "DeviceCountMax",
+                    "script_input_key" : "MaxDeviceCount"
+                }
+            ],
+            "script_filename" : "txml_processing_functions.py",
+            "func_id" : "Config.CreateProtocolMix.DeviceCount",
+            "output" : [
+                {
+                    "ep_key" : "TestMethodologyIteratorMinVal",
+                    "script_output_key" : "minDev"
+                },
+                {
+                    "ep_key" : "TestMethodologyIteratorMaxVal",
+                    "script_output_key" : "maxDev"
+                }
+            ]
+        },
+        {
+            "entry_function" : "copy_dict_to_sequence",
+            "input" : [
+                {
+                    "dict" :
+                    {
+                        "load": 1,
+                        "loadUnits": "PERCENT_LINE_RATE",
+                        "components": [
+                            {
+                                "weight": "100%",
+                                "baseTemplateFile": "IPv4_Stream.xml",
+                                "postExpandModify": [
+                                    {
+                                        "streamBlockExpand": {
+                                            "endpointMapping": {
+                                                "bidirectional": false,
+                                                "srcBindingClassList": [
+                                                    "Ipv4NetworkBlock"
+                                                ],
+                                                "srcBindingTagList": [
+                                                    "Left_ttStmRouteMix"
+                                                ],
+                                                "dstBindingClassList": [
+                                                    "Ipv4NetworkBlock"
+                                                ],
+                                                "dstBindingTagList": [
+                                                    "Right_ttStmRouteMix"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "script_input_key" : "InputKey"
+                }
+            ],
+            "script_filename" : "txml_processing_functions.py",
+            "func_id" : "Left.CreateTrafficMix.MixInfo",
+            "output" : [
+                {
+                    "ep_key" : "TrafficCreateTrafficMixCommand2MixInfo",
+                    "script_output_key" : "OutputKey"
+                }
+            ]
+        },
+                {
+            "entry_function" : "copy_dict_to_sequence",
+            "input" : [
+                {
+                    "dict" :
+                    {
+                        "load": 1,
+                        "loadUnits": "PERCENT_LINE_RATE",
+                        "components": [
+                            {
+                                "weight": "100%",
+                                "baseTemplateFile": "IPv4_Stream.xml",
+                                "postExpandModify": [
+                                    {
+                                        "streamBlockExpand": {
+                                            "endpointMapping": {
+                                                "bidirectional": false,
+                                                "srcBindingClassList": [
+                                                    "Ipv4NetworkBlock"
+                                                ],
+                                                "srcBindingTagList": [
+                                                    "Right_ttStmRouteMix"
+                                                ],
+                                                "dstBindingClassList": [
+                                                    "Ipv4NetworkBlock"
+                                                ],
+                                                "dstBindingTagList": [
+                                                    "Left_ttStmRouteMix"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "script_input_key" : "InputKey"
+                }
+            ],
+            "script_filename" : "txml_processing_functions.py",
+            "func_id" : "Left.CreateTrafficMix.MixInfo",
+            "output" : [
+                {
+                    "ep_key" : "TrafficCreateTrafficMixCommand3MixInfo",
+                    "script_output_key" : "OutputKey"
+                }
+            ]
+        },
+        {
+            "entry_function" : "copy_value_to_sequence",
+            "input" : [
+                {
+                    "src_prop_id" : "SetTrafficLoad",
+                    "script_input_key" : "InputKey"
+                }
+            ],
+            "script_filename" : "txml_processing_functions.py",
+            "func_id" : "Config.CreateTrafficMix.Load",
+            "output" : [
+                {
+                    "ep_key" : "TrafficExpandTrafficMixCommand1Load",
+                    "script_output_key" : "OutputKey"
+                },
+                {
+                    "ep_key" : "TrafficExpandTrafficMixCommand2Load",
+                    "script_output_key" : "OutputKey"
+                }
+            ]
+        },
+        {
+            "entry_function" : "copy_value_to_sequence",
+            "input" : [
+                {
+                    "src_prop_id" : "SetTrafficLoadUnit",
+                    "script_input_key" : "InputKey"
+                }
+            ],
+            "script_filename" : "txml_processing_functions.py",
+            "func_id" : "Config.ExpandTrafficMix.LoadUnit",
+            "output" : [
+                {
+                    "ep_key" : "TrafficExpandTrafficMixCommand1LoadUnit",
+                    "script_output_key" : "OutputKey"
+                },
+                {
+                    "ep_key" : "TrafficExpandTrafficMixCommand2LoadUnit",
+                    "script_output_key" : "OutputKey"
+                }
+            ]
+        },
+        {
+            "entry_function" : "copy_dict_to_sequence",
+            "input" : [
+                {
+                    "dict" :
+                    {
+                        "routeCount" : 1000,
+                        "components" : [
+                            {
+                                "baseTemplateFile" : "AllRouters.xml",
+                                "weight" : "50%",
+                                "modifyList" : [
+                                    {
+                                        "mergeList" : [
+                                            {
+                                                "mergeSourceTag" : "ttBgpIpv4RouteConfig",
+                                                "mergeSourceTemplateFile" : "AllRoutes.xml",
+                                                "mergeTargetTag" : "ttBgpRouterConfig"
+                                            },
+                                            {
+                                                "mergeSourceTag" : "ttBgpIpv6RouteConfig",
+                                                "mergeSourceTemplateFile" : "AllRoutes.xml",
+                                                "mergeTargetTag" : "ttBgpRouterConfig"
+                                            }
+                                        ],
+                                        "stmPropertyModifierList" : [
+                                            {
+                                                "className" : "Ipv4NetworkBlock",
+                                                "propertyName" : "StartIpList",
+                                                "parentTagName" : "ttBgpIpv4RouteConfig.Ipv4NetworkBlock",
+                                                "propertyValueList" :
+                                                {
+                                                    "Start" : "22.22.22.22",
+                                                    "Step" : "0.0.1.0"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "baseTemplateFile" : "BGP_Import_Routes.xml",
+                                "weight" : "100",
+                                "modifyList" : [
+                                    {
+                                        "propertyValueList" : [
+                                            {
+                                                "className" : "BgpImportRouteTableParams",
+                                                "tagName" : "ttBgpImportRouteTableParams",
+                                                "propertyValueList" :
+                                                {
+                                                    "FileName" : "bgp_fullroute.txt"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "postExpandModify" : [
+                                    {
+                                        "bllWizardExpand" :
+                                        {
+                                            "targetTagList" : ["Left_ttEmulatedDevice"],
+                                            "srcObjectTagName" : "ttBgpImportRouteTableParams",
+                                            "createdRoutesTagName" : "ttBgpImportedRoutes",
+                                            "commandName" : "spirent.methodology.routing.BgpImportRoutesCommand"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "baseTemplateFile" : "AllRoutePrefixDist.xml",
+                                "weight" : "100",
+                                "postExpandModify" : [
+                                    {
+                                        "bllWizardExpand" :
+                                        {
+                                            "targetTagList" : ["Left_ttEmulatedDevice"],
+                                            "srcObjectTagName" : "ttBgpRouteGenParamsIpv4",
+                                            "createdRoutesTagName" : "ttBgpRouteObjectPrefixDist",
+                                            "commandName" : "spirent.methodology.routing.RoutePrefixDistributionCommand"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "baseTemplateFile" : "AllRoutePrefixDist.xml",
+                                "weight" : "100",
+                                "postExpandModify" : [
+                                    {
+                                        "bllWizardExpand" :
+                                        {
+                                            "targetTagList" : ["Left_ttEmulatedDevice"],
+                                            "srcObjectTagName" : "ttOspfv3LsaGenParamsIntraArea",
+                                            "createdRoutesTagName" : "ttOspfv3RouteObjectPrefixDist",
+                                            "commandName" : "spirent.methodology.routing.RoutePrefixDistributionCommand"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "script_input_key" : "InputKey"
+                }
+            ],
+            "script_filename" : "txml_processing_functions.py",
+            "func_id" : "Left.Config.CreateRouteMix.MixInfo",
+            "output" : [
+                {
+                    "ep_key" : "RoutingCreateRouteMixCommand1MixInfo",
+                    "script_output_key" : "OutputKey"
+                }
+            ]
+        },
+        {
+            "entry_function" : "copy_dict_to_sequence",
+            "input" : [
+                {
+                    "dict" :
+                    {
+                        "routeCount" : 1000,
+                        "components" : [
+                            {
+                                "baseTemplateFile" : "AllRouters.xml",
+                                "weight" : "50%",
+                                "modifyList" : [
+                                    {
+                                        "mergeList" : [
+                                            {
+                                                "mergeSourceTag" : "ttBgpIpv4RouteConfig",
+                                                "mergeSourceTemplateFile" : "AllRoutes.xml",
+                                                "mergeTargetTag" : "ttBgpRouterConfig"
+                                            },
+                                            {
+                                                "mergeSourceTag" : "ttBgpIpv6RouteConfig",
+                                                "mergeSourceTemplateFile" : "AllRoutes.xml",
+                                                "mergeTargetTag" : "ttBgpRouterConfig"
+                                            }
+                                        ],
+                                        "stmPropertyModifierList" : [
+                                            {
+                                                "className" : "Ipv4NetworkBlock",
+                                                "propertyName" : "StartIpList",
+                                                "parentTagName" : "ttBgpIpv4RouteConfig.Ipv4NetworkBlock",
+                                                "propertyValueList" :
+                                                {
+                                                    "Start" : "33.33.33.33",
+                                                    "Step" : "0.0.1.0"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "baseTemplateFile" : "BGP_Import_Routes.xml",
+                                "weight" : "100",
+                                "modifyList" : [
+                                    {
+                                        "propertyValueList" : [
+                                            {
+                                                "className" : "BgpImportRouteTableParams",
+                                                "tagName" : "ttBgpImportRouteTableParams",
+                                                "propertyValueList" :
+                                                {
+                                                    "FileName" : "bgp_fullroute.txt"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "postExpandModify" : [
+                                    {
+                                        "bllWizardExpand" :
+                                        {
+                                            "targetTagList" : ["Right_ttEmulatedDevice"],
+                                            "srcObjectTagName" : "ttBgpImportRouteTableParams",
+                                            "createdRoutesTagName" : "ttBgpImportedRoutes",
+                                            "commandName" : "spirent.methodology.routing.BgpImportRoutesCommand"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "baseTemplateFile" : "AllRoutePrefixDist.xml",
+                                "weight" : "100",
+                                "postExpandModify" : [
+                                    {
+                                        "bllWizardExpand" :
+                                        {
+                                            "targetTagList" : ["Right_ttEmulatedDevice"],
+                                            "srcObjectTagName" : "ttBgpRouteGenParamsIpv4",
+                                            "createdRoutesTagName" : "ttBgpRouteObjectPrefixDist",
+                                            "commandName" : "spirent.methodology.routing.RoutePrefixDistributionCommand"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "baseTemplateFile" : "AllRoutePrefixDist.xml",
+                                "weight" : "100",
+                                "postExpandModify" : [
+                                    {
+                                        "bllWizardExpand" :
+                                        {
+                                            "targetTagList" : ["Right_ttEmulatedDevice"],
+                                            "srcObjectTagName" : "ttOspfv3LsaGenParamsIntraArea",
+                                            "createdRoutesTagName" : "ttOspfv3RouteObjectPrefixDist",
+                                            "commandName" : "spirent.methodology.routing.RoutePrefixDistributionCommand"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "script_input_key" : "InputKey"
+                }
+            ],
+            "script_filename" : "txml_processing_functions.py",
+            "func_id" : "Right.Config.CreateRouteMix.MixInfo",
+            "output" : [
+                {
+                    "ep_key" : "RoutingCreateRouteMixCommand2MixInfo",
+                    "script_output_key" : "OutputKey"
+                }
+            ]
+        },
+        {
+            "entry_function" : "copy_value_to_sequence",
+            "input" : [
+                {
+                    "src_prop_id" : "TotalRouteCount",
+                    "script_input_key" : "InputKey"
+                }
+            ],
+            "script_filename" : "txml_processing_functions.py",
+            "func_id" : "Config.ExpandRouteMix.RouteCount",
+            "output" : [
+                {
+                    "ep_key" : "RoutingExpandRouteMixCommand1RouteCount",
+                    "script_output_key" : "OutputKey"
+                },
+                {
+                    "ep_key" : "RoutingExpandRouteMixCommand3RouteCount",
+                    "script_output_key" : "OutputKey"
+                }
+            ]
+        },
+        {
+            "entry_function" : "config_protocol_table_data",
+            "output" : [
+                {
+                    "ep_key" : "TestMethodologyCreateProtocolMix2Command12MixInfo",
+                    "script_output_key" : "TableData"
+                }
+            ],
+            "script_filename" : "txml_processing_functions.py",
+            "func_id" : "Left.CreateProtocolMix.TableData",
+            "input" : [
+                {
+                    "script_input_key" : "input",
+                    "dict" :
+                    {
+                        "protocolDict" : [
+                            {
+                                "ClassName" : "BfdRouterConfig",
+                                "ParentTagName" : "ttBfdRouterConfig",
+                                "PropertyValueDict" :
+                                {
+                                    "DetectMultiplier" : "CreateProtocolMix.BfdDetectMultiplier",
+                                    "TxInterval" : "CreateProtocolMix.BfdTxInterval",
+                                    "RxInterval" : "CreateProtocolMix.BfdRxInterval"
+                                }
+                            },
+                            {
+                                "ClassName" : "BgpRouterConfig",
+                                "EnableProperty" : "Left.CreateProtocolMix.EnableBgp",
+                                "ParentTagName" : "ttBgpRouterConfig",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "DutAsNum" :
+                                    {
+                                        "Start" : "Left.CreateProtocolMix.BgpDutAsNum",
+                                        "Step" : "Left.CreateProtocolMix.BgpDutAsNumStep"
+                                    },
+                                    "AsNum" :
+                                    {
+                                        "Start" : "Left.CreateProtocolMix.BgpAsNum",
+                                        "Step" : "Left.CreateProtocolMix.BgpAsNumStep"
+                                    }
+                                },
+                                "PropertyValueDict" :
+                                {
+                                    "IpVersion" : "Left.CreateProtocolMix.BgpIpVersion",
+                                    "EnableBfd" : "Left.CreateProtocolMix.EnableBgpBfd"
+                                }
+                            },
+                            {
+                                "ClassName" : "Ospfv2RouterConfig",
+                                "EnableProperty" : "Left.CreateProtocolMix.EnableOspfv2",
+                                "ParentTagName" : "ttOspfv2RouterConfig",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "AreaId" :
+                                    {
+                                        "Start" : "Left.CreateProtocolMix.Ospfv2AreaId",
+                                        "Step" : "Left.CreateProtocolMix.Ospfv2AreaIdStep"
+                                    },
+                                    "RouterPriority" :
+                                    {
+                                        "Start" : "Left.CreateProtocolMix.Ospfv2RouterPriority",
+                                        "Step" : "1"
+                                    }
+                                },
+                                "PropertyValueDict" :
+                                {
+                                    "NetworkType" : "Left.CreateProtocolMix.Ospfv2NetworkType",
+                                    "EnableBfd" : "Left.CreateProtocolMix.EnableOspfv2Bfd"
+                                }
+                            },
+                            {
+                                "ClassName" : "Ospfv3RouterConfig",
+                                "EnableProperty" : "Left.CreateProtocolMix.EnableOspfv3",
+                                "ParentTagName" : "ttOspfv3RouterConfig",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "AreaId" :
+                                    {
+                                        "Start" : "Left.CreateProtocolMix.Ospfv3AreaId",
+                                        "Step" : "Left.CreateProtocolMix.Ospfv3AreaIdStep"
+                                    },
+                                    "RouterPriority" :
+                                    {
+                                        "Start" : "Left.CreateProtocolMix.Ospfv3RouterPriority",
+                                        "Step" : "1"
+                                    }
+                                },
+                                "PropertyValueDict" :
+                                {
+                                    "NetworkType" : "Left.CreateProtocolMix.Ospfv3NetworkType",
+                                    "EnableBfd" : "Left.CreateProtocolMix.EnableOspfv3Bfd"
+                                }
+                            },
+                            {
+                                "ClassName" : "LdpRouterConfig",
+                                "EnableProperty" : "Left.CreateProtocolMix.EnableLdp",
+                                "ParentTagName" : "ttLdpRouterConfig",
+                                "PropertyValueDict" :
+                                {
+                                    "HelloVersion" : "Left.CreateProtocolMix.LdpHelloVersion",
+                                    "EnableBfd" : "Left.CreateProtocolMix.EnableLdpBfd"
+                                }
+                            },
+                            {
+                                "ClassName" : "IsisRouterConfig",
+                                "EnableProperty" : "Left.CreateProtocolMix.EnableIsis",
+                                "ParentTagName" : "ttIsisRouterConfig",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "RouterPriority" :
+                                    {
+                                        "Start" : "Left.CreateProtocolMix.IsisRouterPriority",
+                                        "Step" : "1"
+                                    }
+                                },
+                                "PropertyValueDict" :
+                                {
+                                    "NetworkType" : "Left.CreateProtocolMix.IsisNetworkType",
+                                    "EnableBfd" : "Left.CreateProtocolMix.EnableIsisBfd"
+                                }
+                            }
+                        ],
+                        "customDict" :
+                        {
+                            "EnableVlan" : "Left.CreateProtocolMix.EnableVlan",
+                            "DeviceCount" : "ScalabilityDeviceCount",
+                            "DevPerBlock" : "Left.CreateProtocolMix.DevicesPerBlock",
+                            "TagPrefix" : "Left_",
+                            "Weight" : "Left.CreateProtocolMix.Weight"
+                        },
+                        "interfaceDict" : [
+                            {
+                                "ClassName" : "VlanIf",
+                                "ParentTagName" : "ttVlanIf",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "VlanId" :
+                                    {
+                                        "Start" : "Left.CreateProtocolMix.VlanId",
+                                        "Step" : "Left.CreateProtocolMix.VlanIdStep"
+                                    }
+                                }
+                            },
+                            {
+                                "ClassName" : "Ipv4If",
+                                "ParentTagName" : "ttIpv4If",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "Gateway" :
+                                    {
+                                        "Start" : "Left.CreateProtocolMix.Ipv4GwAddr",
+                                        "Step" : "Left.CreateProtocolMix.Ipv4GwAddrStep"
+                                    },
+                                    "Address" :
+                                    {
+                                        "Start" : "Left.CreateProtocolMix.Ipv4Addr",
+                                        "Step" : "Left.CreateProtocolMix.Ipv4AddrStep"
+                                    }
+                                }
+                            },
+                            {
+                                "ClassName" : "Ipv6If",
+                                "ParentTagName" : "ttIpv6If",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "Gateway" :
+                                    {
+                                        "Start" : "Left.CreateProtocolMix.Ipv6GwAddr",
+                                        "Step" : "Left.CreateProtocolMix.Ipv6GwAddrStep"
+                                    },
+                                    "Address" :
+                                    {
+                                        "Start" : "Left.CreateProtocolMix.Ipv6Addr",
+                                        "Step" : "Left.CreateProtocolMix.Ipv6AddrStep"
+                                    }
+                                }
+                            },
+                            {
+                                "ClassName" : "Ipv6If",
+                                "ParentTagName" : "ttLinkLocalIf",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "Address" :
+                                    {
+                                        "Start" : "Left.CreateProtocolMix.LLAddr",
+                                        "Step" : "Left.CreateProtocolMix.LLAddrStep"
+                                    }
+                                }
+                            },
+                            {
+                                "ClassName" : "EmulatedDevice",
+                                "ParentTagName" : "ttEmulatedDevice",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "RouterId" :
+                                    {
+                                        "Start" : "Left.CreateProtocolMix.Ipv4RtrId",
+                                        "Step" : "Left.CreateProtocolMix.Ipv4RtrIdStep"
+                                    }
+                                }
+                            },
+                            {
+                                "ClassName" : "EthIIIf",
+                                "ParentTagName" : "ttEthIIIf",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "SourceMac" :
+                                    {
+                                        "Start" : "Left.CreateProtocolMix.MacAddr",
+                                        "Step" : "Left.CreateProtocolMix.MacAddrStep"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "entry_function" : "config_protocol_table_data",
+            "output" : [
+                {
+                    "ep_key" : "TestMethodologyCreateProtocolMix2Command13MixInfo",
+                    "script_output_key" : "TableData"
+                }
+            ],
+            "script_filename" : "txml_processing_functions.py",
+            "func_id" : "Right.CreateProtocolMix.TableData",
+            "input" : [
+                {
+                    "script_input_key" : "input",
+                    "dict" :
+                    {
+                        "protocolDict" : [
+                            {
+                                "ClassName" : "BfdRouterConfig",
+                                "ParentTagName" : "ttBfdRouterConfig",
+                                "PropertyValueDict" :
+                                {
+                                    "DetectMultiplier" : "CreateProtocolMix.BfdDetectMultiplier",
+                                    "TxInterval" : "CreateProtocolMix.BfdTxInterval",
+                                    "RxInterval" : "CreateProtocolMix.BfdRxInterval"
+                                }
+                            },
+                            {
+                                "ClassName" : "BgpRouterConfig",
+                                "EnableProperty" : "Right.CreateProtocolMix.EnableBgp",
+                                "ParentTagName" : "ttBgpRouterConfig",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "DutAsNum" :
+                                    {
+                                        "Start" : "Right.CreateProtocolMix.BgpDutAsNum",
+                                        "Step" : "Right.CreateProtocolMix.BgpDutAsNumStep"
+                                    },
+                                    "AsNum" :
+                                    {
+                                        "Start" : "Right.CreateProtocolMix.BgpAsNum",
+                                        "Step" : "Right.CreateProtocolMix.BgpAsNumStep"
+                                    }
+                                },
+                                "PropertyValueDict" :
+                                {
+                                    "IpVersion" : "Right.CreateProtocolMix.BgpIpVersion",
+                                    "EnableBfd" : "Right.CreateProtocolMix.EnableBgpBfd"
+                                }
+                            },
+                            {
+                                "ClassName" : "Ospfv2RouterConfig",
+                                "EnableProperty" : "Right.CreateProtocolMix.EnableOspfv2",
+                                "ParentTagName" : "ttOspfv2RouterConfig",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "AreaId" :
+                                    {
+                                        "Start" : "Right.CreateProtocolMix.Ospfv2AreaId",
+                                        "Step" : "Right.CreateProtocolMix.Ospfv2AreaIdStep"
+                                    },
+                                    "RouterPriority" :
+                                    {
+                                        "Start" : "Right.CreateProtocolMix.Ospfv2RouterPriority",
+                                        "Step" : "1"
+                                    }
+                                },
+                                "PropertyValueDict" :
+                                {
+                                    "NetworkType" : "Right.CreateProtocolMix.Ospfv2NetworkType",
+                                    "EnableBfd" : "Right.CreateProtocolMix.EnableOspfv2Bfd"
+                                }
+                            },
+                            {
+                                "ClassName" : "Ospfv3RouterConfig",
+                                "EnableProperty" : "Right.CreateProtocolMix.EnableOspfv3",
+                                "ParentTagName" : "ttOspfv3RouterConfig",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "AreaId" :
+                                    {
+                                        "Start" : "Right.CreateProtocolMix.Ospfv3AreaId",
+                                        "Step" : "Right.CreateProtocolMix.Ospfv3AreaIdStep"
+                                    },
+                                    "RouterPriority" :
+                                    {
+                                        "Start" : "Right.CreateProtocolMix.Ospfv3RouterPriority",
+                                        "Step" : "1"
+                                    }
+                                },
+                                "PropertyValueDict" :
+                                {
+                                    "NetworkType" : "Right.CreateProtocolMix.Ospfv3NetworkType",
+                                    "EnableBfd" : "Right.CreateProtocolMix.EnableOspfv3Bfd"
+                                }
+                            },
+                            {
+                                "ClassName" : "LdpRouterConfig",
+                                "EnableProperty" : "Right.CreateProtocolMix.EnableLdp",
+                                "ParentTagName" : "ttLdpRouterConfig",
+                                "PropertyValueDict" :
+                                {
+                                    "HelloVersion" : "Right.CreateProtocolMix.LdpHelloVersion",
+                                    "EnableBfd" : "Right.CreateProtocolMix.EnableLdpBfd"
+                                }
+                            },
+                            {
+                                "ClassName" : "IsisRouterConfig",
+                                "EnableProperty" : "Right.CreateProtocolMix.EnableIsis",
+                                "ParentTagName" : "ttIsisRouterConfig",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "RouterPriority" :
+                                    {
+                                        "Start" : "Right.CreateProtocolMix.IsisRouterPriority",
+                                        "Step" : "1"
+                                    }
+                                },
+                                "PropertyValueDict" :
+                                {
+                                    "NetworkType" : "Right.CreateProtocolMix.IsisNetworkType",
+                                    "EnableBfd" : "Right.CreateProtocolMix.EnableIsisBfd"
+                                }
+                            }
+                        ],
+                        "customDict" :
+                        {
+                            "EnableVlan" : "Right.CreateProtocolMix.EnableVlan",
+                            "DeviceCount" : "ScalabilityDeviceCount",
+                            "DevPerBlock" : "Right.CreateProtocolMix.DevicesPerBlock",
+                            "TagPrefix" : "Right_",
+                            "Weight" : "Right.CreateProtocolMix.Weight"
+                        },
+                        "interfaceDict" : [
+                            {
+                                "ClassName" : "VlanIf",
+                                "ParentTagName" : "ttVlanIf",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "VlanId" :
+                                    {
+                                        "Start" : "Right.CreateProtocolMix.VlanId",
+                                        "Step" : "Right.CreateProtocolMix.VlanIdStep"
+                                    }
+                                }
+                            },
+                            {
+                                "ClassName" : "Ipv4If",
+                                "ParentTagName" : "ttIpv4If",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "Gateway" :
+                                    {
+                                        "Start" : "Right.CreateProtocolMix.Ipv4GwAddr",
+                                        "Step" : "Right.CreateProtocolMix.Ipv4GwAddrStep"
+                                    },
+                                    "Address" :
+                                    {
+                                        "Start" : "Right.CreateProtocolMix.Ipv4Addr",
+                                        "Step" : "Right.CreateProtocolMix.Ipv4AddrStep"
+                                    }
+                                }
+                            },
+                            {
+                                "ClassName" : "Ipv6If",
+                                "ParentTagName" : "ttIpv6If",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "Gateway" :
+                                    {
+                                        "Start" : "Right.CreateProtocolMix.Ipv6GwAddr",
+                                        "Step" : "Right.CreateProtocolMix.Ipv6GwAddrStep"
+                                    },
+                                    "Address" :
+                                    {
+                                        "Start" : "Right.CreateProtocolMix.Ipv6Addr",
+                                        "Step" : "Right.CreateProtocolMix.Ipv6AddrStep"
+                                    }
+                                }
+                            },
+                            {
+                                "ClassName" : "Ipv6If",
+                                "ParentTagName" : "ttLinkLocalIf",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "Address" :
+                                    {
+                                        "Start" : "Right.CreateProtocolMix.LLAddr",
+                                        "Step" : "Right.CreateProtocolMix.LLAddrStep"
+                                    }
+                                }
+                            },
+                            {
+                                "ClassName" : "EmulatedDevice",
+                                "ParentTagName" : "ttEmulatedDevice",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "RouterId" :
+                                    {
+                                        "Start" : "Right.CreateProtocolMix.Ipv4RtrId",
+                                        "Step" : "Right.CreateProtocolMix.Ipv4RtrIdStep"
+                                    }
+                                }
+                            },
+                            {
+                                "ClassName" : "EthIIIf",
+                                "ParentTagName" : "ttEthIIIf",
+                                "StmPropertyModifierDict" :
+                                {
+                                    "SourceMac" :
+                                    {
+                                        "Start" : "Right.CreateProtocolMix.MacAddr",
+                                        "Step" : "Right.CreateProtocolMix.MacAddrStep"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "version" : "1-0-0",
+    "short_display_name" : "Routing Multi-Protocol",
+    "methodology_key" : "MULTIPROTO",
+    "port_groups" : [
+        {
+            "prop_id" : "LeftPortTag",
+            "name" : "Left",
+            "ports" : [
+                {
+                    "location" : "10.14.16.27/2/5"
+                }
+            ]
+        },
+        {
+            "prop_id" : "RightPortTag",
+            "name" : "Right",
+            "ports" : [
+                {
+                    "location" : "10.14.16.27/2/6"
+                }
+            ]
+        }
+    ],
+    "feature_ids" : ["MULTIPROTO"],
+    "property_groups" : [
+        {
+            "display_name" : "Device Count Search Space Configuration",
+            "description" : "Device Count Search Space Configuration",
+            "image" : "",
+            "default_for_new_test" : true,
+            "gui_id" : "",
+            "test_properties" : [
+                {
+                    "acceptable_values" : ["SCALABILITY", "BENCHMARK"],
+                    "display_name" : "Test Type",
+                    "description" : "Test Type",
+                    "gui_id" : "",
+                    "property_value" : "SCALABILITY",
+                    "prop_id" : "MethTestType",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Scalability Device Count",
+                    "description" : "Scalability Device Count",
+                    "gui_id" : "",
+                    "property_value" : "10",
+                    "prop_id" : "ScalabilityDeviceCount",
+                    "gui_only" : true
+                },
+                {
+                    "acceptable_values" : ["STEP", "BINARY"],
+                    "display_name" : "Mode",
+                    "description" : "Mode",
+                    "gui_id" : "",
+                    "property_value" : "STEP",
+                    "prop_id" : "TestMethodologyIteratorMode",
+                    "gui_only" : false
+                },
+                {
+                    "display_name" : "Min Device Count",
+                    "description" : "Min Device Count",
+                    "gui_id" : "",
+                    "property_value" : "1",
+                    "prop_id" : "DeviceCountMin",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Max Device Count",
+                    "description" : "Max Device Count",
+                    "gui_id" : "",
+                    "property_value" : "100",
+                    "prop_id" : "DeviceCountMax",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Device Count Step",
+                    "description" : "Device Count Step",
+                    "gui_id" : "",
+                    "property_value" : "10",
+                    "prop_id" : "TestMethodologyIteratorStepVal",
+                    "gui_only" : false
+                },
+                {
+                    "display_name" : "Enable Stability Check",
+                    "description" : "Enable Stability Check",
+                    "gui_id" : "",
+                    "property_value" : "False",
+                    "prop_id" : "TestMethodologyIteratorEnableStabilityBackoff",
+                    "gui_only" : false
+                },
+                {
+                    "display_name" : "Trial Repeat Count",
+                    "description" : "Trial Repeat Count",
+                    "gui_id" : "",
+                    "property_value" : "1",
+                    "prop_id" : "TestMethodologyIteratorStabilityRepeatCount",
+                    "gui_only" : false
+                },
+                {
+                    "display_name" : "Percent of Passing Trials for Success",
+                    "description" : "Percent of Passing Trials for Success",
+                    "gui_id" : "",
+                    "property_value" : "100",
+                    "prop_id" : "TestMethodologyIteratorStabilitySuccessPercent",
+                    "gui_only" : false
+                }
+            ],
+            "prop_id" : "DeviceCountSearchSpaceConfiguration",
+            "group_type" : ""
+        },
+        {
+            "display_name" : "Setup Protocol Mix Configuration",
+            "description" : "Setup Protocol Mix Configuration",
+            "image" : "",
+            "default_for_new_test" : true,
+            "gui_id" : "",
+            "test_properties" : [
+                {
+                    "acceptable_values" : ["DUAL"],
+                    "display_name" : "Interface Stack",
+                    "description" : "Interface Stack",
+                    "gui_id" : "",
+                    "property_value" : ["DUAL"],
+                    "prop_id" : "Left.CreateProtocolMix.InterfaceStack",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable Vlan",
+                    "description" : "Enable Vlan",
+                    "gui_id" : "",
+                    "property_value" : ["True"],
+                    "prop_id" : "Left.CreateProtocolMix.EnableVlan",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Vlan Id",
+                    "description" : "Vlan Id",
+                    "gui_id" : "",
+                    "property_value" : ["100"],
+                    "prop_id" : "Left.CreateProtocolMix.VlanId",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Vlan Id Step",
+                    "description" : "Vlan Id Step",
+                    "gui_id" : "",
+                    "property_value" : ["1"],
+                    "prop_id" : "Left.CreateProtocolMix.VlanIdStep",
+                    "gui_only" : true
+                },
+                {
+                    "acceptable_values" : ["DUAL"],
+                    "display_name" : "Interface Stack",
+                    "description" : "Interface Stack",
+                    "gui_id" : "",
+                    "property_value" : ["DUAL"],
+                    "prop_id" : "Right.CreateProtocolMix.InterfaceStack",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable Vlan",
+                    "description" : "Enable Vlan",
+                    "gui_id" : "",
+                    "property_value" : ["True"],
+                    "prop_id" : "Right.CreateProtocolMix.EnableVlan",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Vlan Id",
+                    "description" : "Vlan Id",
+                    "gui_id" : "",
+                    "property_value" : ["100"],
+                    "prop_id" : "Right.CreateProtocolMix.VlanId",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Vlan Id Step",
+                    "description" : "Vlan Id Step",
+                    "gui_id" : "",
+                    "property_value" : ["1"],
+                    "prop_id" : "Right.CreateProtocolMix.VlanIdStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Start IPv4 Address",
+                    "description" : "Start IPv4 Address",
+                    "gui_id" : "",
+                    "property_value" : ["1.1.1.1"],
+                    "prop_id" : "Left.CreateProtocolMix.Ipv4Addr",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "IPv4 Address Step",
+                    "description" : "IPv4 Address Step",
+                    "gui_id" : "",
+                    "property_value" : ["0.0.1.0"],
+                    "prop_id" : "Left.CreateProtocolMix.Ipv4AddrStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Start IPv4 Gateway Address",
+                    "description" : "Start IPv4 Gateway Address",
+                    "gui_id" : "",
+                    "property_value" : ["1.1.1.2"],
+                    "prop_id" : "Left.CreateProtocolMix.Ipv4GwAddr",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "IPv4 Gateway Address Step",
+                    "description" : "IPv4 Gateway Address Step",
+                    "gui_id" : "",
+                    "property_value" : ["0.0.1.0"],
+                    "prop_id" : "Left.CreateProtocolMix.Ipv4GwAddrStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Start IPv6 Address",
+                    "description" : "Start IPv6 Address",
+                    "gui_id" : "",
+                    "property_value" : ["2222::2"],
+                    "prop_id" : "Left.CreateProtocolMix.Ipv6Addr",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "IPv6 Address Step",
+                    "description" : "IPv6 Address Step",
+                    "gui_id" : "",
+                    "property_value" : ["::1:0"],
+                    "prop_id" : "Left.CreateProtocolMix.Ipv6AddrStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Start IPv6 Gateway Address",
+                    "description" : "Start IPv6 Gateway Address",
+                    "gui_id" : "",
+                    "property_value" : ["2222::1"],
+                    "prop_id" : "Left.CreateProtocolMix.Ipv6GwAddr",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "IPv6 Gateway Address Step",
+                    "description" : "IPv6 Gateway Address Step",
+                    "gui_id" : "",
+                    "property_value" : ["::1:0"],
+                    "prop_id" : "Left.CreateProtocolMix.Ipv6GwAddrStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Link-Local Address",
+                    "description" : "Link-Local Address",
+                    "gui_id" : "",
+                    "property_value" : ["fe80::1:2"],
+                    "prop_id" : "Left.CreateProtocolMix.LLAddr",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Link-Local Address Step",
+                    "description" : "Link-Local Address Step",
+                    "gui_id" : "",
+                    "property_value" : ["::1:0"],
+                    "prop_id" : "Left.CreateProtocolMix.LLAddrStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Start Router Id",
+                    "description" : "Start Router Id",
+                    "gui_id" : "",
+                    "property_value" : ["100.0.0.1"],
+                    "prop_id" : "Left.CreateProtocolMix.Ipv4RtrId",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Router Id Step",
+                    "description" : "Router Id Step",
+                    "gui_id" : "",
+                    "property_value" : ["0.0.0.1"],
+                    "prop_id" : "Left.CreateProtocolMix.Ipv4RtrIdStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Start MAC Address",
+                    "description" : "Start MAC Address",
+                    "gui_id" : "",
+                    "property_value" : ["00:10:95:00:00:01"],
+                    "prop_id" : "Left.CreateProtocolMix.MacAddr",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "MAC Address Step",
+                    "description" : "MAC Address Step",
+                    "gui_id" : "",
+                    "property_value" : ["00:00:00:00:00:01"],
+                    "prop_id" : "Left.CreateProtocolMix.MacAddrStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Start IPv4 Address",
+                    "description" : "Start IPv4 Address",
+                    "gui_id" : "",
+                    "property_value" : ["1.1.1.2"],
+                    "prop_id" : "Right.CreateProtocolMix.Ipv4Addr",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "IPv4 Address Step",
+                    "description" : "IPv4 Address Step",
+                    "gui_id" : "",
+                    "property_value" : ["0.0.1.0"],
+                    "prop_id" : "Right.CreateProtocolMix.Ipv4AddrStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Start IPv4 Gateway Address",
+                    "description" : "Start IPv4 Gateway Address",
+                    "gui_id" : "",
+                    "property_value" : ["1.1.1.1"],
+                    "prop_id" : "Right.CreateProtocolMix.Ipv4GwAddr",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "IPv4 Gateway Address Step",
+                    "description" : "IPv4 Gateway Address Step",
+                    "gui_id" : "",
+                    "property_value" : ["0.0.1.0"],
+                    "prop_id" : "Right.CreateProtocolMix.Ipv4GwAddrStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Start IPv6 Address",
+                    "description" : "Start IPv6 Address",
+                    "gui_id" : "",
+                    "property_value" : ["2222::1"],
+                    "prop_id" : "Right.CreateProtocolMix.Ipv6Addr",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "IPv6 Address Step",
+                    "description" : "IPv6 Address Step",
+                    "gui_id" : "",
+                    "property_value" : ["::1:0"],
+                    "prop_id" : "Right.CreateProtocolMix.Ipv6AddrStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Start IPv6 Gateway Address",
+                    "description" : "Start IPv6 Gateway Address",
+                    "gui_id" : "",
+                    "property_value" : ["2222::2"],
+                    "prop_id" : "Right.CreateProtocolMix.Ipv6GwAddr",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "IPv6 Gateway Address Step",
+                    "description" : "IPv6 Gateway Address Step",
+                    "gui_id" : "",
+                    "property_value" : ["::1:0"],
+                    "prop_id" : "Right.CreateProtocolMix.Ipv6GwAddrStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Link-Local Address",
+                    "description" : "Link-Local Address",
+                    "gui_id" : "",
+                    "property_value" : ["fe80::1:1"],
+                    "prop_id" : "Right.CreateProtocolMix.LLAddr",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Link-Local Address Step",
+                    "description" : "Link-Local Address Step",
+                    "gui_id" : "",
+                    "property_value" : ["::1:0"],
+                    "prop_id" : "Right.CreateProtocolMix.LLAddrStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Start Router Id",
+                    "description" : "Start Router Id",
+                    "gui_id" : "",
+                    "property_value" : ["100.10.0.1"],
+                    "prop_id" : "Right.CreateProtocolMix.Ipv4RtrId",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Router Id Step",
+                    "description" : "Router Id Step",
+                    "gui_id" : "",
+                    "property_value" : ["0.0.0.1"],
+                    "prop_id" : "Right.CreateProtocolMix.Ipv4RtrIdStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Start MAC Address",
+                    "description" : "Start MAC Address",
+                    "gui_id" : "",
+                    "property_value" : ["00:11:95:00:00:01"],
+                    "prop_id" : "Right.CreateProtocolMix.MacAddr",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "MAC Address Step",
+                    "description" : "MAC Address Step",
+                    "gui_id" : "",
+                    "property_value" : ["00:00:00:00:00:01"],
+                    "prop_id" : "Right.CreateProtocolMix.MacAddrStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Weight (%)",
+                    "description" : "Weight (%)",
+                    "gui_id" : "",
+                    "property_value" : ["100 %"],
+                    "prop_id" : "Left.CreateProtocolMix.Weight",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Devices Per Block",
+                    "description" : "Devices Per Block",
+                    "gui_id" : "",
+                    "property_value" : ["1"],
+                    "prop_id" : "Left.CreateProtocolMix.DevicesPerBlock",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable BGP",
+                    "description" : "Enable BGP",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Left.CreateProtocolMix.EnableBgp",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable OSPFv2",
+                    "description" : "Enable OSPFv2",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Left.CreateProtocolMix.EnableOspfv2",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable OSPFv3",
+                    "description" : "Enable OSPFv3",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Left.CreateProtocolMix.EnableOspfv3",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable LDP",
+                    "description" : "Enable LDP",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Left.CreateProtocolMix.EnableLdp",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable ISIS",
+                    "description" : "Enable ISIS",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Left.CreateProtocolMix.EnableIsis",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Weight",
+                    "description" : "Weight",
+                    "gui_id" : "",
+                    "property_value" : ["100 %"],
+                    "prop_id" : "Right.CreateProtocolMix.Weight",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Devices Per Block",
+                    "description" : "Devices Per Block",
+                    "gui_id" : "",
+                    "property_value" : ["1"],
+                    "prop_id" : "Right.CreateProtocolMix.DevicesPerBlock",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable BGP",
+                    "description" : "Enable BGP",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Right.CreateProtocolMix.EnableBgp",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable OSPFv2",
+                    "description" : "Enable OSPFv2",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Right.CreateProtocolMix.EnableOspfv2",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable OSPFv3",
+                    "description" : "Enable OSPFv3",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Right.CreateProtocolMix.EnableOspfv3",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable LDP",
+                    "description" : "Enable LDP",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Right.CreateProtocolMix.EnableLdp",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable ISIS",
+                    "description" : "Enable ISIS",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Right.CreateProtocolMix.EnableIsis",
+                    "gui_only" : true
+                }
+            ],
+            "prop_id" : "SetupProtocolMixConfiguration",
+            "group_type" : ""
+        },
+        {
+            "display_name" : "Setup Protocol Properties",
+            "description" : "Setup Protocol Properties",
+            "image" : "",
+            "default_for_new_test" : true,
+            "gui_id" : "",
+            "test_properties" : [
+                {
+                    "acceptable_values" : ["NORMAL", "GEN_TX_NO_RESULTS", "GEN_TX_RX_RESULTS"],
+                    "display_name" : "Scale Mode",
+                    "description" : "Scale Mode",
+                    "gui_id" : "",
+                    "property_value" : ["NORMAL"],
+                    "prop_id" : "CreateProtocolMix.BfdScaleMode",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Tx Interval (msec)",
+                    "description" : "Tx Interval (msec)",
+                    "gui_id" : "",
+                    "property_value" : ["50"],
+                    "prop_id" : "CreateProtocolMix.BfdTxInterval",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Rx Interval (msec)",
+                    "description" : "Rx Interval (msec)",
+                    "gui_id" : "",
+                    "property_value" : ["50"],
+                    "prop_id" : "CreateProtocolMix.BfdRxInterval",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Detect Multiplier",
+                    "description" : "Detect Multiplier",
+                    "gui_id" : "",
+                    "property_value" : ["3"],
+                    "prop_id" : "CreateProtocolMix.BfdDetectMultiplier",
+                    "gui_only" : true
+                },
+                {
+                    "acceptable_values" : ["IPV4", "IPV6"],
+                    "display_name" : "IP Version",
+                    "description" : "IP Version",
+                    "gui_id" : "",
+                    "property_value" : ["IPV4"],
+                    "prop_id" : "Left.CreateProtocolMix.BgpIpVersion",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "AS Num",
+                    "description" : "AS Num",
+                    "gui_id" : "",
+                    "property_value" : ["100"],
+                    "prop_id" : "Left.CreateProtocolMix.BgpAsNum",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "AS Num Step",
+                    "description" : "AS Num Step",
+                    "gui_id" : "",
+                    "property_value" : ["1"],
+                    "prop_id" : "Left.CreateProtocolMix.BgpAsNumStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "DUT AS Num",
+                    "description" : "DUT AS Num",
+                    "gui_id" : "",
+                    "property_value" : ["100"],
+                    "prop_id" : "Left.CreateProtocolMix.BgpDutAsNum",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "DUT AS Num Step",
+                    "description" : "DUT AS Num Step",
+                    "gui_id" : "",
+                    "property_value" : ["1"],
+                    "prop_id" : "Left.CreateProtocolMix.BgpDutAsNumStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable BFD",
+                    "description" : "Enable BFD",
+                    "gui_id" : "",
+                    "property_value" : ["True"],
+                    "prop_id" : "Left.CreateProtocolMix.EnableBgpBfd",
+                    "gui_only" : true
+                },
+                {
+                    "acceptable_values" : ["IPV4", "IPV6"],
+                    "display_name" : "IP Version",
+                    "description" : "IP Version",
+                    "gui_id" : "",
+                    "property_value" : ["IPV4"],
+                    "prop_id" : "Right.CreateProtocolMix.BgpIpVersion",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "AS Num",
+                    "description" : "AS Num",
+                    "gui_id" : "",
+                    "property_value" : ["100"],
+                    "prop_id" : "Right.CreateProtocolMix.BgpAsNum",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "AS Num Step",
+                    "description" : "AS Num Step",
+                    "gui_id" : "",
+                    "property_value" : ["1"],
+                    "prop_id" : "Right.CreateProtocolMix.BgpAsNumStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "DUT AS Num",
+                    "description" : "DUT AS Num",
+                    "gui_id" : "",
+                    "property_value" : ["100"],
+                    "prop_id" : "Right.CreateProtocolMix.BgpDutAsNum",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "DUT AS Num Step",
+                    "description" : "DUT AS Num Step",
+                    "gui_id" : "",
+                    "property_value" : ["1"],
+                    "prop_id" : "Right.CreateProtocolMix.BgpDutAsNumStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable BFD",
+                    "description" : "Enable BFD",
+                    "gui_id" : "",
+                    "property_value" : ["True"],
+                    "prop_id" : "Right.CreateProtocolMix.EnableBgpBfd",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Area Id",
+                    "description" : "Area Id",
+                    "gui_id" : "",
+                    "property_value" : ["1.0.0.0"],
+                    "prop_id" : "Left.CreateProtocolMix.Ospfv2AreaId",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Area Id Step",
+                    "description" : "Area Id Step",
+                    "gui_id" : "",
+                    "property_value" : ["0.0.0.1"],
+                    "prop_id" : "Left.CreateProtocolMix.Ospfv2AreaIdStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Router Priority",
+                    "description" : "Router Priority",
+                    "gui_id" : "",
+                    "property_value" : ["0"],
+                    "prop_id" : "Left.CreateProtocolMix.Ospfv2RouterPriority",
+                    "gui_only" : true
+                },
+                {
+                    "acceptable_values" : ["NATIVE", "P2P", "BROADCAST"],
+                    "display_name" : "NetworkType",
+                    "description" : "NetworkType",
+                    "gui_id" : "",
+                    "property_value" : ["P2P"],
+                    "prop_id" : "Left.CreateProtocolMix.Ospfv2NetworkType",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable BFD",
+                    "description" : "Enable BFD",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Left.CreateProtocolMix.EnableOspfv2Bfd",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Area Id",
+                    "description" : "Area Id",
+                    "gui_id" : "",
+                    "property_value" : ["1.0.0.0"],
+                    "prop_id" : "Right.CreateProtocolMix.Ospfv2AreaId",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Area Id Step",
+                    "description" : "Area Id Step",
+                    "gui_id" : "",
+                    "property_value" : ["0.0.0.1"],
+                    "prop_id" : "Right.CreateProtocolMix.Ospfv2AreaIdStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Router Priority",
+                    "description" : "Router Priority",
+                    "gui_id" : "",
+                    "property_value" : ["0"],
+                    "prop_id" : "Right.CreateProtocolMix.Ospfv2RouterPriority",
+                    "gui_only" : true
+                },
+                {
+                    "acceptable_values" : ["NATIVE", "P2P", "BROADCAST"],
+                    "display_name" : "NetworkType",
+                    "description" : "NetworkType",
+                    "gui_id" : "",
+                    "property_value" : ["P2P"],
+                    "prop_id" : "Right.CreateProtocolMix.Ospfv2NetworkType",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable BFD",
+                    "description" : "Enable BFD",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Right.CreateProtocolMix.EnableOspfv2Bfd",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Area Id",
+                    "description" : "Area Id",
+                    "gui_id" : "",
+                    "property_value" : ["1.0.0.0"],
+                    "prop_id" : "Left.CreateProtocolMix.Ospfv3AreaId",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Area Id Step",
+                    "description" : "Area Id Step",
+                    "gui_id" : "",
+                    "property_value" : ["0.0.0.1"],
+                    "prop_id" : "Left.CreateProtocolMix.Ospfv3AreaIdStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Router Priority",
+                    "description" : "Router Priority",
+                    "gui_id" : "",
+                    "property_value" : ["0"],
+                    "prop_id" : "Left.CreateProtocolMix.Ospfv3RouterPriority",
+                    "gui_only" : true
+                },
+                {
+                    "acceptable_values" : ["NATIVE", "P2P", "BROADCAST"],
+                    "display_name" : "NetworkType",
+                    "description" : "NetworkType",
+                    "gui_id" : "",
+                    "property_value" : ["P2P"],
+                    "prop_id" : "Left.CreateProtocolMix.Ospfv3NetworkType",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable BFD",
+                    "description" : "Enable BFD",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Left.CreateProtocolMix.EnableOspfv3Bfd",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Area Id",
+                    "description" : "Area Id",
+                    "gui_id" : "",
+                    "property_value" : ["1.0.0.0"],
+                    "prop_id" : "Right.CreateProtocolMix.Ospfv3AreaId",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Area Id Step",
+                    "description" : "Area Id Step",
+                    "gui_id" : "",
+                    "property_value" : ["0.0.0.1"],
+                    "prop_id" : "Right.CreateProtocolMix.Ospfv3AreaIdStep",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Router Priority",
+                    "description" : "Router Priority",
+                    "gui_id" : "",
+                    "property_value" : ["0"],
+                    "prop_id" : "Right.CreateProtocolMix.Ospfv3RouterPriority",
+                    "gui_only" : true
+                },
+                {
+                    "acceptable_values" : ["NATIVE", "P2P", "BROADCAST"],
+                    "display_name" : "NetworkType",
+                    "description" : "NetworkType",
+                    "gui_id" : "",
+                    "property_value" : ["P2P"],
+                    "prop_id" : "Right.CreateProtocolMix.Ospfv3NetworkType",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable BFD",
+                    "description" : "Enable BFD",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Right.CreateProtocolMix.EnableOspfv3Bfd",
+                    "gui_only" : true
+                },
+                {
+                    "acceptable_values" : ["LDP_IPV4_HELLO", "LDP_IPV6_HELLO", "LDP_IPV4_AND_IPV6_HELLO"],
+                    "display_name" : "Hello Version",
+                    "description" : "Hello Version",
+                    "gui_id" : "",
+                    "property_value" : ["LDP_IPV4_HELLO"],
+                    "prop_id" : "Left.CreateProtocolMix.LdpHelloVersion",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable BFD",
+                    "description" : "Enable BFD",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Left.CreateProtocolMix.EnableLdpBfd",
+                    "gui_only" : true
+                },
+                {
+                    "acceptable_values" : ["LDP_IPV4_HELLO", "LDP_IPV6_HELLO", "LDP_IPV4_AND_IPV6_HELLO"],
+                    "display_name" : "Hello Version",
+                    "description" : "Hello Version",
+                    "gui_id" : "",
+                    "property_value" : ["LDP_IPV4_HELLO"],
+                    "prop_id" : "Right.CreateProtocolMix.LdpHelloVersion",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable BFD",
+                    "description" : "Enable BFD",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Right.CreateProtocolMix.EnableLdpBfd",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Router Priority",
+                    "description" : "Router Priority",
+                    "gui_id" : "",
+                    "property_value" : ["0"],
+                    "prop_id" : "Left.CreateProtocolMix.IsisRouterPriority",
+                    "gui_only" : true
+                },
+                {
+                    "acceptable_values" : ["P2P", "BROADCAST"],
+                    "display_name" : "NetworkType",
+                    "description" : "NetworkType",
+                    "gui_id" : "",
+                    "property_value" : ["P2P"],
+                    "prop_id" : "Left.CreateProtocolMix.IsisNetworkType",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable BFD",
+                    "description" : "Enable BFD",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Left.CreateProtocolMix.EnableIsisBfd",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Router Priority",
+                    "description" : "Router Priority",
+                    "gui_id" : "",
+                    "property_value" : ["0"],
+                    "prop_id" : "Right.CreateProtocolMix.IsisRouterPriority",
+                    "gui_only" : true
+                },
+                {
+                    "acceptable_values" : ["P2P", "BROADCAST"],
+                    "display_name" : "NetworkType",
+                    "description" : "NetworkType",
+                    "gui_id" : "",
+                    "property_value" : ["P2P"],
+                    "prop_id" : "Right.CreateProtocolMix.IsisNetworkType",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable BFD",
+                    "description" : "Enable BFD",
+                    "gui_id" : "",
+                    "property_value" : ["False"],
+                    "prop_id" : "Right.CreateProtocolMix.EnableIsisBfd",
+                    "gui_only" : true
+                }
+            ],
+            "prop_id" : "SetupProtocolProperties",
+            "group_type" : ""
+        },
+        {
+            "display_name" : "Test Configuration",
+            "description" : "Test Configuration",
+            "image" : "",
+            "default_for_new_test" : true,
+            "gui_id" : "",
+            "test_properties" : [
+                {
+                    "display_name" : "Total Route Count",
+                    "description" : "Total Route Count",
+                    "gui_id" : "",
+                    "property_value" : "2000",
+                    "prop_id" : "TotalRouteCount",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Traffic Load",
+                    "description" : "Traffic Load",
+                    "gui_id" : "",
+                    "property_value" : "100",
+                    "prop_id" : "SetTrafficLoad",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Traffic Load Unit",
+                    "description" : "Unit for Traffic Load",
+                    "gui_id" : "",
+                    "property_value" : "PERCENT_LINE_RATE",
+                    "prop_id" : "SetTrafficLoadUnit",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Protocol Establishment Wait Time (s)",
+                    "description" : "Protocol Establishment Wait Time (s)",
+                    "gui_id" : "",
+                    "property_value" : "60",
+                    "prop_id" : "SamplingPollSubscriptionResultsCommand3MaximumPollingPeriodS",
+                    "gui_only" : false
+                },
+                {
+                    "display_name" : "Protocol Stability Duration (s)",
+                    "description" : "Protocol Stability Duration (s)",
+                    "gui_id" : "",
+                    "property_value" : "60",
+                    "prop_id" : "SamplingPollSubscriptionResultsCommand4MaximumPollingPeriodS",
+                    "gui_only" : false
+                },
+                {
+                    "display_name" : "Traffic Duration (s)",
+                    "description" : "Traffic Duration (s)",
+                    "gui_id" : "",
+                    "property_value" : "10",
+                    "prop_id" : "SamplingPollSubscriptionResultsCommand6MaximumPollingPeriodS",
+                    "gui_only" : false
+                },
+                {
+                    "display_name" : "Frame Size (bytes)",
+                    "description" : "Frame Size (bytes)",
+                    "gui_id" : "",
+                    "property_value" : "128",
+                    "prop_id" : "FrameSize",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable Check for Frame Loss",
+                    "description" : "Enable Check for Frame Loss",
+                    "gui_id" : "",
+                    "property_value" : "False",
+                    "prop_id" : "CheckFrameLossResult",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable Check for Dead Streams/Flows",
+                    "description" : "Enable Check for Dead Streams/Flows",
+                    "gui_id" : "",
+                    "property_value" : "False",
+                    "prop_id" : "CheckDeadStreamResults",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable Traffic",
+                    "description" : "Enable Traffic",
+                    "gui_id" : "",
+                    "property_value" : "False",
+                    "prop_id" : "EnableTrafficSetting",
+                    "gui_only" : true
+                },
+                {
+                    "display_name" : "Enable ARP/ND (Learning))",
+                    "description" : "Enable ARP/ND (Learning))",
+                    "gui_id" : "",
+                    "property_value" : "False",
+                    "prop_id" : "EnableArpSetting",
+                    "gui_only" : true
+                }
+            ],
+            "prop_id" : "TestConfiguration",
+            "group_type" : ""
+        }
+    ],
+    "display_template_key" : ""
+}

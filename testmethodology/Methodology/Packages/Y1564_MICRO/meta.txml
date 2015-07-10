@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test>
+  <!--
+    A methodology is defined by a collection of files. One of the files
+    contains the metadata for the test. This is a sample of that metadata.
+    When a methodology is produced, it has one and only one meta.txml file,
+    where txml = testCenter XML. The test consumer never accesses or interacts
+    with the meta.txml for the methodology. When a test case is created from a
+    methodology, a copy of meta.txml is made. Localization is made in the
+    per-test-case copy of meta.txml.
+  -->
+  <!--
+    The testInfo section contains the overall information about the
+    methodology or test case.  testMethodologyName is the name of the
+    methodology. The description is the description of the methodology. The
+    testCaseName is the name of the test case that this instance of the file
+    represents. If this file represents a methodology, the testCaseName is set
+    to "original". The version is the version of this methodology. The
+    imageName is a diagram that contains an image that can be shown to
+    describe the topology of the test. Labels are used to categorize the test.
+  -->
+  <testInfo displayName="ITU-T Y.1564 Microburst Test" description="Y.1564 Microburst Test" methodologyKey="Y1564_MICRO" testCaseName="original" testCaseDescription="Runs a series of bursts to ensure KPI are maintained" version="1.0" testCaseKey="">
+    <labels>
+      <label>data plane</label>
+      <label>x-connect</label>
+    </labels>
+    <features>
+      <!-- Replace with proper feature ID when available -->
+      <feature id="MAX_SCALABILITY"/>
+    </features>
+  </testInfo>
+  <!--
+    The testResources section provides information related to requirements on
+    the test ports and customer equipment for the test to run. This includes
+    references to the topology templates that are used for each port group.
+  -->
+  <testResources>
+    <resourceGroups>
+      <resourceGroup displayName="Port Group Limits" id="">
+        <!-- Per-port-group limits for validation -->
+        <attribute name="minNumPorts" value="2" />
+        <attribute name="maxNumPorts" value="10" />
+        <attribute name="portSpeedList" value="['10', '40', '100']" />
+      </resourceGroup>
+      <resourceGroup displayName="Chassis Info" id="chassisInfo">
+        <portGroups>
+          <portGroup name="Left" id="LeftTagName">
+            <template name="Left Side Endpoint">
+              <description>Left Side Endpoint</description>
+              <image name="diagram.png" />
+              <source name="Traffic.xml" />
+            </template>
+            <!-- <ports> -->
+            <port name="Left Port">
+              <attribute name="location" value="10.14.16.27/2/7" />
+            </port>
+            <!-- </ports> -->
+          </portGroup>
+          <portGroup name="Right" id="RightTagName">
+            <template name="Right Side Endpoint">
+              <description>Right Side Endpoint</description>
+              <image name="diagram.png" />
+              <source name="Traffic.xml" />
+            </template>
+            <!-- <ports> -->
+            <port name="Right Port">
+              <attribute name="location" value="10.14.16.27/2/8" />
+            </port>
+            <!-- </ports> -->
+          </portGroup>
+        </portGroups>
+      </resourceGroup>
+    </resourceGroups>
+  </testResources>
+  <!--
+    The wizard section defines the input parameters that the test consumer
+    will be allowed to modify at run time. The format of this section is
+    designed to allow a rendering engine to create a simple wizard for
+    collecting information from the test consumer during localization.
+
+    Each page of the wizard has an optional imageName that can be used to
+    render an image file in the wizard as an aid to the user.
+  -->
+  <enumerations>
+    <!-- From ManualScheduleEntry.EnumGapUnit -->
+    <enumeration id="EnumGapUnit">
+      <enum name="PERCENT_LINE_RATE" displayName="Percent (%)" />
+      <enum name="FRAMES_PER_SECOND" displayName="Frames/Sec" />
+      <enum name="BYTES" displayName="Bytes" />
+      <enum name="MILLISECONDS" displayName="Milliseconds" />
+      <enum name="NANOSECONDS" displayName="Nanoseconds" />
+      <enum name="BITS_PER_SECOND" displayName="Bps" />
+      <enum name="KILOBITS_PER_SECOND" displayName="Kbps" />
+      <enum name="MEGABITS_PER_SECOND" displayName="Mbps" />
+    </enumeration>
+  </enumerations>
+  <wizard displayName="ITU-T Y.1564 Microburst Test" description="Configure and run a Y.1564 Microburst Test" image="MicroburstDiagram.png">
+
+    <page displayName="Configure Microburst Parameters" description="Configure Microburst Parameters" image="MicroburstDiagram.png">
+      <group displayName="Microburst">
+          <property id="ConfigureY1564MicroburstTestMicroburstMaximumRate" value="100.0" type="double" displayName="Microburst Maximum Rate" description="Microburst Maximum Rate" />
+          <property id="ConfigureY1564MicroburstTestMicroburstRateUnit" value="PERCENT_LINE_RATE" displayName="Microburst Rate Unit" widgetType="dropdown" type="enum" description="Microburst Rate Unit">
+            <enumerationRef ref="EnumGapUnit" />
+          </property>
+          <property id="ConfigureY1564MicroburstTestFrameSizeBytes" value="128" type="uint16" displayName="Frame Size (bytes)" description="Frame Size (bytes)" />
+          <property id="ConfigureY1564MicroburstTestEnableLearning" value="False" type="bool" displayName="Enable L2/L3 Learning" widgetType="checkbox" description="Enable L2/L3Learning" />
+      </group>
+      <group displayName="Delta">
+          <property id="ConfigureY1564MicroburstTestMaximumDeltaCountPerBurst" value="10" type="uint32" displayName="Max Delta Count per Burst" description="Max Delta Count per Burst">
+            <numericValidation minInclusive="5" maxInclusive="4294967295" />
+          </property>
+          <property id="ConfigureY1564MicroburstTestDeltaWidth" value="500" type="uint32" displayName="Delta Width (frames)" description="Delta Width (frames)" />
+          <property id="ConfigureY1564MicroburstTestMaximumUniqueAddressCount" value="500" type="uint32" displayName="Max Unique Address Count" description="Max Unique Address Count">
+            <numericValidation minInclusive="1" maxInclusive="4294967295" />
+          </property>
+      </group>
+      <group displayName="InterMicroburst Gap">
+          <property id="ConfigureY1564MicroburstTestMaximumInter-MicroburstGapFrames" value="500" type="uint32" displayName="Max IMG (frames)" description="Max IMG (frames)">
+            <numericValidation minInclusive="50" maxInclusive="4294967295" />
+          </property>
+      </group>
+      <group displayName="Best Effort Traffic">
+          <property id="ConfigureY1564MicroburstTestNominalRate" value="10" type="double" displayName="Nominal Rate" description="Nominal Rate" />
+          <property id="ConfigureY1564MicroburstTestNominalRateUnit" value="PERCENT_LINE_RATE" displayName="Nominal Rate Unit" widgetType="dropdown" type="enum" description="Nominal Rate Unit">
+            <enumerationRef ref="EnumGapUnit" />
+          </property>
+      </group>
+      <group displayName="Random Seed">
+          <property id="ConfigureY1564MicroburstTestEnableRandomSeed" value="False" type="bool" displayName="Enable Random Seed" widgetType="checkbox" description="Enable Random Seed" />
+          <property id="ConfigureY1564MicroburstTestRandomSeedValue" value="0" type="uint32" displayName="Random Seed Value" description="Random Seed Value" />
+      </group>
+    </page>
+
+    <page displayName="Microburst Configuration" description="Microburst Configuration" image="MicroburstDiagram.png">
+    </page>
+  </wizard>
+</test>

@@ -1,0 +1,10 @@
+{
+"SelectProperties" : ["StreamBlock.Name", "StreamBlock.StreamId", "StreamBlock.PortName",
+                    "StreamBlock.ActualRxPortName", "StreamBlock.TxFrameCount",
+                    "StreamBlock.RxFrameCount", "StreamBlock.TxBitRate",
+                    "StreamBlock.RxBitRate", "StreamBlock.DroppedFrameCount"]
+,
+"WhereConditions" : ["StreamBlock.DroppedFrameCount > 0"]
+,
+"SortBy" : ["StreamBlock.DroppedFrameCount DESC"]
+}

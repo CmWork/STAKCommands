@@ -1,0 +1,160 @@
+<?xml version="1.0" ?>
+<stc:meta xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:stc="urn:www.spirentcom.com:XMLSchema.xsd"
+          plugin="plcommands" package="spirent.methodology.routing"
+          version="0.0.0-0">
+
+<stc:class name="BgpImportRoutesCommand"
+           displayName="Expand Import Route Command"
+           bllDirectInterface="true"
+           isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Expand Import Route Command"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Topology Template"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="RouterTagList" displayName="Router Tag List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of tag names, which tag BgpRouterConfig objects, that we will import BgpRouteConfig objects under." />
+    </stc:property>
+
+    <stc:property category="input" name="BgpImportParamsTagName" displayName="BgpImportRouteTableParams tag name" type="string" default="ttImportRouteParams">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="The tag name that identifies the BgpImportRouteTableParams object that the BgpImportRouteTableCommand will use to generate routes" />
+    </stc:property>
+
+    <stc:property category="input" name="CreatedRoutesTagName" displayName="New routes will be tagged with this" type="string" default="ttImportRouteParams">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="The tag name that new routes made by the BgpImportRouteTableCommand will be subsequently tagged with" />
+    </stc:property>
+
+</stc:class>
+
+<stc:class name="RoutePrefixDistributionCommand"
+           displayName="Route Prefix Distribution Command"
+           bllDirectInterface="true"
+           isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Route Prefix Distribution Command"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Topology Template"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="RouterTagList" displayName="Router Tag List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of tag names, which tag BgpRouterConfig objects, that we will import RouteConfig objects under." />
+    </stc:property>
+
+    <stc:property category="input" name="SrcObjectTagName" displayName="Source Object Tag Name tag name" type="string" default="ttProtocolRouteGenParams">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="The tag name that identifies the ProtocolRouteGenParams object that the RouteGenApplyCommand will use to generate routes" />
+    </stc:property>
+
+    <stc:property category="input" name="CreatedRoutesTagName" displayName="Created Routes Tag Name" type="string" default="ttRoutePrefixParams">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="The tag name that new routes made by the RouteGenApplyCommand will be subsequently tagged with" />
+    </stc:property>
+
+</stc:class>
+
+<stc:class name="CreateRouteMixCommand"
+           displayName="Create Route Mix Command"
+           baseClass="spirent.methodology.CreateTemplateMixCommand"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Command for creating mixtures of route counts among route objects on tagged router config objects."/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Routing"/>
+
+    <!-- These all should be from the base class -->
+    
+    <stc:property category="input" name="MixInfo" displayName="Mix Info" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+        value="JSON string representation of the mix (including table data)"/>
+    </stc:property>
+    <stc:property category="input" name="MixTagName" displayName="Mix Container Tag Name" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+         value="Name to use when tagging the output StmTemplateMix.  If left blank, StmTemplateMix will not be tagged."/>
+    </stc:property>
+    <stc:property category="input" name="AutoExpandTemplateMix" displayName="Automatically expand templates in the mix" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+       value="Automatically expand templates." />
+    </stc:property>
+    <stc:property category="state" name="GroupCommandTagInfo" displayName="Group Command Tag Info" type="string" default="" >
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+         value="JSON structure containing the names of the tags used to refer to commands in this group."/>
+    </stc:property>
+
+    <!-- This should not be from the base class (or it should be overwritten) -->
+    <stc:property category="state" name="MixInfoJsonSchema" displayName="Table Data JSON Schema" type="string" default='{"title":"Schema for the MixInfo of the spirent.methodology.CreateRouteMixCommand.","type":"object","properties":{"routeCount":{"description":"Total number of routes for all components in this mix","type":"number"},"components":{"description":"A list of components that make up the mixture.","type":"array","items":{"type":"object","properties":{"tagPrefix":{"description":"String that will be prefixed to all tags loaded and used in this template.","type":"string"},"baseTemplateFile":{"description":"Base template file that will be loaded into the StmTemplateConfig.  All modifications in the modifyList will be applied to the contents loaded out of this file.","type":"string"},"weight":{"description":"The weight of this component upon network counts.","type":"string"},"modifyList":{"description":"A list of operations that will be carried out on the template.  See the schema defined in the spirent.methodology.CreateTemplateConfigCommand.","type":"array","items":{"type":"object"}},"postExpandModify":{"description":"A list of operations that will be carried out on datamodel objects after the template is expanded.","type":"array","items":{"type":"object","properties":{"bllWizardExpand":{"description":"Process route wizard params, invoke BLL command, tag resulting routes.","type":"object","properties":{"targetTagList":{"description":"List of tag names representing routers that will have routes applied onto them.","type":"array","items":{"type":"string"}},"srcObjectTagName":{"description":"Tag name that represents the loaded wizard params object.","type":"string"},"createdRoutesTagName":{"description":"Tag name that will be affected upon the routes that are created by the BLL wizard.","type":"string"},"commandName":{"description":"Name of command that will be invoked with the targetTagList, srcObjectTagName, and createdRoutesTagName.","type":"string"}}}}}}},"required":["baseTemplateFile"]}}},"required":["components"]}'>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+         value="JSON schema that will be used to validate the MixInfo property's value."/>
+    </stc:property>
+
+    <stc:property category="input" name="TargetObjectList" displayName="Target Object List" type="handle" default="" minOccurs="0" maxOccurs="unbounded">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+        value="List of StmProtocolMix, StmTemplateConfig, EmulatedDevice, or RouterConfig objects, that we will expand RouteConfig objects under"/>
+    </stc:property>
+
+    <stc:property category="input" name="TargetObjectTagList" displayName="Target Object Tag List" type="string" default="" minOccurs="0" maxOccurs="unbounded" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of tag names, which tag StmProtocolMix, StmTemplateConfig, EmulatedDevice, or RouterConfig objects, that we will expand RouteConfig objects under." />
+    </stc:property>
+</stc:class>
+
+
+<stc:class name="ExpandRouteMixCommand"
+           displayName="Expand Route Mix Command"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Expand Route Mix Command"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Routing"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="TargetObjectList" displayName="Target Object List" type="handle" default="" minOccurs="0" maxOccurs="unbounded">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+        value="List of StmProtocolMix, StmTemplateConfig, EmulatedDevice, or RouterConfig objects, that we will expand RouteConfig objects under"/>
+    </stc:property>
+    <stc:property category="input" name="TargetObjectTagList" displayName="Target Object Tag List" type="string" default="" minOccurs="0" maxOccurs="unbounded" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of tag names, which tag StmProtocolMix, StmTemplateConfig, EmulatedDevice, or RouterConfig objects, that we will expand RouteConfig objects under." />
+    </stc:property>
+
+    <stc:property category="input" name="SrcObjectList" displayName="Source Object List" type="handle" default="" minOccurs="0" maxOccurs="unbounded">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+        value="List of handles to StmTemplateMix objects, created by CreateRouteMixCommand, that contain the XML for RouteConfig objects to expand."/>
+    </stc:property>
+    <stc:property category="input" name="SrcObjectTagList" displayName="Source Object Tag List" type="string" default="" minOccurs="0" maxOccurs="unbounded" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of tag names to StmTemplateMix objects, created by CreateRouteMixCommand, that contain the XML for RouteConfig objects to expand." />
+    </stc:property>
+
+    <stc:property category="input" name="RouteCount" displayName="Route Count"
+                  type="u32" default="1000">
+        <stc:attribute internalType="string" type="framework.PropertyDescription" value="Route Count" />
+    </stc:property>
+    <stc:property category="state" name="MixInfoJsonSchema" displayName="Table Data JSON Schema" type="string" default='{"title":"Schema for the MixInfo of the spirent.methodology.CreateRouteMixCommand.","type":"object","properties":{"routeCount":{"description":"Total number of routes for all components in this mix","type":"number"},"components":{"description":"A list of components that make up the mixture.","type":"array","items":{"type":"object","properties":{"tagPrefix":{"description":"String that will be prefixed to all tags loaded and used in this template.","type":"string"},"baseTemplateFile":{"description":"Base template file that will be loaded into the StmTemplateConfig.  All modifications in the modifyList will be applied to the contents loaded out of this file.","type":"string"},"weight":{"description":"The weight of this component upon network counts.","type":"string"},"modifyList":{"description":"A list of operations that will be carried out on the template.  See the schema defined in the spirent.methodology.CreateTemplateConfigCommand.","type":"array","items":{"type":"object"}},"postExpandModify":{"description":"A list of operations that will be carried out on datamodel objects after the template is expanded.","type":"array","items":{"type":"object","properties":{"bllWizardExpand":{"description":"Process route wizard params, invoke BLL command, tag resulting routes.","type":"object","properties":{"targetTagList":{"description":"List of tag names representing routers that will have routes applied onto them.","type":"array","items":{"type":"string"}},"srcObjectTagName":{"description":"Tag name that represents the loaded wizard params object.","type":"string"},"createdRoutesTagName":{"description":"Tag name that will be affected upon the routes that are created by the BLL wizard.","type":"string"},"commandName":{"description":"Name of command that will be invoked with the targetTagList, srcObjectTagName, and createdRoutesTagName.","type":"string"}}}}}}},"required":["baseTemplateFile"]}}},"required":["components"]}'>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+         value="JSON schema that will be used to validate the MixInfo property's value."/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="AllocateRouteMixCountCommand"
+           displayName="Allocate Route Mix Route Count Command"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Allocate total route count to components in the route mix"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Routing"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="RouteMixList" displayName="Route Mix" type="handle" default=""  minOccurs="0" maxOccurs="unbounded">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Route Mix Object Handles" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="core.ValidHandleTypes" value="StmTemplateMix" />
+    </stc:property>
+    <stc:property category="input" name="RouteMixTagList" displayName="Tag name for Route Mix" type="string" default=""  minOccurs="0" maxOccurs="unbounded">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Tag names associated with the Route Mix objects" />
+    </stc:property>
+    <stc:property category="input" name="RouteCount" displayName="Route Count"
+                  type="u64" default="10">
+        <stc:attribute internalType="string" type="framework.PropertyDescription" value="Total number of routes" />
+    </stc:property>
+    <stc:property category="state" name="MixInfoJsonSchema" displayName="Route Mix Info JSON Schema" type="string" default=''>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+         value="JSON schema that will be used to validate the MixInfo property's value."/>
+    </stc:property>
+</stc:class>
+
+</stc:meta>

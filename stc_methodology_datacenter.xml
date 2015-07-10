@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<stc:meta plugin="plcommands" version="0.0.0-0" package="spirent.methodology.datacenter" xmlns:stc="urn:www.spirentcom.com:XMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<!-- Methodology commands for OSE -->
+
+<!-- Configurator command to configure Packet-In rate for OSE switch block
+    Existing iterators will be used for getting rates and binary search -->
+<stc:class name="ConfigOseSwitchPacketInRateCommand" displayName="Ose Switch Packet-In Rate(fps) Configure Command" baseClass="spirent.methodology.IteratorConfigCommand"  bllDirectInterface="true"  isInternal="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Ose Switch Packet-In Rate Configurator Command (configures rate in fps)" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+		   value="Test Methodology//Switching//OSE"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="true" internalType="bool" />
+</stc:class>
+
+<!-- Validator command that will validate if a connection lost between any of the 
+    switches in OSE switch block and controller -->
+<stc:class name="ValidateOseSwitchControllerConnectionUpCommand" displayName="Validate Switch Controller Connection Up" bllDirectInterface="true" baseClass="spirent.methodology.IteratorValidateCommand" isInternal="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Validate the switch block and the controller connection is up" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+		   value="Test Methodology//Switching//OSE"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+    
+    <stc:property category="input" name="OseDevice" displayName="Ose Device" type="handle" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="OSE Device to validate" />
+      <stc:attribute type="core.ValidHandleTypes" value="Project,Port,EmulatedDevice" internalType="string"/>
+    </stc:property>
+</stc:class>
+</stc:meta>

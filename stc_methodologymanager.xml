@@ -1,0 +1,404 @@
+<?xml version="1.0" ?>
+<stc:meta xmlns:stc="urn:www.spirentcom.com:XMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" package="spirent.methodology.manager" plugin="plcommands" version="0.0.0-0">
+
+    <!-- Test Case Consumption Commands -->
+    <stc:class name="GetFeatureIdsFromTestCommand" displayName="Get Feature IDs for the test" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="false" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Returns a list of the feature IDs for the test" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="StmTestCase" displayName="Spirent Test Methodology Test Case" type="handle" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Spirent Test Methodology Test Case" />
+        </stc:property>
+        <stc:property category="output" name="FeatureIdList" displayName="Feature ID List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of feature IDs for the test" />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="GetAllTestMethodologiesCommand" displayName="Get All Test Methodologies Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Returns a list of all imported test methodologies" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="output" name="StmMethodologyList" displayName="Test Methodology List" type="handle" default="" minOccurs="0" maxOccurs="unbounded">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of all imported Test Methodology" />
+        </stc:property>
+        <stc:property category="output" name="TestMethodologyDir" displayName="Test Methodology File Directory" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology File Directory" />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="GetTestMethodologyAndTestCaseCommand"
+               displayName="Returns Test Methodology (and Test Case) given key value(s)"
+               bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Returns Test Methodology (and Test Case) given key value(s)"/>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="MethodologyKey"
+                      displayName="Methodology Key" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology Key" />
+        </stc:property>
+        <stc:property category="input" name="TestCaseKey"
+                      displayName="Test Case Key" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Optional Test Case Key" />
+        </stc:property>
+        <stc:property category="output" name="StmMethodology"
+                      displayName="Test Methodology" type="handle" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology corresponding to given key" />
+        </stc:property>
+        <stc:property category="output" name="StmTestCase"
+                      displayName="Test Case" type="handle" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Case corresponding to given key" />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="UpdateTestMethodologyManagerCommand" displayName="UpdateTestMethodologyManagerCommand" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Updates the list of methodologies in the TestMethodologyManager" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="UseTxml" displayName="Use meta.txml files for methodologies" type="bool" default="true">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Use meta.txml file for methodologies" />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="RunStmTestCaseCommand" displayName="Run STM Test Case Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Run a Spirent Test Methodology Test Case" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="StmTestCase" displayName="Spirent Test Methodology Test Case" type="handle" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Spirent Test Methodology Test Case" />
+        </stc:property>
+        <stc:property category="input" name="EnableTieCheck" displayName="Enable TIE checks" type="bool" default="true">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Enable TIE checks" />
+        </stc:property>
+        <stc:property category="input" name="EnableLoadConfig" displayName="Enable loading the configuration" type="bool" default="true">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Load the test confugration before running the test if true, do not load if false" />
+        </stc:property>
+        <stc:property category="output" name="ErrorMsg" displayName="Error message" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Error message(s) that caused the command to fail" />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="RunMethodologyTestCommand" displayName="Run Methodology Test Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Run a Spirent Test Methodology Test Case" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="TestCaseKey" displayName="Test Case Key" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Case Key" />
+        </stc:property>
+        <stc:property category="input" name="StmTestCase" displayName="Spirent Test Methodology Test Case" type="handle" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Spirent Test Methodology Test Case" />
+        </stc:property>
+        <stc:property category="input" name="MethodologyKey" displayName="Test Methodology Key" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology Key" />
+        </stc:property>
+        <stc:property category="input" name="MethodologyJson" displayName="Test Methodology JSON" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology JSON" />
+        </stc:property>
+        <stc:property category="input" name="EnableResourceCheck" displayName="Enable Resource Check" type="bool" default="true">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Enable TIE checks" />
+        </stc:property>
+        <stc:property category="output" name="OutputTestCaseKey" displayName="Output Test Case Key" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Output Test Case Key" />
+        </stc:property>
+        <stc:property category="state" name="InputJsonSchema" displayName="Input JSON Schema" type="string" default='{"$schema":"http://json-schema.org/draft-04/schema#","self":{"vendor":"com.spirentcom","name":"Methodology Set","format":"jsonschema","version":"1-0-0"},"anyOf":[{"title":"Methodology Set","description":"A collection of test methodologies that match a search criteria, default=ALL","type":"array","items":{"type":"object","$ref":"#/definitions/methodology"}},{"type":"object","$ref":"#/definitions/methodology"}],"definitions":{"methodology":{"title":"Methodology","description":"A single test methodology","properties":{"methodology_key":{"description":"The unique identifier for a methodology","type":"string"},"display_template_key":{"description":"The unique identifier for the type of rendering template the data in this section of the JSON is intended to conform to.","type":"string"},"sut_template_key":{"description":"The unique identifier for the type of system under test rendering subtemplate for this methodology.","type":"string"},"display_name":{"description":"The friendly name of the methodology","type":"string"},"short_display_name":{"description":"A short name for the methodology intended to be used for display where space is limited","type":"string"},"description":{"description":"The description of the methodology","type":"string"},"version":{"description":"The version of this methodology","type":"string"},"status":{"description":"The status of the methodology.","type":"object","properties":{"valid":{"description":"A boolean that indicates whether the methodology has passed validation. If true, the methodology is complete and all dependencies have been satisfied. If false, validation did not pass. See validation_explanation for details when false.","type":"boolean"},"validation_explanation":{"description":"A string that provides explanatory text for the reason valid, above, is false.","type":"string"}}},"labels":{"type":"array","minItems":0,"uniqueItems":true,"items":{"description":"A label that describes a characteristic of the test methodology","type":"string"}},"feature_ids":{"type":"array","minItems":1,"uniqueItems":true,"items":{"description":"A string that contains the feature ID required for checking whether the customer is licensed to run this methodology.","type":"string"}},"image":{"description":"The URI to an optional image file that shows a picture of the overall methodology.","type":"string"},"port_groups":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"object","$ref":"#/definitions/port_group"}},"property_groups":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"object","$ref":"#/definitions/property_group"}},"processing_functions":{"type":"array","minItems":0,"uniqueItems":false,"items":{"type":"object","#ref":"#/definitions/processing_function"}}},"required":["methodology_key","display_name","version","feature_ids","port_groups"]},"port_group":{"description":"A group of ports required for the test","properties":{"prop_id":{"description":"The unique identifier or tag for the port group","type":"string"},"name":{"description":"The friendly name of the port group","type":"string"},"image":{"description":"The URI for an optional image file that shows a picture of the port group.","type":"string"},"bring_online":{"description":"A flag to specify whether or not to bring the ports in this group online. If this property is not present, assume the value is true and bring the ports online.","type":"boolean","default":true},"ports":{"description":"The ports that make up the port group.","type":"array","minItems":1,"uniqueItems":true,"items":{"title":"Port","description":"A single port for the test.","type":"object","properties":{"location":{"description":"The chassis-slot-port information for a port to be used in the test. offline is default on a Get. Must be valid chassis-slot-port on a Run.","type":"string"},"phy_properties":{"description":"A list of properties for the physical port, e.g linespeed. Each item in the list is a property_value_item.","type":"array","minItems":0,"uniqueItems":true,"items":{"type":"object","$ref":"#/definitions/property_value_item"}}},"required":["location"]}}},"required":["prop_id","name","ports"]},"property_group":{"description":"A collection of related information about the test that is used to both render the test on a Get and localize the test on a Run.","properties":{"prop_id":{"description":"The unique identifier for this group of properties.","type":"string"},"gui_id":{"description":"A unique identifier or tag that identifies the GUI component used to render this property_group.","type":"string"},"display_name":{"description":"The friendly name for this group of properties.","type":"string"},"description":{"description":"The description for this group of properties.","type":"string"},"image":{"description":"The URI for an optional image file that shows a picture of the components associated with the property group.","type":"string"},"group_type":{"description":"The type of this property_group. Used by the web application to primarily distinguish property_groups for use as a profile.","type":"string"},"default_for_new_test":{"description":"If true, this property group is used as default configuration for a test. It may, if applicable, populate a configuration container, e.g. an endpoint container.","type":"boolean","default":"true"},"test_properties":{"description":"A list of properties for the group, e.g test configuration or settings. Each item in the list is a property_item_value.","type":"array","minItems":0,"uniqueItems":true,"items":{"type":"object","$ref":"#/definitions/property_value_item"}}},"required":["prop_id","display_name"]},"property_value_item":{"description":"A property-value item.","properties":{"prop_id":{"description":"The unique identifier or tag for this property.","type":"string"},"gui_id":{"description":"A unique identifier or tag that identifies the GUI component used to render this property.","type":"string"},"display_name":{"description":"The friendly name for this property.","type":"string"},"description":{"description":"The description for this property.","type":"string"},"image":{"description":"The URI to an optional image file for this property.","type":"string"},"property_name":{"description":"The name of the property","type":"string"},"property_value":{"description":"The value of the property. Can be a single value or list of values.","$ref":"#/definitions/value_or_list"},"property_value_type":{"description":"The type of the single value or values in the list of the property_value.","enum":["integer","float","ipv4","ipv6","mac","string","http","enum","boolean"]},"display_units":{"description":"The friendly name for the units in which the value is rendered.","type":"string"},"minimum":{"description":"The minimum acceptable value or minimum number of characters, as applicable.","type":"number"},"maximum":{"description":"The maximum acceptable value or maximum number of characters, as applicable.","type":"number"},"readOnly":{"description":"Optional value that determines whether the property should be treated as read only by the client. If true, the client must treat the property as read only and an attempt to modify it will result in an error. If false, the client may modify the property. If not present, the client should assume false.","type":"boolean"},"acceptable_values":{"description":"An array of acceptable values, for use when the property_value_type is set to enum or list","type":"array","minItems":0,"uniqueItems":false,"items":{"description":"An acceptable value for this property_value_type","type":"string"}},"gui_only":{"description":"If true, this property_value_item is not mapped to an exposed property of the methodology. It could be an argument mapped to a processing function or a property needed by the web application.","type":"boolean"}},"required":["prop_id"]},"value_or_list":{"description":"Representation of a value that can either be a single string or a list of strings.","oneOf":[{"type":"string"},{"type":"array","minItems":1,"items":{"type":"string"}}]},"processing_function":{"description":"A processing function used to generate values for exposed properties.","properties":{"func_id":{"description":"A unique identifier for the processing function.","type":"string"},"script_filename":{"description":"The name of the script file to process the function data.","type":"string"},"entry_function":{"description":"The name of the function in the script file to call.","type":"string"},"output":{"description":"Definitions for the scripts outputs.","type":"array","minItems":1,"items":{"type":"object","properties":{"script_output_key":{"description":"The name of the script output variable that will be passed to the exposed property.","$ref":"#/definitions/value_or_list"},"ep_key":{"description":"The exposed property key that identifies the property to receive the output value.","type":"string"}},"required":["script_output_key","ep_key"]}},"input":{"description":"The data to be passed to the script files function.","type":"array","minItems":0,"items":{"type":"object","properties":{"script_input_key":{"description":"The name of the script input variable that will receive the user input property value.","$ref":"#/definitions/value_or_list"},"src_prop_id":{"description":"The source property identifier whose value will be passed into the script.","type":"string"},"constant":{"description":"A constant value that is pass verbatim into the script.","$ref":"#/definitions/value_or_list"},"dict":{"description":"A dictionary that is processed (prop_id substitutions) then passed into the script.","type":"object"}},"allOf":[{"required":["script_input_key"]},{"oneOf":[{"required":["src_prop_id"]},{"required":["constant"]},{"required":["dict"]}]}]}}}}}}'>
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="JSON schema that will be used to validate the InputJson property's value."/>
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="ConfigMethodologyTestCommand" displayName="Configure Methodology Test Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Configure a Spirent Test Methodology Test Case" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="StmTestCase" displayName="Spirent Test Methodology Test Case" type="handle" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Spirent Test Methodology Test Case" />
+        </stc:property>
+        <stc:property category="input" name="EnableResourceCheck" displayName="Enable Resource Check" type="bool" default="true">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Enable TIE checks" />
+        </stc:property>
+        <stc:property category="state" name="InputJsonSchema" displayName="Input JSON Schema" type="string" default='{"$schema":"http://json-schema.org/draft-04/schema#","self":{"vendor":"com.spirentcom","name":"Methodology Set","format":"jsonschema","version":"1-0-0"},"anyOf":[{"title":"Methodology Set","description":"A collection of test methodologies that match a search criteria, default=ALL","type":"array","items":{"type":"object","$ref":"#/definitions/methodology"}},{"type":"object","$ref":"#/definitions/methodology"}],"definitions":{"methodology":{"title":"Methodology","description":"A single test methodology","properties":{"methodology_key":{"description":"The unique identifier for a methodology","type":"string"},"display_template_key":{"description":"The unique identifier for the type of rendering template the data in this section of the JSON is intended to conform to.","type":"string"},"sut_template_key":{"description":"The unique identifier for the type of system under test rendering subtemplate for this methodology.","type":"string"},"display_name":{"description":"The friendly name of the methodology","type":"string"},"short_display_name":{"description":"A short name for the methodology intended to be used for display where space is limited","type":"string"},"description":{"description":"The description of the methodology","type":"string"},"version":{"description":"The version of this methodology","type":"string"},"status":{"description":"The status of the methodology.","type":"object","properties":{"valid":{"description":"A boolean that indicates whether the methodology has passed validation. If true, the methodology is complete and all dependencies have been satisfied. If false, validation did not pass. See validation_explanation for details when false.","type":"boolean"},"validation_explanation":{"description":"A string that provides explanatory text for the reason valid, above, is false.","type":"string"}}},"labels":{"type":"array","minItems":0,"uniqueItems":true,"items":{"description":"A label that describes a characteristic of the test methodology","type":"string"}},"feature_ids":{"type":"array","minItems":1,"uniqueItems":true,"items":{"description":"A string that contains the feature ID required for checking whether the customer is licensed to run this methodology.","type":"string"}},"image":{"description":"The URI to an optional image file that shows a picture of the overall methodology.","type":"string"},"port_groups":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"object","$ref":"#/definitions/port_group"}},"property_groups":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"object","$ref":"#/definitions/property_group"}},"processing_functions":{"type":"array","minItems":0,"uniqueItems":false,"items":{"type":"object","#ref":"#/definitions/processing_function"}}},"required":["methodology_key","display_name","version","feature_ids","port_groups"]},"port_group":{"description":"A group of ports required for the test","properties":{"prop_id":{"description":"The unique identifier or tag for the port group","type":"string"},"name":{"description":"The friendly name of the port group","type":"string"},"image":{"description":"The URI for an optional image file that shows a picture of the port group.","type":"string"},"bring_online":{"description":"A flag to specify whether or not to bring the ports in this group online. If this property is not present, assume the value is true and bring the ports online.","type":"boolean","default":true},"ports":{"description":"The ports that make up the port group.","type":"array","minItems":1,"uniqueItems":true,"items":{"title":"Port","description":"A single port for the test.","type":"object","properties":{"location":{"description":"The chassis-slot-port information for a port to be used in the test. offline is default on a Get. Must be valid chassis-slot-port on a Run.","type":"string"},"phy_properties":{"description":"A list of properties for the physical port, e.g linespeed. Each item in the list is a property_value_item.","type":"array","minItems":0,"uniqueItems":true,"items":{"type":"object","$ref":"#/definitions/property_value_item"}}},"required":["location"]}}},"required":["prop_id","name","ports"]},"property_group":{"description":"A collection of related information about the test that is used to both render the test on a Get and localize the test on a Run.","properties":{"prop_id":{"description":"The unique identifier for this group of properties.","type":"string"},"gui_id":{"description":"A unique identifier or tag that identifies the GUI component used to render this property_group.","type":"string"},"display_name":{"description":"The friendly name for this group of properties.","type":"string"},"description":{"description":"The description for this group of properties.","type":"string"},"image":{"description":"The URI for an optional image file that shows a picture of the components associated with the property group.","type":"string"},"group_type":{"description":"The type of this property_group. Used by the web application to primarily distinguish property_groups for use as a profile.","type":"string"},"default_for_new_test":{"description":"If true, this property group is used as default configuration for a test. It may, if applicable, populate a configuration container, e.g. an endpoint container.","type":"boolean","default":"true"},"test_properties":{"description":"A list of properties for the group, e.g test configuration or settings. Each item in the list is a property_item_value.","type":"array","minItems":0,"uniqueItems":true,"items":{"type":"object","$ref":"#/definitions/property_value_item"}}},"required":["prop_id","display_name"]},"property_value_item":{"description":"A property-value item.","properties":{"prop_id":{"description":"The unique identifier or tag for this property.","type":"string"},"gui_id":{"description":"A unique identifier or tag that identifies the GUI component used to render this property.","type":"string"},"display_name":{"description":"The friendly name for this property.","type":"string"},"description":{"description":"The description for this property.","type":"string"},"image":{"description":"The URI to an optional image file for this property.","type":"string"},"property_name":{"description":"The name of the property","type":"string"},"property_value":{"description":"The value of the property. Can be a single value or list of values.","$ref":"#/definitions/value_or_list"},"property_value_type":{"description":"The type of the single value or values in the list of the property_value.","enum":["integer","float","ipv4","ipv6","mac","string","http","enum","boolean"]},"display_units":{"description":"The friendly name for the units in which the value is rendered.","type":"string"},"minimum":{"description":"The minimum acceptable value or minimum number of characters, as applicable.","type":"number"},"maximum":{"description":"The maximum acceptable value or maximum number of characters, as applicable.","type":"number"},"readOnly":{"description":"Optional value that determines whether the property should be treated as read only by the client. If true, the client must treat the property as read only and an attempt to modify it will result in an error. If false, the client may modify the property. If not present, the client should assume false.","type":"boolean"},"acceptable_values":{"description":"An array of acceptable values, for use when the property_value_type is set to enum or list","type":"array","minItems":0,"uniqueItems":false,"items":{"description":"An acceptable value for this property_value_type","type":"string"}},"gui_only":{"description":"If true, this property_value_item is not mapped to an exposed property of the methodology. It could be an argument mapped to a processing function or a property needed by the web application.","type":"boolean"}},"required":["prop_id"]},"value_or_list":{"description":"Representation of a value that can either be a single string or a list of strings.","oneOf":[{"type":"string"},{"type":"array","minItems":1,"items":{"type":"string"}}]},"processing_function":{"description":"A processing function used to generate values for exposed properties.","properties":{"func_id":{"description":"A unique identifier for the processing function.","type":"string"},"script_filename":{"description":"The name of the script file to process the function data.","type":"string"},"entry_function":{"description":"The name of the function in the script file to call.","type":"string"},"output":{"description":"Definitions for the scripts outputs.","type":"array","minItems":1,"items":{"type":"object","properties":{"script_output_key":{"description":"The name of the script output variable that will be passed to the exposed property.","$ref":"#/definitions/value_or_list"},"ep_key":{"description":"The exposed property key that identifies the property to receive the output value.","type":"string"}},"required":["script_output_key","ep_key"]}},"input":{"description":"The data to be passed to the script files function.","type":"array","minItems":0,"items":{"type":"object","properties":{"script_input_key":{"description":"The name of the script input variable that will receive the user input property value.","$ref":"#/definitions/value_or_list"},"src_prop_id":{"description":"The source property identifier whose value will be passed into the script.","type":"string"},"constant":{"description":"A constant value that is pass verbatim into the script.","$ref":"#/definitions/value_or_list"},"dict":{"description":"A dictionary that is processed (prop_id substitutions) then passed into the script.","type":"object"}},"allOf":[{"required":["script_input_key"]},{"oneOf":[{"required":["src_prop_id"]},{"required":["constant"]},{"required":["dict"]}]}]}}}}}}'>
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="JSON schema that will be used to validate the InputJson property's value."/>
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="SaveTestCaseCommand" displayName="Save Test Case Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Save test case in a new TXML" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="TestMethodologyName" displayName="Test Methodology Name" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the Test Methodology" />
+        </stc:property>
+        <stc:property category="input" name="TestCaseName" displayName="Test Case Name" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the test case" />
+        </stc:property>
+        <stc:property category="input" name="InputJson" displayName="JSON Input" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="JSON Input" />
+        </stc:property>
+        <!-- Expose if necessary -->
+        <stc:property category="input" name="FileName" displayName="Test Case Name" type="string" default="" isInternal="true">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="String filename" />
+        </stc:property>
+        <stc:property category="output" name="TxmlFileName" displayName="TXML File" type="outputFilePath" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="TXML Test Case File" />
+            <stc:attribute type="framework.MangleRelativePath" value="false" internalType="bool" />
+        </stc:property>
+        <stc:property category="output" name="ErrorMsg" displayName="Test Methodology Errors" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology errors" />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="CreateTestCaseCommand" displayName="Create Test Case Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Create a test case from a methodology or another test case" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="TestCaseSrc" displayName="Test case source" type="handle" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="The Test Methodology or Test Case to create a new test case from" />
+        </stc:property>
+        <stc:property category="input" name="TestCaseName" displayName="Test Case Name" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the test case" />
+        </stc:property>
+        <stc:property category="input" name="TestCaseDescription" displayName="Test Case Description" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Description of the test case" />
+        </stc:property>
+        <stc:property category="output" name="ErrorMsg" displayName="Test Methodology Errors" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology errors" />
+        </stc:property>
+        <stc:property category="output" name="StmTestCase" displayName="Methodology Test Case" type="handle" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="A Test Case created from a methodology" />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="CreateMethodologyTestCaseCommand" displayName="Create Test Case Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Create a test case from a methodology or another test case" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="MethodologyJson" displayName="Test Methodology JSON" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology JSON" />
+        </stc:property>
+        <stc:property category="output" name="TestCaseKey" displayName="Methodology Test Case key" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Methodology Test Case Key" />
+        </stc:property>
+        <stc:property category="state" name="InputJsonSchema" displayName="Input JSON Schema" type="string" default='{"required": ["methodology_key", "display_name"]}'>
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="JSON schema that will be used to validate the InputJson property's value."/>
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="DeleteTestCaseCommand" displayName="Delete Test Case Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Delete Methodology Test Case" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="StmTestCase" displayName="Methodology Test Case" type="handle" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="A Test Case created from a methodology" />
+        </stc:property>
+        <stc:property category="output" name="ErrorMsg" displayName="Test Methodology Errors" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology errors" />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="ValidateTestCompatibleCommand" displayName="Validate If Test Is Compatible Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Validate STAK Commands define in the test exists in the system" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="FileName" displayName="Partial STC config" type="inputFilePath" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Partial STC config" />
+            <stc:attribute type="framework.MangleRelativePath" value="false" internalType="bool" />
+        </stc:property>
+    </stc:class>
+
+    <!-- Test Methodology Authoring Commands -->
+    <stc:class name="PublishMethodologyCommand" displayName="Publish Test Methodology Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Publish Test Methodology" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="MethodologyName" displayName="Methodology Name" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="The name of the methodology" />
+        </stc:property>
+        <stc:property category="input" name="MethodologyKey" displayName="Methodology Key" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="A short, unique string that can be used to identify the methodology and serve as the name of the folder to store the methodology in." />
+        </stc:property>
+        <stc:property category="input" name="MethodologyDescription" displayName="Methodology Description" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="The description of the methodology" />
+        </stc:property>
+        <stc:property category="input" name="MethodologyLabelList" displayName="Methodology Label List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="A list of labels that describe the methodology" />
+        </stc:property>
+        <stc:property category="input" name="FeatureIdList" displayName="Feature ID List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="A list of feature IDs for the methodology" />
+        </stc:property>
+        <stc:property category="input" name="MinPortCount" displayName="Minimum Ports Count" type="u32" default="1">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Minimum number of ports per port group required for the test being published" />
+        </stc:property>
+        <stc:property category="input" name="MaxPortCount" displayName="Maximum Ports Count" type="u32" default="1000">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Maximum number of ports per port group required for the test being published" />
+        </stc:property>
+        <stc:property category="input" name="PortSpeedList" displayName="Port Speed List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of valid port speeds for the test being published" />
+        </stc:property>
+        <stc:property category="input" name="EditableParams" displayName="Editable Input Parameters" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Formatted string that contains the list of editable input parameters for the methodology" />
+        </stc:property>
+        <stc:property category="output" name="ErrorMsg" displayName="Test Methodology Errors" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology errors" />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="PublishTemplateCommand" displayName="Publish Configuration To A Methodology Template Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Publish Template" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="TemplateName" displayName="Template Name" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Template Name" />
+        </stc:property>
+        <stc:property category="output" name="ErrorMsg" displayName="Test Methodology Errors" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology errors" />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="DeleteTemplateCommand" displayName="Delete A Methodology Template Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Delete  Template" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="TemplateName" displayName="Template Name" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Template Name" />
+        </stc:property>
+        <stc:property category="output" name="ErrorMsg" displayName="Test Methodology Errors" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology errors" />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="MethodologyGroupCommand" displayName="Methodology Group Command" baseClass="stak.StakGroupCommand" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Test Methodology Top Level Group Command" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="KeyValueJson" displayName="Key-value JSON" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="A JSON structure containing localized values to use in this methodology.  Keys come from the TXML file." />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="RemoveMethodologyGroupCommand" displayName="Remove Methodology Group Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Make Test Methodology editable" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+    </stc:class>
+
+    <stc:class name="DeleteMethodologyCommand" displayName="Delete Methodology Test Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Delete Test Methodology" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="StmMethodology" displayName="Test Methodology" type="handle" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology" />
+        </stc:property>
+        <stc:property category="output" name="ErrorMsg" displayName="Test Methodology Errors" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology errors" />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="EstimateTxmlProfileObjectExpansionCommand" displayName="Estimate object expansion for a profile-based test" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Estimate how many objects a profile-based test will expand into" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="StmMethodology" displayName="Test Methodology" type="handle" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology" />
+        </stc:property>
+        <stc:property category="input" name="StmTestCase" displayName="Spirent Test Methodology Test Case" type="handle" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Methodology Test Case" />
+        </stc:property>
+        <!-- Set of user-defined input values that map to the exposed properties -->
+        <stc:property category="input" name="InputJson" displayName="JSON Input" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="JSON Input" />
+        </stc:property>
+        <stc:property category="output" name="OutputJson" displayName="Output JSON string" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Object expansion breakdown in JSON format" />
+        </stc:property>
+    </stc:class>
+
+    <!-- Deprecated commands -->
+    <stc:class name="ImportTestCommand" displayName="Import Test Package Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Import Test" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="FileName" displayName="Test methodology zip" type="inputFilePath" default="methodology.stm">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Zip Archive" />
+            <stc:attribute type="framework.MangleRelativePath" value="false" internalType="bool" />
+        </stc:property>
+        <stc:property category="output" name="Metadata" displayName="TXML data" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="TXML meta data" />
+        </stc:property>
+        <stc:property category="output" name="ErrorMsg" displayName="Test Methodology Errors" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology errors" />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="LoadTestMethodologyCommand" displayName="Load Test Methodology Command" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Load Test Methodology" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="StmMethodology" displayName="Test Methodology" type="handle" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology" />
+        </stc:property>
+        <stc:property category="input" name="StmTestCase" displayName="Spirent Test Methodology Test Case" type="handle" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Methodology Test Case" />
+        </stc:property>
+        <stc:property category="input" name="InputJson" displayName="Input JSON" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="JSON string" />
+        </stc:property>
+        <stc:property category="input" name="EnableTieCheck" displayName="Enable TIE checks" type="bool" default="true">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Enable TIE checks" />
+        </stc:property>
+        <stc:property category="output" name="ErrorMsg" displayName="Test Methodology Errors" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Test Methodology errors" />
+        </stc:property>
+    </stc:class>
+
+    <stc:class name="CheckDuplicateTestCommand" displayName="Check If Reimporting Same Test" bllDirectInterface="true" isInternal="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Check if the test being imported already exists" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Methodology Manager" />
+        <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+        <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+        <stc:property category="input" name="FileName" displayName="Test Methodology Archive File Name" type="inputFilePath" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the archive file" />
+            <stc:attribute type="framework.MangleRelativePath" value="false" internalType="bool" />
+        </stc:property>
+    </stc:class>
+</stc:meta>

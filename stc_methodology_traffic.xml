@@ -1,0 +1,371 @@
+<?xml version="1.0" ?>
+<stc:meta package="spirent.methodology.traffic" plugin="plcommands" version="0.0.0-0" xmlns:stc="urn:www.spirentcom.com:XMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<stc:class name="CreateTrafficMixCommand"
+           displayName="Create Traffic Mix Command"
+           baseClass="spirent.methodology.CreateTemplateMixCommand"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription"
+        value="This command creates mixtures of traffic between tagged end points. A traffic mix is a collection of groups of streamblocks. The traffic mix itself defines a total load that is spread across the mix (both the total load and the load units for the mix). Along with this common set of properties, the mix also has an array of components, where each component defines a group of one or more streamblocks. Each component has its own unique set of properties, including their portion of the mix's load, a set of end points, a streamblock template file, and an expansion method (e.g., route import (bgp only), route prefix distribution generation, or route specifications).\n\nStreamblocks within the mix can be bound or unbound. End points for bound streamblocks are always defined by tags, and can refer to any typical streamblock end point, such as port, route or interface.\n\nStreamblocks are created with a GeneratedObject relationship to their corresponding StmTemplateConfig objects, which are children of the StmTrafficMix object."/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Traffic"/>
+
+    <!-- These all should be from the base class -->
+    
+    <stc:property category="input" name="MixInfo" displayName="Mix Info" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+        value="Information that describes an entire mix of traffic in JSON string form, conforming to the MixInfoJsonSchema."/>
+    </stc:property>
+    <stc:property category="input" name="MixTagName" displayName="Mix Container Tag Name" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+         value="The name of the mix's tag- that is, the name of the tag used in tagging the StmTrafficMix object created by this command.  If empty, the mix's StmTemplateMix object will not be tagged. This tag name is useful for both directly referencing the mix and indirectly referencing streamblocks that are generated from this mix (see AllocateTrafficMixCommand)."/>
+    </stc:property>
+    <stc:property category="input" name="AutoExpandTemplateMix" displayName="Automatically expand templates in the mix" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+       value="If set to true, the entire mix will be expanded before this command completes. If set to false, the mix information will be loaded into an StmTrafficMix object, but streamblocks will not yet be created. Setting this to false is useful when the creation of streamblocks (that is, expanding the mix) must be done within an iterative loop at some point later in the command sequencer." />
+    </stc:property>
+    <stc:property category="state" name="GroupCommandTagInfo" displayName="Group Command Tag Info" type="string" default="" >
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+         value="A JSON formatted structure that contains the names of the tags used to refer to commands in this group. This intra-group information provides one child command with a means to reference another child command within the same group."/>
+    </stc:property>
+
+    <!-- This should not be from the base class (or it should be overwritten) -->
+<stc:property category="state" name="MixInfoJsonSchema" displayName="Table Data JSON Schema" type="string" default='{"title":"Schema for the MixInfo of the spirent.methodology.traffic.CreateTrafficMixCommand.","type":"object","properties":{"load":{"description":"Traffic mix total load in appropriate units.","type":"number"},"loadUnits":{"description":"Traffic load units.","enum":["PERCENT_LINE_RATE","FRAMES_PER_SECOND","INTER_BURST_GAP","BITS_PER_SECOND","KILOBITS_PER_SECOND","MEGABITS_PER_SECOND"]},"components":{"description":"A list of components that make up the mixture.","type":"array","items":{"type":"object","properties":{"weight":{"description":"Percent weight of the total load to assign to this component.","type":"string"},"appliedValue":{"description":"Load actually assigned to this component.  Autocalculated, do not set.","type":"number"},"tagPrefix":{"description":"String that will be prefixed to all tags loaded and used in this template.","type":"string"},"baseTemplateFile":{"description":"Base template file that will be loaded into the StmTemplateConfig.  All modifications in the modifyList will be applied to the contents loaded out of this file.","type":"string"},"modifyList":{"description":"A list of operations that will be carried out on the template.  See the schema defined in the spirent.methodology.CreateTemplateConfigCommand.","type":"array","items":{"type":"object"}},"postExpandModify":{"description":"A list of operations that will be carried out on datamodel objects after the template is expanded.","type":"array","items":{"type":"object","properties":{"streamBlockExpand":{"description":"Process project-level streamblocks and expand onto ports.","type":"object","properties":{"endpointMapping":{"description":"Description of end points that will be mapped on the port-level streamblocks.","type":"object","properties":{"bidirectional":{"description":"True if a streamblock is to be created for both directions (flipping the src and dst for the second streamblock), false if only one direction, must be false for MESH configuration.","type":"boolean"},"srcBindingClassList":{"type":"array","items":{"description":"The classname that we will search the srcBindingTagList objects for.","type":"string"}},"srcBindingTagList":{"type":"array","items":{"description":"List of tag names for streamblock source binding endpoints.","type":"string"}},"dstBindingClassList":{"type":"array","items":{"description":"The classname that we will search the dstBindingTagList objects for.","type":"string"}},"dstBindingTagList":{"type":"array","items":{"description":"List of tag names for streamblock destination binding endpoints, not used in MESH configuration.","type":"string"}}},"required":["srcBindingTagList"],"additionalProperties":false}},"required":["endpointMapping"]}},"required":["streamBlockExpand"]}},"expand":{"type":"object","properties":{"targetTagList":{"description":"List of Target Tags passed to expand","type":"array","items":{"type":"string"}},"copiesPerParent":{"description":"streamblocks to make per parent","type":"number"},"srcTagList":{"description":"List of Source Tags passed to expand","type":"array","items":{"type":"string"}}},"required":["targetTagList"]}},"required":["weight","baseTemplateFile"]}}},"required":["load","loadUnits","components"]}'>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+         value="JSON schema that will be used to validate the MixInfo property's value."/>
+    </stc:property>
+
+<!-- SAMPLE_JSON:
+
+In the sample below, the mix has a total load of 2% of the line rate,
+and two components, each taking half of the total mix load (each with
+1% of the line rate).
+
+The first component defines a streamblock from east to west using the
+Ipv4If as its end points, where as the second component defines a
+streamblock from east to west using emulated devices as its end points.
+
+{
+    "load" : 2,
+    "loadUnits" : "PERCENT_LINE_RATE",
+    "components" : [
+        {
+            "weight" : "50%",
+            "baseTemplateFile" : "IPv4_Stream.xml",
+            "postExpandModify" : [
+                {
+                    "streamBlockExpand" :
+                    {
+                        "endpointMapping" :
+                        {
+                            "bidirectional" : false,
+                            "srcBindingClassList" : ["Ipv4If"],
+                            "srcBindingTagList" : ["East1_ttIpv4If"],
+                            "dstBindingClassList" : ["Ipv4If"],
+                            "dstBindingTagList" : ["West1_ttIpv4If"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "weight" : "50%",
+            "baseTemplateFile" : "IPv4_Stream.xml",
+            "postExpandModify" : [
+                {
+                    "streamBlockExpand" :
+                    {
+                        "endpointMapping" :
+                        {
+                            "bidirectional" : false,
+                            "srcBindingClassList" : ["Ipv4If"],
+                            "srcBindingTagList" : ["East2_ttEmulatedDevice"],
+                            "dstBindingClassList" : ["Ipv4If"],
+                            "dstBindingTagList" : ["West2_ttEmulatedDevice"]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
+<BR><BR>
+-->
+<!-- SAMPLE_JSON:
+
+In the next sample, consider how the mix's load is distributed to each component.
+
+The second component will take 100 frames per second from the total mix load
+of 200 frames per second. This is called a static value, because it isn't based
+upon the total mix load. However, the combination of static values from all
+components within a mix must not exceed the mix's total load value.
+
+That leaves just 100 frames per second to divide between the first and third
+components. Both of those components take only 25% of the 100 frames per second
+that they are sharing, which means they each have an individual load of 25
+frames per second. The combined percentage load from the components cannot exceed
+100%.
+
+{
+    "load": 200,
+    "loadUnits": "FRAMES_PER_SECOND",
+    "components": [
+        {
+            "baseTemplateFile": "Ipv4_Stream.xml",
+            "weight": "25 %",
+            "postExpandModify": [
+                {
+                    "streamBlockExpand": {
+                        "endpointMapping": {
+                            "srcBindingTagList": ["East_Ipv4If"],
+                            "dstBindingTagList": ["West_Ipv4If"]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "baseTemplateFile": "Ipv4_Stream.xml",
+            "weight": "100",
+            "postExpandModify": [
+                {
+                    "streamBlockExpand": {
+                        "endpointMapping": {
+                            "srcBindingTagList": ["East_Ipv4If"],
+                            "dstBindingTagList": ["West_Ipv4If"],
+                            "bidirectional": true
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "baseTemplateFile": "MeshTemplate.xml",
+            "weight": "25 %",
+            "postExpandModify": [
+                {
+                    "streamBlockExpand": {
+                        "endpointMapping": {
+                            "srcBindingTagList": ["East Ipv4If"],
+                            "dstBindingTagList": ["East Ipv4If"]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
+
+Note also that the first component is from east to west, the second is
+bidirectional, and the third is based upon a full mesh template.
+<BR><BR>
+-->
+
+</stc:class>
+
+
+
+
+<stc:class name="ExpandTrafficMixCommand"
+           displayName="Expand Traffic Mix Command"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Expands the traffic mix template(s) into streamblocks and attaches the streamblocks to end points designated in the traffic mix configuration. The traffic mix is defined from an StmTemplateMix object, populated with the mix information from the CreateTrafficMixCommand."/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Traffic"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <!-- Base: input handle StmTemplateMix -->
+    <!-- There appear to be problems with inheritence and file names.  Anyway, this parameter
+    is supposed to come from the base class but is here until this problem is resolved -->
+    <stc:property category="input" name="StmTemplateMix" displayName="XML Container object (StmTemplateMix)" type="handle" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+        value="Handle to an StmTemplate Mix container object that contains the traffic mix information. This value can be empty, in which case a tag name must be supplied to the TrafficMixTagName property."/>
+    </stc:property>
+    <stc:property category="input" name="TrafficMixTagName" displayName="Tag name for Traffic Mix" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+        value="Name of the tag that is attached to one or more StmTemplateMix's. Every StmTemplateMix object associated with the tag is expanded. This property can be empty, in which case a handle to an StmTemplateMix object must be provided in the StmTemplateMix property." />
+    </stc:property>
+    <stc:property category="input" name="Load" displayName="Load" type="double" default="10.0">
+        <stc:attribute internalType="string" type="framework.PropertyDescription"
+        value="The total traffic load distributed across each expanded traffic mix. The value of this property is strictly a numerical value. The units that this value is to be interpreted with is found in the LoadUnit property." />
+    </stc:property>
+    <stc:property category="input" name="LoadUnit" displayName="Load Unit"
+                  type="u8" default="PERCENT_LINE_RATE">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="The units to be applied to the Load property."/>
+      <stc:enumerationRef ref="StreamBlock.EnumLoadUnit"/>
+    </stc:property>
+    <stc:property category="state" name="MixInfoJsonSchema" displayName="Table Data JSON Schema" type="string" default='{"title":"Schema for the MixInfo of the spirent.methodology.traffic.ExpandTrafficMixCommand.","type":"object","properties":{"load":{"description":"Traffic mix total load in appropriate units.","type":"number"},"loadUnits":{"description":"Traffic load units.","enum":["PERCENT_LINE_RATE","FRAMES_PER_SECOND","INTER_BURST_GAP","BITS_PER_SECOND","KILOBITS_PER_SECOND","MEGABITS_PER_SECOND"]},"components":{"description":"A list of components that make up the mixture.","type":"array","items":{"type":"object","properties":{"weight":{"description":"Percent weight of the total load to assign to this component.","type":"string"},"appliedValue":{"description":"Load actually assigned to this component.  Autocalculated, do not set.","type":"number"},"tagPrefix":{"description":"String that will be prefixed to all tags loaded and used in this template.","type":"string"},"baseTemplateFile":{"description":"Base template file that will be loaded into the StmTemplateConfig.  All modifications in the modifyList will be applied to the contents loaded out of this file.","type":"string"},"modifyList":{"description":"A list of operations that will be carried out on the template.  See the schema defined in the spirent.methodology.CreateTemplateConfigCommand.","type":"array","items":{"type":"object"}},"postExpandModify":{"description":"A list of operations that will be carried out on datamodel objects after the template is expanded.","type":"array","items":{"type":"object","properties":{"streamBlockExpand":{"description":"Process project-level streamblocks and expand onto ports.","type":"object","properties":{"endpointMapping":{"description":"Description of end points that will be mapped on the port-level streamblocks.","type":"object","properties":{"bidirectional":{"description":"True if a streamblock is to be created for both directions (flipping the src and dst for the second streamblock), false if only one direction, must be false for MESH configuration.","type":"boolean"},"srcBindingClassList":{"type":"array","items":{"description":"The classname that we will search the srcBindingTagList objects for.","type":"string"}},"srcBindingTagList":{"type":"array","items":{"description":"List of tag names for streamblock source binding endpoints.","type":"string"}},"dstBindingClassList":{"type":"array","items":{"description":"The classname that we will search the dstBindingTagList objects for.","type":"string"}},"dstBindingTagList":{"type":"array","items":{"description":"List of tag names for streamblock destination binding endpoints, not used in MESH configuration.","type":"string"}}},"required":["srcBindingTagList"],"additionalProperties":false}},"required":["endpointMapping"]}},"required":["streamBlockExpand"]}},"expand":{"type":"object","properties":{"targetTagList":{"description":"List of Target Tags passed to expand","type":"array","items":{"type":"string"}},"copiesPerParent":{"description":"streamblocks to make per parent","type":"number"},"srcTagList":{"description":"List of Source Tags passed to expand","type":"array","items":{"type":"string"}}},"required":["targetTagList"]}},"required":["weight","baseTemplateFile"]}}},"required":["load","loadUnits","components"]}'>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+         value="JSON schema that will be used to validate the mix information in JSON form found in the StmTemplateMix object."/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="AllocateTrafficMixLoadCommand"
+           displayName="Allocate Traffic Profile Load Command"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription"
+    value="Takes the load of a given mix and distributes it across the components of the mix, according to the JSON information found in the StmTemplateMix object for the traffic mix. Multiple StmTemplateMix objects can be processed by this command, but each will be processed independtly as though it were the only mix to be handled by this command.\n\nThis command is typically called internally by the CreateTrafficMixCommand (when auto expand is enabled), or externally in the sequencer when changing of loads during iterative test loops is necessary."/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Traffic"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="StmTrafficMix" displayName="Traffic Mix" type="handle" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+        value="Handle to an StmTemplate Mix container object that contains the traffic mix information. This value can be empty, in which case a tag name must be supplied to the TrafficMixTagName property."/>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="core.ValidHandleTypes" value="StmTrafficMix" />
+    </stc:property>
+    <stc:property category="input" name="TrafficMixTagName" displayName="Tag name for Traffic Mix" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+        value="Name of the tag that is attached to one or more StmTemplateMix's. Every StmTemplateMix object associated with the tag is expanded. This property can be empty, in which case a handle to an StmTemplateMix object must be provided in the StmTemplateMix property." />
+    </stc:property>
+    <stc:property category="input" name="Load" displayName="Load" type="double" default="10.0">
+        <stc:attribute internalType="string" type="framework.PropertyDescription"
+        value="The total traffic load distributed across each expanded traffic mix. The value of this property is strictly a numerical value. The units that this value is to be interpreted with is found in the LoadUnit property." />
+    </stc:property>
+    <stc:property category="input" name="LoadUnit" displayName="Load Unit"
+                  type="u8" default="PERCENT_LINE_RATE">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="The units to be applied to the Load property."/>
+      <stc:enumerationRef ref="StreamBlock.EnumLoadUnit"/>
+    </stc:property>
+    <stc:property category="state" name="MixInfoJsonSchema" displayName="Table Data JSON Schema" type="string" default='{"title":"Schema for the MixInfo of the spirent.methodology.traffic.AllocateTrafficMixLoadCommand.","type":"object","properties":{"load":{"description":"Traffic mix total load in appropriate units.","type":"number"},"loadUnits":{"description":"Traffic load units.","enum":["PERCENT_LINE_RATE","FRAMES_PER_SECOND","INTER_BURST_GAP","BITS_PER_SECOND","KILOBITS_PER_SECOND","MEGABITS_PER_SECOND"]},"components":{"description":"A list of components that make up the mixture.","type":"array","items":{"type":"object","properties":{"weight":{"description":"Percent weight of the total load to assign to this component.","type":"string"},"appliedValue":{"description":"Load actually assigned to this component.  Autocalculated, do not set.","type":"number"},"tagPrefix":{"description":"String that will be prefixed to all tags loaded and used in this template.","type":"string"},"baseTemplateFile":{"description":"Base template file that will be loaded into the StmTemplateConfig.  All modifications in the modifyList will be applied to the contents loaded out of this file.","type":"string"},"modifyList":{"description":"A list of operations that will be carried out on the template.  See the schema defined in the spirent.methodology.CreateTemplateConfigCommand.","type":"array","items":{"type":"object"}},"postExpandModify":{"description":"A list of operations that will be carried out on datamodel objects after the template is expanded.","type":"array","items":{"type":"object","properties":{"streamBlockExpand":{"description":"Process project-level streamblocks and expand onto ports.","type":"object","properties":{"endpointMapping":{"description":"Description of end points that will be mapped on the port-level streamblocks.","type":"object","properties":{"bidirectional":{"description":"True if a streamblock is to be created for both directions (flipping the src and dst for the second streamblock), false if only one direction, must be false for MESH configuration.","type":"boolean"},"srcBindingClassList":{"type":"array","items":{"description":"The classname that we will search the srcBindingTagList objects for.","type":"string"}},"srcBindingTagList":{"type":"array","items":{"description":"List of tag names for streamblock source binding endpoints.","type":"string"}},"dstBindingClassList":{"type":"array","items":{"description":"The classname that we will search the dstBindingTagList objects for.","type":"string"}},"dstBindingTagList":{"type":"array","items":{"description":"List of tag names for streamblock destination binding endpoints, not used in MESH configuration.","type":"string"}}},"required":["srcBindingTagList"],"additionalProperties":false}},"required":["endpointMapping"]}},"required":["streamBlockExpand"]}},"expand":{"type":"object","properties":{"targetTagList":{"description":"List of Target Tags passed to expand","type":"array","items":{"type":"string"}},"copiesPerParent":{"description":"streamblocks to make per parent","type":"number"},"srcTagList":{"description":"List of Source Tags passed to expand","type":"array","items":{"type":"string"}}},"required":["targetTagList"]}},"required":["weight","baseTemplateFile"]}}},"required":["load","loadUnits","components"]}'>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+         value="JSON schema that will be used to validate the mix information in JSON form found in the StmTemplateMix object."/>
+    </stc:property>
+
+</stc:class>
+
+
+
+<!-- START OF DEPRECATED COMMANDS -->
+
+<stc:class name="CreateTrafficMix1Command"
+           displayName="Create Traffic Mix Command"
+           baseClass="spirent.methodology.CreateTemplateMixCommand"
+           bllDirectInterface="true"
+           isInternal="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Create Traffic Mix Command"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Traffic"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="Load" displayName="Load"
+                  type="double" default="10.0">
+        <stc:attribute internalType="string" type="framework.PropertyDescription" value="Load" />
+    </stc:property>
+    <stc:property category="input" name="LoadUnit" displayName="Load Unit"
+                  type="u8" default="PERCENT_LINE_RATE">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Load Unit"/>
+      <stc:enumerationRef ref="StreamBlock.EnumLoadUnit"/>
+    </stc:property>
+    <!-- From base class: input string MixTagName -->
+    <!-- From base class: output handle StmTemplateMix -->
+
+    <!-- FIXME: Remove this once inheritence works -->
+    <stc:property category="input" name="MixTagName" displayName="Mix Container Tag Name" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Mix Container Tag Name"/>
+    </stc:property>
+    <stc:property category="input" name="AutoExpandTemplateMix" displayName="Automatically expand templates in the mix" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Automatically expand templates." />
+    </stc:property>
+</stc:class>
+
+<stc:class name="ExpandTrafficMix1Command"
+           displayName="Expand Traffic Mix Command"
+           bllDirectInterface="true"
+           isInternal="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Expand Template Mix Command"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Traffic"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <!-- Base: input handle StmTemplateMix -->
+    <!-- There appear to be problems with inheritence and file names.  Anyway, this parameter
+    is supposed to come from the base class but is here until this problem is resolved -->
+    <stc:property category="input" name="StmTemplateMix" displayName="XML Container object (StmTemplateMix)" type="handle" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="StmTemplate Mix container object"/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="AllocateTrafficMixLoad1Command"
+           displayName="Allocate Traffic Profile Load Command"
+           bllDirectInterface="true"
+           isInternal="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Allocate Traffic Profile Load and Distribute to Stream Templates"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Traffic"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="StmTrafficMix" displayName="Traffic Mix" type="handle" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Traffic Mix Object Handle" />
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="core.ValidHandleTypes" value="StmTrafficMix" />
+    </stc:property>
+    <stc:property category="input" name="TagName" displayName="Tag name for Traffic Mix" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Tag name associated with the StmTrafficMix object" />
+    </stc:property>
+    <stc:property category="input" name="Load" displayName="Load"
+                  type="double" default="10.0">
+        <stc:attribute internalType="string" type="framework.PropertyDescription" value="Load" />
+    </stc:property>
+    <stc:property category="input" name="LoadUnit" displayName="Load Unit"
+                  type="u8" default="PERCENT_LINE_RATE">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Load Unit"/>
+      <stc:enumerationRef ref="StreamBlock.EnumLoadUnit"/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="SetTrafficEndpointTagsCommand"
+           displayName="Set
+           Traffic Endpoint Tags"
+           bllDirectInterface="true"
+           isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Establishes the end points for the streamblocks  that are generated from a traffic mix. This command is executed from within the ExpandTrafficMixCommand, and is not a command that should be executed in isolation."/>
+    <stc:attribute internalType="string" type="framework.CommandCategory" value="Test Methodology//Traffic"/>
+
+    <stc:property category="input" name="TrafficMix" displayName="Traffic Mix" type="handle" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="The handle to an StmTemplateMix object that holds the traffix mix information."/>
+    </stc:property>
+    <stc:property category="input" name="SrcEndpointNameList" displayName="Source Endpoint Tag Name List" type="string" default="" minOccurs="0" maxOccurs="unbounded" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="A list of tag names that identifies all the source end points to be used by the stream blocks generated for the traffic mix." />
+    </stc:property>
+    <stc:property category="input" name="DstEndpointNameList" displayName="Destination Endpoint Tag Name List" type="string" default="" minOccurs="0" maxOccurs="unbounded" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="A list of tag names that identifies all the destination end points to be used by the stream blocks generated for the traffic mix." />
+    </stc:property>
+</stc:class>
+
+
+<stc:class name="LoadTrafficTemplateCommand"
+           baseClass="spirent.methodology.LoadTemplateCommand"
+           displayName="Load Traffic Template Command"
+           bllDirectInterface="true"
+           isInternal="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="This command is used to load a template that defines traffic flow into an StmTemplateConfig object. The templates' XML contents are stored within an StmTemplateConfig object for later operation by other commands.\n\nThis command assumes its role within the traffic mix identified by the StmTemplateMix property."/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Traffic"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+    <!-- Base: input u32 CopiesPerParent, should not be more than 1 -->
+    <!-- Base: input string[] TargetTagList, ignored/forced-->
+    <!-- Base: input string TemplateXml -->
+    <!-- Base: input string TemplateXmlFileName -->
+    <!-- Base: input string TagPrefix -->
+    <!-- Base: input bool AutoExpandTemplate -->
+    <!-- Base: input bool EnableLoadFromFileName -->
+    <!-- Base: input handle StmTemplateMix -->
+    <!-- Base: output handle StmTemplateConfig -->
+    <stc:property category="input" name="Weight" displayName="Load Weight (%)"
+                  type="double" default="10">
+        <stc:attribute internalType="string" type="framework.PropertyDescription" value="The fraction (percentage) of the total traffic mix load to be applied to the streamblock(s) generated by the given template. This value must be greater than 0 and not exceed 100. This value is added into the mix's weight list." />
+    </stc:property>
+</stc:class>
+
+<!-- END OF DEPRECATED COMMANDS -->
+
+
+
+</stc:meta>

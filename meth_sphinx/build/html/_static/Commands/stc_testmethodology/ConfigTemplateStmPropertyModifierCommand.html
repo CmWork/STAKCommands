@@ -1,0 +1,238 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>&lt;no title&gt; &mdash; Spirent Methodology Infrastructure 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Spirent Methodology Infrastructure 0.1 documentation" href="../../../index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="../../../index.html" class="icon icon-home"> Spirent Methodology Infrastructure
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="simple">
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">Spirent Methodology Infrastructure</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+    <li>&lt;no title&gt;</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/_static/Commands/stc_testmethodology/ConfigTemplateStmPropertyModifierCommand.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <p># ConfigTemplateStmPropertyModifierCommand</p>
+<p>Add or configure an StmPropertyModifier in the template</p>
+<p>&lt;font size=&#8221;2&#8221;&gt;File Reference: stc_testmethodology.xml&lt;/font&gt;</p>
+<p>## Properties</p>
+<p>### Repeat: &#8220;Repeat Value&#8221; (input:u32)</p>
+<p>Modifier Repeat Value</p>
+<ul class="simple">
+<li>default - 0</li>
+</ul>
+<p>### ObjectName: &#8220;Object Name&#8221; (input:string)</p>
+<p>Class name of the object being modified.  If configuring an existing modifier, this can be left empty.</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### PropertyName: &#8220;Property Name&#8221; (input:string)</p>
+<p>Name of the property being modified.  If configuring an existing modifier, this can be left empty.</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### StmTemplateConfig: &#8220;StmTemplateConfig&#8221; (input:handle)</p>
+<p>StmTemplateConfig</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### Start: &#8220;Start Value&#8221; (input:string)</p>
+<p>Modifier Starting Value</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### Step: &#8220;Step Value&#8221; (input:string)</p>
+<p>Modifier Step Value</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### TargetObjectTagName: &#8220;Target Object&#8217;s Tag Name&#8221; (input:string)</p>
+<p>Name of the Tag referencing the target object this modifier is being applied to.  If configuring an existing modifier, this can be left empty.</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### TagName: &#8220;Tag Name&#8221; (input:string)</p>
+<p>Name of the Tag referencing an StmPropertyModifier object to modify in the template.  If an StmPropertyModifier is being created, this is the name that will be used for a tag that references the StmPropertyModifier.</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### ModifierType: &#8220;Modifier Type&#8221; (input:u8)</p>
+<p>The type of modifier to add or configure.  If a modifier already exists with the given tag but is of different type, it will be changed to use the new type.</p>
+<ul class="simple">
+<li>default - RANGE</li>
+</ul>
+<p>### Recycle: &#8220;Recycle Value&#8221; (input:u32)</p>
+<p>Modifier Recycle Value</p>
+<ul class="simple">
+<li>default - 0</li>
+</ul>
+<p>### ValueType: &#8220;Value Type&#8221; (input:u8)</p>
+<p>The type of the value being modified by the StmPropertyModifier.</p>
+<ul class="simple">
+<li>default - INT</li>
+</ul>
+<p>## UsedIn
+* L3 QoS DiffServ</p>
+<ul class="simple">
+<li>BGP Route Reflector Test</li>
+<li>ITU-T Y.1564 Service Performance Test</li>
+<li>ITU-T Y.1564 Service Configuration Test</li>
+<li>ITU-T Y.1564 CBS and EBS Burst Test</li>
+<li>ACL Performance Test</li>
+<li>ACL Basic Test</li>
+<li>RFC 2544 Throughput Test</li>
+</ul>
+
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Spirent.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../jquery.js"></script>
+      <script type="text/javascript" src="../../underscore.js"></script>
+      <script type="text/javascript" src="../../doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

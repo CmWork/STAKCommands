@@ -1,0 +1,8 @@
+DstMACOp,DstMAC,SrcMACOp,SrcMAC,DstIPAddrOp,DstIPAddr,SrcIPAddrOp,SrcIPAddr,L4Type,DstPortOp,DstPort,SrcPortOp,SrcPort,Action
+=,00:01:02:03:04:05,ANY,,=,11.1.1.1,=,44.1.1.1,TCP,=,80,,,ACCEPT
+<,00:01:02:03:00:00,>,00:01:02:03:FF:FF,>,33.1.1.255,<,66.1.1.0,TCP,=,80,,,ACCEPT
+<,00:01:03:04:00:00,>,00:01:03:03:FF:FF,>,43.1.1.255,<,56.1.1.0,TCP,,,>,840,DENY
+,,,,,,=,44.1.1.1,TCP,,,>,80,ACCEPT
+,,,,,,=,122.1.1.1,TCP,=,80,>,8000,DENY
+,,,,,,=,111.1.1.1,TCP,=,80,,,ACCEPT
+,,,,,,=,133.1.1.1,TCP,=,80,,,ACCEPT

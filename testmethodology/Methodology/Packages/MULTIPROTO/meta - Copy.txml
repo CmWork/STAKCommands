@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test>
+  <testInfo displayName="Routing Multi-Protocol" description="Routing Multi-Protocol Methodology" methodologyKey="MULTIPROTO" testCaseName="original" testCaseDescription="description specific to this test case" version="1.0" testCaseKey="">
+    <labels>
+      <label>bgp</label>
+      <label>control plane</label>
+      <label>route reflector</label>
+      <label>x-connect</label>
+    </labels>
+  </testInfo>
+  <testResources>
+    <resourceGroups>
+      <resourceGroup displayName="Port Group Limits" id="">
+        <!-- Per-port-group limits for validation -->
+        <attribute name="minNumPorts" value="2" />
+        <attribute name="maxNumPorts" value="10" />
+        <attribute name="portSpeedList" value="['10', '40', '100']" />
+      </resourceGroup>
+      <resourceGroup displayName="Chassis Info" id="chassisInfo">
+        <portGroups>
+          <portGroup name="Left Port Group" id="LeftPortTag">
+            <template name="BGP Provider Edge">
+              <description>Source BGP IPv4 Provider Edge Template</description>
+              <image name="diagram.png" />
+              <source name="BGP_IPv4_Source_PE.xml" />
+            </template>
+            <port name="Left Port">
+              <attribute name="location" value="10.109.123.47/1/1" />
+            </port>
+          </portGroup>
+          <portGroup name="Right Port Group" id="RightPortTag">
+            <template name="BGP Route Reflector">
+              <description>Receiver BGP IPv4 Provider Edge Template</description>
+              <image name="diagram.png" />
+              <source name="BGP_IPv4_Receiver_PE.xml" />
+            </template>
+            <port name="Right Port">
+              <attribute name="location" value="10.109.127.219/1/1" />
+            </port>
+          </portGroup>
+        </portGroups>
+      </resourceGroup>
+    </resourceGroups>
+  </testResources>
+  <!--
+    The wizard section defines the input parameters that the test consumer
+    will be allowed to modify at run time. The format of this section is 
+    designed to allow a rendering engine to create a simple wizard for
+    collecting information from the test consumer during localization.
+
+    Each page of the wizard has an optional imageName that can be used to 
+    render an image file in the wizard as an aid to the user.
+  -->
+
+<!-- enumerations -->
+  <enumerations>
+    <enumeration id="InterfaceStack">
+<!--      <enum name="IPv4" displayName="IPv4"/>
+      <enum name="IPV6" displayName="IPv6"/> -->
+      <enum name="DUAL" displayName="Dual"/>
+    </enumeration>
+    <enumeration id="IpVersion">
+      <enum name="IPV4" displayName="IPv4" />
+      <enum name="IPV6" displayName="IPv6" />
+    </enumeration>
+    <enumeration id="BfdScaleMode">
+      <enum name="NORMAL" displayName="Normal" />
+      <enum name="GEN_TX_NO_RESULTS" displayName="GenTx (No Results)" />
+      <enum name="GEN_TX_RX_RESULTS" displayName="GenTx (With Rx Results)" />
+    </enumeration>
+    <enumeration id="OspfNetworkType">
+      <enum name="NATIVE" displayName="Native" />
+      <enum name="P2P" displayName="P2P" />
+      <enum name="BROADCAST" displayName="Broadcast" />
+    </enumeration>
+    <enumeration id="IsisNetworkType">
+      <enum name="P2P" displayName="P2P" />
+      <enum name="BROADCAST" displayName="Broadcast" />
+    </enumeration>
+    <enumeration id="LdpHelloVersion">
+      <enum name="LDP_IPV4_HELLO" displayName="IPv4" />
+      <enum name="LDP_IPV6_HELLO" displayName="IPv6" />
+      <enum name="LDP_IPV4_AND_IPV6_HELLO" displayName="IPv4 and IPv6" />
+    </enumeration>
+    <enumeration id="TestType">
+      <enum name="SCALABILITY" displayName="Scalability" />
+      <enum name="BENCHMARK" displayName="Benchmarking" />
+    </enumeration>
+    <enumeration id="IteratorMode">
+      <enum name="STEP" displayName="Step" />
+      <enum name="BINARY" displayName="Binary" />
+    </enumeration>
+  </enumerations>
+
+  <wizard displayName="Widget Test" description="Examples of custom widgets" image="diagram.png">
+  
+   <!--- TEST CONFIGURATION SECTION -->
+    <page displayName="Device Count Search Space Configuration" description="Configure the Device Count search space" image="diagram.png"> 
+      <group displayName="">
+        <property id="MethTestType" value="SCALABILITY" displayName="Test Type" widgetType="dropdown" type="enum" ignoreOnBackEnd="true">
+          <enumerationRef ref="TestType" />
+        </property>
+        <property id="ScaleDeviceCount" value="1" displayName="Scalability Device Count" widgetType="textbox" type="int" ignoreOnBackEnd="true" />
+      </group>
+      <group displayName="Benchmarking Search Parameters">
+        <property id="TestMethodologyIteratorMode" value="STEP" displayName="Mode" widgetType="dropdown" type="enum">
+          <enumerationRef ref="IteratorMode" />
+        </property>
+        <property id="DeviceCountMin" value="1" displayName="Min Device Count" widgetType="textbox" type="int" ignoreOnBackEnd="true" />
+        <property id="DeviceCountMax" value="100" displayName="Max Device Count" widgetType="textbox" type="int" ignoreOnBackEnd="true" />
+        <property id="TestMethodologyIteratorStepVal" value="10" displayName="Device Count Step" widgetType="textbox" type="int" />
+      </group>
+      <group displayName="Stability Backoff Parameters">
+        <property id="TestMethodologyIteratorEnableStabilityBackoff" value="False" displayName="Enable Stability Check" widgetType="checkbox" type="bool" />
+        <property id="TestMethodologyIteratorStabilityRepeatCount" value="1" displayName="Trial Repeat Count" widgetType="textbox" type="int" />
+        <property id="TestMethodologyIteratorStabilitySuccessPercent" value="100" displayName="Percent of Passing Trials for Success" widgetType="textbox" type="int" />
+      </group>
+    </page>
+    
+    <!-- INTERFACE & PROTOCOL ENABLE SECTION -->
+    <page displayName="Setup Protocol Mix Configuration" description="Configure Device and Routing Protocols properties for Multi-Protocol test" image="diagram.png"> 
+      <group displayName="Left Device Configuration">
+        <table id="table1">
+          <property id="Left.CreateProtocolMix.InterfaceStack" value="DUAL" displayName="Interface Stack" widgetType="dropdown" type="enum" ignoreOnBackEnd="true">
+            <enumerationRef ref="InterfaceStack" />
+            <data>DUAL</data>
+          </property>
+          <property id="Left.CreateProtocolMix.EnableVlan" value="True" displayName="Enable Vlan" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>True</data>
+          </property>
+          <property id="Left.CreateProtocolMix.VlanId" value="100" displayName="Vlan Id" widgetType="textbox" type="uint64" ignoreOnBackEnd="true">
+            <data>100</data>
+            <numericValidation minInclusive="1" maxInclusive="4095" />
+          </property>
+          <property id="Left.CreateProtocolMix.VlanIdStep" value="1" displayName="Vlan Id Step" widgetType="textbox" type="uint64" ignoreOnBackEnd="true">
+            <data>1</data>
+            <numericValidation minInclusive="1" maxInclusive="4095" />
+          </property>
+        </table>
+      </group>
+      <group displayName="Right Device Configuration">
+        <table id="table2">
+          <property id="Right.CreateProtocolMix.InterfaceStack" value="DUAL" displayName="Interface Stack" widgetType="dropdown" type="enum" ignoreOnBackEnd="true">
+            <enumerationRef ref="InterfaceStack" />
+            <data>DUAL</data>
+          </property>
+          <property id="Right.CreateProtocolMix.EnableVlan" value="True" displayName="Enable Vlan" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>True</data>
+          </property>
+          <property id="Right.CreateProtocolMix.VlanId" value="100" displayName="Vlan Id" widgetType="textbox" type="uint64" ignoreOnBackEnd="true">
+            <data>100</data>
+            <numericValidation minInclusive="1" maxInclusive="4095" />
+          </property>
+          <property id="Right.CreateProtocolMix.VlanIdStep" value="1" displayName="Vlan Id Step" widgetType="textbox" type="uint64" ignoreOnBackEnd="true">
+            <data>1</data>
+            <numericValidation minInclusive="1" maxInclusive="4095" />
+          </property>
+        </table>
+      </group>
+      <group displayName="Left Device Configuration">
+        <table id="table3">
+          <property id="Left.CreateProtocolMix.Ipv4Addr" value="1.1.1.2" displayName="Start IPv4 Address" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>1.1.1.2</data>
+          </property>
+          <property id="Left.CreateProtocolMix.Ipv4AddrStep" value="0.0.0.1" displayName="IPv4 Address Step" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>0.0.1.0</data>
+          </property>
+          <property id="Left.CreateProtocolMix.Ipv4GwAddr" value="1.1.1.1" displayName="Start IPv4 Gateway Address" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>1.1.1.1</data>
+          </property>
+          <property id="Left.CreateProtocolMix.Ipv4GwAddrStep" value="0.0.0.1" displayName="IPv4 Gateway Address Step" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>0.0.1.0</data>
+          </property>
+          <property id="Left.CreateProtocolMix.Ipv6Addr" value="2000::2" displayName="Start IPv6 Address" widgetType="textbox" type="ipv6" ignoreOnBackEnd="true">
+            <data>2000::2</data>
+          </property>
+          <property id="Left.CreateProtocolMix.Ipv6AddrStep" value="::1:0" displayName="IPv6 Address Step" widgetType="textbox" type="ipv6" ignoreOnBackEnd="true">
+            <data>::1:0</data>
+          </property>
+          <property id="Left.CreateProtocolMix.Ipv6GwAddr" value="2000::1" displayName="Start IPv6 Gateway Address" widgetType="textbox" type="ipv6" ignoreOnBackEnd="true">
+            <data>2000::1</data>
+          </property>
+          <property id="Left.CreateProtocolMix.Ipv6GwAddrStep" value="::1:0" displayName="IPv6 Gateway Address Step" widgetType="textbox" type="ipv6" ignoreOnBackEnd="true">
+            <data>::1:0</data>
+          </property>
+          <property id="Left.CreateProtocolMix.LLAddr" value="fe80::2" displayName="Link-Local Address" widgetType="textbox" type="ipv6" ignoreOnBackEnd="true">
+            <data>fe80::1:2</data>
+          </property>
+          <property id="Left.CreateProtocolMix.LLAddrStep" value="::1:0" displayName="Link-Local Address Step" widgetType="textbox" type="ipv6" ignoreOnBackEnd="true">
+            <data>::1:0</data>
+          </property>
+          <property id="Left.CreateProtocolMix.Ipv4RtrId" value="100.0.0.1" displayName="Start Router Id" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>100.0.0.1</data>
+          </property>
+          <property id="Left.CreateProtocolMix.Ipv4RtrIdStep" value="0.0.0.1" displayName="Router Id Step" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>0.0.0.1</data>
+          </property>
+          <property id="Left.CreateProtocolMix.MacAddr" value="00:10:95:00:00:01" displayName="Start MAC Address" widgetType="textbox" type="mac" ignoreOnBackEnd="true">
+            <data>00:10:95:00:00:01</data>
+          </property>
+          <property id="Left.CreateProtocolMix.MacAddrStep" value="00:00:00:00:00:01" displayName="MAC Address Step" widgetType="textbox" type="mac" ignoreOnBackEnd="true">
+            <data>00:00:00:00:00:01</data>
+          </property>
+        </table>
+      </group>
+      <group displayName="Right Device Configuration">
+        <table id="table4">
+          <property id="Right.CreateProtocolMix.Ipv4Addr" value="1.1.1.1" displayName="Start IPv4 Address" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>1.1.1.1</data>
+          </property>
+          <property id="Right.CreateProtocolMix.Ipv4AddrStep" value="0.0.0.1" displayName="IPv4 Address Step" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>0.0.1.0</data>
+          </property>
+          <property id="Right.CreateProtocolMix.Ipv4GwAddr" value="1.1.1.2" displayName="Start IPv4 Gateway Address" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>1.1.1.2</data>
+          </property>
+          <property id="Right.CreateProtocolMix.Ipv4GwAddrStep" value="0.0.0.1" displayName="IPv4 Gateway Address Step" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>0.0.1.0</data>
+          </property>
+          <property id="Right.CreateProtocolMix.Ipv6Addr" value="2000::1" displayName="Start IPv6 Address" widgetType="textbox" type="ipv6" ignoreOnBackEnd="true">
+            <data>2000::1</data>
+          </property>
+          <property id="Right.CreateProtocolMix.Ipv6AddrStep" value="::1:0" displayName="IPv6 Address Step" widgetType="textbox" type="ipv6" ignoreOnBackEnd="true">
+            <data>::1:0</data>
+          </property>
+          <property id="Right.CreateProtocolMix.Ipv6GwAddr" value="2000::2" displayName="Start IPv6 Gateway Address" widgetType="textbox" type="ipv6" ignoreOnBackEnd="true">
+            <data>2000:2</data>
+          </property>
+          <property id="Right.CreateProtocolMix.Ipv6GwAddrStep" value="::1:0" displayName="IPv6 Gateway Address Step" widgetType="textbox" type="ipv6" ignoreOnBackEnd="true">
+            <data>::1:0</data>
+          </property>
+          <property id="Right.CreateProtocolMix.LLAddr" value="fe80::1" displayName="Link-Local Address" widgetType="textbox" type="ipv6" ignoreOnBackEnd="true">
+            <data>fe80::1:1</data>
+          </property>
+          <property id="Right.CreateProtocolMix.LLAddrStep" value="::1:0" displayName="Link-Local Address Step" widgetType="textbox" type="ipv6" ignoreOnBackEnd="true">
+            <data>::1:0</data>
+          </property>
+          <property id="Right.CreateProtocolMix.Ipv4RtrId" value="100.0.0.1" displayName="Start Router Id" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>100.10.0.1</data>
+          </property>
+          <property id="Right.CreateProtocolMix.Ipv4RtrIdStep" value="0.0.0.1" displayName="Router Id Step" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>0.0.0.1</data>
+          </property>
+          <property id="Right.CreateProtocolMix.MacAddr" value="00:10:95:00:00:01" displayName="Start MAC Address" widgetType="textbox" type="mac" ignoreOnBackEnd="true">
+            <data>00:11:95:00:00:01</data>
+          </property>
+          <property id="Right.CreateProtocolMix.MacAddrStep" value="00:00:00:00:00:01" displayName="MAC Address Step" widgetType="textbox" type="mac" ignoreOnBackEnd="true">
+            <data>00:00:00:00:00:01</data>
+          </property>
+        </table>
+      </group>
+      <group displayName="Left Protocol Selection">
+        <table id="table5">
+          <property id="Left.CreateProtocolMix.Weight" value="10" displayName="Weight (%)" widgetType="textbox" type="int" ignoreOnBackEnd="true">
+            <data>100</data>
+          </property>
+          <property id="Left.CreateProtocolMix.EnableBgp" value="False" displayName="Enable BGP" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+          <property id="Left.CreateProtocolMix.EnableOspfv2" value="False" displayName="Enable OSPFv2" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+          <property id="Left.CreateProtocolMix.EnableOspfv3" value="False" displayName="Enable OSPFv3" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+          <property id="Left.CreateProtocolMix.EnableLdp" value="False" displayName="Enable LDP" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+          <property id="Left.CreateProtocolMix.EnableIsis" value="False" displayName="Enable ISIS" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+        </table>
+      </group>
+      <group displayName="Right Protocol Selection">
+        <table id="table6">
+          <property id="Right.CreateProtocolMix.Weight" value="10" displayName="Weight (%)" widgetType="textbox" type="int" ignoreOnBackEnd="true">
+            <data>100</data>
+          </property>
+          <property id="Right.CreateProtocolMix.EnableBgp" value="False" displayName="Enable BGP" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+          <property id="Right.CreateProtocolMix.EnableOspfv2" value="False" displayName="Enable OSPFv2" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+          <property id="Right.CreateProtocolMix.EnableOspfv3" value="False" displayName="Enable OSPFv3" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+          <property id="Right.CreateProtocolMix.EnableLdp" value="False" displayName="Enable LDP" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+          <property id="Right.CreateProtocolMix.EnableIsis" value="False" displayName="Enable ISIS" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+        </table>
+      </group>
+    </page>
+    
+    <!-- PROTOCOL PARAMETER CONFIGURATION SECTION -->
+    <page displayName="Setup Protocol Properties" description="Configure Protocols properties for Multi-Protocol test" image="diagram.png"> 
+      <group displayName="BFD Configuration">
+        <table id="bfd1">
+          <property id="CreateProtocolMix.BfdScaleMode" value="NORMAL" displayName="Scale Mode" widgetType="dropdown" type="enum" ignoreOnBackEnd="true">
+            <enumerationRef ref="BfdScaleMode" />
+            <data>NORMAL</data>
+          </property>
+          <property id="CreateProtocolMix.BfdTxInterval" value="50" displayName="Tx Interval (msec)" widgetType="textbox" type="uint64" ignoreOnBackEnd="true">
+            <data>50</data>
+          </property>
+          <property id="CreateProtocolMix.BfdRxInterval" value="50" displayName="Rx Interval (msec)" widgetType="textbox" type="uint64" ignoreOnBackEnd="true">
+            <data>50</data>
+          </property>
+          <property id="CreateProtocolMix.BfdDetectMultiplier" value="3" displayName="Detect Multiplier" widgetType="textbox" type="uint64" ignoreOnBackEnd="true">
+            <data>3</data>
+          </property>
+        </table>
+      </group>
+      <group displayName="Left BGP Configuration">
+        <table id="bgp1">
+          <property id="Left.CreateProtocolMix.BgpIpVersion" value="IPV4" displayName="IP Version" widgetType="dropdown" type="enum" ignoreOnBackEnd="true">
+            <enumerationRef ref="IpVersion" />
+            <data>IPV4</data>
+          </property>
+          <property id="Left.CreateProtocolMix.BgpAsNum" value="10" displayName="AS Num" widgetType="textbox" type="int" ignoreOnBackEnd="true">
+            <data>100</data>
+          </property>
+          <property id="Left.CreateProtocolMix.BgpAsNumStep" value="1" displayName="AS Num Step" widgetType="textbox" type="int" ignoreOnBackEnd="true">
+            <data>1</data>
+          </property>
+          <property id="Left.CreateProtocolMix.BgpDutAsNum" value="10" displayName="DUT AS Num" widgetType="textbox" type="int" ignoreOnBackEnd="true">
+            <data>100</data>
+          </property>
+          <property id="Left.CreateProtocolMix.BgpDutAsNumStep" value="1" displayName="DUT AS Num Step" widgetType="textbox" type="int" ignoreOnBackEnd="true">
+            <data>1</data>
+          </property>
+          <property id="Left.CreateProtocolMix.EnableBgpBfd" value="False" displayName="Enable BFD" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+        </table>
+      </group>
+      <group displayName="Right BGP Configuration">
+        <table id="bgp2">
+          <property id="Right.CreateProtocolMix.BgpIpVersion" value="IPV4" displayName="IP Version" widgetType="dropdown" type="enum" ignoreOnBackEnd="true">
+            <enumerationRef ref="IpVersion" />
+            <data>IPV4</data>
+          </property>
+          <property id="Right.CreateProtocolMix.BgpAsNum" value="10" displayName="AS Num" widgetType="textbox" type="int" ignoreOnBackEnd="true">
+            <data>100</data>
+          </property>
+          <property id="Right.CreateProtocolMix.BgpAsNumStep" value="1" displayName="AS Num Step" widgetType="textbox" type="int" ignoreOnBackEnd="true">
+            <data>1</data>
+          </property>
+          <property id="Right.CreateProtocolMix.BgpDutAsNum" value="10" displayName="DUT AS Num" widgetType="textbox" type="int" ignoreOnBackEnd="true">
+            <data>100</data>
+          </property>
+          <property id="Right.CreateProtocolMix.BgpDutAsNumStep" value="1" displayName="DUT AS Num Step" widgetType="textbox" type="int" ignoreOnBackEnd="true">
+            <data>1</data>
+          </property>
+          <property id="Right.CreateProtocolMix.EnableBgpBfd" value="False" displayName="Enable BFD" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+        </table>
+      </group>
+      
+      <group displayName="Left OSPFv2 Configuration">
+        <table id="opspfv21">
+          <property id="Left.CreateProtocolMix.Ospfv2AreaId" value="0.0.0.0" displayName="Area Id" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>1.0.0.0</data>
+          </property>
+          <property id="Left.CreateProtocolMix.Ospfv2AreaIdStep" value="0.0.0.1" displayName="Area Id Step" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>0.0.0.1</data>
+          </property>
+          <property id="Left.CreateProtocolMix.Ospfv2RouterPriority" value="0" displayName="Router Priority" widgetType="textbox" type="int" ignoreOnBackEnd="true">
+            <numericValidation minInclusive="0" maxInclusive="255" />
+            <data>0</data>
+          </property>
+          <property id="Left.CreateProtocolMix.Ospfv2NetworkType" value="P2P" displayName="NetworkType" widgetType="dropdown" type="enum" ignoreOnBackEnd="true">
+            <enumerationRef ref="OspfNetworkType" />
+            <data>P2P</data>
+          </property>
+          <property id="Left.CreateProtocolMix.EnableOspfv2Bfd" value="False" displayName="Enable BFD" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+        </table>
+      </group>
+      <group displayName="Right OSPFv2 Configuration">
+        <table id="ospfv22">
+          <property id="Right.CreateProtocolMix.Ospfv2AreaId" value="0.0.0.0" displayName="Area Id" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>1.0.0.0</data>
+          </property>
+          <property id="Right.CreateProtocolMix.Ospfv2AreaIdStep" value="0.0.0.1" displayName="Area Id Step" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>0.0.0.1</data>
+          </property>
+          <property id="Right.CreateProtocolMix.Ospfv2RouterPriority" value="0" displayName="Router Priority" widgetType="textbox" type="int" ignoreOnBackEnd="true">
+            <numericValidation minInclusive="0" maxInclusive="255" />
+            <data>0</data>
+          </property>
+          <property id="Right.CreateProtocolMix.Ospfv2NetworkType" value="P2P" displayName="NetworkType" widgetType="dropdown" type="enum" ignoreOnBackEnd="true">
+            <enumerationRef ref="OspfNetworkType" />
+            <data>P2P</data>
+          </property>
+          <property id="Right.CreateProtocolMix.EnableOspfv2Bfd" value="False" displayName="Enable BFD" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+        </table>
+      </group>
+      
+      <group displayName="Left OSPFv3 Configuration">
+        <table id="ospfv31">
+          <property id="Left.CreateProtocolMix.Ospfv3AreaId" value="0.0.0.0" displayName="Area Id" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>1.0.0.0</data>
+          </property>
+          <property id="Left.CreateProtocolMix.Ospfv3AreaIdStep" value="0.0.0.1" displayName="Area Id Step" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>0.0.0.1</data>
+          </property>
+          <property id="Left.CreateProtocolMix.Ospfv3RouterPriority" value="0" displayName="Router Priority" widgetType="textbox" type="int" ignoreOnBackEnd="true">
+            <numericValidation minInclusive="0" maxInclusive="255" />
+            <data>0</data>
+          </property>
+          <property id="Left.CreateProtocolMix.Ospfv3NetworkType" value="P2P" displayName="NetworkType" widgetType="dropdown" type="enum" ignoreOnBackEnd="true">
+            <enumerationRef ref="OspfNetworkType" />
+            <data>P2P</data>
+          </property>
+          <property id="Left.CreateProtocolMix.EnableOspfv3Bfd" value="False" displayName="Enable BFD" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+        </table>
+      </group>
+      <group displayName="Right OSPFv3 Configuration">
+        <table id="ospfv32">
+          <property id="Right.CreateProtocolMix.Ospfv3AreaId" value="0.0.0.0" displayName="Area Id" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>1.0.0.0</data>
+          </property>
+          <property id="Right.CreateProtocolMix.Ospfv3AreaIdStep" value="0.0.0.1" displayName="Area Id Step" widgetType="textbox" type="ipv4" ignoreOnBackEnd="true">
+            <data>0.0.0.1</data>
+          </property>
+          <property id="Right.CreateProtocolMix.Ospfv3RouterPriority" value="0" displayName="Router Priority" widgetType="textbox" type="int" ignoreOnBackEnd="true">
+            <numericValidation minInclusive="0" maxInclusive="255" />
+            <data>0</data>
+          </property>
+          <property id="Right.CreateProtocolMix.Ospfv3NetworkType" value="P2P" displayName="NetworkType" widgetType="dropdown" type="enum" ignoreOnBackEnd="true">
+            <enumerationRef ref="OspfNetworkType" />
+            <data>P2P</data>
+          </property>
+          <property id="Right.CreateProtocolMix.EnableOspfv3Bfd" value="False" displayName="Enable BFD" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+        </table>
+      </group>
+      
+      <group displayName="Left LDP Configuration">
+        <table id="ldp1">
+          <property id="Left.CreateProtocolMix.LdpHelloVersion" value="LDP_IPV4_HELLO" displayName="Hello Version" widgetType="dropdown" type="enum" ignoreOnBackEnd="true">
+            <enumerationRef ref="LdpHelloVersion" />
+            <data>LDP_IPV4_HELLO</data>
+          </property>
+          <property id="Left.CreateProtocolMix.EnableLdpBfd" value="False" displayName="Enable BFD" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+        </table>
+      </group>
+      <group displayName="Right LDP Configuration">
+        <table id="ldp2">
+          <property id="Right.CreateProtocolMix.LdpHelloVersion" value="LDP_IPV4_HELLO" displayName="Hello Version" widgetType="dropdown" type="enum" ignoreOnBackEnd="true">
+            <enumerationRef ref="LdpHelloVersion" />
+            <data>LDP_IPV4_HELLO</data>
+          </property>
+          <property id="Right.CreateProtocolMix.EnableLdpBfd" value="False" displayName="Enable BFD" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+        </table>
+      </group>
+      <group displayName="Left ISIS Configuration">
+        <table id="isis1">
+<!--          <property id="Left.CreateProtocolMix.IsisIpVersion" value="IPV4" displayName="IP Version" widgetType="dropdown" type="enum" ignoreOnBackEnd="true">
+            <enumerationRef ref="IpVersion" />
+            <data>IPV4</data>
+          </property> -->
+          <property id="Left.CreateProtocolMix.IsisRouterPriority" value="0" displayName="Router Priority" widgetType="textbox" type="int" ignoreOnBackEnd="true">
+            <numericValidation minInclusive="0" maxInclusive="127" />
+            <data>0</data>
+          </property>
+          <property id="Left.CreateProtocolMix.IsisNetworkType" value="P2P" displayName="NetworkType" widgetType="dropdown" type="enum" ignoreOnBackEnd="true">
+            <enumerationRef ref="OspfNetworkType" />
+            <data>P2P</data>
+          </property>
+          <property id="Left.CreateProtocolMix.EnableIsisBfd" value="False" displayName="Enable BFD" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+        </table>
+      </group>
+      <group displayName="Right ISIS Configuration">
+        <table id="isis2">
+<!--          <property id="Right.CreateProtocolMix.IsisIpVersion" value="IPV4" displayName="IP Version" widgetType="dropdown" type="enum" ignoreOnBackEnd="true">
+            <data>IPV4</data>
+          </property> -->
+          <property id="Right.CreateProtocolMix.IsisRouterPriority" value="0" displayName="Router Priority" widgetType="textbox" type="int" ignoreOnBackEnd="true">
+            <numericValidation minInclusive="0" maxInclusive="127" />
+            <data>0</data>
+          </property>
+          <property id="Right.CreateProtocolMix.IsisNetworkType" value="P2P" displayName="NetworkType" widgetType="dropdown" type="enum" ignoreOnBackEnd="true">
+            <enumerationRef ref="IsisNetworkType" />
+            <data>P2P</data>
+          </property>
+          <property id="Right.CreateProtocolMix.EnableIsisBfd" value="False" displayName="Enable BFD" widgetType="checkbox" type="bool" ignoreOnBackEnd="true">
+            <data>False</data>
+          </property>
+        </table>
+      </group>
+    </page>
+    
+    <!-- GENERAL TEST PARAMETERS SECTION -->
+    <page displayName="Test Configuration" description="Configure General Test Settings" image="diagram.png">
+      <group displayName="General Test Parameters">
+        <property id="SetTrafficLoad" value="100" displayName="Load (Frames Per Second)" widgetType="textbox" type="uint64" ignoreOnBackEnd="true" />
+        <property id="SamplingPollSubscriptionResultsCommand3MaximumPollingPeriodS" value="60" displayName="Protocol Establishment Wait Time (s)" widgetType="textbox" type="uint64" />
+        <property id="SamplingPollSubscriptionResultsCommand4MaximumPollingPeriodS" value="60" displayName="Protocol Stability Duration (s)" widgetType="textbox" type="uint64" />
+        <property id="SamplingPollSubscriptionResultsCommand6MaximumPollingPeriodS" value="10" displayName="Traffic Duration (s)" widgetType="textbox" type="uint64" />
+      </group>
+      <group displayName="PLACEHOLDER TODO: for future parameter support">
+        <property id="FrameSize" value="128" displayName="Frame Size (bytes)" widgetType="textbox" type="uint64" ignoreOnBackEnd="true" />
+        <property id="CheckFrameLossResult" value="False" displayName="Enable Check for Frame Loss" widgetType="checkbox" type="bool" ignoreOnBackEnd="true" />
+        <property id="CheckDeadStreamResults" value="False" displayName="Enable Check for Dead Streams/Flows" widgetType="checkbox" type="bool" ignoreOnBackEnd="true" />
+        <property id="EnableTrafficSetting" value="False" displayName="Enable Traffic" widgetType="checkbox" type="bool" ignoreOnBackEnd="true" />
+        <property id="EnableArpSetting" value="False" displayName="Enable ARP/ND (Learning))" widgetType="checkbox" type="bool" ignoreOnBackEnd="true" />
+      </group>
+    </page>
+  </wizard>
+  
+  <processingFunctions>
+    <processingFunction id="Left.CreateProtocolMix.TableData" scriptFile="txml_processing_functions.py" entryFunction="config_table_data">
+      <!-- SrcId MUST map to a property that appears in the wizard section.  This will be passed in dictionary form to the processing function -->
+      <!-- scriptVarName is the name to be used in the dictionary.  If not specified, the SrcId as a string will be used. -->
+      <!-- Default specifies a constant value that will be passed directly into the processing function when srcId is not specified. -->
+      <input srcId="Left.CreateProtocolMix.EnableVlan" scriptVarName="EnableVlan" />
+      <input srcId="Left.CreateProtocolMix.VlanId" scriptVarName="VlanId" />
+      <input srcId="Left.CreateProtocolMix.VlanIdStep" scriptVarName="VlanIdStep" />
+      <input srcId="Left.CreateProtocolMix.Ipv4Addr" scriptVarName="Ipv4Addr" />
+      <input srcId="Left.CreateProtocolMix.Ipv4AddrStep" scriptVarName="Ipv4AddrStep" />
+      <input srcId="Left.CreateProtocolMix.Ipv4GwAddr" scriptVarName="Ipv4GwAddr" />
+      <input srcId="Left.CreateProtocolMix.Ipv4GwAddrStep" scriptVarName="Ipv4GwAddrStep" />
+      <input srcId="Left.CreateProtocolMix.Ipv6Addr" scriptVarName="Ipv6Addr" />
+      <input srcId="Left.CreateProtocolMix.Ipv6AddrStep" scriptVarName="Ipv6AddrStep" />
+      <input srcId="Left.CreateProtocolMix.Ipv6GwAddr" scriptVarName="Ipv6GwAddr" />
+      <input srcId="Left.CreateProtocolMix.Ipv6GwAddrStep" scriptVarName="Ipv6GwAddrStep" />
+      <input srcId="Left.CreateProtocolMix.LLAddr" scriptVarName="linkLocalAddr" />
+      <input srcId="Left.CreateProtocolMix.LLAddrStep" scriptVarName="linkLocalAddrStep" />
+      <input srcId="Left.CreateProtocolMix.Ipv4RtrId" scriptVarName="Ipv4RtrId" />
+      <input srcId="Left.CreateProtocolMix.Ipv4RtrIdStep" scriptVarName="Ipv4RtrIdStep" />
+      <input srcId="Left.CreateProtocolMix.MacAddr" scriptVarName="MacAddr" />
+      <input srcId="Left.CreateProtocolMix.MacAddrStep" scriptVarName="MacAddrStep" />
+      <input srcId="Left.CreateProtocolMix.Weight" scriptVarName="Weight" />
+      
+      <input srcId="CreateProtocolMix.BfdScaleMode" scriptVarName="BfdScaleMode" />
+      <input srcId="CreateProtocolMix.BfdTxInterval" scriptVarName="BfdTxInterval" />
+      <input srcId="CreateProtocolMix.BfdRxInterval" scriptVarName="BfdRxInterval" />
+      <input srcId="CreateProtocolMix.BfdDetectMultiplier" scriptVarName="BfdDetectMultiplier" />
+      
+      <input srcId="Left.CreateProtocolMix.EnableBgp" scriptVarName="EnableBgp" />
+      <input srcId="Left.CreateProtocolMix.BgpIpVersion" scriptVarName="BgpIpVersion" />
+      <input srcId="Left.CreateProtocolMix.BgpAsNum" scriptVarName="BgpAsNum" />
+      <input srcId="Left.CreateProtocolMix.BgpAsNumStep" scriptVarName="BgpAsNumStep" />
+      <input srcId="Left.CreateProtocolMix.BgpDutAsNum" scriptVarName="BgpDutAsNum" />
+      <input srcId="Left.CreateProtocolMix.BgpDutAsNumStep" scriptVarName="BgpDutAsNumStep" />
+      <input srcId="Left.CreateProtocolMix.EnableBgpBfd" scriptVarName="EnableBgpBfd" />
+      
+      <input srcId="Left.CreateProtocolMix.EnableOspfv2" scriptVarName="EnableOspfv2" />
+      <input srcId="Left.CreateProtocolMix.Ospfv2AreaId" scriptVarName="Ospfv2AreaId" />
+      <input srcId="Left.CreateProtocolMix.Ospfv2AreaIdStep" scriptVarName="Ospfv2AreaIdStep" />
+      <input srcId="Left.CreateProtocolMix.Ospfv2RouterPriority" scriptVarName="Ospfv2RouterPriority" />
+      <input srcId="Left.CreateProtocolMix.Ospfv2NetworkType" scriptVarName="Ospfv2NetworkType" />
+      <input srcId="Left.CreateProtocolMix.EnableOspfv2Bfd" scriptVarName="EnableOspfv2Bfd" />
+      
+      <input srcId="Left.CreateProtocolMix.EnableOspfv3" scriptVarName="EnableOspfv3" />
+      <input srcId="Left.CreateProtocolMix.Ospfv3AreaId" scriptVarName="Ospfv3AreaId" />
+      <input srcId="Left.CreateProtocolMix.Ospfv3AreaIdStep" scriptVarName="Ospfv3AreaIdStep" />
+      <input srcId="Left.CreateProtocolMix.Ospfv3RouterPriority" scriptVarName="Ospfv3RouterPriority" />
+      <input srcId="Left.CreateProtocolMix.Ospfv3NetworkType" scriptVarName="Ospfv3NetworkType" />
+      <input srcId="Left.CreateProtocolMix.EnableOspfv3Bfd" scriptVarName="EnableOspfv3Bfd" />
+
+      <input srcId="Left.CreateProtocolMix.EnableLdp" scriptVarName="EnableLdp" />
+      <input srcId="Left.CreateProtocolMix.LdpHelloVersion" scriptVarName="LdpHelloVersion" />
+      <input srcId="Left.CreateProtocolMix.EnableLdpBfd" scriptVarName="EnableLdpBfd" />
+      
+      <input srcId="Left.CreateProtocolMix.EnableIsis" scriptVarName="EnableIsis" />
+<!--      <input srcId="Left.CreateProtocolMix.IsisIpVersion" scriptVarName="IsisIpVersion" /> -->
+      <input srcId="Left.CreateProtocolMix.IsisRouterPriority" scriptVarName="IsisRouterPriority" />
+      <input srcId="Left.CreateProtocolMix.IsisNetworkType" scriptVarName="IsisNetworkType" />
+      <input srcId="Left.CreateProtocolMix.EnableIsisBfd" scriptVarName="EnableIsisBfd" />
+      
+      <!-- scriptVarName is the name of the output in the output dictionary. -->
+      <!-- epKey is the name of the ExposedProperty.EPNameId that the value stored in scriptVarName in the output dictionary will be passed to. -->
+      <output scriptVarName="TableData" epKey="TestMethodologyCreateProtocolMixCommand3TableData" />
+    </processingFunction>
+    
+    <processingFunction id="Right.CreateProtocolMix.TableData" scriptFile="txml_processing_functions.py" entryFunction="config_table_data">
+      <input srcId="Right.CreateProtocolMix.EnableVlan" scriptVarName="EnableVlan" />
+      <input srcId="Right.CreateProtocolMix.VlanId" scriptVarName="VlanId" />
+      <input srcId="Right.CreateProtocolMix.VlanIdStep" scriptVarName="VlanIdStep" />
+      <input srcId="Right.CreateProtocolMix.Ipv4Addr" scriptVarName="Ipv4Addr" />
+      <input srcId="Right.CreateProtocolMix.Ipv4AddrStep" scriptVarName="Ipv4AddrStep" />
+      <input srcId="Right.CreateProtocolMix.Ipv4GwAddr" scriptVarName="Ipv4GwAddr" />
+      <input srcId="Right.CreateProtocolMix.Ipv4GwAddrStep" scriptVarName="Ipv4GwAddrStep" />
+      <input srcId="Right.CreateProtocolMix.Ipv6Addr" scriptVarName="Ipv6Addr" />
+      <input srcId="Right.CreateProtocolMix.Ipv6AddrStep" scriptVarName="Ipv6AddrStep" />
+      <input srcId="Right.CreateProtocolMix.Ipv6GwAddr" scriptVarName="Ipv6GwAddr" />
+      <input srcId="Right.CreateProtocolMix.Ipv6GwAddrStep" scriptVarName="Ipv6GwAddrStep" />
+      <input srcId="Right.CreateProtocolMix.LLAddr" scriptVarName="linkLocalAddr" />
+      <input srcId="Right.CreateProtocolMix.LLAddrStep" scriptVarName="linkLocalAddrStep" />
+      <input srcId="Right.CreateProtocolMix.Ipv4RtrId" scriptVarName="Ipv4RtrId" />
+      <input srcId="Right.CreateProtocolMix.Ipv4RtrIdStep" scriptVarName="Ipv4RtrIdStep" />
+      <input srcId="Right.CreateProtocolMix.MacAddr" scriptVarName="MacAddr" />
+      <input srcId="Right.CreateProtocolMix.MacAddrStep" scriptVarName="MacAddrStep" />
+      <input srcId="Right.CreateProtocolMix.Weight" scriptVarName="Weight" />
+
+      <input srcId="CreateProtocolMix.BfdScaleMode" scriptVarName="BfdScaleMode" />
+      <input srcId="CreateProtocolMix.BfdTxInterval" scriptVarName="BfdTxInterval" />
+      <input srcId="CreateProtocolMix.BfdRxInterval" scriptVarName="BfdRxInterval" />
+      <input srcId="CreateProtocolMix.BfdDetectMultiplier" scriptVarName="BfdDetectMultiplier" />
+
+      <input srcId="Right.CreateProtocolMix.EnableBgp" scriptVarName="EnableBgp" />
+      <input srcId="Right.CreateProtocolMix.BgpIpVersion" scriptVarName="BgpIpVersion" />
+      <input srcId="Right.CreateProtocolMix.BgpAsNum" scriptVarName="BgpAsNum" />
+      <input srcId="Right.CreateProtocolMix.BgpAsNumStep" scriptVarName="BgpAsNumStep" />
+      <input srcId="Right.CreateProtocolMix.BgpDutAsNum" scriptVarName="BgpDutAsNum" />
+      <input srcId="Right.CreateProtocolMix.BgpDutAsNumStep" scriptVarName="BgpDutAsNumStep" />
+      <input srcId="Right.CreateProtocolMix.EnableBgpBfd" scriptVarName="EnableBgpBfd" />
+      
+      <input srcId="Right.CreateProtocolMix.EnableOspfv2" scriptVarName="EnableOspfv2" />
+      <input srcId="Right.CreateProtocolMix.Ospfv2AreaId" scriptVarName="Ospfv2AreaId" />
+      <input srcId="Right.CreateProtocolMix.Ospfv2AreaIdStep" scriptVarName="Ospfv2AreaIdStep" />
+      <input srcId="Right.CreateProtocolMix.Ospfv2RouterPriority" scriptVarName="Ospfv2RouterPriority" />
+      <input srcId="Right.CreateProtocolMix.Ospfv2NetworkType" scriptVarName="Ospfv2NetworkType" />
+      <input srcId="Right.CreateProtocolMix.EnableOspfv2Bfd" scriptVarName="EnableOspfv2Bfd" />
+      
+      <input srcId="Right.CreateProtocolMix.EnableOspfv3" scriptVarName="EnableOspfv3" />
+      <input srcId="Right.CreateProtocolMix.Ospfv3AreaId" scriptVarName="Ospfv3AreaId" />
+      <input srcId="Right.CreateProtocolMix.Ospfv3AreaIdStep" scriptVarName="Ospfv3AreaIdStep" />
+      <input srcId="Right.CreateProtocolMix.Ospfv3RouterPriority" scriptVarName="Ospfv3RouterPriority" />
+      <input srcId="Right.CreateProtocolMix.Ospfv3NetworkType" scriptVarName="Ospfv3NetworkType" />
+      <input srcId="Right.CreateProtocolMix.EnableOspfv3Bfd" scriptVarName="EnableOspfv3Bfd" />
+      
+      <input srcId="Right.CreateProtocolMix.EnableLdp" scriptVarName="EnableLdp" />
+      <input srcId="Right.CreateProtocolMix.LdpHelloVersion" scriptVarName="LdpHelloVersion" />
+      <input srcId="Right.CreateProtocolMix.EnableLdpBfd" scriptVarName="EnableLdpBfd" />
+
+      <input srcId="Right.CreateProtocolMix.EnableIsis" scriptVarName="EnableIsis" />
+<!--      <input srcId="Right.CreateProtocolMix.IsisIpVersion" scriptVarName="IsisIpVersion" /> -->
+      <input srcId="Right.CreateProtocolMix.IsisRouterPriority" scriptVarName="IsisRouterPriority" />
+      <input srcId="Right.CreateProtocolMix.IsisNetworkType" scriptVarName="IsisNetworkType" />
+      <input srcId="Right.CreateProtocolMix.EnableIsisBfd" scriptVarName="EnableIsisBfd" />
+      <output scriptVarName="TableData" epKey="TestMethodologyCreateProtocolMixCommand4TableData" />
+    </processingFunction>
+    
+    <processingFunction id="Config.CreateProtocolMix.DeviceCount" scriptFile="txml_processing_functions.py" entryFunction="config_device_iterator_value">
+      <input srcId="MethTestType" scriptVarName="TestType" />
+      <input srcId="ScaleDeviceCount" scriptVarName="ScaleDeviceCount" />
+      <input srcId="DeviceCountMin" scriptVarName="MinDeviceCount" />
+      <input srcId="DeviceCountMax" scriptVarName="MaxDeviceCount" />
+      <output scriptVarName="minDev" epKey="TestMethodologyIteratorMinVal" />
+      <output scriptVarName="maxDev" epKey="TestMethodologyIteratorMaxVal" />
+    </processingFunction>
+    
+    <processingFunction id="Config.CreateTrafficMix.Load" scriptFile="txml_processing_functions.py" entryFunction="config_traffic_load">
+      <input srcId="SetTrafficLoad" scriptVarName="TrafficLoad" />
+      <output scriptVarName="Load1" epKey="TrafficCreateTrafficMixCommand1Load" />
+      <output scriptVarName="Load2" epKey="TrafficCreateTrafficMixCommand2Load" />
+    </processingFunction>
+  </processingFunctions>
+</test>

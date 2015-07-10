@@ -1,0 +1,1690 @@
+<?xml version="1.0" ?>
+<stc:meta package="spirent.methodology" plugin="plcommands" version="0.0.0-0" xmlns:stc="urn:www.spirentcom.com:XMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<stc:class
+    name="IterationGroupCommand"
+    baseClass="stak.StakGroupCommand"
+    displayName="Iteration Group Command"
+    bllDirectInterface="true"
+    isInternal="false">
+
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Iteration Group"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="ObjectList" displayName="Object List" type="handle" default="" minOccurs="0" maxOccurs="unbounded" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of objects to configure" />
+    </stc:property>
+</stc:class>
+
+<!-- Wait for Property Value Command (more generic than Verify Results Value but probably for internal use only) -->
+<stc:class name="WaitForPropertyValueCommand" displayName="Wait For Property Value Command" bllDirectInterface="true" isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Wait for an object's property to reach a certain value" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Utilities//Custom Builder Commands"/>
+    <stc:attribute type="core.RequireApplyToIL" value="true" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:enumeration name="EnumPropertyValueType">
+      <stc:enum name="NUMBER"     value="0" displayName="Number" />
+      <stc:enum name="BOOL"        value="1" displayName="Bool" />
+      <stc:enum name="STRING"      value="2" displayName="String" />
+      <stc:enum name="ENUM"        value="3" displayName="Enum" />
+    </stc:enumeration>
+
+    <stc:enumeration name="EnumOperationType">
+      <stc:enum name="EQUALS"                   value="0" displayName="Equals" />
+      <stc:enum name="NOT_EQUALS"               value="1" displayName="Not Equal" />
+      <stc:enum name="GREATER_THAN"             value="2" displayName="Greater" />
+      <stc:enum name="LESS_THAN"                value="3" displayName="Less" />
+      <stc:enum name="GREATER_THAN_OR_EQUALS"   value="4" displayName="Greater or Equal" />
+      <stc:enum name="LESS_THAN_OR_EQUALS"      value="5" displayName="Less or Equal" />
+    </stc:enumeration>
+
+    <stc:property category="input" name="ParentList" displayName="Parent List" type="handle" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of parent objects to wait for property value on" />
+      <stc:attribute type="core.ValidHandleTypes" value="EmulatedDevice" internalType="string" />
+    </stc:property>
+    <stc:property category="input" name="ObjectClassName" displayName="Object Class Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Object Class Name" />
+    </stc:property>
+    <stc:property category="input" name="PropertyName" displayName="Property Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the Property to wait for" />
+    </stc:property>
+    <stc:property category="input" name="PropertyValue" displayName="Property Value" type="string" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the value to wait for" />
+    </stc:property>
+    <stc:property category="input" name="PropertyValueType" displayName="Property Value Type" type="u8" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Property Value Type" />
+      <stc:enumerationRef ref="EnumPropertyValueType"/>
+    </stc:property>
+    <stc:property category="input" name="OperationType" displayName="Operation Type" type="u8" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the value to wait for" />
+      <stc:enumerationRef ref="EnumOperationType"/>
+    </stc:property>
+    <stc:property category="input" name="PollInterval" displayName="Poll Interval" type="u32" default="10">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="How often to poll state result in seconds" />
+    </stc:property>
+    <stc:property category="input" name="MaxWaitTime" displayName="Maximum Wait Time" type="u32" default="10">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Maximum amount of time to wait for state change in seconds" />
+    </stc:property>
+</stc:class>
+
+
+<!-- Iterator command base class -->
+<stc:class name="IteratorCommand" displayName="Iterator Command" bllDirectInterface="true" isInternal="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Base Iterator Command" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Utilities//Iteration Framework"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="BreakOnFail" displayName="Break on fail" type="bool" default="false" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Break out of the test when an iteration fails" />
+    </stc:property>
+    <stc:property category="input" name="MinVal" displayName="Minimum value" type="double" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Minimum value" />
+    </stc:property>
+    <stc:property category="input" name="MaxVal" displayName="Maximum value" type="double" default="100">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Maximum value" />
+    </stc:property>
+    <stc:property category="input" name="PrevIterVerdict" displayName="Previous iteration result" type="bool" default="true" isInternal="false" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Result of the previous iteration" />
+    </stc:property>
+
+    <stc:property category="state" name="Iteration" displayName="Iteration" type="u32" default="0" isInternal="false">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Iteration number" />
+    </stc:property>
+    <stc:property category="state" name="CurrVal" displayName="Current value" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Value to use in the current iteration" />
+    </stc:property>
+    <stc:property category="state" name="ResetState" displayName="Reset State" type="bool" default="false" isInternal="true" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Reset state properties" />
+    </stc:property>
+
+</stc:class>
+
+
+<!-- Iterate over discrete objects -->
+<stc:class name="ObjectIteratorCommand" displayName="Object Iterator Command" baseClass="spirent.methodology.IteratorCommand" bllDirectInterface="true" isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Object Iterator Command" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Iterators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:enumeration name="EnumIterMode">
+      <stc:enum name="STEP"         value="1" displayName="Step" />
+      <stc:enum name="BINARY"       value="2" displayName="Binary" />
+    </stc:enumeration>
+
+    <stc:enumeration name="EnumValueType">
+      <stc:enum name="RANGE"        value="1" displayName="Range" />
+      <stc:enum name="LIST"         value="2" displayName="List" />
+    </stc:enumeration>
+
+    <stc:property category="input" name="IterMode" displayName="Iteration Mode" type="u8" default="STEP" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Iteration mode" />
+      <stc:enumerationRef ref="EnumIterMode"/>
+    </stc:property>
+    <stc:property category="input" name="StepVal" displayName="Step value" type="double" default="10">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Step value" />
+    </stc:property>
+    <stc:property category="input" name="ValueType" displayName="Value type" type="u8" default="RANGE" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Value type (list or range)" />
+      <stc:enumerationRef ref="EnumValueType"/>
+    </stc:property>
+    <stc:property category="input" name="ValueList" displayName="List of values" type="string" default="" minOccurs="0" maxOccurs="unbounded" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of values to test" />
+    </stc:property>
+
+    <stc:property category="state" name="CurrIndex" displayName="Current Index" type="u32" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Current list value's index" />
+    </stc:property>
+    <stc:property category="state" name="MinFail" displayName="Minimum fail value" type="double" default="" isInternal="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Minimum fail value" />
+    </stc:property>
+    <stc:property category="state" name="MaxPass" displayName="Maximum pass value" type="double" default="" isInternal="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Maximum pass value" />
+    </stc:property>
+
+    <stc:property category="output" name="IsConverged" displayName="Is Converged" type="bool" default="false">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Did the iterator converge?" />
+    </stc:property>
+    <stc:property category="output" name="ConvergedVal" displayName="Converged Value" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Value the iterator converged on" />
+    </stc:property>
+
+</stc:class>
+
+
+<!-- Iterate over continuous values like rates (ie RFC 2544 style throughput search) -->
+<stc:class name="RateIteratorCommand" displayName="Rate Iterator Command" baseClass="spirent.methodology.IteratorCommand" bllDirectInterface="true" isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Rate Iterator Command" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Iterators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:enumeration name="EnumResolutionMode">
+      <stc:enum name="PERCENT"       value="1" displayName="Percent" />
+      <stc:enum name="ABSOLUTE"      value="2" displayName="Absolute" />
+    </stc:enumeration>
+
+    <stc:property category="input" name="Resolution" displayName="Resolution" type="double" default="1">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="How close to get to the true value" />
+    </stc:property>
+    <stc:property category="input" name="ResolutionMode" displayName="Resolution Mode" type="u8" default="PERCENT">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Resolution units" />
+      <stc:enumerationRef ref="EnumResolutionMode"/>
+    </stc:property>
+    <stc:property category="input" name="RoundingResolution" displayName="Rounding Resolution" type="double" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="How to round the values used. 0 means no rounding." />
+    </stc:property>
+
+    <stc:property category="state" name="MinFail" displayName="Minimum fail value" type="double" default="" isInternal="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Minimum fail value" />
+    </stc:property>
+    <stc:property category="state" name="MaxPass" displayName="Maximum pass value" type="double" default="" isInternal="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Maximum pass value" />
+    </stc:property>
+
+    <stc:property category="output" name="IsConverged" displayName="Is Converged" type="bool" default="false">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Did the iterator converge?" />
+    </stc:property>
+    <stc:property category="output" name="ConvergedVal" displayName="Converged Value" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Value the iterator converged on" />
+    </stc:property>
+</stc:class>
+
+
+<!-- Reverse iterator for stability search -->
+<stc:class
+    name="StabilityBackoffIteratorCommand"
+    displayName="Stability Backoff Iterator Command"
+    baseClass="spirent.methodology.IteratorCommand"
+    bllDirectInterface="true"
+    isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Stability Backoff Iterator (reverse iteration from a maximum value while repeating each test value some number of times for stability)" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Iterators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:enumeration name="EnumValueType">
+      <stc:enum name="RANGE"        value="1" displayName="Range" />
+      <stc:enum name="LIST"         value="2" displayName="List" />
+    </stc:enumeration>
+
+    <stc:property category="input" name="StepVal" displayName="Step value" type="double" default="10">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Amount to step backwards by" />
+    </stc:property>
+    <stc:property category="input" name="RepeatCount" displayName="Step value" type="u32" default="5">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Number of times to repeat an iteration" />
+    </stc:property>
+    <stc:property category="input" name="SuccessPercent" displayName="Success Percent" type="double" default="100">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Number of times a repeated value has to pass to be considered stable" />
+    </stc:property>
+    <stc:property category="input" name="ValueType" displayName="Value type" type="u8" default="RANGE" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Value type (list or range)" />
+      <stc:enumerationRef ref="EnumValueType"/>
+    </stc:property>
+    <stc:property category="input" name="ValueList" displayName="List of values" type="string" default="" minOccurs="0" maxOccurs="unbounded" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of values to test" />
+    </stc:property>
+
+    <stc:property category="state" name="CurrIndex" displayName="Current Index" type="u32" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Current list value's index" />
+    </stc:property>
+    <stc:property category="state" name="MinFail" displayName="Minimum fail value" type="double" default="" isInternal="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Minimum fail value" />
+    </stc:property>
+    <stc:property category="state" name="MaxPass" displayName="Maximum pass value" type="double" default="" isInternal="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Maximum pass value" />
+    </stc:property>
+    <stc:property category="state" name="SuccessCount" displayName="Success Count" type="u32" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Number of successful trials" />
+    </stc:property>
+    <stc:property category="state" name="TrialNum" displayName="Trial Number" type="u32" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Trial number for a particular test value" />
+    </stc:property>
+
+    <stc:property category="output" name="StableValue" displayName="Stable value" type="string" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Stable value" />
+    </stc:property>
+    <stc:property category="output" name="FoundStableValue" displayName="Found a stable value" type="bool" default="false">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Flag indicating a stable value was found" />
+    </stc:property>
+
+</stc:class>
+
+
+<!-- Object Iterator + Stability Backoff Iterator -->
+<stc:class
+    name="BenchmarkStabilityIteratorCommand"
+    displayName="Benchmark Stability Iterator Command"
+    baseClass="spirent.methodology.IteratorCommand"
+    bllDirectInterface="true"
+    isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Discrete step size binary or step search followed by stability test with backoff" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Iterators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:enumeration name="EnumIterMode">
+      <stc:enum name="STEP"         value="1" displayName="Step" />
+      <stc:enum name="BINARY"       value="2" displayName="Binary" />
+    </stc:enumeration>
+
+    <stc:enumeration name="EnumValueType">
+      <stc:enum name="RANGE"        value="1" displayName="Range" />
+      <stc:enum name="LIST"         value="2" displayName="List" />
+    </stc:enumeration>
+
+    <stc:enumeration name="EnumIterState">
+      <stc:enum name="SEARCH"       value="1" displayName="Goal Seeking" />
+      <stc:enum name="STABILITY"    value="2" displayName="Stability Backoff" />
+    </stc:enumeration>
+
+    <!-- Generic properties -->
+    <stc:property category="input" name="EnableStabilityBackoff" displayName="Enable Stability Backoff" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Enable stability backoff iteration once a converged value is found.  If false, iteration will end once a converged value is found." />
+    </stc:property>
+
+    <!-- ObjectIterator properties -->
+    <stc:property category="input" name="IterMode" displayName="Iteration Mode" type="u8" default="STEP" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Iteration mode" />
+      <stc:enumerationRef ref="EnumIterMode"/>
+    </stc:property>
+    <stc:property category="input" name="StepVal" displayName="Step value" type="double" default="10">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Step value" />
+    </stc:property>
+    <stc:property category="input" name="ValueType" displayName="Value type" type="u8" default="RANGE" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Value type (list or range)" />
+      <stc:enumerationRef ref="EnumValueType"/>
+    </stc:property>
+    <stc:property category="input" name="ValueList" displayName="List of values" type="string" default="" minOccurs="0" maxOccurs="unbounded" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of values to test" />
+    </stc:property>
+
+    <!-- StabilityBackoffIterator properties -->
+    <stc:property category="input" name="RepeatCount" displayName="Repeat Count" type="u32" default="5">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Number of times to repeat an iteration" />
+    </stc:property>
+    <stc:property category="input" name="SuccessPercent" displayName="Success Percent" type="double" default="100">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Number of times a repeated value has to pass to be considered stable" />
+    </stc:property>
+
+    <!-- Internal state properties -->
+    <stc:property category="state" name="CurrIndex" displayName="Current Index" type="u32" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Current list value's index" />
+    </stc:property>
+    <stc:property category="state" name="IterState" displayName="Iterator state" type="u8" default="SEARCH" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Specifies what part of the search the iterator is in (goal-seeking or stability backoff)" />
+      <stc:enumerationRef ref="EnumIterState"/>
+    </stc:property>
+
+    <!-- ObjectIteratorCommand State Properties -->
+    <stc:property category="state" name="SearchIteration" displayName="Goal-seeking Test Iteration Number" type="u32" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Iteration number used during goal-seek testing" />
+    </stc:property>
+    <stc:property category="state" name="SearchMinFail" displayName="Minimum fail value" type="double" default="" isInternal="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Minimum failing value encountered during search" />
+    </stc:property>
+    <stc:property category="state" name="SearchMaxPass" displayName="Maximum pass value" type="double" default="" isInternal="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Maximum passing value encountered during search" />
+    </stc:property>
+
+    <!-- StabilityBackoffIterator Command State Properties -->
+    <stc:property category="state" name="StabilityIteration" displayName="Stability Test Iteration Number" type="u32" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Iteration number used during stability testing" />
+    </stc:property>
+    <stc:property category="state" name="StabilityTrialNum" displayName="Stability Test Trial Number" type="u32" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Trial number for a particular test value during stability testing" />
+    </stc:property>
+    <stc:property category="state" name="StabilitySuccessCount" displayName="Stability Success Count" type="u32" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Number of successful trials in a iteration during stability testing" />
+    </stc:property>
+
+    <!-- Output properties -->
+    <stc:property category="output" name="IsConverged" displayName="Is Converged" type="bool" default="false">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Did the iterator converge?" />
+    </stc:property>
+    <stc:property category="output" name="ConvergedVal" displayName="Converged Value" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Value the iterator converged on" />
+    </stc:property>
+
+    <stc:property category="output" name="StableValue" displayName="Stable value" type="string" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Stable value" />
+    </stc:property>
+    <stc:property category="output" name="FoundStableValue" displayName="Found a stable value" type="bool" default="false">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Flag indicating a stable value was found" />
+    </stc:property>
+
+</stc:class>
+
+
+<!-- Iterate over tagged objects -->
+<stc:class name="TaggedObjectsIteratorCommand"
+           displayName="Tagged Objects Iterator Command"
+           baseClass="spirent.methodology.IteratorCommand"
+           bllDirectInterface="true" isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Tagged Objects Iterator Command" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Iterators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:enumeration name="EnumObjectOrder">
+      <stc:enum name="SCALAR"   value="1" displayName="Scalar" />
+      <stc:enum name="TUPLE"    value="2" displayName="Tuple" />
+    </stc:enumeration>
+
+    <stc:property category="input" name="ObjectOrder" displayName="Iteration Mode" type="u8" default="SCALAR" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Order of tagged objects" />
+      <stc:enumerationRef ref="EnumObjectOrder"/>
+    </stc:property>
+    <stc:property category="input" name="TagNameList" displayName="List of Tag Names" type="string" default="" minOccurs="0" maxOccurs="unbounded" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Obtain objects from named tags" />
+    </stc:property>
+</stc:class>
+
+
+<!-- Configurator base class -->
+<stc:class name="IteratorConfigCommand" displayName="Iterator Config Command" bllDirectInterface="true" isInternal="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Base Iterator Config Command" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Configurators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="ObjectList" displayName="Object List" type="handle" default="" minOccurs="1" maxOccurs="unbounded" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of objects to configure" />
+    </stc:property>
+    <stc:property category="input" name="IgnoreEmptyTags" displayName="Ignore Empty Tags" type="bool" default="false">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="If set to false, tags must point to at least one object" />
+    </stc:property>
+    <stc:property category="input" name="TagList" displayName="Tag List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of Tags from which to get objects to be configured" />
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="core.ValidHandleTypes" value="Tag" />
+    </stc:property>
+    <stc:property category="input" name="CurrVal" displayName="Current value" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Value to use in the current iteration" />
+    </stc:property>
+    <stc:property category="input" name="Iteration" displayName="Iteration" type="u32" default="0" isInternal="false">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Iteration number" />
+    </stc:property>
+</stc:class>
+
+<stc:class name="IteratorConfigPropertyValueCommand"
+           displayName="Iterator Config Property Value Command"
+           baseClass="spirent.methodology.IteratorConfigCommand"
+           bllDirectInterface="true"
+           isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Configure the property for objects of a given type" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Configurators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="ClassName" displayName="Class Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the object's class" />
+    </stc:property>
+    <stc:property category="input" name="PropertyName" displayName="Property Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the property to configure" />
+    </stc:property>
+</stc:class>
+
+<stc:class name="IteratorConfigRotateTrafficMixWeightsCommand" displayName="Iterator Config Rotate Traffic Mix Weights Command" baseClass="spirent.methodology.IteratorConfigCommand" bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Reconfigure the Traffic Mix's load weights by rotating the weights list to the right by RotationCount (or left by a negative count)." />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Configurators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+</stc:class>
+
+
+<stc:class name="ResetRotateTrafficMixWeightsCommand" displayName="Reset Rotate Traffic Mix Weights Command" bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Configure the TrafficProfile's frame size" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Utilities//Iteration Framework//Configurators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="ObjectList" displayName="Object List" type="handle" default="" minOccurs="1" maxOccurs="unbounded" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of objects to configure" />
+    </stc:property>
+    <stc:property category="input" name="TrafficMixTagList" displayName="Traffic Mix Tag List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of Tag names to identify the Traffic Mix objects." />
+    </stc:property>
+</stc:class>
+
+<stc:class name="IteratorConfigFrameSizeCommand" displayName="Iterator Config Frame Size Command" baseClass="spirent.methodology.IteratorConfigCommand" bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Configure the frame size on a group of tagged streamblocks" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Configurators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+</stc:class>
+
+
+<stc:class name="IteratorConfigTrafficLoadCommand" displayName="Iterator Config Traffic Load Command" baseClass="spirent.methodology.IteratorConfigCommand" bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Configure the traffic load on a group of tagged streamblocks" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Configurators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="LoadUnit" displayName="Load Units" type="u8" default="PERCENT_LINE_RATE" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Load Units" />
+      <stc:enumerationRef ref="StreamBlock.EnumLoadUnit"/>
+    </stc:property>
+</stc:class>
+
+
+<stc:class name="TagObjectConfigCommand"
+           displayName="Tag Object Config Command"
+           baseClass="spirent.methodology.IteratorConfigCommand"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Set Tag to only point to specified object handle(s)" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Configurators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <!-- Remove this and call it TagList -->
+    <stc:property category="input" name="TagNameList" displayName="Tag Name List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of Tags used to tag objects specified" />
+    </stc:property>
+</stc:class>
+
+
+<!-- Validator base class -->
+<stc:class name="IteratorValidateCommand" displayName="Iterator Validate Command" bllDirectInterface="true" isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Base Iterator Validate Command" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Validators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="Iteration" displayName="Iteration" type="u32" default="0" isInternal="false">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Iteration number" />
+    </stc:property>
+
+    <!-- PASS == True, FAIL == False -->
+    <stc:property category="output" name="Verdict" displayName="Verdict" type="bool" default="True">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Validate command's verdict" />
+    </stc:property>
+</stc:class>
+
+
+<!-- Template based topology commands -->
+<stc:class
+    name="LoadTemplateCommand"
+    baseClass="stak.StakGroupCommand"
+    displayName="Load Template Command"
+    bllDirectInterface="true"
+    isInternal="false">
+
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Load an XML template into an StmTemplateConfig object" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Topology Template"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="CopiesPerParent" displayName="Number of copies to make per Target Tag object" type="u32" default="1">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Number of copies of the template to make per Target Tag object" />
+    </stc:property>
+
+    <!-- Not in use yet
+    <stc:property category="input" name="SrcTagList" displayName="Source Tag List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of tags whose elements will be merged into the full template" />
+    </stc:property>
+    -->
+
+    <stc:property category="input" name="TargetTagList" displayName="Target Tag List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of tags where the Source Tags will be appended." />
+    </stc:property>
+
+    <stc:property category="input" name="TemplateXml" displayName="XML Template String" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Template to use as a string" />
+    </stc:property>
+
+    <stc:property category="input" name="TemplateXmlFileName" displayName="XML Template File" type="inputFilePath" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Template XML File Location" />
+      <stc:attribute type="framework.MangleRelativePath" value="false" internalType="bool" />
+    </stc:property>
+
+    <stc:property category="input" name="TagPrefix" displayName="Tag Prefix"
+                  type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Prefix value prepended to all tags loaded by configuration" />
+    </stc:property>
+
+    <stc:property category="input" name="AutoExpandTemplate" displayName="Automatically Expand Template" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Expand template into EmulatedDevices, Streamblocks, etc." />
+    </stc:property>
+
+    <stc:property category="input" name="StmTemplateMix" displayName="Parent StmTemplateMix object" type="handle" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Handle of an StmTemplateMix object to use for the parent of the created StmTemplateConfig." />
+    </stc:property>
+
+    <stc:property category="input" name="EnableLoadFromFileName" displayName="Enable XML Template File" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Load the XML from a Template File rather than the Template XML string parameter." />
+    </stc:property>
+
+    <stc:property category="output" name="StmTemplateConfig" displayName="XML container object (StmTemplateConfig)" type="handle" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="StmTemplateConfig container object"/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="ExpandTemplateCommand" displayName="Expand XML Template Command" bllDirectInterface="true" isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Expand an XML template across ports" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Topology Template"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="StmTemplateConfigList" displayName="StmTemplateConfig List" type="handle" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of StmTemplateConfig objects" />
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="core.ValidHandleTypes" value="Port" />
+    </stc:property>
+    <stc:property category="input" name="CopiesPerParent" displayName="Number of copies to make per Target Tag object" type="u32" default="1">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Number of copies of the template to make per Target Tag object" />
+    </stc:property>
+    <stc:property category="input" name="SrcTagList" displayName="Source Tag List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of tags that indicate where in the XML template the config will be copied from" />
+    </stc:property>
+    <stc:property category="input" name="TargetTagList" displayName="Target Tag List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of tags that indicate where in the STC configuration the template will be copied to.  If TargetTagList is empty, the target will be assumed to be Project." />
+    </stc:property>
+</stc:class>
+
+<stc:class name="ModifyTemplatePropertyCommand" displayName="Modify XML Template Command" bllDirectInterface="true" isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Modify an XML template across ports" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Topology Template"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="StmTemplateConfig" displayName="StmTemplateConfig" type="handle" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="StmTemplateConfig" />
+    </stc:property>
+
+    <stc:property category="input" name="TagNameList" displayName="Tag Name List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the Tag(s) referencing objects to modify in the template" />
+    </stc:property>
+    <stc:property category="input" name="PropertyList" displayName="Property List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of property IDs (ie classname.property) to configure new values for.  Position in this list MUST map to position in the ValueList." />
+    </stc:property>
+    <stc:property category="input" name="ValueList" displayName="Value List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of values to configure.  Position in this list MUST map to position in the PropertyList." />
+    </stc:property>
+</stc:class>
+
+<stc:class name="AddTemplateObjectCommand" displayName="Add Object To Template Command" bllDirectInterface="true" isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Add a new STC object to the template" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Topology Template"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="StmTemplateConfig" displayName="StmTemplateConfig" type="handle" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="StmTemplateConfig" />
+    </stc:property>
+    <stc:property category="input" name="ParentTagName" displayName="Parent Tag Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the tag from which parent objects will be found to add new objects to under" />
+    </stc:property>
+    <stc:property category="input" name="TagName" displayName="Tag Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of a new tag to create and attach to the added objects" />
+    </stc:property>
+    <stc:property category="input" name="ClassName" displayName="Class Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Class name of the object" />
+    </stc:property>
+    <stc:property category="input" name="PropertyList" displayName="Property List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of property IDs on the newly created object to configure new values for.  Position in this list MUST map to position in the ValueList." />
+    </stc:property>
+    <stc:property category="input" name="ValueList" displayName="Value List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of values to configure on the newly created object.  Position in this list MUST map to position in the PropertyList." />
+    </stc:property>
+</stc:class>
+
+<stc:class name="DeleteTemplateObjectCommand" displayName="Delete Object From Template Command" bllDirectInterface="true" isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Delete an object and all of its children from the template" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Topology Template"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="StmTemplateConfig" displayName="StmTemplateConfig" type="handle" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="StmTemplateConfig" />
+    </stc:property>
+    <!--- FIXME: Should we delete the tag too? -->
+    <stc:property category="input" name="TagName" displayName="Tag Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the tag referring to the object to delete" />
+    </stc:property>
+     <stc:property category="input" name="ClassName" displayName="Class Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Class name of the object" />
+    </stc:property>
+ </stc:class>
+
+<stc:class name="ConfigTemplateRelationCommand" displayName="Add Relation To Template Command" bllDirectInterface="true" isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Add or remove a relation in the template" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Topology Template"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="StmTemplateConfig" displayName="StmTemplateConfig" type="handle" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="StmTemplateConfig" />
+    </stc:property>
+    <stc:property category="input" name="SrcTagName" displayName="Source Tag Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the tag from which the source object will be found" />
+    </stc:property>
+    <stc:property category="input" name="TargetTagName" displayName="Target Tag Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the tag from which the target object will be found" />
+    </stc:property>
+    <stc:property category="input" name="RelationName" displayName="Relation Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the relation to add or remove" />
+    </stc:property>
+    <stc:property category="input" name="RemoveRelation" displayName="Remove Relation" type="bool" default="false">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Remove the relation of the given type" />
+    </stc:property>
+</stc:class>
+
+<stc:class name="ConfigRelationCommand" displayName="Add Relation Between Tagged Objects Command" bllDirectInterface="true" isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Add or remove a relation between tagged BLL objects" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Topology Template"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="SrcTagName" displayName="Source Tag Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the tag from which the source object(s) will be found" />
+    </stc:property>
+    <stc:property category="input" name="TargetTagName" displayName="Target Tag Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the tag from which the target object(s) will be found" />
+    </stc:property>
+    <stc:property category="input" name="RelationName" displayName="Relation Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the relation to add or remove" />
+    </stc:property>
+    <stc:property category="input" name="RemoveRelation" displayName="Remove Relation" type="bool" default="false">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Remove the relation of the given type" />
+    </stc:property>
+</stc:class>
+
+<stc:class name="DeleteTemplatesAndGeneratedObjectsCommand" displayName="Delete Templates and Generated Objects Command" bllDirectInterface="true" isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Deletes StmTemplateConfigs and objects generated from expansion of the templates"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Topology Template"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="DeleteStmTemplateConfigs" displayName="Delete StmTemplateConfig objects" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Deletes StmTemplateConfig objects when True, skip them when False" />
+    </stc:property>
+</stc:class>
+
+<stc:class
+    name="MergeTemplateCommand"
+    displayName="Merge Template Command"
+    bllDirectInterface="true"
+    isInternal="false">
+
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Merges XML from a source string or file into the StmTemplateConfig container using source and target tags." />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Topology Template"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="StmTemplateConfig" displayName="StmTemplateConfig (from LoadTemplateCommand)" type="handle" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="StmTemplateConfig container object passed in from the LoadTemplateCommand"/>
+    </stc:property>
+    <stc:property category="input" name="SrcTagList" displayName="Source Tag List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of tags from the XML Template String or File whose elements will be merged into the TemplateXml contained in the StmTemplateConfig" />
+    </stc:property>
+    <stc:property category="input" name="TargetTagList" displayName="Target Tag List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of tags in the StmTemplateConfig's TemplateXml string where the Source Tag List's tagged elements will be inserted." />
+    </stc:property>
+    <stc:property category="input" name="TagPrefix" displayName="Tag Prefix" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Prefix value prepended to all merged tags loaded in the source XML" />
+    </stc:property>
+    <stc:property category="input" name="TemplateXml" displayName="XML Template String" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="String XML that will serve as a source" />
+    </stc:property>
+    <stc:property category="input" name="TemplateXmlFileName" displayName="XML Template File" type="inputFilePath" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Template XML File Location that will serve as a source" />
+      <stc:attribute type="framework.MangleRelativePath" value="false" internalType="bool" />
+    </stc:property>
+    <stc:property category="input" name="EnableLoadFromFileName" displayName="Enable XML Template File" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Load the XML from a Template File rather than the Template XML string parameter." />
+    </stc:property>
+
+</stc:class>
+
+
+<stc:class name="ConfigTemplateStmPropertyModifierCommand" displayName="Configure XML Template StmPropertyModifier Command" bllDirectInterface="true" isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Add or configure an StmPropertyModifier in the template" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Topology Template"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:enumeration name="EnumModifierType">
+        <stc:enum name="RANGE"      value="0"   displayName="Range" />
+<!--
+        <stc:enum name="LIST"       value="1"   displayName="List" />
+        <stc:enum name="TABLE"      value="2"   displayName="Table" />
+-->
+    </stc:enumeration>
+    <stc:property category="input" name="StmTemplateConfig" displayName="StmTemplateConfig" type="handle" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="StmTemplateConfig" />
+    </stc:property>
+    <stc:property category="input" name="TagName" displayName="Tag Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the Tag referencing an StmPropertyModifier object to modify in the template.  If an StmPropertyModifier is being created, this is the name that will be used for a tag that references the StmPropertyModifier." />
+    </stc:property>
+    <stc:property category="input" name="TargetObjectTagName" displayName="Target Object's Tag Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the Tag referencing the target object this modifier is being applied to.  If configuring an existing modifier, this can be left empty." />
+    </stc:property>
+    <stc:property category="input" name="ObjectName" displayName="Object Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Class name of the object being modified.  If configuring an existing modifier, this can be left empty. " />
+    </stc:property>
+    <stc:property category="input" name="PropertyName" displayName="Property Name" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the property being modified.  If configuring an existing modifier, this can be left empty. " />
+    </stc:property>
+    <stc:property category="input" name="StartList" displayName="Start Value List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of modifier start values" />
+    </stc:property>
+    <stc:property category="input" name="StepList" displayName="Step Value List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of modifier step values" />
+    </stc:property>
+    <stc:property category="input" name="RepeatList" displayName="Repeat Value List" type="u32" default="0" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of modifier repeat values" />
+    </stc:property>
+    <stc:property category="input" name="RecycleList" displayName="Recycle Value List" type="u32" default="0" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of modifier recycle values" />
+    </stc:property>
+    <stc:property category="input" name="ModifierType" displayName="Modifier Type" type="u8" default="RANGE">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="The type of modifier to add or configure.  If a modifier already exists with the given tag but is of different type, it will be changed to use the new type." />
+      <stc:enumerationRef ref="EnumModifierType"/>
+    </stc:property>
+    <stc:property category="input" name="TargetObjectStepList" displayName="Target Object Step List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of step value to apply to start value(s) when a new target object is encountered." />
+    </stc:property>
+    <stc:property category="input" name="ResetOnNewTargetObject" displayName="Reset Start Value On New Target Object" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Reset the start value each time a new target (usually parent) object of the objects being modified is encountered." />
+    </stc:property>
+</stc:class>
+
+
+<stc:class
+    name="ValidateDhcpv6BoundCommand" displayName="Validate DHCPv6 Bound"
+    bllDirectInterface="true"
+    baseClass="spirent.methodology.IteratorValidateCommand"
+    isInternal="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Validate DHCPV6 Bound" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Validators" />
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+</stc:class>
+
+<stc:class name="ValidateRouterUpCommand" displayName="Validate Router Up" bllDirectInterface="true" baseClass="spirent.methodology.IteratorValidateCommand" isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Validate Router Up" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Validators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+</stc:class>
+
+<stc:class name="ValidatePppoxConnectedCommand" displayName="Validate PPPoX Connected" bllDirectInterface="true" baseClass="spirent.methodology.IteratorValidateCommand" isInternal="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Validate PPPoX Devices Connected" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Validators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <!-- This name needs to be changed to match the fact that it is a list -->
+    <stc:property category="input" name="NetworkProfile" displayName="Network Profile Handle List" type="handle" default="" minOccurs="1" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="NetworkProfile Handle List" />
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="core.ValidHandleTypes" value="NetworkProfile,TopologyProfile,Project" />
+    </stc:property>
+</stc:class>
+
+<stc:class name="ValidateDhcpv4BindCommand" displayName="Validate DHCPv4 Bound" bllDirectInterface="true" baseClass="spirent.methodology.IteratorValidateCommand" isInternal="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Validate DHCPv4 Devices Bound" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework//Validators"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="ObjectList" displayName="Object List" type="handle" default="" minOccurs="0" maxOccurs="unbounded" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of NetworkProfile objects to validate" />
+    </stc:property>
+</stc:class>
+
+
+<stc:class  name="ResultBaseCommand"
+            displayName="Result Base Command"
+            bllDirectInterface="true"
+            canCreate="false"
+            isInternal="true">
+
+    <stc:enumeration name="EnumComparisonOperator">
+        <stc:enum name="LESS_THAN"              value="0"   displayName="Less Than"/>
+        <stc:enum name="LESS_THAN_OR_EQUAL"     value="1"   displayName="Less Than or Equal To"/>
+        <stc:enum name="GREATER_THAN"           value="2"   displayName="Greater Than"/>
+        <stc:enum name="GREATER_THAN_OR_EQUAL"  value="3"   displayName="Greater Than or Equal To"/>
+        <stc:enum name="EQUAL"                  value="4"   displayName="Equal To"/>
+        <stc:enum name="NOT_EQUAL"              value="5"   displayName="Not Equal To"/>
+        <stc:enum name="BETWEEN"                value="6"   displayName="Between"/>
+    </stc:enumeration>
+
+    <stc:enumeration name="EnumReportGroup">
+        <stc:enum name="SUMMARY"  value="0"   displayName="Summary"/>
+        <stc:enum name="GROUP_1"    value="1"   displayName="Group 1"/>
+        <stc:enum name="GROUP_2"    value="2"   displayName="Group 2"/>
+        <stc:enum name="GROUP_3"    value="3"   displayName="Group 3"/>
+        <stc:enum name="GROUP_4"    value="4"   displayName="Group 4"/>
+        <stc:enum name="GROUP_5"    value="5"   displayName="Group 5"/>
+    </stc:enumeration>
+
+    <stc:property category="input" name="ReportGroup" displayName="Report Group" type="u8" default="GROUP_2">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Determines where the results will be displayed on the results page. Group 0 is the highest priority and will be displayed before Group 3, Group 2, etc. SUMMARY will be displayed at the very top in the summary section." />
+            <stc:enumerationRef ref="spirent.methodology.ResultBaseCommand.EnumReportGroup"/>
+    </stc:property>
+
+</stc:class>
+
+
+<stc:class  name="VerifyBaseCommand"
+            displayName="Verify Base Command"
+            baseClass="spirent.methodology.ResultBaseCommand"
+            bllDirectInterface="true"
+            canCreate="false"
+            isInternal="true">
+
+    <stc:property category="input" name="ApplyVerdictToSummary" displayName="Apply Verdict To Summary" type="bool" default="true">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Apply Verdict To Test verdict." />
+    </stc:property>
+
+</stc:class>
+
+<stc:class  name="VerifySingleBaseCommand"
+            displayName="Verify Single Base Command"
+            baseClass="spirent.methodology.VerifyBaseCommand"
+            bllDirectInterface="true"
+            canCreate="false"
+            isInternal="true">
+
+    <stc:property category="input" name="DisplayName" displayName="Display Name" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Title to display for this result section in the report file."/>
+    </stc:property>
+
+    <stc:property category="input" name="PassedVerdictExplanation" displayName="Passed Verdict Explanation" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Verdict explanation if command passes."/>
+    </stc:property>
+
+    <stc:property category="input" name="FailedVerdictExplanation" displayName="Failed Verdict Explanation" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Verdict explanation if command fails."/>
+    </stc:property>
+
+</stc:class>
+
+<stc:class  name="VerifyMultiBaseCommand"
+            displayName="Verify Single Base Command"
+            baseClass="spirent.methodology.VerifyBaseCommand"
+            bllDirectInterface="true"
+            canCreate="false"
+            isInternal="true">
+
+    <stc:property category="input" name="DisplayNameList" displayName="Display Name List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Title to display for this result section in the report file. Maps 1-1 with validation query/configuration."/>
+    </stc:property>
+    <stc:property category="input" name="PassedVerdictExplanationList" displayName="Passed Verdict Explanation List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Verdict explanation if command passes. Maps 1-1 with validation query/configuration."/>
+    </stc:property>
+
+    <stc:property category="input" name="FailedVerdictExplanationList" displayName="Failed Verdict Explanation List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Verdict explanation if command fails. Maps 1-1 with validation query/configuration."/>
+    </stc:property>
+
+</stc:class>
+
+
+
+<stc:class  name="VerifyResultBaseCommand"
+            displayName="Verify Result Base Command"
+            bllDirectInterface="true"
+            canCreate="false"
+            isInternal="true">
+
+
+    <stc:enumeration name="EnumComparisonOperator">
+        <stc:enum name="LESS_THAN"              value="0"   displayName="Less Than"/>
+        <stc:enum name="LESS_THAN_OR_EQUAL"     value="1"   displayName="Less Than or Equal To"/>
+        <stc:enum name="GREATER_THAN"           value="2"   displayName="Greater Than"/>
+        <stc:enum name="GREATER_THAN_OR_EQUAL"  value="3"   displayName="Greater Than or Equal To"/>
+        <stc:enum name="EQUAL"                  value="4"   displayName="Equal To"/>
+        <stc:enum name="NOT_EQUAL"              value="5"   displayName="Not Equal To"/>
+        <stc:enum name="BETWEEN"                value="6"   displayName="Between"/>
+    </stc:enumeration>
+
+    <stc:property category="input" name="PropertyValue" displayName="Property Value" type="double" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Property value to compare" />
+    </stc:property>
+     <stc:property category="input" name="MinPropertyValue" displayName="Min Property Value" type="double" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Min Property value for betweeen" />
+    </stc:property>
+     <stc:property category="input" name="MaxPropertyValue" displayName="Max Property Value" type="double" default="0">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Max Property value for between" />
+    </stc:property>
+    <stc:property category="input" name="OperationType" displayName="Operation Type" type="u8" default="GREATER_THAN">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the value to wait for" />
+      <stc:enumerationRef ref="EnumComparisonOperator"/>
+    </stc:property>
+    <stc:property category="input" name="PollInterval" displayName="Poll Interval (sec)" type="u32" default="10">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Wait time before retry (sec)" />
+    </stc:property>
+    <stc:property category="input" name="MaxWaitTime" displayName="Maximum Wait Time (sec)" type="u32" default="10">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Maximum amount of time to wait (sec)" />
+    </stc:property>
+</stc:class>
+
+
+<stc:class  name="VerifyTrafficResultDemoCommand"
+            displayName="Verify Traffic Result Demo Command"
+            baseClass="spirent.methodology.VerifyResultBaseCommand"
+            bllDirectInterface="true"
+            isInternal="true">
+
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Verify Traffic Result Demo Command"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Utilities//Results"/>
+
+    <stc:enumeration name="EnumResultProperties">
+        <stc:enum name="DROPPED_FRAME_COUNT"    value="0"   displayName="Dropped frame count"/>
+        <stc:enum name="MIN_LATENCY"            value="1"   displayName="Min Latency (us)"/>
+        <stc:enum name="MAX_LATENCY"            value="2"   displayName="Max Latency (us)"/>
+    </stc:enumeration>
+
+    <stc:property category="input" name="PropertyName" displayName="Property Name" type="u8" default="DROPPED_FRAME_COUNT">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Property name to compare" />
+      <stc:enumerationRef ref="EnumResultProperties"/>
+    </stc:property>
+</stc:class>
+
+
+<stc:class name="CompleteIterationCommand"
+           displayName="Complete Iteration Command"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Collect and summarize results for current iteration"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory"
+           value="Test Methodology//Utilities//Iteration Framework"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+</stc:class>
+
+<stc:class name="VerifyMultipleDbQueryCommand"
+            displayName="Verify Multiple DB Queries"
+            baseClass="spirent.methodology.VerifyMultiBaseCommand"
+            bllDirectInterface="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Verify that each query in a list of SqlQueries yields row count = 0."/>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Results"/>
+
+        <stc:property category="input" name="SqlQueryList" displayName="Sql Query List" type="string" default="" minOccurs="1" maxOccurs="unbounded">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="A list of 1 or more SQL queries."/>
+        </stc:property>
+        <stc:property category="input" name="UseMultipleResultsDatabases" displayName="Has Multiple Results Databases" type="bool" default="false">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Used when there are multiple results databases (SaveResults LoopMode = Append). All active results databases will be queried. If set to True and only one results database exists (SaveResults LoopMode = Overwrite), an error will occur." />
+        </stc:property>
+        <stc:property category="input" name="UseSummary" displayName="Use Summary Database Only" type="bool" default="false">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Use the summary database instead of the iteration databases. Only valid if UseMultipleResultsDatabases is False." />
+        </stc:property>
+</stc:class>
+
+<stc:class name="VerifyDbQueryCommand"
+            displayName="Verify DB Query"
+            baseClass="spirent.methodology.VerifySingleBaseCommand"
+            bllDirectInterface="true">
+        <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Verify that an SqlQuery yields a row count that meets the specified limits."/>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Results"/>
+
+        <stc:property category="input" name="SqlQuery" displayName="Sql Query" type="string" default="">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Sql Query"/>
+        </stc:property>
+        <stc:property category="input" name="OperationType" displayName="Operation Type" type="u8" default="GREATER_THAN">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Comparision operator" />
+            <stc:enumerationRef ref="spirent.methodology.ResultBaseCommand.EnumComparisonOperator"/>
+        </stc:property>
+        <stc:property category="input" name="RowCount" displayName="Row Count" type="u64" default="0">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Row count to compare to SQL query yield based on OperationType. Valid for all OperationType values except Between." />
+        </stc:property>
+        <stc:property category="input" name="MinRowCount" displayName="Min Row Count (Inclusive)" type="u64" default="0">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Minimum acceptable row count when OperationType is Between." />
+        </stc:property>
+        <stc:property category="input" name="MaxRowCount" displayName="Max Row Count (Inclusive)" type="u64" default="0">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Maximum acceptable row count when OperationType is Between." />
+        </stc:property>
+        <stc:property category="input" name="UseMultipleResultsDatabases" displayName="Has Multiple Results Databases" type="bool" default="false">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Used when there are multiple results databases (SaveResults LoopMode = Append). All active results databases will be queried. If set to True and only one results database exists (SaveResults LoopMode = Overwrite), an error will occur." />
+        </stc:property>
+        <stc:property category="input" name="UseSummary" displayName="Use the summery db only" type="bool" default="false">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Use the summary db instead of iteration dbs. Only valid if UseMultipleResultsDatabases is False." />
+        </stc:property>
+</stc:class>
+
+<stc:class name="RunPyScriptCommand" displayName="Run a Python Script" bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Run a python script."/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology"/>
+
+    <stc:property category="input" name="ScriptFilename" displayName="Python script file" type="inputFilePath" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="The python script file (without the py extension)."/>
+        <stc:attribute type="framework.MangleRelativePath" value="false" internalType="bool" />
+    </stc:property>
+    <stc:property category="input" name="MethodName" displayName="Method within the script" type="string" default="run">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="The python script method to run."/>
+    </stc:property>
+    <stc:property category="input" name="TagName" displayName="Name of the tag associated with the target object(s)" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the tag used to form a collection of objects for the script to act on."/>
+    </stc:property>
+    <stc:property category="input" name="Params" displayName="A string for the script" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="A string parameter that is passed to the script to work with."/>
+    </stc:property>
+    <stc:property category="output" name="ErrorMsg" displayName="Error Message" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Holds the last error message recorded by the command."/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="ModifyHandleListCommand" displayName="Modify a BLL command's handle list property" bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Modify a property of a BLL command that contains a list of handles"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="BllCommandTagName" displayName="Tag that identifies target BLL Command" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name of the tag that the target BLL command will have a UserTag relation to."/>
+    </stc:property>
+    <stc:property category="input" name="PropertyName" displayName="Property To Modify" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="The property in the target BLL command that will have its contents modified." />
+    </stc:property>
+    <stc:property category="input" name="TagList" displayName="Tag List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of tags that will be expanded into BLL objects, then passed in to the command.  If the command already has handles, these handles will be appended to its list."/>
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="core.ValidHandleTypes" value="Host,Router,EmulatedDevice,StreamBlock,Tag" />
+    </stc:property>
+    <stc:property category="input" name="OverwriteProperty" displayName="Overwrite Property" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="If set to true, will overwrite the property to modify.  If false, command will append." />
+    </stc:property>
+</stc:class>
+
+<stc:class  name="VerifyDynamicResultViewDataCommand"
+            displayName="Verify Dynamic Result View Data Command"
+            bllDirectInterface="true"
+            baseClass="spirent.methodology.VerifySingleBaseCommand">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Verify that DRV yields a result count that meets the specified limits."/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Results"/>
+
+    <stc:property category="input" name="DynamicResultViewName" displayName="Dynamic Result View Name" type="string" default="" minOccurs="1" maxOccurs="1">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Dynamic Result View Name."/>
+    </stc:property>
+
+    <stc:property category="input" name="OperationType" displayName="Operation Type" type="u8" default="GREATER_THAN">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Comparision operator" />
+            <stc:enumerationRef ref="spirent.methodology.ResultBaseCommand.EnumComparisonOperator"/>
+    </stc:property>
+
+    <stc:property category="input" name="ResultCount" displayName="Result Count" type="u64" default="0">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Result count to compare to DRV yield based on OperationType. Valid for all OperationType values except Between." />
+    </stc:property>
+
+    <stc:property category="input" name="MinResultCount" displayName="Min Result Count (Inclusive)" type="u64" default="0">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Minimum acceptable result count when OperationType is Between." />
+    </stc:property>
+
+    <stc:property category="input" name="MaxResultCount" displayName="Max Result Count (Inclusive)" type="u64" default="0">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Maximum acceptable result count when OperationType is Between." />
+    </stc:property>
+
+</stc:class>
+
+<stc:class  name="ExportDynamicResultViewDataCommand"
+            displayName="Export Dynamic Result View Data Command"
+            baseClass="spirent.methodology.VerifyBaseCommand"
+            bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Export dynamic result view data to the test report."/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Results"/>
+
+    <stc:property category="input" name="DynamicResultViewNameList" displayName="Dynamic Result View Name List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Dynamic Result View Name List."/>
+    </stc:property>
+
+    <stc:property category="input" name="ExportDisabledAutoGroupData" displayName="Export Disabled Auto Group Data" type="bool" default="false">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Export disabled auto group data for drilldown results." />
+    </stc:property>
+
+    <stc:property category="input" name="DisplayNameList" displayName="Display Name List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Title to display for this result section in the report file. Maps 1-1 with dynamic result view list."/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="ExportDbChartCommand"
+           displayName="Export DB Chart Command"
+           baseClass="spirent.methodology.ResultBaseCommand"
+           bllDirectInterface="true">
+
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Export Chart"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Results"/>
+
+    <stc:enumeration name="EnumSeriesDataType">
+        <stc:enum name="SINGLE"     value="1" displayName="Single" />
+        <stc:enum name="PAIR"       value="2" displayName="Pair" />
+    </stc:enumeration>
+
+    <stc:property category="input" name="ChartTemplateJsonFileName" displayName="Chart Template File" type="inputFilePath" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Chart Template JSON File Location" />
+      <stc:attribute type="framework.MangleRelativePath" value="false" internalType="bool" />
+    </stc:property>
+
+    <stc:property category="input" name="Title" displayName="Chart Title" type="string" default="My Chart">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Chart Title" />
+    </stc:property>
+
+    <stc:property category="input" name="XAxisTitle" displayName="X Axis Title" type="string" default="My X Axis">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="X Axis Title" />
+    </stc:property>
+
+    <stc:property category="input" name="XAxisCategories" displayName="X Axis Categories" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="X Axis Categories (can be a string or SQL query). Used to label the tick marks along the X axis" />
+    </stc:property>
+
+    <stc:property category="input" name="YAxisTitle" displayName="Y Axis Title" type="string" default="My Y Axis">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Y Axis Title" />
+    </stc:property>
+
+    <stc:property category="input" name="YAxisCategories" displayName="Y Axis Categories" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Y Axis Categories (can be a string or SQL query). Used to label the tick marks along the Y axis" />
+    </stc:property>
+
+    <stc:property category="input" name="Series" displayName="Series' Data" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Set of data to be plotted on the chart (can be given as strings or SQL queries) Ex. String format for SeriesDataType(Single): 1, 2, 3, 4 SeriesDataType(Pair): [1, 1], [2, 2]" />
+    </stc:property>
+
+    <stc:property category="input" name="SeriesDataType" displayName="Series Data Type" type="u8" default="SINGLE" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Series data can be given as a single or pair type. SINGLE = only Y values, X values are calculated automaticatlly. PAIR = [x,y] value pairs" />
+      <stc:enumerationRef ref="EnumSeriesDataType"/>
+    </stc:property>
+
+    <stc:property category="input" name="CustomModifier" displayName="Custom Modifier" type="string" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="JSON string that will be appended to the JSON result file which is used to modify chart properties. Follows HighCharts API. Ex. {&quot;yAxis&quot;: {&quot;title&quot;: {&quot;text&quot;: &quot;Modified Label&quot;}}} SQL Queries can be inserted to the JSON string by delimiting the queries with {{ and }}" />
+    </stc:property>
+
+    <stc:property category="input" name="UseMultipleResultsDatabases" displayName="Has Multiple Results Databases" type="bool" default="false">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Used when there are multiple results databases (SaveResults LoopMode = Append). All active results databases will be queried. If set to True and only one results database exists (SaveResults LoopMode = Overwrite), an error will occur." />
+        </stc:property>
+
+    <stc:property category="input" name="UseSummary" displayName="Use the summery db only" type="bool" default="false">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Use the summary db instead of iteration dbs. Only valid if UseMultipleResultsDatabases is False." />
+    </stc:property>
+
+</stc:class>
+
+<stc:class name="CreateMethodologyChartCommand"
+           displayName="Create Methodology Chart Command"
+           baseClass="spirent.methodology.ResultBaseCommand"
+           bllDirectInterface="true">
+
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Export Chart"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Results"/>
+
+    <stc:enumeration name="EnumSourceDatabase">
+        <stc:enum name="LAST_ITERATION" value="0" displayName="Last Iteration Database"/>
+        <stc:enum name="SUMMARY" value="1" displayName="Summary Database"/>
+        <stc:enum name="ALL_ITERATION" value="2" displayName="All Iteration Databases"/>
+    </stc:enumeration>
+
+    <stc:property category="input" name="ChartTemplateJsonFileName" displayName="Chart Template File" type="inputFilePath" default="Line_Template.json">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Chart template file in JSON format. May use one of the provided basic templates: Line_Template.json and Column_Template.json." />
+      <stc:attribute type="framework.MangleRelativePath" value="false" internalType="bool" />
+    </stc:property>
+
+    <stc:property category="input" name="Title" displayName="Chart Title" type="string" default="Result Node Param Handles">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Title displayed at the top of the chart." />
+    </stc:property>
+
+    <stc:property category="input" name="XAxisTitle" displayName="X Axis Title" type="string" default="Id">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Title displayed along the X axis." />
+    </stc:property>
+
+    <stc:property category="input" name="XAxisCategories" displayName="X Axis Categories" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="X axis categories specified as a list of strings or SQL queries. Used to label the tick marks along the X axis." />
+    </stc:property>
+
+    <stc:property category="input" name="YAxisTitle" displayName="Y Axis Title" type="string" default="Handle">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Title displayed along the Y axis." />
+    </stc:property>
+
+    <stc:property category="input" name="YAxisCategories" displayName="Y Axis Categories" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Y axis categories specified as a list of strings or SQL queries. Used to label the tick marks along the Y axis." />
+    </stc:property>
+
+    <stc:property category="input" name="Series" displayName="Series' Data" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Set of data to be plotted on the chart specified as a list of strings or SQL queries. Each list element is a series. The string format to plot a single data type is: 1, 2, 3, 4. Plotting two data types is: [1, 1], [2, 2]." />
+    </stc:property>
+
+    <stc:property category="input" name="TemplateModifier" displayName="Template Modifier" type="string" default='{"series":[{"name": "Handles"}]}'>
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Modify chart properties by specifying a string in JSON format that will be appended to the result file. Specified properties will be merged with and overwrite any existing properies in the chart template file. Follows the HighCharts API. Ex. {&quot;yAxis&quot;: {&quot;title&quot;: {&quot;text&quot;: &quot;Modified Label&quot;}}} SQL Queries can be inserted to the JSON string by delimiting the queries with {{ and }}." />
+    </stc:property>
+
+    <stc:property category="input" name="SrcDatabase" displayName="Source Database" type="u8" default="SUMMARY">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Select source database(s) to execute the Sql queries." />
+        <stc:enumerationRef ref="EnumSourceDatabase"/>
+    </stc:property>
+
+</stc:class>
+
+<stc:class name="StartOfTestCommand"
+           displayName="Start Of Test Command"
+           bllDirectInterface="true">
+
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Initializes test results"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Utilities//Results"/>
+
+</stc:class>
+
+<stc:class name="EndOfTestCommand"
+           displayName="End Of Test Command"
+           bllDirectInterface="true">
+
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Aggregates and writes out test results"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Utilities//Results"/>
+
+</stc:class>
+
+<!-- Template group operations -->
+<stc:class name="CreateTemplateMixCommand"
+           displayName="Create Template Mix Command"
+           baseClass="stak.StakGroupCommand" bllDirectInterface="true"
+           canCreate="false" isInternal="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Create Template Mix Command"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Topology Template"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <!-- FIXME: Add this back in once inheritence works -->
+    <!--
+    <stc:property category="input" name="MixInfo" displayName="Mix Info" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+        value="JSON string representation of the mix (including table data)"/>
+    </stc:property>
+    <stc:property category="input" name="MixTagName" displayName="Mix Container Tag Name" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Mix Container Tag Name"/>
+    </stc:property>
+    <stc:property category="input" name="AutoExpandTemplateMix" displayName="Automatically expand templates in the mix" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Automatically expand templates." />
+    </stc:property>
+    <stc:property category="state" name="MixInfoJsonSchema" displayName="Table Data JSON Schema" type="string" default=''>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+         value="JSON schema that will be used to validate the MixInfo property's value."/>
+    </stc:property>
+    -->
+    <stc:property category="output" name="StmTemplateMix" displayName="XML Container Aggregator object (StmTemplateMix)" type="handle" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="StmTemplate Mix container aggregator object"/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="ExpandTemplateMixCommand"
+           displayName="Expand Template Mix Command"
+           bllDirectInterface="true" canCreate="false" isInternal="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Expand Template Mix Command"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Topology Template"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="StmTemplateMix" displayName="XML Container object (StmTemplateMix)" type="handle" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="StmTemplate Mix container object"/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="AddRowToDbTableCommand"
+           displayName="Add Row To DB Table"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Add queried results to a new or existing table."/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Results"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+    
+    <stc:enumeration name="EnumSourceDatabase">
+        <stc:enum name="LAST_ITERATION" value="0" displayName="Last Iteration Database"/>
+        <stc:enum name="SUMMARY" value="1" displayName="Summary Database"/>
+        <stc:enum name="ALL_ITERATION" value="2" displayName="All Iteration Databases"/>
+    </stc:enumeration>
+    <stc:enumeration name="EnumDestinationDatabase">
+        <stc:enum name="LAST_ITERATION" value="0" displayName="Last Iteration Database"/>
+        <stc:enum name="SUMMARY" value="1" displayName="Summary Database"/>
+    </stc:enumeration>
+
+    <stc:property category="input" name="SrcDatabase" displayName="Source Database" type="u8" default="ALL_ITERATION">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Select source database(s) to execute Sql query." />
+            <stc:enumerationRef ref="EnumSourceDatabase"/>
+    </stc:property>
+    <stc:property category="input" name="DstDatabase" displayName="Destination Database" type="u8" default="SUMMARY">
+            <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Select destination database to create new table." />
+            <stc:enumerationRef ref="EnumDestinationDatabase"/>
+    </stc:property>
+    <stc:property category="input" name="SqlCreateTable" displayName="Create Table Sql Statement" type="string"
+                  default="CREATE TABLE NewTableName ('Column1' INTEGER, 'Column2' TIMESTAMP)">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Specify a table name for an existing destination table or a Create Table Sql statement for a new destination table. If the table exists, a new one shall not be created."/>
+    </stc:property>
+    <stc:property category="input" name="SqlQuery" displayName="Source Data Sql Query" type="string"
+                  default="SELECT Id, CreatedTime From DataSet">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Sql query for source data. Queried results shall be populated in new or existing table specified in Create Table Sql Statement field. The number of columns in the query must match the number of columns in the table."/>
+    </stc:property>
+    
+</stc:class>
+
+<!-- Tier 2 Template Commands -->
+<stc:class
+    name="CreateTemplateConfigCommand"
+    displayName="Create Template Config Command"
+    bllDirectInterface="true"
+    isInternal="false">
+
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Create an StmTemplateConfig by load an XML template and modifying it." />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Topology Template"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="AutoExpandTemplate" displayName="Automatically Expand Template" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Expand template into EmulatedDevices, Streamblocks, etc." />
+    </stc:property>
+    <stc:property category="input" name="StmTemplateMix" displayName="Parent StmTemplateMix object" type="handle" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Handle of an StmTemplateMix object to use for the parent of the created StmTemplateConfig." />
+    </stc:property>
+    <stc:property category="input" name="InputJson" displayName="JSON Input" type="string" default='{"baseTemplateFile": "IPv4_NoVlan.xml"}'>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="JSON string representation of parameters to load and modify template(s) into the StmTemplateConfig."/>
+    </stc:property>
+    <stc:property category="input" name="CopiesPerParent" displayName="Number of copies to make per Target Tag object" type="u32" default="1">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Number of copies of the template to make per Target Tag object" />
+    </stc:property>
+    <stc:property category="input" name="SrcTagList" displayName="Source Tag List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of tags that indicate where in the XML template the config will be expanded from" />
+    </stc:property>
+    <stc:property category="input" name="TargetTagList" displayName="Target Tag List" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of tags that indicate where in the STC configuration the template will be copied to.  If TargetTagList is empty, the target will be assumed to be Project." />
+    </stc:property>
+
+    <stc:property category="state" name="InputJsonSchema" displayName="Input JSON Schema" type="string" default='{"title":"Schema for InputJson of the spirent.methodology.CreateTemplateConfigCommand.","type":"object","properties":{"tagPrefix":{"description":"String that will be prefixed to all tags loaded and used in this template.","type":"string"},"baseTemplateFile":{"description":"Base template file that will be loaded into the StmTemplateConfig.  All modifications in the modifyList will be applied to the contents loaded out of this file.","type":"string"},"modifyList":{"description":"A list of operations that will be carried out on the template.","type":"array","items":{"type":"object","properties":{"mergeList":{"description":"A list of merge operations where a XML file will be used as a source of XML to merge into the XML contained in the StmTemplateConfig.","type":"array","items":{"type":"object","properties":{"mergeSourceTag":{"description":"The name of the tag in the XML file from which tagged elements will be merged into the StmTemplateConfig.","type":"string"},"mergeSourceTemplateFile":{"description":"The path to the source XML file.","type":"string"},"mergeTargetTag":{"description":"The name of the tag in the StmTemplateConfig where elements from the XML file will be merged into.","type":"string"},"mergeTagPrefix":{"description":"A string that will be prefixed to the tags that are merged from the source file to the StmTemplateConfig.","type":"string"},"propertyValueList":{"description":"A list of modify template operations to change the values of properties on tagged objects.","type":"array","items":{"type":"object","properties":{"className":{"description":"Class name of the object type that properties will be modified on.","type":"string"},"tagName":{"description":"Name of the tag that tags objects of type className.","type":"string"},"propertyValueList":{"description":"List of property-value pairs that will be modified.","type":"object"}}},"required":["className","tagName","propertyValueList"]},"stmPropertyModifierList":{"description":"A list of config StmPropertyModifier operations to add or configure StmPropertyModifiers in the StmTemplateConfig.","type":"array","items":{"type":"object","properties":{"items":{"className":{"description":"Class name of the object type that properties will be modified on.","type":"string"},"tagName":{"description":"Name of the tag that tags objects of type className.","type":"string"},"parentTagName":{"description":"Name of the tag that tags the object that an StmPropertyModifier will be added or configured on.","type":"string"},"propertyName":{"description":"Name of the property that an StmPropertyModifier is being attached onto.","type":"string"},"propertyValueList":{"description":"List of property-value pairs that will be modified.  This list should contain property names that exist in the StmPropertyModifier&apos;s ModifierInfo.","type":"object"}}}},"required":["className","tagName","propertyValueList"]}}},"required":["mergeSourceTag","mergeSourceTemplateFile","mergeTargetTag"]},"propertyValueList":{"description":"A list of modify template operations to change the values of properties on tagged objects.","type":"array","items":{"type":"object","properties":{"className":{"description":"Class name of the object type that properties will be modified on.","type":"string"},"tagName":{"description":"Name of the tag that tags objects of type className.","type":"string"},"propertyValueList":{"description":"List of property-value pairs that will be modified.","type":"object"}}},"required":["className","tagName","propertyValueList"]},"addObjectList":{"description":"A list of objects to add to a template.","type":"array","items":{"type":"object","properties":{"className":{"description":"Class name of the object type that will be added.","type":"string"},"parentTagName":{"description":"Name of the tag that tags parent objects for type className.","type":"string"},"tagName":{"description":"Name of the tag that tags newly created objects of type className.","type":"string"},"propertyValueList":{"description":"List of property-value pairs that will be modified.","type":"object"}}},"required":["className","parentTagName","tagName"]},"stmPropertyModifierList":{"description":"A list of config StmPropertyModifier operations to add or configure StmPropertyModifiers in the StmTemplateConfig.","type":"array","items":{"type":"object","properties":{"items":{"className":{"description":"Class name of the object type that properties will be modified on.","type":"string"},"tagName":{"description":"Name of the tag that tags objects of type className.","type":"string"},"parentTagName":{"description":"Name of the tag that tags the object that an StmPropertyModifier will be added or configured on.","type":"string"},"propertyName":{"description":"Name of the property that an StmPropertyModifier is being attached onto.","type":"string"},"propertyValueList":{"description":"List of property-value pairs that will be modified.  This list should contain property names that exist in the StmPropertyModifier&apos;s ModifierInfo.","type":"object"}}}},"required":["className","tagName","propertyValueList"]},"pduModifierList":{"description":"A list of PDU modification operations to change values in a StreamBlock&apos;s FrameConfig.","type":"array","items":{"type":"object","properties":{"templateElementTagName":{"description":"Name of the tag that tags StreamBlock objects.","type":"string"},"offsetReference":{"description":"String in the form of . that refers to a particular field in a particular PDU that will be modified.","type":"string"},"value":{"description":"String value for the PDU property.","type":"string"}}},"required":["offsetReference"]},"relationList":{"description":"A list of configure relation operations to add or remove relations between elements in the StmTemplateConfig.","type":"array","items":{"type":"object","properties":{"relationType":{"description":"The type of relation to add or remove, ie StackedOnEndpoint or UsesIf.","type":"string"},"removeRelation":{"description":"A flag indicating if the relation should be removed if found.","type":"boolean"},"targetTag":{"description":"Name of the tag that tags an object that is the target of the relation.","type":"string"},"sourceTag":{"description":"Name of the tag that tags an object that is the source of the relation.","type":"string"}}},"required":["relationType","targetTagList"]}}}}},"required":["baseTemplateFile"]}'>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="JSON schema that will be used to validate the InputJson property's value."/>
+    </stc:property>
+
+    <stc:property category="output" name="StmTemplateConfig" displayName="XML container object (StmTemplateConfig)" type="handle" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="StmTemplateConfig container object"/>
+    </stc:property>
+</stc:class>
+
+
+<stc:class name="CreateProtocolMixCommand"
+           displayName="Create Protocol Mix Command"
+           baseClass="spirent.methodology.CreateTemplateMixCommand"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Command for creating mixtures of protocols on an Emulated Device block."/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology"/>
+
+    <stc:property category="input" name="MixInfo" displayName="Mix Info" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="JSON string representation of the mix (including table data)"/>
+    </stc:property>
+    <stc:property category="input" name="MixTagName" displayName="Mix Container Tag Name" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Name to use when tagging the output StmProtocolMix.  If left blank, StmProtocolMix will not be tagged."/>
+    </stc:property>
+    <stc:property category="input" name="PortGroupTagList" displayName="Port Group Tag" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Tag name representing the port group on which devices and protocols should be expanded on."/>
+    </stc:property>
+    <stc:property category="state" name="GroupCommandTagInfo" displayName="Group Command Tag Info" type="string" default="" >
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="JSON structure containing the names of the tags used to refer to commands in this group."/>
+    </stc:property>
+    <stc:property category="state" name="MixInfoJsonSchema" displayName="Table Data JSON Schema" type="string" default='{"title":"Schema for the MixInfo of the spirent.methodology.CreateProtocolMixCommand.","type":"object","properties":{"deviceCount":{"description":"Total Device Count for StmTemplateMix distribution.","type":"number"},"components":{"description":"A list of components that make up the mixture.","type":"array","items":{"type":"object","properties":{"weight":{"description":"If value is followed by %, this is the percent weight of the total deviceCount to assign to this component. Otherwise, this becomes a static deviceCount value.","type":"string"},"devicesPerBlock":{"description":"Number that indicates how many device will be assigned per device block.  If 0, devicesPerBlock indicates all deviceCount is assigned to one block. If 1, devicesPerBlock = # of device blocks with a device count of 1. If devicesPerBlock > device count of component (after weight is applied), all devices go into one block.  Otherwise, blocks are greedily created until we run out of device count (ie. deviceCount = 17, devicesPerBlock = 5, blocks created with 5, 5, 5, 2 devices).","type":"number"},"appliedValue":{"description":"Load actually assigned to this component.  Autocalculated, do not set.","type":"number"},"tagPrefix":{"description":"String that will be prefixed to all tags loaded and used in this template.","type":"string"},"baseTemplateFile":{"description":"Base template file that will be loaded into the StmTemplateConfig.  All modifications in the modifyList will be applied to the contents loaded out of this file.","type":"string"},"modifyList":{"description":"A list of operations that will be carried out on the template.  See the schema defined in the spirent.methodology.CreateTemplateConfigCommand.","type":"array","items":{"type":"object","properties":{"mergeList":{"description":"A list of merge operations where a XML file will be used as a source of XML to merge into the XML contained in the StmTemplateConfig.","type":"array","items":{"type":"object"}}}}}},"required":["weight","devicesPerBlock","baseTemplateFile"]}}},"required":["deviceCount","components"]}'>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="JSON schema that will be used to validate the TableData property's value."/>
+    </stc:property>
+
+    <!-- This should be from the base class -->
+    <stc:property category="input" name="AutoExpandTemplateMix" displayName="Automatically expand templates in the mix" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Automatically expand templates." />
+    </stc:property>
+</stc:class>
+
+<stc:class name="IteratorConfigMixParamsCommand"
+           displayName="IteratorConfigMixParamsCommand"
+           baseClass="spirent.methodology.IteratorConfigCommand"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="dummy"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+    <stc:property category="input" name="StmTemplateMix" displayName="StmTemplateMix" type="handle" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="StmTemplateMix handle" />
+    </stc:property>
+    <stc:property category="input" name="TagData" displayName="tag Data" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value=""/>
+    </stc:property>
+    <stc:property category="state" name="MixJsonSchema" displayName="Mix JSON Schema" type="string" default='{"title":"Schema for the MixInfo of the spirent.methodology.IteratorConfigMixParamsCommand.","type":"object","properties":{"components":{"description":"A list of components that make up the mixture.","type":"array","items":{"type":"object","properties":{"weight":{"description":"Percent weight of the total load to assign to this component.","type":"string"},"appliedValue":{"description":"Load actually assigned to this component.  Autocalculated, do not set.","type":"number"},"tagPrefix":{"description":"String that will be prefixed to all tags loaded and used in this template.","type":"string"},"baseTemplateFile":{"description":"Base template file that will be loaded into the StmTemplateConfig.  All modifications in the modifyList will be applied to the contents loaded out of this file.","type":"string"}},"required":["weight","baseTemplateFile"]}}},"required":["components"]}'>
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="JSON schema that will be used to validate the StmTemplateMix JSON contents."/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="ConfigTemplatePdusCommand"
+           displayName="Config Template PDUs Command"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription"
+                   value="This command will configure PDUs in the Streamblock template's FrameConfig that itself is found in the StmTemplateConfig, using the information from PduInfo property."/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology"/>
+
+    <stc:property category="input" name="StmTemplateConfig" displayName="StmTemplateConfig" type="handle" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="StmTemplateConfig handle" />
+    </stc:property>
+
+    <stc:property category="input" name="TemplateElementTagNameList" displayName="Template Element Tag Name List" type="string" default=""  minOccurs="0" maxOccurs="unbounded">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+                       value="List of tag names that refer to the targeted stream block (XML elements) in the template."/>
+    </stc:property>
+
+    <stc:property category="input" name="PduPropertyList" displayName="PDU Information Property List" type="string" default=""  minOccurs="0" maxOccurs="unbounded">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+                       value="List of properties to modify PDU information within streamblocks' FrameConfig properties."/>
+    </stc:property>
+
+    <stc:property category="input" name="PduValueList" displayName="PDU Information Value List" type="string" default=""  minOccurs="0" maxOccurs="unbounded">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+                       value="List of values to modify PDU information within streamblocks' FrameConfig properties."/>
+    </stc:property>
+
+</stc:class>
+
+
+<stc:class name="ExpandProtocolMixCommand"
+           displayName="Expand Protocol Mix Command"
+           baseClass="spirent.methodology.ExpandTemplateMixCommand"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Expand a Protocol Mix"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="TagName" displayName="Tag name for the Template Mix" type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Tag name referencing an existing StmProtocolMix" />
+    </stc:property>
+    <stc:property category="input" name="DeviceCount" displayName="Device Count"
+                  type="u32" default="10">
+        <stc:attribute internalType="string" type="framework.PropertyDescription" value="Device Count" />
+    </stc:property>
+    <stc:property category="input" name="PortGroupTagList" displayName="Port Group Tag" type="string" default="" minOccurs="0" maxOccurs="unbounded">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Tag name representing the port group on which devices and protocols should be expanded on."/>
+    </stc:property>
+</stc:class>
+
+
+<stc:class name="TaggedLinkCreateCommand"
+           displayName="Tagged Link Create Command"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none"
+                   type="core.Sequenceable" value="true" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                   type="framework.CommandDescription"
+                   value="Create Links With Tagged Objects" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                   type="framework.CommandCategory"
+                   value="Test Methodology" />
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:enumeration name="EnumLinkPattern">
+        <stc:enum name="PAIR" value="0" displayName="Pair / Group back devices" />
+        <stc:enum name="BACKBONE" value="1" displayName="Backbone" />
+        <stc:enum name="INTERLEAVED" value="2" displayName="Interleave back devices" />
+    </stc:enumeration>
+
+    <stc:property name="LinkType" type="string" default="" category="input"
+                  displayName="Link Type">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Name Link Created between objects" />
+    </stc:property>
+    <stc:property name="SrcObjTag" type="string" default="" category="input"
+                  displayName="Source Object Tag">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Tag used for Source (Back) Objects" />
+    </stc:property>
+    <stc:property name="SrcIfTag" type="string" default="" category="input"
+                  displayName="Source Interface Tag">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Tag used for Source (Back) Interface Objects"/>
+    </stc:property>
+    <stc:property name="DstObjTag" type="string" default="" category="input"
+                  displayName="Destination Object Tag">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Tag used for Destination (Front) Objects" />
+    </stc:property>
+    <stc:property name="DstIfTag" type="string" default="" category="input"
+                  displayName="Destination Interface Tag">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Tag used for Destination (Front) Interface Objects"/>
+    </stc:property>
+    <stc:property name="LinkPattern" type="u8" default="PAIR"
+                  category="input" displayName="Link Distribution Pattern">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Link Distribution Pattern"/>
+        <stc:enumerationRef ref="EnumLinkPattern" />
+    </stc:property>
+    <stc:property name="LinkTag" type="string" default="" category="input"
+                  displayName="Tag for newly-created Link Objects">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="If not blank, tag used with new link objects " />
+    </stc:property>
+    <stc:property name="LinkList" type="handle" default="" category="output"
+                  minOccurs="0" maxOccurs="unbounded"
+                  displayName="List of created Link objects">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Contains list of handles for links created" />
+    </stc:property>
+</stc:class>
+
+
+<stc:class name="L2L3LearningCommand"
+           displayName="L2L3 Learning Command"
+           bllDirectInterface="true"
+           isInternal="false">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="L2L3 Learning Command"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:enumeration name="EnumL2LearningOption">
+        <stc:enum name="TX_ONLY" value="0" displayName="L2LearningOnTxOnly" />
+        <stc:enum name="RX_ONLY" value="1" displayName="L2LearningOnRxOnly" />
+        <stc:enum name="TX_RX" value="2" displayName="L2LearningOnTxRx" />
+    </stc:enumeration>
+
+    <stc:property category="input" name="ObjectList" displayName="Object List" type="handle" default="0" minOccurs="0" maxOccurs="unbounded">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of port, stream block, host, router, or emulated device handles." />
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="core.ValidHandleTypes" value="Port,StreamBlock,Host,Router,EmulatedDevice" />
+    </stc:property>
+
+    <stc:property category="input" name="TagNameList" displayName="Tag Name List" type="string" default="" minOccurs="0" maxOccurs="unbounded" >
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of tag names identifying port, stream block, host, router, or emulated device" />
+    </stc:property>
+
+    <stc:property category="input" name="EnableL2Learning" displayName="Enable L2 Learning" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Enable L2 Learning" />
+    </stc:property>
+
+    <stc:property category="input" name="EnableL3Learning" displayName="Enable L3 Learning" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Enable L3 Learning" />
+    </stc:property>
+
+    <stc:property category="input" name="L2LearningOption" displayName="L2 Learning Option" type="u8" default="TX_RX">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="L2LearningOption takes places on Tx, or Rx, or both Tx and Rx. Only used for L2 learning." />
+      <stc:enumerationRef ref="EnumL2LearningOption"/>
+    </stc:property>
+
+    <stc:property category="input" name="WaitForArpToFinish" displayName="Wait For Arp To Finish" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Wait for Arp to finish. Only used for L3 learning." />
+    </stc:property>
+
+    <stc:property category="input" name="ForceArp" displayName="Always Arp" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="If Arp should always occur even if it is not required. Only used for L3 learning." />
+    </stc:property>
+
+    <stc:property category="input" name="VerifyArp" displayName="Verify Arp Status" type="bool" default="true">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Verifiy if Arp resolved." />
+    </stc:property>
+
+</stc:class>
+
+
+</stc:meta>

@@ -1,0 +1,399 @@
+<?xml version="1.0" ?>
+<stc:meta package="spirent.methodology.traffictest" plugin="plcommands" version="0.0.0-0" xmlns:stc="urn:www.spirentcom.com:XMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<!-- This data model file holds "customized" STAK command used in context of
+     implemented methodologies -->
+
+
+<stc:class name="LoadAclTrafficRulesCommand"
+           displayName="Load ACL Traffic Rules Command"
+           baseClass="spirent.methodology.traffic.LoadTrafficTemplateCommand"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Import an Access Control List traffic mix rules file and generate the stream blocks from the rules."/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Traffic"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+
+    <stc:property category="input" name="RulesFileName" displayName="Rules File Name" type="inputFilePath" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="File name and path to the rules file to import." />
+      <stc:attribute type="framework.MangleRelativePath" value="false" internalType="bool" />
+    </stc:property>
+
+    <stc:property category="input" name="StreamsPerRule" displayName="Streams Per Rule" type="u32" default="1">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="The number of streams to create per rule."/>
+    </stc:property>
+
+    <stc:property category="input" name="ConformToAccept" displayName="Conform To Accept" type="bool" default="false">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription"
+      value="If true, the packet information is formed in conformity with the ACCEPT rules and non-conformity with the DENY rules,
+ thus the packets are expected to pass through the DUT. If false, then the packet information will conform with DENY and not with
+ ACCEPT, thus the packets are expected to be blocked by the DUT." />
+    </stc:property>
+</stc:class>
+
+<!--- ITU-T Y.1564 -->
+<stc:class name="Y1564SvcConfigRampCommand"
+           displayName="Configure Y1564 Service Configuration Ramp Test"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Configure Y1564 Service Configuration Ramp Test" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Methodology Specific"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+    <stc:property category="input" name="CommandTagName"
+                  displayName="Command Tag Name"
+                  type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Tag name for associated commands"/>
+    </stc:property>
+    <stc:property category="input" name="IterationDuration"
+                  displayName="Iteration Duration"
+                  type="u32" default="60">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Iteration Duration" />
+    </stc:property>
+    <stc:property category="input" name="StartBw"
+                  displayName="Starting Bandwidth"
+                  type="double" default="10.0">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Starting Bandwidth" />
+    </stc:property>
+    <stc:property category="input" name="CirBw"
+                  displayName="Committed Information Rate (CIR) Bandwidth"
+                  type="double" default="20.0">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Committed Information Rate (CIR) Bandwidth" />
+    </stc:property>
+    <stc:property category="input" name="EirBw"
+                  displayName="Excess Information Rate (EIR) Bandwidth"
+                  type="double" default="5.0">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Excess Information Rate (EIR) Bandwidth" />
+    </stc:property>
+    <stc:property category="input" name="OvershootBw"
+                  displayName="Overshoot Bandwidth"
+                  type="double" default="5.0">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Overshoot Bandwidth" />
+    </stc:property>
+    <stc:property category="input" name="StepCount"
+                  displayName="Bandwidth Step Count"
+                  type="u32" default="5">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Bandwidth Step Count" />
+    </stc:property>
+    <stc:property category="input" name="ExpPktLossCount"
+                  displayName="Packet Loss Count Threshold"
+                  type="u64" default="0">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Packet Loss Count Threshold" />
+    </stc:property>
+    <stc:property category="input" name="ExpRfc4689AvgJitter"
+                  displayName="RFC4689 Average Jitter Threshold (ms)"
+                  type="double" default="0.05">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="RFC4689 Average Jitter Threshold (ms)"/>
+    </stc:property>
+    <stc:property category="input" name="ExpMaxJitter"
+                  displayName="Maximum Jitter Threshold (ms)"
+                  type="double" default="0.2">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Maximum Jitter Threshold (ms)"/>
+    </stc:property>
+    <stc:property category="input" name="ExpAvgLatency"
+                  displayName="Average Latency Threshold (ms)"
+                  type="double" default="0.7">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Average Latency Threshold (ms)"/>
+    </stc:property>
+    <stc:property category="input" name="ExpMaxLatency"
+                  displayName="Maximum Latency Threshold (ms)"
+                  type="double" default="1.0">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Maximum Latency Threshold (ms)"/>
+    </stc:property>
+    <stc:property category="input" name="ExpMaxOopCount"
+                  displayName="Maximum Out of Order Packet Count Threshold"
+                  type="u64" default="0">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Maximum Out of Order Packet Count Threshold"/>
+    </stc:property>
+    <stc:property category="input" name="ExpMaxLatePktCount"
+                  displayName="Maximum Late Packet Count Threshold"
+                  type="u64" default="0">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Maximum Late Packet Count Threshold"/>
+    </stc:property>
+</stc:class>
+
+
+<stc:class name="Y1564ConfigKpiQueriesCommand"
+           displayName="Configure Y1564 Service Ramp Queries"
+           baseClass="stak.StakGroupCommand"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Configure Y1564 Result Queries (requires,  "/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Methodology Specific"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+    <stc:property category="input" name="StreamblockTagName"
+                  displayName="Streamblock Tag Name"
+                  type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Tag name for streamblock to configure"/>
+    </stc:property>
+</stc:class>
+
+
+<!-- Microburst -->
+<stc:class name="Y1564MicroburstConfigCommand"
+           displayName="Configure Y.1564 Microburst Test"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none"
+                   type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                   type="framework.CommandDescription"
+                   value="Configure Y.1564 Microburst Test"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                   type="framework.CommandCategory"
+                   value="Test Methodology//Methodology Specific"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+    <stc:property category="input" name="LeftTagName"
+                  displayName="Left Port Group Tag Name"
+                  type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Left Port Group Tag Name"/>
+    </stc:property>
+    <stc:property category="input" name="RightTagName"
+                  displayName="Right Port Group Tag Name"
+                  type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Right Port Group Tag Name"/>
+    </stc:property>
+    <stc:property category="input" name="EnableLearning"
+                  displayName="Enable L2/L3 Learning"
+                  type="bool" default="false">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Enable L2/L3 Learning"/>
+    </stc:property>
+    <stc:property category="input" name="MicroburstMaxRate"
+                  displayName="Microburst Maximum Rate"
+                  type="double" default="100.0">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Microburst Maximum Rate"/>
+    </stc:property>
+    <stc:property category="input" name="MicroburstRateUnit"
+                  displayName="Microburst Rate Unit"
+                  type="u8" default="PERCENT_LINE_RATE">
+        <stc:attribute internalType="string" type="framework.PropertyDescription" value="Microburst Rate Unit"/>
+        <stc:enumerationRef ref="ManualScheduleEntry.EnumGapUnit"/>
+    </stc:property>
+    <stc:property category="input" name="FrameSize"
+                  displayName="Frame Size (bytes)"
+                  type="u16" default="128">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Frame Size (bytes)" />
+    </stc:property>
+    <stc:property category="input" name="MaxDeltaCount"
+                  displayName="Maximum Delta Count per Burst"
+                  type="u32" default="10">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Maximum Delta Count per Burst" />
+        <stc:numericValidation minInclusive="5" maxInclusive="4294967295" />
+    </stc:property>
+    <stc:property category="input" name="DeltaWidth"
+                  displayName="Delta Width"
+                  type="u32" default="500">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Delta Width in Packets" />
+    </stc:property>
+    <stc:property category="input" name="MaxUniqueAddrCount"
+                  displayName="Maximum Unique Address Count"
+                  type="u32" default="500">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Max Unique Address Count" />
+        <stc:numericValidation minInclusive="1" maxInclusive="4294967295" />
+    </stc:property>
+    <stc:property category="input" name="MaxImg"
+                  displayName="Maximum Inter-Microburst Gap (frames)"
+                  type="u32" default="500">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Maximum Inter-Microburst Gap (frames)" />
+        <stc:numericValidation minInclusive="50" maxInclusive="4294967295" />
+    </stc:property>
+    <stc:property category="input" name="NominalRate"
+                  displayName="Nominal Rates"
+                  type="double" default="10.0">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Nominal Rate" />
+    </stc:property>
+    <stc:property category="input" name="NominalRateUnit"
+                  displayName="Nominal Rate Unit"
+                  type="u8" default="PERCENT_LINE_RATE">
+        <stc:attribute internalType="string" type="framework.PropertyDescription" value="Nominal Rate Unit"/>
+        <stc:enumerationRef ref="ManualScheduleEntry.EnumGapUnit"/>
+    </stc:property>
+    <stc:property category="input" name="EnableRandomSeed"
+                  displayName="Enable Random Seed"
+                  type="bool" default="false">
+        <stc:attribute internalType="string" type="framework.PropertyDescription" value="Enable Random Seed"/>
+    </stc:property>
+    <stc:property category="input" name="RandomSeedValue"
+                  displayName="Random Seed Value"
+                  type="u32" default="0">
+        <stc:attribute internalType="string" type="framework.PropertyDescription" value="Random Seed Value"/>
+        <stc:condition type="applicable" property="EnableRandomSeed"
+                       operator="equal" value="true" />
+    </stc:property>
+    <stc:property category="input" name="BestEffortTagName"
+                  displayName="Tag Name for Best Effort Streams"
+                  type="string" default="ttBeStream">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Tag Name for Best Effort Streams"/>
+    </stc:property>
+    <stc:property category="input" name="MicroburstTagName"
+                  displayName="Tag Name for Microburst Streams"
+                  type="string" default="ttMicroburst">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Tag Name for Microburst Streams"/>
+    </stc:property>
+    <stc:property category="input" name="MixTagName"
+                  displayName="Mix Container Tag Name"
+                  type="string" default="">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Mix Container Tag Name"/>
+    </stc:property>
+    <stc:property category="input" name="MicroburstFileName"
+                  displayName="Microburst Configuration File"
+                  type="inputFilePath" default="">
+      <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                     type="framework.PropertyDescription"
+                     value="Microburst Configuration File" />
+      <stc:attribute type="framework.MangleRelativePath" value="false" internalType="bool" />
+    </stc:property>
+</stc:class>
+
+
+<stc:class name="Y1564MicroburstResultsCommand"
+           displayName="Configure Y.1564 Microburst Test Results"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none"
+                   type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                   type="framework.CommandDescription"
+                   value="Configure Y.1564 Microburst Test Results"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                   type="framework.CommandCategory"
+                   value="Test Methodology//Methodology Specific"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+</stc:class>
+
+<!--- L3QOS DIFFSERV -->
+<stc:class name="DiffServConfigRampCommand"
+           displayName="Configure DIFFSERV Configuration Ramp Test"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Configure DIFFSERV Configuration Ramp Test" />
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Methodology Specific"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="false" internalType="bool" />
+    <stc:property category="input" name="StreamTagNameList" displayName="List of StreamBlock Tag Name" type="string" default="" 
+                  minOccurs="0" maxOccurs="unbounded">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="List of streamblock tag names"/>
+    </stc:property>
+    <stc:property category="input" name="ExpPktLossCount"
+                  displayName="Packet Loss Count Threshold"
+                  type="u64" default="0">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Packet Loss Count Threshold" />
+    </stc:property>
+    <stc:property category="input" name="ExpMaxJitter"
+                  displayName="Maximum Jitter Threshold (usec)"
+                  type="double" default="0.2">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Maximum Jitter Threshold (usec)"/>
+    </stc:property>
+    <stc:property category="input" name="ExpMaxLatency"
+                  displayName="Maximum Latency Threshold (ms)"
+                  type="double" default="1.0">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Maximum Latency Threshold (ms)"/>
+    </stc:property>
+    <stc:property category="input" name="ExpMaxOopCount"
+                  displayName="Maximum Out of Order Packet Count Threshold"
+                  type="u64" default="0">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Maximum Out of Order Packet Count Threshold"/>
+    </stc:property>
+    <stc:property category="input" name="ExpMaxLatePktCount"
+                  displayName="Maximum Late Packet Count Threshold"
+                  type="u64" default="0">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Maximum Late Packet Count Threshold"/>
+    </stc:property>
+    <stc:property category="input" name="ExpMaxDupPktCount"
+                  displayName="Maximum Duplicated Packet Count Threshold"
+                  type="u64" default="0">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none"
+                       type="framework.PropertyDescription"
+                       value="Maximum Duplicated Packet Count Threshold"/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="DiffServConfigStreamBlockLoadCommand"
+           displayName="Configure Stream Block Load Command for DiffServ"
+           bllDirectInterface="true">
+    <stc:attribute internalIsEnum="false" internalType="bool" name="none" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandDescription" value="Set the percent load for all appropriately-tagged stream blocks used in a DiffServ test"/>
+    <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.CommandCategory" value="Test Methodology//Traffic"/>
+    <stc:attribute type="core.RequireApplyToIL" value="false" internalType="bool" />
+    <stc:attribute type="core.RequirePostApplyToIL" value="true" internalType="bool" />
+
+    <stc:property category="input" name="TagNameList" displayName="List of stream block tag names" type="string" default="" minOccurs="1" maxOccurs="unbounded">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="List of stream block tag names to match"/>
+    </stc:property>
+    <stc:property category="input" name="RxLoadPercent" displayName="RX percent load" type="double" default="10">
+        <stc:attribute internalIsEnum="false" internalType="string" name="none" type="framework.PropertyDescription" value="Desired percent load on the RX ports terminating the stream blocks" />
+        <stc:numericValidation minInclusive="0" maxInclusive="100" />
+    </stc:property>
+</stc:class>
+
+</stc:meta>

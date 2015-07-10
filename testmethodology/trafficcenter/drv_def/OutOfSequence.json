@@ -1,0 +1,8 @@
+{
+"SelectProperties" : ["StreamBlock.Name", "StreamBlock.StreamId", "StreamBlock.PortName",
+                    "StreamBlock.ActualRxPortName", "StreamBlock.TxFrameCount",
+                    "StreamBlock.RxFrameCount", "StreamBlock.TxBitRate",
+                    "StreamBlock.RxBitRate", "StreamBlock.OutSeqFrameCount"]
+,
+"WhereConditions" : ["StreamBlock.OutSeqFrameCount > 0"]
+}

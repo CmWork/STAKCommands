@@ -1,0 +1,219 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>&lt;no title&gt; &mdash; Spirent Methodology Infrastructure 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Spirent Methodology Infrastructure 0.1 documentation" href="../../index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="../../index.html" class="icon icon-home"> Spirent Methodology Infrastructure
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="simple">
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Spirent Methodology Infrastructure</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+    <li>&lt;no title&gt;</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/Commands/stc_testmethodology/CreateMethodologyChartCommand.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <p># CreateMethodologyChartCommand</p>
+<p>Export Chart</p>
+<p>&lt;font size=&#8221;2&#8221;&gt;File Reference: stc_testmethodology.xml&lt;/font&gt;</p>
+<p>## Properties</p>
+<p>### ChartTemplateJsonFileName: &#8220;Chart Template File&#8221; (input:inputFilePath)</p>
+<p>Chart template file in JSON format. May use one of the provided basic templates: Line_Template.json and Column_Template.json.</p>
+<ul class="simple">
+<li>default - Line_Template.json</li>
+</ul>
+<p>### Title: &#8220;Chart Title&#8221; (input:string)</p>
+<p>Title displayed at the top of the chart.</p>
+<ul class="simple">
+<li>default - Result Node Param Handles</li>
+</ul>
+<p>### Series: &#8220;Series&#8217; Data&#8221; (input:string)</p>
+<p>Set of data to be plotted on the chart specified as a list of strings or SQL queries. Each list element is a series. The string format to plot a single data type is: 1, 2, 3, 4. Plotting two data types is: [1, 1], [2, 2].</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### YAxisTitle: &#8220;Y Axis Title&#8221; (input:string)</p>
+<p>Title displayed along the Y axis.</p>
+<ul class="simple">
+<li>default - Handle</li>
+</ul>
+<p>### XAxisTitle: &#8220;X Axis Title&#8221; (input:string)</p>
+<p>Title displayed along the X axis.</p>
+<ul class="simple">
+<li>default - Id</li>
+</ul>
+<p>### TemplateModifier: &#8220;Template Modifier&#8221; (input:string)</p>
+<p>Modify chart properties by specifying a string in JSON format that will be appended to the result file. Specified properties will be merged with and overwrite any existing properies in the chart template file. Follows the HighCharts API. Ex. {&#8220;yAxis&#8221;: {&#8220;title&#8221;: {&#8220;text&#8221;: &#8220;Modified Label&#8221;}}} SQL Queries can be inserted to the JSON string by delimiting the queries with {{ and }}.</p>
+<ul class="simple">
+<li>default - {&#8220;series&#8221;:[{&#8220;name&#8221;: &#8220;Handles&#8221;}]}</li>
+</ul>
+<p>### SrcDatabase: &#8220;Source Database&#8221; (input:u8)</p>
+<p>Select source database(s) to execute the Sql queries.</p>
+<ul class="simple">
+<li>default - SUMMARY</li>
+</ul>
+<p>### XAxisCategories: &#8220;X Axis Categories&#8221; (input:string)</p>
+<p>X axis categories specified as a list of strings or SQL queries. Used to label the tick marks along the X axis.</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### YAxisCategories: &#8220;Y Axis Categories&#8221; (input:string)</p>
+<p>Y axis categories specified as a list of strings or SQL queries. Used to label the tick marks along the Y axis.</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>## UsedIn
+* Routing Multi-Protocol</p>
+
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Spirent.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

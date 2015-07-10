@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<test>
+  <testInfo description="L3 QoS DiffServ Validation Test" displayName="L3 QoS DiffServ" methodologyKey="L3QOS_DIFFSERV" testCaseDescription="" testCaseKey="" testCaseName="" version="1.0">
+    <labels>
+      <label>DiffServ</label>
+      <label>QoS</label>
+      <label>L3</label>
+    </labels>
+  </testInfo>
+  <testResources>
+    <resourceGroups>
+      <resourceGroup displayName="Chassis Info" id="chassisInfo">
+        <portGroups>
+          <portGroup id="Tag.Name.2040" name="Left Port Group 1">
+            <port name="TX Load">
+              <attribute name="location" value="offline" />
+            </port>
+          </portGroup>
+          <portGroup id="Tag.Name.2039" name="Left Port Group 2">
+            <port name="TX Test">
+              <attribute name="location" value="offline" />
+            </port>
+          </portGroup>
+          <portGroup id="Tag.Name.1998" name="Right Port Group">
+            <port name="RX">
+              <attribute name="location" value="offline" />
+            </port>
+          </portGroup>
+        </portGroups>
+      </resourceGroup>
+    </resourceGroups>
+  </testResources>
+  <wizard description="L3 QoS DiffServ Test" displayName="L3 QoS DiffServ Test" image="L3QosDiffServTopo.png">
+    <page layout="grid" columns="2" rows="1" displayName="Test Duration Config" description="Configure how long the test will run based on number of iterations and duration of each iteration." image="L3QosDiffServTopo.png">
+      <group posId="0,0" displayName="Test Duration Config">
+        <property id="TestTrafficLoopStartNumberOfIterations" value="10" displayName="Number of iterations" description="Number of iterations" type="uint32" />
+        <property id="RunTestTrafficWaitTimeSecs" value="30" displayName="Duration of each iteration (seconds)" description="Duration of each iteration in seconds" type="uint32" />
+      </group>
+      <group posId="1,0" displayName="Sanity and Recovery Duration Config">
+        <property id="RunSanityTrafficWaitTimeSecs" value="10" displayName="Duration of the sanity run (seconds)" description="Time to allow traffic to settle prior to running test load above saturation" type="uint32" />
+        <property id="RunRecoveryTrafficWaitTimeSecs" value="10" displayName="Duration of the recovery run (seconds)" description="Time to allow the device under test to recover after test load is reduced" type="uint32" />
+      </group>
+    </page>
+    <page layout="grid" columns="2" rows="2" displayName="TX Load Endpoint Config" description="Configure the endpoints for the TX ports that will be used to saturate the device under test with BE traffic." image="L3QosDiffServTopoLoad.png">
+      <group posId="0,0" displayName="IPv4 Addresses">
+        <property id="UpdateIpv4AddressStartValue" value="192.85.5.3" displayName="IPv4 Address Start" description="Address Start" type="ipv4" />
+        <property id="UpdateIpv4AddressStepValue" value="0.0.0.1" displayName="IPv4 Address Step" description="Address Step" type="ipv4" />
+        <property id="UpdateIpv4AddressRepeatValue" value="0" displayName="IPv4 Repeat Value" description="Repeat Value" type="uint32" />
+        <property id="UpdateIpv4AddressRecycleValue" value="0" displayName="IPv4 Recycle Value" description="Recycle Value" type="uint32" />
+      </group>
+      <group posId="1,0" displayName="IPv4 Gateway Addresses">
+        <property id="UpdateIpv4GatewayAddressStartValue" value="192.85.5.1" displayName="IPv4 Gateway Address Start" description="Gateway Address Start" type="ipv4" />
+        <property id="UpdateIpv4GatewayAddressStepValue" value="0.0.0.0" displayName="IPv4 Gateway Address Step" description="Gateway Address Step" type="ipv4" />
+        <property id="UpdateIpv4GatewayAddressRepeatValue" value="0" displayName="IPv4 Gateway Repeat Value" description="Gateway Repeat Value" type="uint32" />
+        <property id="UpdateIpv4GatewayAddressRecycleValue" value="0" displayName="IPv4 Gateway Recycle Value" description="Gateway Recycle Value" type="uint32" />
+      </group>
+      <group posId="0,1" displayName="MAC Addresses">
+        <property id="UpdateSourceMACAddressStartValue" value="00:10:94:00:00:01" displayName="MAC Address Start" description="MAC Address Start" type="mac" />
+        <property id="UpdateSourceMACAddressStepValue" value="00:00:00:00:00:01" displayName="MAC Address Step" description="MAC Address Step" type="mac" />
+        <property id="UpdateSourceMACAddressRepeatValue" value="0" displayName="MAC Address Repeat" description="MAC Address Repeat" type="uint32" />
+        <property id="UpdateSourceMACAddressRecycleValue" value="0" displayName="MAC Address Recylce" description="MAC Address Step" type="uint32" />
+      </group>
+    </page>
+    <page layout="grid" columns="2" rows="2" displayName="TX Test Endpoint Config" description="Configure the endpoints for the TX ports that will be used to send differentiated traffic to the device under test." image="L3QosDiffServTopoTest.png">
+      <group posId="0,0" displayName="IPv4 Addresses">
+        <property id="UpdateIpv4AddressStartValue13" value="192.85.4.4" displayName="IPv4 Address Start" description="Address Start" type="ipv4" />
+        <property id="UpdateIpv4AddressStepValue14" value="0.0.0.1" displayName="IPv4 Address Step" description="Address Step" type="ipv4" />
+        <property id="UpdateIpv4AddressRepeatValue15" value="0" displayName="IPv4 Repeat Value" description="Repeat Value" type="uint32" />
+        <property id="UpdateIpv4AddressRecycleValue16" value="0" displayName="IPv4 Recycle Value" description="Recycle Value" type="uint32" />
+      </group>
+      <group posId="1,0" displayName="IPv4 Gateway Addresses">
+        <property id="UpdateIpv4GatewayAddressStartValue17" value="192.85.4.1" displayName="IPv4 Gateway Address Start" description="Gateway Address Start" type="ipv4" />
+        <property id="UpdateIpv4GatewayAddressStepValue18" value="0.0.0.0" displayName="IPv4 Gateway Address Step" description="Gateway Address Step" type="ipv4" />
+        <property id="UpdateIpv4GatewayAddressRepeatValue19" value="0" displayName="IPv4 Gateway Repeat Value" description="Gateway Repeat Value" type="uint32" />
+        <property id="UpdateIpv4GatewayAddressRecycleValue20" value="0" displayName="IPv4 Gateway Recycle Value" description="Gateway Recycle Value" type="uint32" />
+      </group>
+      <group posId="0,1" displayName="MAC Addresses">
+        <property id="UpdateSourceMACAddressStartValue21" value="00:10:95:00:00:01" displayName="MAC Address Start" description="MAC Address Start" type="mac" />
+        <property id="UpdateSourceMACAddressStepValue22" value="00:00:00:00:00:01" displayName="MAC Address Step" description="MAC Address Step" type="mac" />
+        <property id="UpdateSourceMACAddressRepeatValue23" value="0" displayName="MAC Address Repeat" description="MAC Address Repeat" type="uint32" />
+        <property id="UpdateSourceMACAddressRecycleValue24" value="0" displayName="MAC Address Recylce" description="MAC Address Step" type="uint32" />
+      </group>
+    </page>
+    <page layout="grid" columns="2" rows="2" displayName="RX Endpoint Config" description="Configure the endpoints for the RX ports that will receive all traffic from the device under test." image="L3QosDiffServTopoRX.png">
+      <group posId="0,0" displayName="IPv4 Addresses">
+        <property id="UpdateIpv4AddressStartValue25" value="192.85.6.5" displayName="IPv4 Address Start" description="Address Start" type="ipv4" />
+        <property id="UpdateIpv4AddressStepValue26" value="0.0.0.1" displayName="IPv4 Address Step" description="Address Step" type="ipv4" />
+        <property id="UpdateIpv4AddressRepeatValue27" value="0" displayName="IPv4 Repeat Value" description="Repeat Value" type="uint32" />
+        <property id="UpdateIpv4AddressRecycleValue28" value="0" displayName="IPv4 Recycle Value" description="Recycle Value" type="uint32" />
+      </group>
+      <group posId="1,0" displayName="IPv4 Gateway Addresses">
+        <property id="UpdateIpv4GatewayAddressStartValue29" value="192.85.6.1" displayName="IPv4 Gateway Address Start" description="Gateway Address Start" type="ipv4" />
+        <property id="UpdateIpv4GatewayAddressStepValue30" value="0.0.0.0" displayName="IPv4 Gateway Address Step" description="Gateway Address Step" type="ipv4" />
+        <property id="UpdateIpv4GatewayAddressRepeatValue31" value="0" displayName="IPv4 Gateway Repeat Value" description="Gateway Repeat Value" type="uint32" />
+        <property id="UpdateIpv4GatewayAddressRecycleValue32" value="0" displayName="IPv4 Gateway Recycle Value" description="Gateway Recycle Value" type="uint32" />
+      </group>
+      <group posId="0,1" displayName="MAC Addresses">
+        <property id="UpdateSourceMACAddressStartValue33" value="00:10:96:00:00:01" displayName="MAC Address Start" description="MAC Address Start" type="mac" />
+        <property id="UpdateSourceMACAddressStepValue34" value="00:00:00:00:00:01" displayName="MAC Address Step" description="MAC Address Step" type="mac" />
+        <property id="UpdateSourceMACAddressRepeatValue35" value="0" displayName="MAC Address Repeat" description="MAC Address Repeat" type="uint32" />
+        <property id="UpdateSourceMACAddressRecycleValue36" value="0" displayName="MAC Address Recylce" description="MAC Address Step" type="uint32" />
+      </group>
+    </page>
+  </wizard>
+</test>

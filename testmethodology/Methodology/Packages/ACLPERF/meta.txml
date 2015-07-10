@@ -1,0 +1,123 @@
+<?xml version="1.0" ?>
+<test>
+  <testInfo displayName="ACL Performance Test" description="Access Control List Performance Test" methodologyKey="ACLPERF" testCaseName="original" version="1.0" testCaseKey=""
+            testCaseDescription="Access Control List Performance Test will measure traffic statistics while shifting the traffic load to the DUT with non conforming packets.
+ The test will provide insight to the DUT's functionality (properly processing ACL rules) and performance (e.g., jitter, latency, packet loss, order, late, etc.) across a list
+ of frame sizes.">
+    <labels>
+      <label>Access Control List</label>
+      <label>ACL</label>
+      <label>Performance</label>
+    </labels>
+    <features>
+      <!-- Replace with proper feature ID when available -->
+      <feature id="MAX_SCALABILITY"/>
+    </features>
+  </testInfo>
+  <testResources>
+    <resourceGroups>
+      <resourceGroup displayName="Chassis Info" id="chassisInfo">
+        <portGroups>
+          <portGroup id="Tag.Name.2703" name="East Port Group">
+            <template name="IPv4 No VLAN">
+              <description>East Port Template</description>
+              <Image/>
+              <source name="Ipv4_NoVlan.xml"/>
+            </template>
+              <port name="East Port">
+                <attribute name="location" value="10.14.16.27/4/1" />
+              </port>
+          </portGroup>
+          <portGroup id="Tag.Name.2704" name="West Port Group">
+            <template name="IPv4 No VLAN">
+              <description>West Port Template</description>
+              <Image/>
+              <source name="Ipv4_NoVlan.xml"/>
+            </template>
+              <port name="West Port">
+                <attribute name="location" value="10.14.16.27/4/2" />
+              </port>
+          </portGroup>
+        </portGroups>
+      </resourceGroup>
+    </resourceGroups>
+  </testResources>
+
+  <wizard displayName="Access Control List Performance Methodology" image="Acl.png"
+        description="Access Control List Performance Test will measure traffic statistics while shifting the traffic load to the DUT with non conforming packets.
+ The test will provide insight to the DUT's functionality (properly processing ACL rules) and performance (e.g., jitter, latency, packet loss, order, late, etc.) across a list
+ of frame sizes.">
+    <page description="Configure the East side emulated devices to connect to the DUT." displayName="East Port Group Configuration" image="AclIngress.png">
+      <group displayName="East Port Group Configuration">
+          <property description="Number of endpoints created per port" displayName="Endpoint Count (Per Port)" id="spirent.methodology.LoadTemplateCommand.copiesperparent.1" value="1"/>
+      </group>
+      <group displayName="Ethernet Configuration">
+          <property description="MAC Address Start" displayName="MAC Address Start" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand19StartValue" value="00:10:94:00:00:01"/>
+          <property description="MAC Address Step" displayName="MAC Address Step" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand19StepValue" value="00:00:00:00:00:01"/>
+      </group>
+      <group displayName="IPv4 Configuration">
+          <property description="IPv4 Address Start" displayName="IPv4 Address Start" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand23StartValue" value="192.85.1.1"/>
+          <property description="IPv4 Address Step" displayName="IPv4 Address Step" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand23StepValue" value="0.0.0.1"/>
+          <property description="IPv4 Gateway Start" displayName="IPv4 Gateway Start" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand24StartValue" value="192.85.1.3"/>
+          <property description="IPv4 Gateway Step" displayName="IPv4 Gateway Step" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand24StepValue" value="0.0.0.0"/>
+      </group>
+    </page>
+    <page description="Configure the West side emulated devices to connect to the DUT." displayName="West Port Group Configuration" image="AclEgress.png">
+      <group displayName="West Port Group Configuration">
+          <property description="Number of endpoints created per port" displayName="Endpoint Count (Per Port)" id="spirent.methodology.LoadTemplateCommand.copiesperparent.2" value="1"/>
+      </group>
+      <group displayName="Ethernet Configuration">
+          <property description="MAC Address Start" displayName="MAC Address Start" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand20StartValue" value="00:10:96:00:00:01"/>
+          <property description="MAC Address Step" displayName="MAC Address Step" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand20StepValue" value="00:00:00:00:00:01"/>
+      </group>
+      <group displayName="IPv4 Configuration">
+          <property description="IPv4 Address Start" displayName="IPv4 Address Start" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand21StartValue" value="192.85.1.3"/>
+          <property description="IPv4 Address Step" displayName="IPv4 Address Step" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand21StepValue" value="0.0.0.1"/>
+          <property description="IPv4 Gateway Start" displayName="IPv4 Gateway Start" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand22StartValue" value="192.85.1.1"/>
+          <property description="IPv4 Gateway Step" displayName="IPv4 Gateway Step" id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommand22StepValue" value="0.0.0.0"/>
+      </group>
+    </page>
+    <page description="Customize the test parameters, such as traffic settings, iteration characteristics." displayName="Traffic Settings" image="AclTraffic.png">
+      <group displayName="Traffic Settings">
+          <property description="How long traffic will flow for each iteration of determining baseline line rate per frame size." 
+                displayName="Traffic Duration For Baseline Phase (secs)" id="WaitCommand.WaitTime.1" value="30"/>
+          <property description="How long traffic will flow for each iteration of determining performance with increasing non-conformant traffic." 
+                displayName="Traffic Duration For Performance Phase (secs)" id="WaitCommand.WaitTime.2" value="30"/>
+          <property displayName="Frame Size List (bytes)" id="test.frameSizeList" value="['128', '256', '512', '1024', '1280', '1518']"
+                description="List of Frame Sizes to iterate over for each test stream" ignoreOnBackEnd="true" />
+          <property displayName="Back Step Start For Stability (% max line rate)" id="spirent.methodology.StabilityBackoffIteratorCommand.MaxVal.2" value="100"
+                description="The beginning percent line rate value that is stepped back down from until stability is achieved." />
+          <property displayName="Back Step For Stability (% max line rate)" id="spirent.methodology.StabilityBackoffIteratorCommand.StepVal.2" value="15"
+                description="The % line rate value that is stepped back down per iteration until stability is achieved." />
+          <property description="The rules file to import." displayName="Rules file" id="spirent.methodology.RunPyScriptCommand.Params.rulesfilename" value="rules.txt"/>
+          <property displayName="Additional blocking streams per iteration" id="spirent.methodology.RunPyScriptCommand.Params.rotate" value="1"
+                description="The number of blocking streams (streams that the DUT should block) that replace pass through streams (streams that the DUT should pass through) with each iteration." />
+      </group>
+    </page>
+    <page description="Customize the test case threshold values, such as the average latency that will be acceptable." displayName="Traffic Statistics Threshold Settings" image="AclTraffic.png">
+      <group displayName="Traffic Statistics Threshold Settings">
+          <property displayName="Packet Loss Count Threshold" id="spirent.methodology.RunPyScriptCommand.Params.exp_pktloss" value="0"
+           description="It is considered an error when the packet loss count reaches or exceeds this value."/>
+          <property displayName="Mean Frame Delay Variation Threshold (us)" id="spirent.methodology.RunPyScriptCommand.Params.exp_avgjitter" value="50"
+           description="It is considered an error when the mean FDV (average jitter) reaches or exceeds this value."/>
+          <property displayName="Maximum Frame Delay Variation Threshold (us)" id="spirent.methodology.RunPyScriptCommand.Params.exp_maxjitter" value="200"
+           description="It is considered an error when the maximum FDV (maximum jitter) reaches or exceeds this value."/>
+          <property displayName="Mean Frame Transfer Delay Threshold (us)" id="spirent.methodology.RunPyScriptCommand.Params.exp_avglatency" value="700"
+           description="It is considered an error when the mean FTD (average latency) reaches or exceeds this value."/>
+          <property displayName="Maximum Frame Transfer Delay Threshold (us)" id="spirent.methodology.RunPyScriptCommand.Params.exp_maxlatency" value="1000"
+           description="It is considered an error when the maximum FTD (maximum latency) reaches or exceeds this value."/>
+          <property displayName="Out Of Order Packets Threshold" id="spirent.methodology.RunPyScriptCommand.Params.exp_maxoop" value="0"
+           description="It is considered an error when the packet out of order count reaches or exceeds this value."/>
+          <property displayName="Late Packets Threshold" id="spirent.methodology.RunPyScriptCommand.Params.exp_maxlatepkt" value="0"
+           description="It is considered an error when the late packet value reaches or exceeds this value."/>
+      </group>
+    </page>
+  </wizard>
+
+  <processingFunctions>
+    <processingFunction id="frameSizeList.pf.copy_string_to_list" scriptFile="txml_processing_functions.py" entryFunction="copy_string_to_list">
+      <input srcId="test.frameSizeList" scriptVarName="InputKey" />
+      <output scriptVarName="OutputKey" epKey="spirent.methodology.ObjectIteratorCommand.ValueList.2" />
+    </processingFunction>
+  </processingFunctions>
+</test>

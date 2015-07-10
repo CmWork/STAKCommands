@@ -1,0 +1,242 @@
+<?xml version="1.0" ?>
+<stc:meta package="spirent.methodology.trafficcenter" plugin="plcommands" version="0.0.0-0" xmlns:stc="urn:www.spirentcom.com:XMLSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<stc:class name="SetupVirtualPortsCommand"
+	   displayName="Setup Virtual Ports Configuration"
+	   bllDirectInterface="true"
+	   isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Setup Virtual  Ports"/>
+  <stc:attribute internalType="string" type="framework.CommandCategory" value="Test Methodology//Traffic Center"/>
+</stc:class>
+
+<stc:class name="ReleasePortsCommand"
+	   displayName="Release Ports"
+	   bllDirectInterface="true"
+	   isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Release Ports"/>
+    <stc:attribute internalType="string" type="framework.CommandCategory" value="Test Methodology//Traffic Center"/>
+    <stc:property category="input" name="TestConfig" displayName="Test Configuration" type="string" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Test Configuration"/>
+    </stc:property>   
+</stc:class>
+
+<stc:class name="ReservePortsCommand"
+	   displayName="Reserve Ports"
+	   bllDirectInterface="true"
+	   isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Reserve Ports"/>
+  <stc:attribute internalType="string" type="framework.CommandCategory" value="Test Methodology//Traffic Center"/>
+    <stc:property category="input" name="TopologyConfig" displayName="Topology Configuration" type="string" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Topology Configuration"/>
+    </stc:property>   
+</stc:class>
+
+<stc:class name="TrafficCenterTestCommand"
+	   displayName="Traffic Center Test Command"
+	   bllDirectInterface="true"
+	   isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="true" />
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Traffic Center Test Command"/>
+    <stc:attribute internalType="string" type="framework.CommandCategory" value="Test Methodology//Traffic Center"/>
+    <stc:property category="input" name="TestConfig" displayName="Test Configuration" type="string" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Test Configuration"/>
+    </stc:property>   
+</stc:class>
+
+<stc:class name="CreateTemplatesCommand"
+	   displayName="Create Templates Command"
+	   bllDirectInterface="true"
+	   isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="true" />
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Create topology and traffic templates for use by TrafficCenter"/>
+    <stc:attribute internalType="string" type="framework.CommandCategory" value="Test Methodology//Traffic Center"/>
+
+    <stc:property category="input" name="TopologyConfig" displayName="Topology Configuration" type="string" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Topology Configuration"/>
+    </stc:property>   
+    <stc:property category="input" name="NetworkProfileConfig" displayName="Network Profile Configuration" type="string" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Network Profile Configuration"/>
+    </stc:property>   
+    <stc:property category="input" name="TrafficProfileConfig" displayName="Trafifc Profile Configuration" type="string" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Trafifc Profile Configuration"/>
+    </stc:property>     
+    <stc:property category="input" name="EndpointConfig" displayName="Endpoint Configuration" type="string" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Endpoint Configuration"/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="SubscribeHealthCommand"
+	   displayName="Subscribe Health Stats Command"
+	   bllDirectInterface="true"
+	   isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="false" />
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Subscribe Health Stats Command"/>
+    <stc:attribute internalType="string" type="framework.CommandCategory" value="Test Methodology//Traffic Center"/>
+    <stc:property category="input" name="HealthConfig" displayName="Health Stats Configuration" type="string" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Health Stats Configuration"/>
+    </stc:property>
+    <stc:property category="output" name="TrafficFilter" displayName="Traffic Counter Filter" type="handle" maxOccurs="unbounded" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Traffic Counter Filter For Drill Down"/>
+    </stc:property>
+  <stc:property category="output" name="TrafficThresholdNames" displayName="Traffic Threshold Names" type="string" maxOccurs="unbounded" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Traffic Threshold Names"/>
+    </stc:property>
+  <stc:property category="output" name="TrafficDrvNames" displayName="Health Drv Names" type="string" maxOccurs="unbounded" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Health Drv Names"/>
+    </stc:property>
+  <stc:property category="output" name="TrafficDrvs" displayName="Health Drvs" type="handle" maxOccurs="unbounded" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Health Drvs"/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="SubscribePortCounterCommand" displayName="Subscribe Port Coutners Command" bllDirectInterface="true" isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="false" />
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Subscribe Health Stats Command"/>
+    <stc:attribute internalType="string" type="framework.CommandCategory" value="Test Methodology//Traffic Center"/>
+    <stc:property category="input" name="Config" displayName="Port Stats Configuration" type="string" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Port Stats Configuration"/>      
+    </stc:property>
+    <stc:property category="output" name="PortResults" displayName="Port Result Handles" type="handle" default="" maxOccurs="unbounded">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Port Results"/>
+    </stc:property>
+    <stc:property category="output" name="PortLocations" displayName="Port Location" type="string" default="" maxOccurs="unbounded">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Port Location"/>
+    </stc:property>       
+</stc:class>
+
+<stc:class name="DrillDownHealthCommand" displayName="Drill Down Health Command" bllDirectInterface="true" isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="false" />
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Drill Down Health Command"/>
+    <stc:attribute internalType="string" type="framework.CommandCategory" value="Test Methodology//Traffic Center"/>
+    <stc:property category="input" name="TrafficFilter" displayName="Traffic Filter" type="handle" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Result filter"/>
+    </stc:property>
+  <stc:property category="input" name="TargetPort" displayName="Target Port" type="handle" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Target port"/>
+    </stc:property>
+  <stc:property category="input" name="CallbackInfo" displayName="Callback Info" type="string" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Callback info"/>
+    </stc:property>
+    <stc:property category="output" name="HealthDetailDrv" displayName="Health Detail Drv" type="handle" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="DRV of health detail"/>
+    </stc:property>
+  <stc:property category="output" name="HealthDetailDrvChild" displayName="Health Detail Drv Child" type="handle" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="DRV of health detail child"/>
+    </stc:property>
+  <stc:property category="output" name="HealthDetailColumns" displayName="Health Detail Columns" type="string" maxOccurs="unbounded" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Health Detail Columns"/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="CollapseHealthCommand" displayName="Collapse Health Command" bllDirectInterface="true" isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="false" />
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Collapse Health Command"/>
+    <stc:attribute internalType="string" type="framework.CommandCategory" value="Test Methodology//Traffic Center"/>
+    <stc:property category="input" name="HealthDetailDrv" displayName="Health Detail Drv" type="handle" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="DRV of health detail"/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="SetTrafficDurationCommand"
+	   displayName="Set Traffic Duration"
+	   bllDirectInterface="true"
+	   isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Set Traffic Profile Duration"/>
+    <stc:attribute internalType="string" type="framework.CommandCategory" value="Test Methodology//Traffic Center"/>
+    <stc:property name="Duration" type="u32" default="604800" category="input" displayName="Duration (secs)" >
+      <stc:attribute type="framework.PropertyDescription" value="Time to transmit traffic." internalType="string" />
+    </stc:property>   
+</stc:class>
+
+<stc:class name="CollectResultCommand" displayName="Collect Result Command" bllDirectInterface="true" isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="false" />
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Collect Result Command"/>
+    <stc:attribute internalType="string" type="framework.CommandCategory" value="Traffic Center"/>
+    <stc:property category="input" name="TrafficFilters" displayName="Traffic Filters" type="handle" maxOccurs="unbounded" default="0">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Traffic Filters"/>
+    </stc:property>
+	<stc:property category="input" name="Ports" displayName="Ports" type="handle" maxOccurs="unbounded" default="0">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Ports"/>
+    </stc:property>
+	<stc:property category="input" name="Drvs" displayName="Drvs" type="handle" maxOccurs="unbounded" default="0">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Drvs"/>
+    </stc:property>
+	<stc:property category="input" name="DrvPorts" displayName="DRV Ports" type="handle" maxOccurs="unbounded" default="0">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="DRV Ports"/>
+    </stc:property>
+	<stc:property category="output" name="Result" displayName="Result" type="string" default="{}">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Result"/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="CollectResultAsyncCommand" displayName="Collect Result Async Command" bllDirectInterface="true" isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="false" />
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Collect Result Async Command"/>
+    <stc:attribute internalType="string" type="framework.CommandCategory" value="Traffic Center"/>
+    <stc:property category="input" name="TrafficFilters" displayName="Traffic Filters" type="handle" maxOccurs="unbounded" default="0">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Traffic Filters"/>
+    </stc:property>
+	<stc:property category="input" name="Ports" displayName="Ports" type="handle" maxOccurs="unbounded" default="0">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Ports"/>
+    </stc:property>
+	<stc:property category="input" name="Drvs" displayName="Drvs" type="handle" maxOccurs="unbounded" default="0">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Drvs"/>
+    </stc:property>
+	<stc:property category="input" name="DrvPorts" displayName="DRV Ports" type="handle" maxOccurs="unbounded" default="0">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="DRV Ports"/>
+    </stc:property>
+	<stc:property category="input" name="CallbackInfo" displayName="Callback Info" type="string" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Callback info"/>
+    </stc:property>
+	<stc:property category="output" name="StartedCommand" displayName="Started Command" type="handle" default="">
+      <stc:attribute internalType="string" type="framework.PropertyDescription" value="Started Command"/>
+    </stc:property>
+</stc:class>
+
+<stc:class name="AdjustMacCommand" displayName="Adjust Mac for Traffic Center Tests" bllDirectInterface="true" isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Adjust Mac for Traffic Center Tests"/>
+    <stc:attribute internalType="string" type="framework.CommandCategory" value="Test Methodology//Traffic Center"/>
+    <stc:property name="TopologyConfig" type="string" default="[]" category="input" displayName="Topology Config" >
+      <stc:attribute type="framework.PropertyDescription" value="Topology Config" internalType="string" />
+    </stc:property>   
+</stc:class>
+
+<stc:class name="ArpSubnetCommand" displayName="Arp Subnet Command" bllDirectInterface="true" isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Arp Subnet Command"/>
+    <stc:attribute internalType="string" type="framework.CommandCategory" value="Test Methodology//Traffic Center"/>
+    <stc:property name="TopologyConfig" type="string" default="[]" category="input" displayName="Topology Config" >
+      <stc:attribute type="framework.PropertyDescription" value="Topology Config" internalType="string" />
+    </stc:property>   
+</stc:class>
+
+<stc:class name="BindDhcpSubnetCommand" displayName="Bind Dhcp Subnet Command" bllDirectInterface="true" isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Bind Dhcp Subnet Command"/>
+    <stc:attribute internalType="string" type="framework.CommandCategory" value="Test Methodology//Traffic Center"/>
+    <stc:property name="TopologyConfig" type="string" default="[]" category="input" displayName="Topology Config" >
+      <stc:attribute type="framework.PropertyDescription" value="Topology Config" internalType="string" />
+    </stc:property>   
+</stc:class>
+
+<stc:class name="ReleaseDhcpSubnetCommand" displayName="Release Dhcp Subnet Command" bllDirectInterface="true" isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Release Dhcp Subnet Command"/>
+    <stc:attribute internalType="string" type="framework.CommandCategory" value="Test Methodology//Traffic Center"/>
+    <stc:property name="TopologyConfig" type="string" default="[]" category="input" displayName="Topology Config" >
+      <stc:attribute type="framework.PropertyDescription" value="Topology Config" internalType="string" />
+    </stc:property>   
+</stc:class>
+
+<stc:class name="UnsubscribeAllStatsCommand" displayName="Unsubscribe All Stats Command" bllDirectInterface="true" isInternal="true">
+    <stc:attribute internalType="bool" type="core.Sequenceable" value="true"/>
+    <stc:attribute internalType="string" type="framework.CommandDescription" value="Unsubscribe All Stats Command"/>
+    <stc:attribute internalType="string" type="framework.CommandCategory" value="Test Methodology//Traffic Center"/>  
+</stc:class>
+
+</stc:meta>

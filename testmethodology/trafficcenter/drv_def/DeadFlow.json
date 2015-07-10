@@ -1,0 +1,13 @@
+{
+"SelectProperties":["StreamBlock.Name", "Port.Name",
+					"StreamBlock.ActualRxPortName", "StreamBlock.FrameConfig.ipv4:IPv4.1.sourceAddr",
+					"StreamBlock.FrameConfig.ipv4:IPv4.1.destAddr", "StreamBlock.FrameConfig.ethernet:EthernetII.1.srcMac",
+					"StreamBlock.FrameConfig.ethernet:EthernetII.vlans.Vlan.1.id",
+					"StreamBlock.TxFrameCount", "StreamBlock.RxSigFrameCount",
+					"StreamBlock.TxFrameRate", "StreamBlock.RxSigFrameRate",
+					"StreamBlock.DuplicateFrameCount", "StreamBlock.DroppedFrameCount",
+					"StreamBlock.DroppedFrameDuration", "StreamBlock.MinLatency",
+					"StreamBlock.MaxLatency", "StreamBlock.AvgLatency", "StreamBlock.IsExpected"]
+,
+"WhereConditions" : ["StreamBlock.TxFrameRate > 0 AND StreamBlock.RxSigFrameRate = 0 OR StreamBlock.TxFrameCount > 0 AND StreamBlock.RxSigFrameCount = 0"]
+}

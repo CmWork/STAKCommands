@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>stc_methodology_routing.xml - Spirent Methodology Infrastructure</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Commands\stc_methodology_routing"
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Spirent Methodology Infrastructure</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../..">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Commands</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_api/">stc_methodology_api.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_datacenter/">stc_methodology_datacenter.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">stc_methodology_routing.xml</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#allocateroutemixcountcommand">AllocateRouteMixCountCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#bgpimportroutescommand">BgpImportRoutesCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#createroutemixcommand">CreateRouteMixCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#expandroutemixcommand">ExpandRouteMixCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#routeprefixdistributioncommand">RoutePrefixDistributionCommand</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_sampling/">stc_methodology_sampling.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_traffic/">stc_methodology_traffic.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_trafficcenter/">stc_methodology_trafficcenter.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_traffictest/">stc_methodology_traffictest.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodologymanager/">stc_methodologymanager.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_testmethodology/">stc_testmethodology.xml</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Templates</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Templates/AllRouters/">AllRouters.xml</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Spirent Methodology Infrastructure</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Commands &raquo;</li>
+        
+      
+    
+    <li>stc_methodology_routing.xml</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="allocateroutemixcountcommand">AllocateRouteMixCountCommand</h1>
+<p>Allocate total route count to components in the route mix</p>
+<h2>- Properties</h2>
+
+<h3>RouteMixList (input:handle)<br><font size=2>"Route Mix"</font></h3>
+
+<p>Route Mix Object Handles</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>RouteMixTagList (input:string)<br><font size=2>"Tag name for Route Mix"</font></h3>
+
+<p>Tag names associated with the Route Mix objects</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>RouteCount (input:u64)<br><font size=2>"Route Count"</font></h3>
+
+<p>Total number of routes</p>
+<ul>
+<li>default: 10</li>
+</ul>
+<h3>MixInfoJsonSchema (state:string)<br><font size=2>"Route Mix Info JSON Schema"</font></h3>
+
+<p>JSON schema that will be used to validate the MixInfo property's value.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="bgpimportroutescommand">BgpImportRoutesCommand</h1>
+<p>Expand Import Route Command</p>
+<h2>- Properties</h2>
+
+<h3>RouterTagList (input:string)<br><font size=2>"Router Tag List"</font></h3>
+
+<p>List of tag names, which tag BgpRouterConfig objects, that we will import BgpRouteConfig objects under.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>BgpImportParamsTagName (input:string)<br><font size=2>"BgpImportRouteTableParams tag name"</font></h3>
+
+<p>The tag name that identifies the BgpImportRouteTableParams object that the BgpImportRouteTableCommand will use to generate routes</p>
+<ul>
+<li>default: ttImportRouteParams</li>
+</ul>
+<h3>CreatedRoutesTagName (input:string)<br><font size=2>"New routes will be tagged with this"</font></h3>
+
+<p>The tag name that new routes made by the BgpImportRouteTableCommand will be subsequently tagged with</p>
+<ul>
+<li>default: ttImportRouteParams</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>BGP Route Reflector Test</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="createroutemixcommand">CreateRouteMixCommand</h1>
+<h3>Extends spirent.methodology.CreateTemplateMixCommand.</h3>
+
+<p>Command for creating mixtures of route counts among route objects on tagged router config objects.</p>
+<h2>- Properties</h2>
+
+<h3>MixInfo (input:string)<br><font size=2>"Mix Info"</font></h3>
+
+<p>JSON string representation of the mix (including table data)</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>MixTagName (input:string)<br><font size=2>"Mix Container Tag Name"</font></h3>
+
+<p>Name to use when tagging the output StmTemplateMix.  If left blank, StmTemplateMix will not be tagged.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>AutoExpandTemplateMix (input:bool)<br><font size=2>"Automatically expand templates in the mix"</font></h3>
+
+<p>Automatically expand templates.</p>
+<ul>
+<li>default: true</li>
+</ul>
+<h3>GroupCommandTagInfo (state:string)<br><font size=2>"Group Command Tag Info"</font></h3>
+
+<p>JSON structure containing the names of the tags used to refer to commands in this group.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>MixInfoJsonSchema (state:string)<br><font size=2>"Table Data JSON Schema"</font></h3>
+
+<p>JSON schema that will be used to validate the MixInfo property's value.</p>
+<h3><a id="schema.for.CreateRouteMixCommand.MixInfoJsonSchema.h3link" href="JavaScript:;" onclick="toggle_visibility('schema.for.CreateRouteMixCommand.MixInfoJsonSchema');">JSON Schema [+]</a></h3>
+
+<div class="section" style="display:none;" id="schema.for.CreateRouteMixCommand.MixInfoJsonSchema"><pre><code class="hljs json">        {
+          "required": [
+            "components"
+          ], 
+          "type": "object", 
+          "properties": {
+            "components": {
+              "items": {
+                "required": [
+                  "baseTemplateFile"
+                ], 
+                "type": "object", 
+                "properties": {
+                  "postExpandModify": {
+                    "items": {
+                      "type": "object", 
+                      "properties": {
+                        "bllWizardExpand": {
+                          "type": "object", 
+                          "description": "Process route wizard params, invoke BLL command, tag resulting routes.", 
+                          "properties": {
+                            "targetTagList": {
+                              "items": {
+                                "type": "string"
+                              }, 
+                              "type": "array", 
+                              "description": "List of tag names representing routers that will have routes applied onto them."
+                            }, 
+                            "srcObjectTagName": {
+                              "type": "string", 
+                              "description": "Tag name that represents the loaded wizard params object."
+                            }, 
+                            "commandName": {
+                              "type": "string", 
+                              "description": "Name of command that will be invoked with the targetTagList, srcObjectTagName, and createdRoutesTagName."
+                            }, 
+                            "createdRoutesTagName": {
+                              "type": "string", 
+                              "description": "Tag name that will be affected upon the routes that are created by the BLL wizard."
+                            }
+                          }
+                        }
+                      }
+                    }, 
+                    "type": "array", 
+                    "description": "A list of operations that will be carried out on datamodel objects after the template is expanded."
+                  }, 
+                  "modifyList": {
+                    "items": {
+                      "type": "object"
+                    }, 
+                    "type": "array", 
+                    "description": "A list of operations that will be carried out on the template.  See the schema defined in the spirent.methodology.CreateTemplateConfigCommand."
+                  }, 
+                  "tagPrefix": {
+                    "type": "string", 
+                    "description": "String that will be prefixed to all tags loaded and used in this template."
+                  }, 
+                  "weight": {
+                    "type": "string", 
+                    "description": "The weight of this component upon network counts."
+                  }, 
+                  "baseTemplateFile": {
+                    "type": "string", 
+                    "description": "Base template file that will be loaded into the StmTemplateConfig.  All modifications in the modifyList will be applied to the contents loaded out of this file."
+                  }
+                }
+              }, 
+              "type": "array", 
+              "description": "A list of components that make up the mixture."
+            }, 
+            "routeCount": {
+              "type": "number", 
+              "description": "Total number of routes for all components in this mix"
+            }
+          }, 
+          "title": "Schema for the MixInfo of the spirent.methodology.CreateRouteMixCommand."
+        }
+
+</code></pre></div>
+
+<h3>TargetObjectList (input:handle)<br><font size=2>"Target Object List"</font></h3>
+
+<p>List of StmProtocolMix, StmTemplateConfig, EmulatedDevice, or RouterConfig objects, that we will expand RouteConfig objects under</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>TargetObjectTagList (input:string)<br><font size=2>"Target Object Tag List"</font></h3>
+
+<p>List of tag names, which tag StmProtocolMix, StmTemplateConfig, EmulatedDevice, or RouterConfig objects, that we will expand RouteConfig objects under.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>StmTemplateMix (output:handle)<br><font size=2>"XML Container Aggregator object (StmTemplateMix)"</font></h3>
+
+<p>StmTemplate Mix container aggregator object</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<p><font color="red">MISSING JSON SAMPLE</font></p>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>Routing Multi-Protocol</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="expandroutemixcommand">ExpandRouteMixCommand</h1>
+<p>Expand Route Mix Command</p>
+<h2>- Properties</h2>
+
+<h3>TargetObjectList (input:handle)<br><font size=2>"Target Object List"</font></h3>
+
+<p>List of StmProtocolMix, StmTemplateConfig, EmulatedDevice, or RouterConfig objects, that we will expand RouteConfig objects under</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>TargetObjectTagList (input:string)<br><font size=2>"Target Object Tag List"</font></h3>
+
+<p>List of tag names, which tag StmProtocolMix, StmTemplateConfig, EmulatedDevice, or RouterConfig objects, that we will expand RouteConfig objects under.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>SrcObjectList (input:handle)<br><font size=2>"Source Object List"</font></h3>
+
+<p>List of handles to StmTemplateMix objects, created by CreateRouteMixCommand, that contain the XML for RouteConfig objects to expand.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>SrcObjectTagList (input:string)<br><font size=2>"Source Object Tag List"</font></h3>
+
+<p>List of tag names to StmTemplateMix objects, created by CreateRouteMixCommand, that contain the XML for RouteConfig objects to expand.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>RouteCount (input:u32)<br><font size=2>"Route Count"</font></h3>
+
+<p>Route Count</p>
+<ul>
+<li>default: 1000</li>
+</ul>
+<h3>MixInfoJsonSchema (state:string)<br><font size=2>"Table Data JSON Schema"</font></h3>
+
+<p>JSON schema that will be used to validate the MixInfo property's value.</p>
+<h3><a id="schema.for.ExpandRouteMixCommand.MixInfoJsonSchema.h3link" href="JavaScript:;" onclick="toggle_visibility('schema.for.ExpandRouteMixCommand.MixInfoJsonSchema');">JSON Schema [+]</a></h3>
+
+<div class="section" style="display:none;" id="schema.for.ExpandRouteMixCommand.MixInfoJsonSchema"><pre><code class="hljs json">        {
+          "required": [
+            "components"
+          ], 
+          "type": "object", 
+          "properties": {
+            "components": {
+              "items": {
+                "required": [
+                  "baseTemplateFile"
+                ], 
+                "type": "object", 
+                "properties": {
+                  "postExpandModify": {
+                    "items": {
+                      "type": "object", 
+                      "properties": {
+                        "bllWizardExpand": {
+                          "type": "object", 
+                          "description": "Process route wizard params, invoke BLL command, tag resulting routes.", 
+                          "properties": {
+                            "targetTagList": {
+                              "items": {
+                                "type": "string"
+                              }, 
+                              "type": "array", 
+                              "description": "List of tag names representing routers that will have routes applied onto them."
+                            }, 
+                            "srcObjectTagName": {
+                              "type": "string", 
+                              "description": "Tag name that represents the loaded wizard params object."
+                            }, 
+                            "commandName": {
+                              "type": "string", 
+                              "description": "Name of command that will be invoked with the targetTagList, srcObjectTagName, and createdRoutesTagName."
+                            }, 
+                            "createdRoutesTagName": {
+                              "type": "string", 
+                              "description": "Tag name that will be affected upon the routes that are created by the BLL wizard."
+                            }
+                          }
+                        }
+                      }
+                    }, 
+                    "type": "array", 
+                    "description": "A list of operations that will be carried out on datamodel objects after the template is expanded."
+                  }, 
+                  "modifyList": {
+                    "items": {
+                      "type": "object"
+                    }, 
+                    "type": "array", 
+                    "description": "A list of operations that will be carried out on the template.  See the schema defined in the spirent.methodology.CreateTemplateConfigCommand."
+                  }, 
+                  "tagPrefix": {
+                    "type": "string", 
+                    "description": "String that will be prefixed to all tags loaded and used in this template."
+                  }, 
+                  "weight": {
+                    "type": "string", 
+                    "description": "The weight of this component upon network counts."
+                  }, 
+                  "baseTemplateFile": {
+                    "type": "string", 
+                    "description": "Base template file that will be loaded into the StmTemplateConfig.  All modifications in the modifyList will be applied to the contents loaded out of this file."
+                  }
+                }
+              }, 
+              "type": "array", 
+              "description": "A list of components that make up the mixture."
+            }, 
+            "routeCount": {
+              "type": "number", 
+              "description": "Total number of routes for all components in this mix"
+            }
+          }, 
+          "title": "Schema for the MixInfo of the spirent.methodology.CreateRouteMixCommand."
+        }
+
+</code></pre></div>
+
+<p><font color="red">MISSING JSON SAMPLE</font></p>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>Routing Multi-Protocol</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="routeprefixdistributioncommand">RoutePrefixDistributionCommand</h1>
+<p>Route Prefix Distribution Command</p>
+<h2>- Properties</h2>
+
+<h3>RouterTagList (input:string)<br><font size=2>"Router Tag List"</font></h3>
+
+<p>List of tag names, which tag BgpRouterConfig objects, that we will import RouteConfig objects under.</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>SrcObjectTagName (input:string)<br><font size=2>"Source Object Tag Name tag name"</font></h3>
+
+<p>The tag name that identifies the ProtocolRouteGenParams object that the RouteGenApplyCommand will use to generate routes</p>
+<ul>
+<li>default: ttProtocolRouteGenParams</li>
+</ul>
+<h3>CreatedRoutesTagName (input:string)<br><font size=2>"Created Routes Tag Name"</font></h3>
+
+<p>The tag name that new routes made by the RouteGenApplyCommand will be subsequently tagged with</p>
+<ul>
+<li>default: ttRoutePrefixParams</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../stc_methodology_sampling/" class="btn btn-neutral float-right" title="stc_methodology_sampling.xml"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../stc_methodology_datacenter/" class="btn btn-neutral" title="stc_methodology_datacenter.xml"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../stc_methodology_datacenter/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../stc_methodology_sampling/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

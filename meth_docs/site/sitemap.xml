@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
+    <url>
+     <loc>None/</loc>
+     <lastmod>2015-07-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+        
+    <url>
+     <loc>None/Commands/stc_methodology_api/</loc>
+     <lastmod>2015-07-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/Commands/stc_methodology_datacenter/</loc>
+     <lastmod>2015-07-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/Commands/stc_methodology_routing/</loc>
+     <lastmod>2015-07-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/Commands/stc_methodology_sampling/</loc>
+     <lastmod>2015-07-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/Commands/stc_methodology_traffic/</loc>
+     <lastmod>2015-07-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/Commands/stc_methodology_trafficcenter/</loc>
+     <lastmod>2015-07-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/Commands/stc_methodology_traffictest/</loc>
+     <lastmod>2015-07-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/Commands/stc_methodologymanager/</loc>
+     <lastmod>2015-07-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/Commands/stc_testmethodology/</loc>
+     <lastmod>2015-07-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>None/Templates/AllRouters/</loc>
+     <lastmod>2015-07-09</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+</urlset>

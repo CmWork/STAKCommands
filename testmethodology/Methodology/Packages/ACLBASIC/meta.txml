@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<test>
+  <testInfo displayName="ACL Basic Test" description="Access Control List Basic Functionality Test" methodologyKey="ACLBASIC" testCaseName="original" version="1.0" testCaseKey=""
+        testCaseDescription="Access Control List Basic Functionality Test will examine four streams of traffic, one that should pass through the DUT's ACL, and three others
+ that should be blocked by the DUT's ACL. The three streams will include the following features that the ACL should detect and block: Fragment flag FM set to 1, fragment offset
+ other than 0, and a private IP address (e.g., 10.x.x.x). The test runs in two phases, one without ACL to ensure all four streams pass through, the other with ACL enabled to
+ determine the basic functionality of the ACL is performed properly for these three types of traffic.">
+    <labels>
+      <label>Access Control List</label>
+      <label>ACL</label>
+      <label>Functionality</label>
+    </labels>
+    <features>
+      <!-- Replace with proper feature ID when available -->
+      <feature id="MAX_SCALABILITY"/>
+    </features>
+  </testInfo>
+  <testResources>
+    <resourceGroups>
+      <resourceGroup displayName="Port Group Limits" id="">
+        <attribute name="minNumPorts" value="2" />
+        <attribute name="maxNumPorts" value="2" />
+        <attribute name="portSpeedList" value="['10', '40', '100']" />
+      </resourceGroup>
+      <resourceGroup displayName="Chassis Info" id="chassisInfo">
+        <portGroups>
+          <portGroup name="East Port Group" id="Tag.Name.2039">
+            <template name="East Port">
+              <description>East Port Template</description>
+              <image name="AclBasicIngressPort.png" />
+              <source name="IPv4_NoVlan.xml" />
+            </template>
+              <port name="East Port">
+                <attribute name="location" value="10.14.16.27/2/5" />
+              </port>
+          </portGroup>
+          <portGroup name="West Port Group" id="Tag.Name.2040">
+            <template name="West Port">
+              <description>West Port Template</description>
+              <image name="AclBasicEgressPort.png" />
+              <source name="IPv4_NoVlan.xml" />
+            </template>
+              <port name="West Port">
+                <attribute name="location" value="10.14.16.27/2/6" />
+              </port>
+          </portGroup>
+        </portGroups>
+      </resourceGroup>
+    </resourceGroups>
+  </testResources>
+
+  <wizard displayName="Access Control List Basic Functionality Methodology" image="AclBasic.png"
+        description="Access Control List Basic Functionality Test will determine if the DUT properly handles traffic flow for four
+ streams with ACL enabled and configured to block three of those streams.">
+    <page displayName="East Port Template" description="Configure the East Port Side" image="AclBasicIngress.png">
+      <group displayName="Ethernet Configuration">
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSourcemacStartValue" value="00:10:95:00:00:11" displayName="Mac Address Start" description="Mac Address Start" widgetType="textbox" />
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSourcemacStepValue" value="00:00:00:00:00:01" displayName="Mac Address Step" description="Mac Address Step" widgetType="textbox" />
+      </group>
+      <group displayName="IPv4 Configuration">
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAddressStartValue" value="192.85.1.2" displayName="Address Start" description="IPv4 Address Start"/>
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAddressStepValue" value="0.0.1.0" displayName="Address Step" description="IPv4 Address Step"/>
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandGatewayStartValue" value="192.85.1.1" displayName="Gateway Start" description="IPv4 Gateway Start"/>
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandGatewayStepValue" value="0.0.1.0" displayName="Gateway Step" description="IPv4 Gateway Step"/>
+      </group>
+    </page>
+
+    <page displayName="West Port Template" description="Configure the West Port Side" image="AclBasicEgress.png">
+      <group displayName="Ethernet Configuration">
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSourcemacStartValue1" value="00:10:95:00:00:01" displayName="Mac Address Start" description="Mac Address Start"/>
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandSourcemacStepValue2" value="00:00:00:00:00:01" displayName="Mac Address Step" description="Mac Address Step"/>
+      </group>
+      <group displayName="IPv4 Configuration">
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAddressStartValue3" value="192.85.1.1" displayName="Address Start" description="IPv4 Address Start"/>
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandAddressStepValue4" value="0.0.1.0" displayName="Address Step" description="IPv4 Address Step"/>
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandGatewayStartValue5" value="192.85.1.2" displayName="Gateway Start" description="IPv4 Gateway Start"/>
+          <property id="TopologyTemplateConfigureXMLTemplateStmpropertymodifierCommandGatewayStepValue6" value="0.0.1.0" displayName="Gateway Step" description="IPv4 Gateway Step"/>
+      </group>
+    </page>
+
+    <page displayName="Test Case Configuration" description="Configure the traffic that the DUT will be tested with." image="AclBasicTraffic.png">
+      <group displayName="DUT Configuration Scripts">
+          <property id="ConfigDUTWithoutACLScriptFileName" value="ConfigNoACL.tcl" displayName="Part 1 DUT Custom TCL script (disables ACL)"
+                    description="The TCL file name and path to run to configure the DUT to not use any ACL"/>
+          <property id="ConfigDUTWithACLScriptFileName" value="ConfigACL.tcl" displayName="Part 2 DUT Custom TCL script (enables ACL)"
+                    description="The TCL file name and path to run to configure the DUT to use any ACL"/>
+      </group>
+      <group displayName="Test Phase 1 (Without ACL)">
+          <property id="WaitWaitTimeSecs" value="15" displayName="Traffic Duration in (secs)"
+                    description="Seconds to wait while traffic flows to DUT without ACL"/>
+      </group>
+      <group displayName="Test Phase 2 (With ACL)">
+          <property id="WaitWaitTimeSecs1" value="15" displayName="Traffic Duration (secs)"
+                    description="Seconds to wait while traffic flows to DUT with ACL"/>
+      </group>
+      <group displayName="Overall Traffic Configuration">
+          <property id="spirent.methodology.traffic.CreateTrafficMixCommand.Load.2" value="10" displayName="Traffic Load (% Line Rate)"
+                    description="The total traffic load between all streams as a percentage of the total line rate (should be between 1 and 100)."/>
+      </group>
+      <group displayName="Blocking Traffic Configuration">
+          <property id="TopologyTemplateModifyXMLTemplateCommandFragValueList" value="1" displayName="Fragmented Traffic (fragment offset)"
+                    description="The fragment offset value (should be between 1 and 10)."/>
+        <property id="TopologyTemplateModifyXMLTemplateCommandSrcValueList" value="10.0.0.11" displayName="ACL BLocking Source IP Address"
+                    description="Source IP Address to be blocked by the DUT ACL" />
+        <property id="TopologyTemplateModifyXMLTemplateCommandDstValueList" value="10.0.0.22" displayName="ACL Blocking Destination IP Address"
+                    description="Destination IP Address to be blocked by the DUT ACL" />
+      </group>
+    </page>
+  </wizard>
+</test>

@@ -1,0 +1,17 @@
+site_name: Spirent Methodology Infrastructure
+theme: readthedocs
+
+pages:
+- Home: 'index.md'
+- Commands:
+    - 'stc_methodology_api.xml': 'Commands/stc_methodology_api.md'
+    - 'stc_methodology_datacenter.xml': 'Commands/stc_methodology_datacenter.md'
+    - 'stc_methodology_routing.xml': 'Commands/stc_methodology_routing.md'
+    - 'stc_methodology_sampling.xml': 'Commands/stc_methodology_sampling.md'
+    - 'stc_methodology_traffic.xml': 'Commands/stc_methodology_traffic.md'
+    - 'stc_methodology_trafficcenter.xml': 'Commands/stc_methodology_trafficcenter.md'
+    - 'stc_methodology_traffictest.xml': 'Commands/stc_methodology_traffictest.md'
+    - 'stc_methodologymanager.xml': 'Commands/stc_methodologymanager.md'
+    - 'stc_testmethodology.xml': 'Commands/stc_testmethodology.md'
+- Templates:
+    - 'AllRouters.xml': 'Templates/AllRouters.md'

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>stc_methodology_sampling.xml - Spirent Methodology Infrastructure</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Commands\stc_methodology_sampling"
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Spirent Methodology Infrastructure</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../..">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Commands</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_api/">stc_methodology_api.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_datacenter/">stc_methodology_datacenter.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_routing/">stc_methodology_routing.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">stc_methodology_sampling.xml</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#appendtoeotcommand">AppendToEotCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#pollsubscriptioncommand">PollSubscriptionCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#setupsubscriptioncommand">SetupSubscriptionCommand</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#storeeventcommand">StoreEventCommand</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_traffic/">stc_methodology_traffic.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_trafficcenter/">stc_methodology_trafficcenter.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodology_traffictest/">stc_methodology_traffictest.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_methodologymanager/">stc_methodologymanager.xml</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stc_testmethodology/">stc_testmethodology.xml</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Templates</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Templates/AllRouters/">AllRouters.xml</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Spirent Methodology Infrastructure</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Commands &raquo;</li>
+        
+      
+    
+    <li>stc_methodology_sampling.xml</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="appendtoeotcommand">AppendToEotCommand</h1>
+<p>Append Sampled data to EOT Database</p>
+<h2>- Properties</h2>
+
+<h3>EventTableName (input:string)<br><font size=2>"Name for Event Table in DB"</font></h3>
+
+<p>Name for Event Table in DB</p>
+<ul>
+<li>default: Methodology_SamplingEvent</li>
+</ul>
+<h3>DataTableName (input:string)<br><font size=2>"Name for Data Table in DB"</font></h3>
+
+<p>Name for Data Table in DB</p>
+<ul>
+<li>default: Methodology_SamplingData</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>BGP Route Reflector Test</p>
+</li>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+<li>
+<p>Widgets Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="pollsubscriptioncommand">PollSubscriptionCommand</h1>
+<p>Poll and Wait for Sampling Subscription</p>
+<h2>- Properties</h2>
+
+<h3>PollingPeriod (input:u32)<br><font size=2>"Maximum Polling Period (s)"</font></h3>
+
+<p>Maximum Polling Period</p>
+<ul>
+<li>default: 300</li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>BGP Route Reflector Test</p>
+</li>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+<li>
+<p>Widgets Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="setupsubscriptioncommand">SetupSubscriptionCommand</h1>
+<p>Set up Sampling Subscription Command</p>
+<h2>- Properties</h2>
+
+<h3>PollingInterval (input:u32)<br><font size=2>"Polling Interval (s)"</font></h3>
+
+<p>Polling Interval in seconds</p>
+<ul>
+<li>default: 1</li>
+</ul>
+<h3>ValueIdleTimeout (input:u32)<br><font size=2>"Time to mark subscription complete if all values stay constant"</font></h3>
+
+<p>Time to mark subscription complete if all polled values in subscription stay constant</p>
+<ul>
+<li>default: 60</li>
+</ul>
+<h3>PropertyList (input:string)<br><font size=2>"Whitespace-separated list of classname.property values"</font></h3>
+
+<p>Whitespace-separated list of classname.property values</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h3>ResultParent (input:handle)<br><font size=2>"Root(s) of subscription, port(s) or project "</font></h3>
+
+<p>Root(s) of subscription, can be port or project</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h3>EnableCondition (input:bool)<br><font size=2>"Enable Terminal Values"</font></h3>
+
+<p>Enable Terminal Value(s) for completion of subscription</p>
+<ul>
+<li>default: false</li>
+</ul>
+<h3>TerminalValueList (input:u32)<br><font size=2>"Terminal Value List"</font></h3>
+
+<p>Terminal Value List. Subscription will be marked complete if properties reach values (count must match with subscribed property list)</p>
+<ul>
+<li>default: <font color=#cc8888>(empty)</font></li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>BGP Route Reflector Test</p>
+</li>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+<li>
+<p>Widgets Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+
+<h1 id="storeeventcommand">StoreEventCommand</h1>
+<p>Store Sampling Event Commnad</p>
+<h2>- Properties</h2>
+
+<h3>EventName (input:string)<br><font size=2>"Name of Timestamp Event"</font></h3>
+
+<p>Name of Timestamp Event</p>
+<ul>
+<li>default: <font color=#cc8888>(empty string)</font></li>
+</ul>
+<h2>- UsedIn</h2>
+
+<ul>
+<li>
+<p>BGP Route Reflector Test</p>
+</li>
+<li>
+<p>Routing Multi-Protocol</p>
+</li>
+<li>
+<p>Widgets Test</p>
+</li>
+</ul>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var caption = document.getElementById(id + '.h3link');
+       var text = caption.innerHTML
+       if(e.style.display == 'block')
+       {
+          e.style.display = 'none';
+          caption.innerHTML = text.replace('[-]', '[+]');
+       }
+       else
+       {
+          e.style.display = 'block';
+          caption.innerHTML = text.replace('[+]', '[-]');
+       }
+    }
+//!-->
+</script>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../stc_methodology_traffic/" class="btn btn-neutral float-right" title="stc_methodology_traffic.xml"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../stc_methodology_routing/" class="btn btn-neutral" title="stc_methodology_routing.xml"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../stc_methodology_routing/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../stc_methodology_traffic/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

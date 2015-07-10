@@ -1,0 +1,170 @@
+<?xml version="1.0" ?>
+<test>
+
+  <testInfo displayName="RFC 2544 Throughput Test"
+            description="Determine the maximum rate at which none of the offered frames are dropped by the DUT."
+            methodologyKey="RFC2544THROUGHPUT"
+            testCaseName="Original"
+            testCaseDescription="" 
+            version="1.0"
+            testCaseKey="">
+    <labels>
+      <label>RFC 2544 Throughput</label>
+      <label>2544</label>
+      <label>Throughput</label>
+    </labels>
+  </testInfo>
+
+  <testResources>
+    <resourceGroups>
+
+      <resourceGroup displayName="Chassis Info" id="chassisInfo">
+        <portGroups>
+          <portGroup id="LeftPortGroup" name="Left">
+            <template name="Left">
+              <description>Left Port Template</description>
+              <Image/>
+              <source name="Ipv4_NoVlan.xml"/>
+            </template>
+            <port name="Port 1">
+              <attribute name="location" value="10.1.1.1/1/1" />
+            </port>
+          </portGroup>
+          <portGroup id="RightPortGroup" name="Right">
+            <template name="Right">
+              <description>Right Port Template</description>
+              <Image/>
+              <source name="Ipv4_NoVlan.xml"/>
+            </template>
+            <port name="Port 2">
+              <attribute name="location" value="10.1.1.2/1/1" />
+            </port>
+          </portGroup>
+        </portGroups>
+      </resourceGroup>
+
+    </resourceGroups>
+  </testResources>
+
+  <wizard displayName="RFC 2544 Throughput Test"
+          description="Determine the maximum rate at which none of the offered frames are dropped by the DUT."
+          image="rfc2544_topology.png">
+
+    <!-- Endpoint Configuration page-->
+    <page displayName="Endpoint Configuration"
+          description="Configure the endpoint addressing."
+          image="rfc2544_endpoints.png">
+      <group displayName="Learning Options">
+          <property id="TestMethodologyL2L3LearningCommandEnableL2Learning" value="True" displayName="Enable L2 Learning" widgetType="checkbox" type="bool" />
+          <property id="TestMethodologyL2L3LearningCommandEnableL3Learning" value="True" displayName="Enable L3 Learning" widgetType="checkbox" type="bool" />
+          <property id="TestMethodologyL2L3LearningCommandL2LearningOption" value="TX_RX" displayName="L2 Learning Option" type="string" />
+          <property id="TestMethodologyL2L3LearningCommandWaitForArpToFinish" value="True" displayName="Wait For Arp To Finish" widgetType="checkbox" type="bool" />
+          <property id="TestMethodologyL2L3LearningCommandAlwaysArp" value="True" displayName="Always Arp" widgetType="checkbox" type="bool" />
+      </group>
+      <group displayName="Left Proto MixInfo">
+          <property displayName="Left Mix Info" description="Left Mix Info." id="TestMethodologyCreateProtocolMixCommand1MixInfo" value="{&quot;deviceCount&quot;:1,&quot;components&quot;:[{&quot;weight&quot;:&quot;100%&quot;,&quot;tagPrefix&quot;:&quot;Left_&quot;,&quot;baseTemplateFile&quot;:&quot;IPv4_NoVlan.xml&quot;,&quot;devicesPerBlock&quot;:0,&quot;modifyList&quot;:[{&quot;mergeList&quot;:[{&quot;propertyValueList&quot;:[{&quot;className&quot;:&quot;BgpRouterConfig&quot;,&quot;tagName&quot;:&quot;ttBgpRouterConfig&quot;,&quot;propertyValueList&quot;:{&quot;IpVersion&quot;:&quot;IPV4&quot;,&quot;EnableBfd&quot;:&quot;False&quot;}}],&quot;mergeSourceTag&quot;:&quot;ttBgpRouterConfig&quot;,&quot;mergeSourceTemplateFile&quot;:&quot;AllRouters.xml&quot;,&quot;stmPropertyModifierList&quot;:[{&quot;className&quot;:&quot;BgpRouterConfig&quot;,&quot;propertyName&quot;:&quot;DutAsNum&quot;,&quot;parentTagName&quot;:&quot;ttBgpRouterConfig&quot;,&quot;tagName&quot;:&quot;ttBgpRouterConfig.DutAsNum&quot;,&quot;propertyValueList&quot;:{&quot;Start&quot;:&quot;100&quot;,&quot;Step&quot;:&quot;1&quot;}},{&quot;className&quot;:&quot;BgpRouterConfig&quot;,&quot;propertyName&quot;:&quot;AsNum&quot;,&quot;parentTagName&quot;:&quot;ttBgpRouterConfig&quot;,&quot;tagName&quot;:&quot;ttBgpRouterConfig.AsNum&quot;,&quot;propertyValueList&quot;:{&quot;Start&quot;:&quot;100&quot;,&quot;Step&quot;:&quot;1&quot;}}],&quot;mergeTargetTag&quot;:&quot;ttEmulatedDevice&quot;}]},{&quot;propertyValueList&quot;:[{&quot;className&quot;:&quot;Ipv4If&quot;,&quot;tagName&quot;:&quot;ttIpv4If&quot;,&quot;propertyValueList&quot;:{&quot;PrefixLength&quot;:&quot;24&quot;}}]},{&quot;stmPropertyModifierList&quot;:[{&quot;className&quot;:&quot;Ipv4If&quot;,&quot;propertyName&quot;:&quot;Gateway&quot;,&quot;parentTagName&quot;:&quot;ttIpv4If&quot;,&quot;tagName&quot;:&quot;tag_Ipv4If_Address&quot;,&quot;propertyValueList&quot;:{&quot;Start&quot;:&quot;198.18.1.2&quot;,&quot;Step&quot;:&quot;0.0.1.0&quot;}},{&quot;className&quot;:&quot;EthIIIF&quot;,&quot;propertyName&quot;:&quot;SourceMac&quot;,&quot;parentTagName&quot;:&quot;ttEthIIIf&quot;,&quot;tagName&quot;:&quot;tag_EthIIIf_SourceMac&quot;,&quot;propertyValueList&quot;:{&quot;Start&quot;:&quot;00:10:94:00:00:02&quot;,&quot;Step&quot;:&quot;00:00:00:00:00:01&quot;}},{&quot;className&quot;:&quot;Ipv4If&quot;,&quot;propertyName&quot;:&quot;Address&quot;,&quot;parentTagName&quot;:&quot;ttIpv4If&quot;,&quot;tagName&quot;:&quot;ttIpv4If.Address&quot;,&quot;propertyValueList&quot;:{&quot;Start&quot;:&quot;198.18.1.1&quot;,&quot;Step&quot;:&quot;0.0.1.0&quot;}},{&quot;className&quot;:&quot;EmulatedDevice&quot;,&quot;propertyName&quot;:&quot;RouterId&quot;,&quot;parentTagName&quot;:&quot;ttEmulatedDevice&quot;,&quot;tagName&quot;:&quot;ttEmulatedDevice.RouterId&quot;,&quot;propertyValueList&quot;:{&quot;Start&quot;:&quot;192.0.0.1&quot;,&quot;Step&quot;:&quot;0.1.0.0&quot;}}]}]}]}" type="string"/>
+      </group>
+      <group displayName="Right Proto MixInfo">
+          <property displayName="Right Mix Info" description="Right Mix Info." id="TestMethodologyCreateProtocolMixCommand2MixInfo" value="{&quot;deviceCount&quot;:1,&quot;components&quot;:[{&quot;weight&quot;:&quot;100%&quot;,&quot;tagPrefix&quot;:&quot;Right_&quot;,&quot;baseTemplateFile&quot;:&quot;IPv4_NoVlan.xml&quot;,&quot;devicesPerBlock&quot;:0,&quot;modifyList&quot;:[{&quot;mergeList&quot;:[{&quot;propertyValueList&quot;:[{&quot;className&quot;:&quot;BgpRouterConfig&quot;,&quot;tagName&quot;:&quot;ttBgpRouterConfig&quot;,&quot;propertyValueList&quot;:{&quot;IpVersion&quot;:&quot;IPV4&quot;,&quot;EnableBfd&quot;:&quot;False&quot;}}],&quot;mergeSourceTag&quot;:&quot;ttBgpRouterConfig&quot;,&quot;mergeSourceTemplateFile&quot;:&quot;AllRouters.xml&quot;,&quot;stmPropertyModifierList&quot;:[{&quot;className&quot;:&quot;BgpRouterConfig&quot;,&quot;propertyName&quot;:&quot;DutAsNum&quot;,&quot;parentTagName&quot;:&quot;ttBgpRouterConfig&quot;,&quot;tagName&quot;:&quot;ttBgpRouterConfig.DutAsNum&quot;,&quot;propertyValueList&quot;:{&quot;Start&quot;:&quot;100&quot;,&quot;Step&quot;:&quot;1&quot;}},{&quot;className&quot;:&quot;BgpRouterConfig&quot;,&quot;propertyName&quot;:&quot;AsNum&quot;,&quot;parentTagName&quot;:&quot;ttBgpRouterConfig&quot;,&quot;tagName&quot;:&quot;ttBgpRouterConfig.AsNum&quot;,&quot;propertyValueList&quot;:{&quot;Start&quot;:&quot;100&quot;,&quot;Step&quot;:&quot;1&quot;}}],&quot;mergeTargetTag&quot;:&quot;ttEmulatedDevice&quot;}]},{&quot;propertyValueList&quot;:[{&quot;className&quot;:&quot;Ipv4If&quot;,&quot;tagName&quot;:&quot;ttIpv4If&quot;,&quot;propertyValueList&quot;:{&quot;PrefixLength&quot;:&quot;24&quot;}}]},{&quot;stmPropertyModifierList&quot;:[{&quot;className&quot;:&quot;Ipv4If&quot;,&quot;propertyName&quot;:&quot;Gateway&quot;,&quot;parentTagName&quot;:&quot;ttIpv4If&quot;,&quot;tagName&quot;:&quot;tag_Ipv4If_Address&quot;,&quot;propertyValueList&quot;:{&quot;Start&quot;:&quot;198.18.1.1&quot;,&quot;Step&quot;:&quot;0.0.1.0&quot;}},{&quot;className&quot;:&quot;EthIIIF&quot;,&quot;propertyName&quot;:&quot;SourceMac&quot;,&quot;parentTagName&quot;:&quot;ttEthIIIf&quot;,&quot;tagName&quot;:&quot;`tag_EthIIIf_SourceMac&quot;,&quot;propertyValueList&quot;:{&quot;Start&quot;:&quot;00:10:95:00:00:02&quot;,&quot;Step&quot;:&quot;00:00:00:00:00:01&quot;}},{&quot;className&quot;:&quot;Ipv4If&quot;,&quot;propertyName&quot;:&quot;Address&quot;,&quot;parentTagName&quot;:&quot;ttIpv4If&quot;,&quot;tagName&quot;:&quot;ttIpv4If.Address&quot;,&quot;propertyValueList&quot;:{&quot;Start&quot;:&quot;198.18.1.2&quot;,&quot;Step&quot;:&quot;0.0.1.0&quot;}},{&quot;className&quot;:&quot;EmulatedDevice&quot;,&quot;propertyName&quot;:&quot;RouterId&quot;,&quot;parentTagName&quot;:&quot;ttEmulatedDevice&quot;,&quot;tagName&quot;:&quot;ttEmulatedDevice.RouterId&quot;,&quot;propertyValueList&quot;:{&quot;Start&quot;:&quot;193.0.0.1&quot;,&quot;Step&quot;:&quot;0.1.0.0&quot;}}]}]}]}" type="string"/>
+      </group>
+      <group displayName="Traffic MixInfo">
+          <property displayName="Traffic Mix Info" description="Traffic Mix Info." id="TestMethodologyCreateTrafficMixCommandMixInfo" value="{&quot;load&quot;:1,&quot;loadUnits&quot;:&quot;PERCENT_LINE_RATE&quot;,&quot;components&quot;:[{&quot;weight&quot;:&quot;100%&quot;,&quot;baseTemplateFile&quot;:&quot;IPv4_Stream.xml&quot;,&quot;postExpandModify&quot;:[{&quot;streamBlockExpand&quot;:{&quot;endpointMapping&quot;:{&quot;bidirectional&quot;:true,&quot;srcBindingTagList&quot;:[&quot;Left_ttIpv4If&quot;],&quot;dstBindingTagList&quot;:[&quot;Right_ttIpv4If&quot;]}}}]}]}"/>
+      </group>
+
+
+    </page>
+
+    <!-- Traffic Configuration page-->
+    <page displayName="Traffic Configuration"
+          description="Configure the parameters for the throughput test. Binary search is used to determine the maximum throughput."
+          image="rfc2544_topology.png">
+      <group displayName="">
+          <!-- <property displayName="Number of Trials" description="" id="" value="1"/> -->
+          <property displayName="Traffic Duration (sec)" description="Time in seconds to send test traffic between endpoints." id="TrafficDuration" value="60" type="double">
+            <numericValidation minInclusive="0.005" maxInclusive="2147483647" />
+          </property>
+          <property displayName="Wait after Traffic Stopped (sec)" description="Time in seconds to wait after traffic is stopped before collecting measurements." id="WaitTimeAfterTraffic" value="10" type="double">
+            <numericValidation minInclusive="0.005" maxInclusive="2147483647" />
+          </property>
+          <property displayName="Frame Size List (bytes)" description="The maximum frame rate shall be determined for each specified frame size in list." id="test.frameSizeList" value="[&quot;64&quot;,&quot;128&quot;,&quot;256&quot;,&quot;512&quot;,&quot;1024&quot;,&quot;1280&quot;,&quot;1518&quot;]" ignoreOnBackEnd="true" />
+      </group>
+      <group displayName="Binary Search Parameters">
+          <property displayName="Traffic Rate Lower Limit (%)" description="Lowest search limit for binary search." id="spirent.methodology.RateIteratorCommand.MinVal.126354" value="1" type="double">
+            <numericValidation minInclusive="0.001" maxInclusive="100" />
+          </property>
+          <property displayName="Traffic Rate Upper Limit (%)" description="Highest search limit for binary search." id="spirent.methodology.RateIteratorCommand.MaxVal.126354" value="100" type="double">
+            <numericValidation minInclusive="0.001" maxInclusive="100" />
+          </property>
+          <property displayName="Resolution (%)" description="Specifies how precisely to determine measured throughput against true throughput. Binary search shall complete once last two search iterations are within the specified resolution." id="spirent.methodology.RateIteratorCommand.Resolution.126354" value="1" type="double">
+            <numericValidation minInclusive="0.001" maxInclusive="100" />
+          </property>
+      </group>
+    </page>
+
+    <!-- Processing Functions
+    <processingFunctions>
+        <processingDictionary inputDict=
+          '{
+              "id": "CreateTrafficMixCommand.MixInfo",
+              "scriptFile": "Rfc2544_Script.py",
+              "entryFunction": "Rfc2544ThroughputCreateMixInfoProcFunction",
+              "input" :
+              {
+                  "load" : 1,
+                  "loadUnits" : "PERCENT_LINE_RATE",
+                  "components" : [
+                      {
+                          "weight" : "50%",
+                          "baseTemplateFile" : "IPv4_Stream.xml",
+                          "postExpandModify" : [
+                              {
+                                  "streamBlockExpand" :
+                                  {
+                                      "endpointMapping" :
+                                      {
+                                          "bidirectional" : true,
+                                          "srcBindingTagList" : ["East1_ttIpv4If"],
+                                          "dstBindingTagList" : ["West1_ttIpv4If"]
+                                      }
+                                  }
+                              }
+                          ]
+                      },
+                      {
+                          "weight" : "50%",
+                          "baseTemplateFile" : "IPv4_Stream.xml",
+                          "postExpandModify" : [
+                              {
+                                  "streamBlockExpand" :
+                                  {
+                                      "endpointMapping" :
+                                      {
+                                          "bidirectional" : true,
+                                          "srcBindingTagList" : ["East2_ttIpv4If"],
+                                          "dstBindingTagList" : ["West2_ttIpv4If"]
+                                      }
+                                  }
+                              }
+                          ]
+                      }
+                  ]
+              },
+              "output": [
+                  {
+                      "scriptVarName": "MixInfo",
+                      "epKey": "TestMethodologyCreateTrafficMixCommandMixInfo"
+                  }
+              ]
+          }'
+         />  
+    </processingFunctions> -->
+  <processingFunctions>
+    <processingFunction id="frameSizeList.pf.copy_string_to_list" scriptFile="txml_processing_functions.py" entryFunction="copy_string_to_list">
+      <input srcId="test.frameSizeList" scriptVarName="InputKey" />
+      <output scriptVarName="OutputKey" epKey="spirent.methodology.ObjectIteratorCommand.ValueList.188536" />
+    </processingFunction>
+  </processingFunctions>
+
+
+  </wizard>
+</test>

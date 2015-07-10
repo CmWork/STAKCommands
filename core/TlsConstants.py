@@ -1,0 +1,10 @@
+KEY_ROOT = '/mnt/spirent/ccpu/lib/tls'
+PRIVATE_KEY_LOC = '/privateKey'
+CERTIFICATE_LOC = '/certificate'
+CA_CERTIFICATE_LOC = '/caCertificate'
+
+MAP_FILE_TO_TYPE_LOC = {
+    'PRIVATE_KEY': KEY_ROOT + PRIVATE_KEY_LOC,
+    'CERTIFICATE': KEY_ROOT + CERTIFICATE_LOC,
+    'CA_CERTIFICATE': KEY_ROOT + CA_CERTIFICATE_LOC
+}

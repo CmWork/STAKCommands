@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>&lt;no title&gt; &mdash; Spirent Methodology Infrastructure 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Spirent Methodology Infrastructure 0.1 documentation" href="../../../index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="../../../index.html" class="icon icon-home"> Spirent Methodology Infrastructure
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="simple">
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">Spirent Methodology Infrastructure</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+    <li>&lt;no title&gt;</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/_static/Commands/stc_methodology_traffictest/Y1564MicroburstConfigCommand.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <p># Y1564MicroburstConfigCommand</p>
+<p>Configure Y.1564 Microburst Test</p>
+<p>&lt;font size=&#8221;2&#8221;&gt;File Reference: stc_methodology_traffictest.xml&lt;/font&gt;</p>
+<p>## Properties</p>
+<p>### MicroburstRateUnit: &#8220;Microburst Rate Unit&#8221; (input:u8)</p>
+<p>Microburst Rate Unit</p>
+<ul class="simple">
+<li>default - PERCENT_LINE_RATE</li>
+</ul>
+<p>### LeftTagName: &#8220;Left Port Group Tag Name&#8221; (input:string)</p>
+<p>Left Port Group Tag Name</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### MicroburstTagName: &#8220;Tag Name for Microburst Streams&#8221; (input:string)</p>
+<p>Tag Name for Microburst Streams</p>
+<ul class="simple">
+<li>default - ttMicroburst</li>
+</ul>
+<p>### FrameSize: &#8220;Frame Size (bytes)&#8221; (input:u16)</p>
+<p>Frame Size (bytes)</p>
+<ul class="simple">
+<li>default - 128</li>
+</ul>
+<p>### RightTagName: &#8220;Right Port Group Tag Name&#8221; (input:string)</p>
+<p>Right Port Group Tag Name</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### MicroburstMaxRate: &#8220;Microburst Maximum Rate&#8221; (input:double)</p>
+<p>Microburst Maximum Rate</p>
+<ul class="simple">
+<li>default - 100.0</li>
+</ul>
+<p>### DeltaWidth: &#8220;Delta Width&#8221; (input:u32)</p>
+<p>Delta Width in Packets</p>
+<ul class="simple">
+<li>default - 500</li>
+</ul>
+<p>### MaxDeltaCount: &#8220;Maximum Delta Count per Burst&#8221; (input:u32)</p>
+<p>Maximum Delta Count per Burst</p>
+<ul class="simple">
+<li>default - 10</li>
+</ul>
+<p>### RandomSeedValue: &#8220;Random Seed Value&#8221; (input:u32)</p>
+<p>Random Seed Value</p>
+<ul class="simple">
+<li>default - 0</li>
+</ul>
+<p>### NominalRateUnit: &#8220;Nominal Rate Unit&#8221; (input:u8)</p>
+<p>Nominal Rate Unit</p>
+<ul class="simple">
+<li>default - PERCENT_LINE_RATE</li>
+</ul>
+<p>### EnableLearning: &#8220;Enable L2/L3 Learning&#8221; (input:bool)</p>
+<p>Enable L2/L3 Learning</p>
+<ul class="simple">
+<li>default - false</li>
+</ul>
+<p>### MixTagName: &#8220;Mix Container Tag Name&#8221; (input:string)</p>
+<p>Mix Container Tag Name</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### BestEffortTagName: &#8220;Tag Name for Best Effort Streams&#8221; (input:string)</p>
+<p>Tag Name for Best Effort Streams</p>
+<ul class="simple">
+<li>default - ttBeStream</li>
+</ul>
+<p>### MaxUniqueAddrCount: &#8220;Maximum Unique Address Count&#8221; (input:u32)</p>
+<p>Max Unique Address Count</p>
+<ul class="simple">
+<li>default - 500</li>
+</ul>
+<p>### NominalRate: &#8220;Nominal Rates&#8221; (input:double)</p>
+<p>Nominal Rate</p>
+<ul class="simple">
+<li>default - 10.0</li>
+</ul>
+<p>### EnableRandomSeed: &#8220;Enable Random Seed&#8221; (input:bool)</p>
+<p>Enable Random Seed</p>
+<ul class="simple">
+<li>default - false</li>
+</ul>
+<p>### MaxImg: &#8220;Maximum Inter-Microburst Gap (frames)&#8221; (input:u32)</p>
+<p>Maximum Inter-Microburst Gap (frames)</p>
+<ul class="simple">
+<li>default - 500</li>
+</ul>
+<p>### MicroburstFileName: &#8220;Microburst Configuration File&#8221; (input:inputFilePath)</p>
+<p>Microburst Configuration File</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>## UsedIn
+* ITU-T Y.1564 Microburst Test</p>
+
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Spirent.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../jquery.js"></script>
+      <script type="text/javascript" src="../../underscore.js"></script>
+      <script type="text/javascript" src="../../doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

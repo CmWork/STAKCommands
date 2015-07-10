@@ -1,0 +1,234 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>&lt;no title&gt; &mdash; Spirent Methodology Infrastructure 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Spirent Methodology Infrastructure 0.1 documentation" href="../../index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="../../index.html" class="icon icon-home"> Spirent Methodology Infrastructure
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="simple">
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Spirent Methodology Infrastructure</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+    <li>&lt;no title&gt;</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/Commands/stc_testmethodology/StabilityBackoffIteratorCommand.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <p># StabilityBackoffIteratorCommand</p>
+<p>Stability Backoff Iterator (reverse iteration from a maximum value while repeating each test value some number of times for stability)</p>
+<p>&lt;font size=&#8221;2&#8221;&gt;File Reference: stc_testmethodology.xml&lt;/font&gt;</p>
+<p>## Properties</p>
+<p>### MaxPass: &#8220;Maximum pass value&#8221; (state:double)</p>
+<p>Maximum pass value</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### RepeatCount: &#8220;Step value&#8221; (input:u32)</p>
+<p>Number of times to repeat an iteration</p>
+<ul class="simple">
+<li>default - 5</li>
+</ul>
+<p>### ValueType: &#8220;Value type&#8221; (input:u8)</p>
+<p>Value type (list or range)</p>
+<ul class="simple">
+<li>default - RANGE</li>
+</ul>
+<p>### TrialNum: &#8220;Trial Number&#8221; (state:u32)</p>
+<p>Trial number for a particular test value</p>
+<ul class="simple">
+<li>default - 0</li>
+</ul>
+<p>### CurrIndex: &#8220;Current Index&#8221; (state:u32)</p>
+<p>Current list value&#8217;s index</p>
+<ul class="simple">
+<li>default - 0</li>
+</ul>
+<p>### ValueList: &#8220;List of values&#8221; (input:string)</p>
+<p>List of values to test</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### MinFail: &#8220;Minimum fail value&#8221; (state:double)</p>
+<p>Minimum fail value</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### FoundStableValue: &#8220;Found a stable value&#8221; (output:bool)</p>
+<p>Flag indicating a stable value was found</p>
+<ul class="simple">
+<li>default - false</li>
+</ul>
+<p>### StableValue: &#8220;Stable value&#8221; (output:string)</p>
+<p>Stable value</p>
+<ul class="simple">
+<li>default - 0</li>
+</ul>
+<p>### StepVal: &#8220;Step value&#8221; (input:double)</p>
+<p>Amount to step backwards by</p>
+<ul class="simple">
+<li>default - 10</li>
+</ul>
+<p>### SuccessCount: &#8220;Success Count&#8221; (state:u32)</p>
+<p>Number of successful trials</p>
+<ul class="simple">
+<li>default - 0</li>
+</ul>
+<p>### SuccessPercent: &#8220;Success Percent&#8221; (input:double)</p>
+<p>Number of times a repeated value has to pass to be considered stable</p>
+<ul class="simple">
+<li>default - 100</li>
+</ul>
+<p>## UsedIn
+* ACL Performance Test</p>
+
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Spirent.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

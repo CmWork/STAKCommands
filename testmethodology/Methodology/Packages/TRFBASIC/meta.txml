@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test>
+  <!--
+    A methodology is defined by a collection of files. One of the files contains the metadata
+    for the test. This is a sample of that metadata. When a methodology is produced, it has one
+    and only one meta.txml file, where txml = testCenter XML. The test consumer never accesses
+    or interacts with the meta.txml for the methodology. When a test case is created from
+    a methodology, a copy of meta.txml is made. Localization is made in the per-test-case copy
+    of meta.txml.
+  -->
+  <!--
+    The testInfo section contains the overall information about the methodology or test case.
+    testMethodologyName is the name of the methodology. The description is the description of
+    the methodology. The testCaseName is the name of the test case that this instance of the
+    file represents. If this file represents a methodology, the testCaseName is set to
+    "original". The version is the version of this methodology. The imageName is a diagram
+    that contains an image that can be shown to describe the topology of the test. Labels are
+    used to categorize the test.
+  -->
+  <testInfo displayName="Basic Traffic Test" description="Simple Traffic Test that tests the DUT's ability to forward traffic.  This test also demonstrates optional VLANs and will be enhanced later to support BGP or DHCPv4 or both." methodologyKey="TRFBASIC" testCaseName="original" testCaseDescription="Methodology Template file - do not modify" version="1.0" testCaseKey="">
+    <labels>
+      <label>traffic</label>
+      <label>vlan</label>
+      <label>x-connect</label>
+    </labels>
+    <features>
+      <!-- Replace with proper feature ID when available -->
+      <feature id="MAX_SCALABILITY"/>
+    </features>
+  </testInfo>
+  <!--
+    The testResources section provides information related to requirements on the test ports
+    and customer equipment for the test to run. This includes references to the topology
+    templates that are used for each port group.
+  -->
+  <testResources>
+    <resourceGroups>
+      <resourceGroup displayName="Chassis Info" id="chassisInfo">
+        <portGroups>
+          <portGroup name="East" id="Tag.Name.2039">
+            <template name="IPv4 No VLAN">
+              <description>IPv4 over Ethernet II Template</description>
+              <image name="diagram.png" />
+              <source name="IPv4_NoVlan.xml" />
+            </template>
+            <port name="port1.location.2051">
+              <attribute name="location" value="10.14.16.27/2/7" />
+            </port>
+          </portGroup>
+          <portGroup name="West" id="Tag.Name.2040">
+            <template name="IPv4 No VLAN">
+              <description>IPv4 over Ethernet II Template</description>
+              <image name="diagram.png" />
+              <source name="IPv4_NoVlan.xml" />
+            </template>
+            <port name="port3.location.2053">
+              <attribute name="location" value="10.14.16.27/2/8" />
+            </port>
+          </portGroup>
+        </portGroups>
+      </resourceGroup>
+    </resourceGroups>
+  </testResources>
+  <!--
+    The wizard section defines the input parameters that the test consumer
+    will be allowed to modify at run time. The format of this section is 
+    designed to allow a rendering engine to create a simple wizard for
+    collecting information from the test consumer during localization.
+
+    Each page of the wizard has an optional imageName that can be used to 
+    render an image file in the wizard as an aid to the user.
+  -->
+  <wizard displayName="Simple Traffic Test" description="Configure and run a simple traffic test" image="diagram.png">
+    <page displayName="East Device Configuration" description="Configure emulated devices on the East side of the DUT." image="diagram.png">
+      <group displayName="East Devices">
+          <property id="spirent.methodology.LoadTemplateCommand.CopiesPerParent.2896" value="5" displayName="Devices Per Port" description="" />
+          <property id="East.Ipv4AddrStart" value="192.85.1.2" displayName="IPv4 Address Start" description="Address Start" type="ipv4" ignoreOnBackEnd="true" />
+          <property id="East.Ipv4AddrStep" value="0.0.0.2" displayName="IPv4 Address Step" description="Address Step" type="ipv4" ignoreOnBackEnd="true" />
+          <!--
+          <property id="East.Ipv4AddrRepeatCount" value="0" displayName="IPv4 Address Repeat Count" type="uint32" widget="textbox" ignoreOnBackEnd="True" />
+          <property id="East.Ipv4AddrRecycleCount" value="0" displayName="IPv4 Address Recycle Count" type="uint32" widget="textbox" ignoreOnBackEnd="True" />
+          -->
+          <property id="East.Ipv4GatewayAddrStart" value="192.85.1.1" displayName="IPv4 Gateway Address Start" description="Gateway Address Start" type="ipv4" ignoreOnBackEnd="true" />
+          <property id="East.Ipv4GatewayAddrStep" value="0.0.0.2" displayName="IPv4 Gateway Address Step" description="Gateway Address Step" type="ipv4" ignoreOnBackEnd="true" />
+          <property id="East.EnableVlan" value="False" displayName="Enable VLAN" description="Enable VLAN" ignoreOnBackEnd="true" widgetType="checkbox" type="bool" />
+          <property id="East.VlanIdStart" value="100" displayName="VLAN ID Start" description="VLAN ID Starting Value" ignoreOnBackEnd="true" type="uint32">
+            <numericValidation minInclusive="1" maxInclusive="4095" />
+          </property>
+          <property id="East.VlanIdStep" value="1" displayName="VLAN ID Step" description="VLAN ID Step Value" ignoreOnBackEnd="true" type="uint32">
+            <numericValidation minInclusive="1" maxInclusive="4095" />
+          </property>
+          <property id="East.MacAddrStart" value="00:10:94:00:00:01" displayName="MAC Address Start" description="MAC Address Start" type="mac" ignoreOnBackEnd="true" />
+          <property id="East.MacAddrStep" value="00:00:00:00:00:01" displayName="MAC Address Step" description="MAC Address Step" type="mac" ignoreOnBackEnd="true" />
+      </group>
+    </page>
+    <page displayName="West Device Configuration" description="Configure emulated devices on the est side of the DUT." image="diagram.png">
+      <group displayName="West Devices">
+          <property id="spirent.methodology.LoadTemplateCommand.CopiesPerParent.2906" value="5" displayName="Devices Per Port" description="" />
+
+          <property id="West.Ipv4AddrStart" value="192.85.1.1" displayName="IPv4 Address Start" description="Address Start" type="ipv4" ignoreOnBackEnd="true" />
+          <property id="West.Ipv4AddrStep" value="0.0.0.2" displayName="IPv4 Address Step" description="Address Step" type="ipv4" ignoreOnBackEnd="true" />
+          <!--
+          <property id="West.Ipv4AddrRepeatCount" value="0" displayName="IPv4 Address Repeat Count" type="uint32" widget="textbox" ignoreOnBackEnd="True" />
+          <property id="West.Ipv4AddrRecycleCount" value="0" displayName="IPv4 Address Recycle Count" type="uint32" widget="textbox" ignoreOnBackEnd="True" />
+          -->
+          <property id="West.Ipv4GatewayAddrStart" value="192.85.1.2" displayName="IPv4 Gateway Address Start" description="Gateway Address Start" type="ipv4" ignoreOnBackEnd="true" />
+          <property id="West.Ipv4GatewayAddrStep" value="0.0.0.2" displayName="IPv4 Gateway Address Step" description="Gateway Address Step" type="ipv4" ignoreOnBackEnd="true" />
+          <property id="West.EnableVlan" value="False" displayName="Enable VLAN" description="Enable VLAN" ignoreOnBackEnd="true" widgetType="checkbox" type="bool" />
+          <property id="West.VlanIdStart" value="100" displayName="VLAN ID Start" description="VLAN ID Starting Value" ignoreOnBackEnd="true" type="uint32">
+            <numericValidation minInclusive="1" maxInclusive="4095" />
+          </property>
+          <property id="West.VlanIdStep" value="1" displayName="VLAN ID Step" description="VLAN ID Step Value" ignoreOnBackEnd="true" type="uint32">
+            <numericValidation minInclusive="1" maxInclusive="4095" />
+          </property>
+          <property id="West.MacAddrStart" value="00:10:95:00:00:01" displayName="MAC Address Start" description="MAC Address Start" type="mac" ignoreOnBackEnd="true" />
+          <property id="West.MacAddrStep" value="00:00:00:00:00:01" displayName="MAC Address Step" description="MAC Address Step" type="mac" ignoreOnBackEnd="true" />
+      </group>
+    </page>
+    <page displayName="Traffic Configuration" description="Configure traffic between East and West sides." image="diagram.png">
+      <group displayName="East-to-West Traffic">
+          <property id="TrafficCreateTrafficMix-EastToWestLoad" value="20" displayName="Traffic Load" description="" />
+          <property id="TrafficCreateTrafficMix-EastToWestLoadUnit" value="FRAMES_PER_SECOND" displayName="Load Unit" description="" />
+      </group>
+      <group displayName="West-to-East Traffic">
+          <property id="TrafficCreateTrafficMix-WestToEastLoad" value="100" displayName="Traffic Load" description="" />
+          <property id="TrafficCreateTrafficMix-WestToEastLoadUnit"
+ value="FRAMES_PER_SECOND" displayName="Load Unit" description="" />
+      </group>
+      <group displayName="Traffic Duration">
+          <property id="Wait2WaitTimeSecs" value="30" displayName="Wait Time (sec)" description="" />
+      </group>
+    </page>
+  </wizard>
+  <processingFunctions>
+    <processingFunction id="East.Ipv4Address" scriptFile="txml_processing_functions.py" entryFunction="config_range_prop_modifier">
+      <!-- SrcId MUST map to a property that appears in the wizard section.  This will be passed in dictionary form to the processing function -->
+      <!-- scriptVarName is the name to be used in the dictionary.  If not specified, the SrcId as a string will be used. -->
+      <!-- Default specifies a constant value that will be passed directly into the processing function when srcId is not specified. -->
+      <input srcId="East.Ipv4AddrStart" scriptVarName="Start" />
+      <input srcId="East.Ipv4AddrStep" scriptVarName="Step" />
+      <input scriptVarName="ObjName" default="Ipv4If" />
+      <input scriptVarName="PropName" default="Address" />
+      <!-- scriptVarName is the name of the output in the output dictionary. -->
+      <!-- epKey is the name of the ExposedProperty.EPNameId that the value stored in scriptVarName in the output dictionary will be passed to. -->
+      <output scriptVarName="ModInfoPropList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.PropertyList.Ipv4If.Address.2899" />
+      <output scriptVarName="ModInfoValList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.ValueList.Ipv4If.Address.2899" />
+    </processingFunction>
+    <processingFunction id="East.Template" scriptFile="txml_processing_functions.py" entryFunction="config_template_filename">
+      <input srcId="East.EnableVlan" scriptVarName="EnableVlan" />
+      <output scriptVarName="TemplateFileName" epKey="spirent.methodology.LoadTemplateCommand.TemplateXmlFileName.2896" />
+    </processingFunction>
+    <processingFunction id="East.VlanId" scriptFile="txml_processing_functions.py" entryFunction="config_range_prop_modifier">
+      <input srcId="East.EnableVlan" scriptVarName="Enable" />
+      <input srcId="East.VlanIdStart" scriptVarName="Start" />
+      <input srcId="East.VlanIdStep" scriptVarName="Step" />
+      <input scriptVarName="ObjName" default="VlanIf" />
+      <input scriptVarName="PropName" default="VlanId" />
+      <output scriptVarName="ModInfoPropList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.PropertyList.VlanIf.VlanId.3695" />
+      <output scriptVarName="ModInfoValList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.ValueList.VlanIf.VlanId.3695" />
+      <output scriptVarName="TagNameList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.TagNameList.3695" />
+    </processingFunction>
+    <processingFunction id="East.Ipv4Gateway" scriptFile="txml_processing_functions.py" entryFunction="config_range_prop_modifier">
+      <input srcId="East.Ipv4GatewayAddrStart" scriptVarName="Start" />
+      <input srcId="East.Ipv4GatewayAddrStep" scriptVarName="Step" />
+      <input scriptVarName="ObjName" default="Ipv4If" />
+      <input scriptVarName="PropName" default="Gateway" />
+      <output scriptVarName="ModInfoPropList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.PropertyList.Ipv4If.Gateway.2900" />
+      <output scriptVarName="ModInfoValList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.ValueList.Ipv4If.Gateway.2900" />
+    </processingFunction>
+    <processingFunction id="East.Mac" scriptFile="txml_processing_functions.py" entryFunction="config_range_prop_modifier">
+      <input srcId="East.MacAddrStart" scriptVarName="Start" />
+      <input srcId="East.MacAddrStep" scriptVarName="Step" />
+      <input scriptVarName="ObjName" default="EthIIIf" />
+      <input scriptVarName="PropName" default="SourceMac" />
+      <output scriptVarName="ModInfoPropList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.PropertyList.EthIIIf.SourceMac.2901" />
+      <output scriptVarName="ModInfoValList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.ValueList.EthIIIf.SourceMac.2901" />
+    </processingFunction>
+    <processingFunction id="West.Template" scriptFile="txml_processing_functions.py" entryFunction="config_template_filename">
+      <input srcId="West.EnableVlan" scriptVarName="EnableVlan" />
+      <output scriptVarName="TemplateFileName" epKey="spirent.methodology.LoadTemplateCommand.TemplateXmlFileName.2906" />
+    </processingFunction>
+    <processingFunction id="West.VlanId" scriptFile="txml_processing_functions.py" entryFunction="config_range_prop_modifier">
+      <input srcId="West.EnableVlan" scriptVarName="Enable" />
+      <input srcId="West.VlanIdStart" scriptVarName="Start" />
+      <input srcId="West.VlanIdStep" scriptVarName="Step" />
+      <input scriptVarName="ObjName" default="VlanIf" />
+      <input scriptVarName="PropName" default="VlanId" />
+      <output scriptVarName="ModInfoPropList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.PropertyList.VlanIf.VlanId.3705" />
+      <output scriptVarName="ModInfoValList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.ValueList.VlanIf.VlanId.3705" />
+      <output scriptVarName="TagNameList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.TagNameList.3705" />
+    </processingFunction>
+    <processingFunction id="West.Ipv4Address" scriptFile="txml_processing_functions.py" entryFunction="config_range_prop_modifier">
+      <input srcId="West.Ipv4AddrStart" scriptVarName="Start" />
+      <input srcId="West.Ipv4AddrStep" scriptVarName="Step" />
+      <input scriptVarName="ObjName" default="Ipv4If" />
+      <input scriptVarName="PropName" default="Address" />
+      <output scriptVarName="ModInfoPropList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.PropertyList.Ipv4If.Address.2909" />
+      <output scriptVarName="ModInfoValList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.ValueList.Ipv4If.Address.2909" />
+    </processingFunction>
+    <processingFunction id="West.Ipv4Gateway" scriptFile="txml_processing_functions.py" entryFunction="config_range_prop_modifier">
+      <input srcId="West.Ipv4GatewayAddrStart" scriptVarName="Start" />
+      <input srcId="West.Ipv4GatewayAddrStep" scriptVarName="Step" />
+      <input scriptVarName="ObjName" default="Ipv4If" />
+      <input scriptVarName="PropName" default="Gateway" />
+      <output scriptVarName="ModInfoPropList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.PropertyList.Ipv4If.Gateway.2910" />
+      <output scriptVarName="ModInfoValList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.ValueList.Ipv4If.Gateway.2910" />
+    </processingFunction>
+    <processingFunction id="West.Mac" scriptFile="txml_processing_functions.py" entryFunction="config_range_prop_modifier">
+      <input srcId="West.MacAddrStart" scriptVarName="Start" />
+      <input srcId="West.MacAddrStep" scriptVarName="Step" />
+      <input scriptVarName="ObjName" default="EthIIIf" />
+      <input scriptVarName="PropName" default="SourceMac" />
+      <output scriptVarName="ModInfoPropList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.PropertyList.EthIIIf.SourceMac.2911" />
+      <output scriptVarName="ModInfoValList" epKey="spirent.methodology.ModifyTemplatePropertyCommand.ValueList.EthIIIf.SourceMac.2911" />
+    </processingFunction>
+  </processingFunctions>
+</test>
+
+
+<!--
+    <processingFunction id="procFunc1" scriptFile="txmlProcessingFunctions.py" entryFunction="config_prop_modifier_xml">
+      <input srcId="East.Ipv4AddrStart" scriptVarName="Start" />
+      <input srcId="East.Ipv4AddrStep" scriptVarName="Step" />
+      <input scriptVarName="ObjName" defaultValue="Ipv4If" />
+      <input scriptVarName="PropName" defaultValue="Address" />
+      <output scriptVarName="ModInfo" epKey="spirent.methodology.ModifyTemplatePropertyCommand.PropertyValueList.Ipv4If.Address.2899" />
+    </processingFunction>
+
+pf_dict["id_list"] = ["pf1", "pf2"]
+pf_dict["pf1"]["script"] = "script.py"
+pf_dict["pf1"]["entry_fn"] = "run"
+pf_dict["pf1"]["input_id_list"] = ["in1", "in2", "in3", "in4"]
+pf_dict["pf1"]["output_id_list"] = ["out1"]
+
+pf_dict["pf1"]["in1"]["src_id"] = "East.Ipv4AddrStart"
+pf_dict["pf1"]["in1"]["script_var"] = "Start"
+pf_dict["pf1"]["in2"]["src_id"] = "East.Ipv4AddrStep"
+pf_dict["pf1"]["in2"]["script_var"] = "Step"
+pf_dict["pf1"]["in3"]["script_var"] = "ObjName"
+pf_dict["pf1"]["in3"]["default"] = "Ipv4If"
+pf_dict["pf1"]["in4"]["script_var"] = "PropName"
+pf_dict["pf1"]["in4"]["default"] = "Address"
+
+
+input_dict:
+{
+  "Start": "10",
+  "Step": "1",
+  "Repeat": "0",
+  "Recycle": "0",
+  "PropName": "VlanId"
+  "ObjName": "VlanIf"
+}
+
+output_dict:
+{
+  "ModInfo": "<escaped XML>"
+}
+
+-->

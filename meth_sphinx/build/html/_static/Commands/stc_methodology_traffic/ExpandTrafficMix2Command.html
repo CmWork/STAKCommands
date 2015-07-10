@@ -1,0 +1,440 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>&lt;no title&gt; &mdash; Spirent Methodology Infrastructure 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Spirent Methodology Infrastructure 0.1 documentation" href="../../../index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="../../../index.html" class="icon icon-home"> Spirent Methodology Infrastructure
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="simple">
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">Spirent Methodology Infrastructure</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+    <li>&lt;no title&gt;</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/_static/Commands/stc_methodology_traffic/ExpandTrafficMix2Command.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <p># ExpandTrafficMix2Command</p>
+<p>Expand Template Mix 2 Command</p>
+<p>&lt;font size=&#8221;2&#8221;&gt;File Reference: stc_methodology_traffic.xml&lt;/font&gt;</p>
+<p>## Properties</p>
+<p>### Load: &#8220;Load&#8221; (input:double)</p>
+<p>Load</p>
+<ul class="simple">
+<li>default - 10.0</li>
+</ul>
+<p>### TrafficMixTagName: &#8220;Tag name for Traffic Mix&#8221; (input:string)</p>
+<p>Tag name associated with the StmTrafficMix object</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### MixInfoJsonSchema: &#8220;Table Data JSON Schema&#8221; (state:string)</p>
+<p>JSON schema that will be used to validate the MixInfo property&#8217;s value.</p>
+<ul>
+<li><p class="first">JSON Schema -</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>{</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;required&#8221;: [</dt>
+<dd><p class="first last">&#8220;load&#8221;,
+&#8220;loadUnits&#8221;,
+&#8220;components&#8221;</p>
+</dd>
+</dl>
+<p>],
+&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;properties&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;load&#8221;: {</dt>
+<dd><p class="first last">&#8220;type&#8221;: &#8220;number&#8221;,
+&#8220;description&#8221;: &#8220;Traffic mix total load in appropriate units.&#8221;</p>
+</dd>
+</dl>
+<p>},
+&#8220;loadUnits&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;enum&#8221;: [</dt>
+<dd><p class="first last">&#8220;PERCENT_LINE_RATE&#8221;,
+&#8220;FRAMES_PER_SECOND&#8221;,
+&#8220;INTER_BURST_GAP&#8221;,
+&#8220;BITS_PER_SECOND&#8221;,
+&#8220;KILOBITS_PER_SECOND&#8221;,
+&#8220;MEGABITS_PER_SECOND&#8221;</p>
+</dd>
+</dl>
+<p>],
+&#8220;description&#8221;: &#8220;Traffic load units.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;components&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;required&#8221;: [</dt>
+<dd><p class="first last">&#8220;weight&#8221;,
+&#8220;useStaticValue&#8221;,
+&#8220;staticValue&#8221;,
+&#8220;baseTemplateFile&#8221;</p>
+</dd>
+</dl>
+<p>],
+&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;properties&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;weight&#8221;: {</dt>
+<dd><p class="first last">&#8220;type&#8221;: &#8220;number&#8221;,
+&#8220;description&#8221;: &#8220;Percent weight of the total load to assign to this component.&#8221;</p>
+</dd>
+</dl>
+<p>},
+&#8220;staticValue&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;number&#8221;,
+&#8220;description&#8221;: &#8220;Static load to assign to this component.  Static load factors into total load.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;postExpandModify&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;required&#8221;: [</dt>
+<dd><p class="first last">&#8220;streamBlockExpand&#8221;</p>
+</dd>
+</dl>
+<p>],
+&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;properties&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;streamBlockExpand&#8221;: {</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;required&#8221;: [</dt>
+<dd><p class="first last">&#8220;endpointMappingList&#8221;</p>
+</dd>
+</dl>
+<p>],
+&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;description&#8221;: &#8220;Process project-level streamblocks and expand onto ports.&#8221;,
+&#8220;properties&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;endpointMappingList&#8221;: {</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><p class="first">&#8220;additionalProperties&#8221;: false,
+&#8220;required&#8221;: [</p>
+<blockquote>
+<div><p>&#8220;srcBindingTag&#8221;,
+&#8220;dstBindingTag&#8221;</p>
+</div></blockquote>
+<p>],
+&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;properties&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;dstBindingTag&#8221;: {</dt>
+<dd><p class="first last">&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Name of the tag for streamblock destination binding endpoints.&#8221;</p>
+</dd>
+</dl>
+<p>},
+&#8220;srcBindingTag&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Name of the tag for streamblock source binding endpoints.&#8221;</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p class="last">},
+&#8220;type&#8221;: &#8220;array&#8221;,
+&#8220;description&#8221;: &#8220;List of tag names representing endpoints that will be mapped on the port-level streamblocks.&#8221;</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>},
+&#8220;type&#8221;: &#8220;array&#8221;,
+&#8220;description&#8221;: &#8220;A list of operations that will be carried out on datamodel objects after the template is expanded.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;useStaticValue&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;boolean&#8221;,
+&#8220;description&#8221;: &#8220;Flag indicating a static load should be used instead of a weight.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;tagPrefix&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;String that will be prefixed to all tags loaded and used in this template.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;appliedValue&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;number&#8221;,
+&#8220;description&#8221;: &#8220;Load actually assigned to this component.  Autocalculated, do not set.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;modifyList&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><p class="first last">&#8220;type&#8221;: &#8220;object&#8221;</p>
+</dd>
+</dl>
+<p>},
+&#8220;type&#8221;: &#8220;array&#8221;,
+&#8220;description&#8221;: &#8220;A list of operations that will be carried out on the template.  See the schema defined in the spirent.methodology.CreateTemplateConfigCommand.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;baseTemplateFile&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;string&#8221;,
+&#8220;description&#8221;: &#8220;Base template file that will be loaded into the StmTemplateConfig.  All modifications in the modifyList will be applied to the contents loaded out of this file.&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;expand&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;required&#8221;: [</dt>
+<dd><p class="first last">&#8220;targetTagList&#8221;</p>
+</dd>
+</dl>
+<p>],
+&#8220;type&#8221;: &#8220;object&#8221;,
+&#8220;properties&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;targetTagList&#8221;: {</dt>
+<dd><dl class="first docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><p class="first last">&#8220;type&#8221;: &#8220;string&#8221;</p>
+</dd>
+</dl>
+<p class="last">},
+&#8220;type&#8221;: &#8220;array&#8221;,
+&#8220;description&#8221;: &#8220;List of Target Tags passed to expand&#8221;</p>
+</dd>
+</dl>
+<p>},
+&#8220;srcTagList&#8221;: {</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#8220;items&#8221;: {</dt>
+<dd><p class="first last">&#8220;type&#8221;: &#8220;string&#8221;</p>
+</dd>
+</dl>
+<p>},
+&#8220;type&#8221;: &#8220;array&#8221;,
+&#8220;description&#8221;: &#8220;List of Source Tags passed to expand&#8221;</p>
+</div></blockquote>
+<p>},
+&#8220;copiesPerParent&#8221;: {</p>
+<blockquote>
+<div><p>&#8220;type&#8221;: &#8220;number&#8221;,
+&#8220;description&#8221;: &#8220;streamblocks to make per parent&#8221;</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>},
+&#8220;type&#8221;: &#8220;array&#8221;,
+&#8220;description&#8221;: &#8220;A list of components that make up the mixture.&#8221;</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p class="last">},
+&#8220;title&#8221;: &#8220;Schema for the MixInfo of the spirent.methodology.ExpandTrafficMixCommand.&#8221;</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+</li>
+</ul>
+<p>### StmTemplateMix: &#8220;XML Container object (StmTemplateMix)&#8221; (input:handle)</p>
+<p>StmTemplate Mix container object</p>
+<ul class="simple">
+<li>default -</li>
+</ul>
+<p>### LoadUnit: &#8220;Load Unit&#8221; (input:u8)</p>
+<p>Load Unit</p>
+<ul class="simple">
+<li>default - PERCENT_LINE_RATE</li>
+</ul>
+<p>## JSON Sample</p>
+<p>&lt;font color=&#8221;red&#8221;&gt;MISSING JSON SAMPLE&lt;/font&gt;</p>
+
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Spirent.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../jquery.js"></script>
+      <script type="text/javascript" src="../../underscore.js"></script>
+      <script type="text/javascript" src="../../doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
